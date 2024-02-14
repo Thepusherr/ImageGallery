@@ -1,0 +1,28 @@
+%nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top.bg-white.border-bottom{style: "border-color: #afafaf"}
+  .container-fluid.w-75
+    = link_to root_path, class: "navbar-brand" do
+      = image_tag "", width: "100rem"
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", type: "button"}
+    %span.navbar-toggler-icon
+  .d-flex
+    #navbarSupportedContent.collapse.navbar-collapse.me-5
+    .navbar-collapse.gap-4
+      %a.text-dark{"data-bs-target" => "#staticBackdrop", "data-bs-toggle" => "modal", type: "button"}
+        %i.fa-regular.fa-square-plus.fa-xl
+      %i.fa-regular.fa-compass.fa-xl
+      .dropstart
+        %i.fa-regular.fa-heart.fa-xl{"aria-expanded" => "false", "data-bs-toggle" => "dropdown"}
+        %ul.dropdown-menu.p-4
+    .dropdown
+      %a{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
+        -# - if current_user  current_user.profile_pic.attached?
+        -#   = image_tag current_user.profile_pic, class: "img-thumbnail rounded-circle", style: "width: 2rem"
+        -# - else
+        -#   = image_tag default_user_dark.png, class: "img-thumbnail rounded-circle", style: "width: 2rem"
+      %ul.dropdown-menu
+        %li
+          = link_to 'Profile', user_path(current_user), class: "dropdown-item"
+        %li
+          = link_to 'Settings', edit_user_registration_path, class: "dropdown-item"
+        %li
+          = button_to 'Log out', destroy_user_session_path, class: "dropdown-item", method: :delete
