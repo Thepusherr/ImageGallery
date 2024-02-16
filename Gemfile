@@ -48,6 +48,7 @@ gem 'bootstrap', '~> 5.3.2'
 gem 'jquery-rails'
 gem "sassc-rails"
 gem 'carrierwave', '~> 3.0'
+gem "mini_magick"
 gem 'kaminari'
 
 gem 'activeadmin'
