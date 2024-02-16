@@ -1,0 +1,10 @@
+= form_for @like do |f|
+  - if @like.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@like.errors.count, "error")} prohibited this like from being saved:"
+      %ul
+        - @like.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'
