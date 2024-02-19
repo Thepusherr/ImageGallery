@@ -382,6 +382,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  activestorage
   bootsnap
   bootstrap (~> 5.3.2)
   capybara

@@ -59,6 +59,7 @@ gem "devise", "~> 4.9"
 # gem 'pundit'
 gem 'html2haml'
 gem "haml-rails"
+gem 'activestorage'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
