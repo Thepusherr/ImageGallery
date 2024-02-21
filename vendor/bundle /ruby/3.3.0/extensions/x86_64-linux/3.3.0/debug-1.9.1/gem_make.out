@@ -1,0 +1,19 @@
+current directory: /home/pusher/RubymineProjects/ImageGallery/vendor/bundle /ruby/3.3.0/gems/debug-1.9.1/ext/debug
+/home/pusher/.rvm/rubies/ruby-3.3.0/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/pusher/RubymineProjects/ImageGallery/vendor/bundle /ruby/3.3.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240220-27656-bnlt sitelibdir\=./.gem.20240220-27656-bnlt clean
+
+current directory: /home/pusher/RubymineProjects/ImageGallery/vendor/bundle /ruby/3.3.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240220-27656-bnlt sitelibdir\=./.gem.20240220-27656-bnlt
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/pusher/RubymineProjects/ImageGallery/vendor/bundle /ruby/3.3.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240220-27656-bnlt sitelibdir\=./.gem.20240220-27656-bnlt install
+/usr/bin/install -m 0755 debug.so ./.gem.20240220-27656-bnlt/debug
+
+current directory: /home/pusher/RubymineProjects/ImageGallery/vendor/bundle /ruby/3.3.0/gems/debug-1.9.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240220-27656-bnlt sitelibdir\=./.gem.20240220-27656-bnlt clean
