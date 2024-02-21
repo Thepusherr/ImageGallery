@@ -1,6 +1,9 @@
 %p#notice= notice
 = @post.title
 %br/
+- if @post.image.attached?
+  = image_tag @post.image.url, width: "200px"
+%br/
 = @post.text
 %br/
 %b Comments

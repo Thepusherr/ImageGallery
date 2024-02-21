@@ -3,6 +3,8 @@
 %br/
 = @post.text
 %br/
+= @post.image
+%br/
 = render "comments/form", comment: @comment
 
 = link_to 'Edit', edit_post_path(@post)
