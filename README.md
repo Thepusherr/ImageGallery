@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
+  ruby 3.3.0
 * System dependencies
 
 * Configuration
@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# ImageGallery
+
+rails 7+ bootstrap 5+

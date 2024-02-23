@@ -1,6 +1,15 @@
 #form-container{
   width:960px;
-  margin:0 auto;
+  margin:1em auto;
   box-shadow: 0 0 12px black;
   padding:20px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#content-container{
+  display: inline-block;
+  justify-content: center;
+  flex-wrap: wrap;
 }

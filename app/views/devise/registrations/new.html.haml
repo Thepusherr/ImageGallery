@@ -1,32 +1,43 @@
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  %h2 Sign up
-  .field
-    = f.label "Profile Photo"
-    = f.file_field :avatar
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :surname
-    %br/
-    = f.text_field :surname, autofocus: true, autocomplete: "surname"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.container#form-container
+  .row
+    .col-sm-12.justify-content-center
+      %h2 Sign up
+      %br/
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { :id => 'content-container'}) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .field.form-group.row
+          = f.label "Profile Photo"
+          .col-sm-5
+            = f.file_field :avatar
+        .field.form-group.row
+          = f.label :name
+          %br/
+          .col-sm-5
+            = f.text_field :name, autofocus: true, autocomplete: "name"
+        .field.form-group.row
+          = f.label :surname
+          %br/
+          .col-sm-5
+            = f.text_field :surname, autofocus: true, autocomplete: "surname"
+        .field.form-group.row
+          = f.label :email
+          %br/
+          .col-sm-5
+            = f.email_field :email, autofocus: true, autocomplete: "email"
+        .field.form-group.row
+          = f.label :password
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+          %br/
+          .col-sm-5
+            = f.password_field :password, autocomplete: "new-password"
+        .field
+          = f.label :password_confirmation
+          %br/
+          .col-sm-5
+            = f.password_field :password_confirmation, autocomplete: "new-password"
+        .actions
+          = f.submit "Sign up"
+        %br/
+        = render "devise/shared/links"

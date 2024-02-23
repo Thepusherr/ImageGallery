@@ -51,7 +51,7 @@ gem 'carrierwave', '~> 3.0'
 gem "mini_magick"
 gem 'kaminari'
 
-gem 'activeadmin'
+gem 'activeadmin', github: 'activeadmin/activeadmin', branch: 'master' # FIXME: revert to stable
 # Plus integrations with:
 gem "devise", "~> 4.9"
 # gem 'cancancan'
