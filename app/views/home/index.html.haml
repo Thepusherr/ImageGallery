@@ -1,9 +1,12 @@
-- if user_signed_in?
-  %h1
-    Welcome Home, #{current_user.email}
-  = link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }
-- else
-  %h1 Home
-  = link_to 'Sign in', new_user_session_path
 
-= render "modals/image_comments"
+
+.container
+  .row
+    - if user_signed_in?
+      = button_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, html: { class: 'btn.btn-info.btn-lg'}
+      = render "modals/image_comments"
+    - else
+      %h1 Home
+      = link_to 'Sign in', new_user_session_path
+      @category.
+

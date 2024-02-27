@@ -3,10 +3,9 @@ class Post < ApplicationRecord
 
   has_one_attached :image
   has_many :comments
+  has_many :categories
 
   validates_presence_of   :image
-  validates_integrity_of  :image
-  validates_processing_of :image
   validate :image_size_validation
 
   private

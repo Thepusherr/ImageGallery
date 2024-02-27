@@ -8,7 +8,7 @@
         .field.form-group.row
           = f.label "Profile Photo"
           .col-sm-5
-            = f.file_field :avatar
+            = f.file_field :avatar, class: 'filepond', direct_upload: true
         .field.form-group.row
           = f.label :name
           %br/

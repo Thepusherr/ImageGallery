@@ -1,0 +1,2 @@
+module CategiriesHelper
+end
