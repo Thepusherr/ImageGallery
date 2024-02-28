@@ -5,8 +5,10 @@
     - if user_signed_in?
       = button_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, html: { class: 'btn.btn-info.btn-lg'}
       = render "modals/image_comments"
+      .flex.flex-column
+        - @posts.each do |post|
+          = render 'posts/post', post: post
     - else
       %h1 Home
       = link_to 'Sign in', new_user_session_path
-      @category.
 

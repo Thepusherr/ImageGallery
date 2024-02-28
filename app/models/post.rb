@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :comments
   has_many :categories
+  has_many :likes
+  has_many :likers, through: :likes, source: :user
 
   validates_presence_of   :image
   validate :image_size_validation

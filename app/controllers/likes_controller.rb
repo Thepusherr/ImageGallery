@@ -5,5 +5,4 @@ class LikesController < InheritedResources::Base
     def like_params
       params.require(:like).permit()
     end
-
 end
