@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   end
 
   ActiveAdmin.routes(self)
+
+  resources :users, only: [:show, :index]
   resources :likes
-  resources :comments
+  resources :comments, only: [:create, :destroy]
   resources :posts
 
   root to: "home#index"

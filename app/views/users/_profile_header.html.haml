@@ -1,0 +1,13 @@
+.container.border-bottom.d-flex.justify-content-center.align-items-center.gap-5{style: "min-height: 20rem"}
+  = image_tag user.avatar.attached? ? user.avatar : 'default_user.jpg', class: "img-thumbnail rounded-circle w-25", style: "max-width: 8rem; max-height: 8rem"
+  .w-50.d-flex.flex-column.gap-4
+    .d-flex.gap-3.align-items-center
+      %p.m-0.fw-bold= user.username
+      %button.btn.border.border-1 Message
+      - if user == current_user
+        = link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-transparent border"
+    .d-flex.gap-5
+      %small.fw-bold= pluralize(user.posts.count, "Post")
+    .d-flex.flex-column
+      %small.fw-bold= user.name
+      %small.fw-bold= user.surname

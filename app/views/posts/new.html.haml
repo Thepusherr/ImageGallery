@@ -1,14 +1,5 @@
-= form_for(resource, as: resource_name, url: new_post_path(resource_name)) do |f|
-  %h1 New post
-  = render 'form'
-  .field
-    = f.label "post image"
-    = f.file_field :image
-  .field
-    = f.label "post title"
-    = f.text_field :title
-  .field
-    = f.label "post text"
-    = f.text_field :text
-
-  = link_to 'Back', posts_path
+%h1 New post
+= render "form", post: @post
+%br/
+%div
+  = link_to "Back to posts", posts_path

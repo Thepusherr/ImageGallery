@@ -1,11 +1,44 @@
-%p#notice= notice
-= @post.title
-%br/
-= @post.text
-%br/
-= @post.image
-%br/
-= render "comments/form", comment: @comment
-
-= link_to 'Edit', edit_post_path(@post)
-= link_to 'Back', posts_path
+#staticBackdrop.modal.fade.modal-lg{"aria-hidden" => "true", "aria-labelledby" => "staticBackdropLabel", "data-bs-backdrop" => "static", "data-bs-keyboard" => "false", tabindex: "-1"}
+  .modal-dialog.modal-dialog-centered
+    = form_with(model: post) do |form|
+      .modal-content
+        .modal-header
+          %h1#staticBackdropLabel.modal-title Create new post
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+        .modal-body.d-flex
+          .border-end.border-secondary.mx-2{style: "width: 60%"}
+            = form.file_field :images, multiple: true, id: "post-images", required: true
+          %div{style: "width:40%"}
+            - if post.errors.any?
+              %div{style: "color: red"}
+                %h2
+                  = pluralize(post.errors.count, "error")
+                  prohibited this post from being saved:
+                %ul
+                  - post.errors.each do |error|
+                    %li= error.full_message
+            .my-2
+              - if current_user.avatar.url
+                = image_tag current_user.avatar.url, class: "img-thumbnail rounded-circle", style: "width: 10%"
+              - else
+                = image_tag "default-avatar.png", class: "img-thumbnail rounded-circle", style: "width: 10%"
+              %span.fw-bold.mx-2= current_user.name
+              %span.fw-bold.mx-2= current_user.surname
+            %div
+              = form.text_area :caption, rows: 8, placeholder: "Write a caption...", class: "form-control border-0", style: "resize:none"
+            %div
+              = form.text_area :location, placeholder: "Add location", class: "form-control"
+            .d-flex.justify-content-between.align-items-center.border.form-control.my-2{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-bs-toggle" => "collapse", href: "#collapseExample", role: "button"}
+              %a.text-dark{style: "text-decoration: none"}
+                Advanced Settings
+              %i.fa-solid.fa-chevron-down
+            #collapseExample.collapse
+              .card.card-body
+                .form-check.form-switch
+                  = form.check_box :allow_comments, class: "form-check-input", role: "switch", checked: true
+                  = form.label :allow_comments, style: "display: block", class: "form-check-label"
+                .form-check.form-switch
+                  = form.check_box :show_likes_counter, class: "form-check-input", role: "switch", checked: true
+                  = form.label :show_likes_counter, style: "display: block", class: "form-check-label"
+        .modal-footer
+          = form.submit "Post", class: "btn btn-primary"
