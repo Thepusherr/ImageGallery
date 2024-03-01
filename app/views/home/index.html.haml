@@ -1,5 +1,3 @@
-
-
 .container
   .row
     - if user_signed_in?
@@ -11,4 +9,3 @@
     - else
       %h1 Home
       = link_to 'Sign in', new_user_session_path
-
