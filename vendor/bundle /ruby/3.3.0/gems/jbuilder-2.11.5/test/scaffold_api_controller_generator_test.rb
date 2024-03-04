@@ -40,9 +40,9 @@ if Rails::VERSION::MAJOR > 4
 
         assert_match %r{def post_params}, content
         if Rails::VERSION::MAJOR >= 6
-          assert_match %r{params\.require\(:post\)\.permit\(:title, :body, images: \[\]\)}, content
+          assert_match %r{params\.require\(:post\)\.permit\(:title, :body, image: \[\]\)}, content
         else
-          assert_match %r{params\.require\(:post\)\.permit\(:title, :body, :images\)}, content
+          assert_match %r{params\.require\(:post\)\.permit\(:title, :body, :image\)}, content
         end
       end
     end

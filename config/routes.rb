@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :users
+
+  ActiveAdmin.routes(self)
+
   get 'categiries/show'
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_for :users
+  post "toggle_like", to: "likes#toggle_like", as: :toggle_like
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
-
-  ActiveAdmin.routes(self)
 
   resources :users, only: [:show, :index]
   resources :likes

@@ -5,10 +5,9 @@
   #navbarColor01.navbar-collapse.collapse.show
     %ul.navbar-nav.mr-auto
       %li.nav-item.active
-        %a.nav-link{href: "#"}
-          Home
+        = link_to "Home", home_index_path, class: 'nav-link'
       %li.nav-item.justify-content-center{style: "text-align:center;"}
-        %a.nav-link{href: "#"} Images
+        = link_to "Create", new_post_path, class: 'nav-link'
       %li.nav-item
         %a.nav-link{href: "#"} Categories
       %li.nav-item.dropdown

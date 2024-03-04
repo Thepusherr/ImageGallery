@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :likers, through: :likes, source: :user
 
-  validates_presence_of   :image
+  validates :image, presence: true
   # validate :image_size_validation
 
   private

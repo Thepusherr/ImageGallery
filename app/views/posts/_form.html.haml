@@ -6,7 +6,7 @@
         %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
       .modal-body.d-flex
         .border-end.border-secondary.mx-2{style: "width: 60%"}
-          = form.file_field :images, multiple: true, id: "post-images", required: true
+          = form.file_field :image, multiple: false, id: "post-image", required: true
         %div{style: "width:40%"}
           - if post.errors.any?
             %div{style: "color: red"}
