@@ -2,7 +2,7 @@
 
 class AddDeviseToAdminUsers < ActiveRecord::Migration[7.1]
   def self.up
-    drop_table :admin_users
+    drop_table :admin_users, if_exists: true
     create_table :admin_users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""

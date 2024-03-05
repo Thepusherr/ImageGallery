@@ -28,6 +28,7 @@ gem "devise", "~> 4.9"
 gem 'html2haml'
 gem "haml-rails"
 gem 'activestorage'
+gem 'active_storage_validations'
 gem 'filepond-rails'
 gem "font-awesome-sass"
 

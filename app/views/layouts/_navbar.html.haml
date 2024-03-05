@@ -18,8 +18,8 @@
           %a.dropdown-item{href: "#"} Something else here
           .dropdown-divider
           %a.dropdown-item{href: "#"} Separated link
-      %input.form-control.m-2{placeholder: "Search", type: "text"}/
-      %button.btn.btn-secondary.m-2{type: "submit"} Search
+      %input.navbar-brand.form-control.m-2{placeholder: "Search", type: "text"}/
+      %button.navbar-brand.btn.btn-secondary.m-2{type: "submit"} Search
       - if user_signed_in?
         %li.nav-item
           = link_to "Edit Profile", edit_user_registration_path, class: 'nav-link'
