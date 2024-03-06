@@ -1,32 +1,33 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-  %a.navbar-brand{href: "#"} ImageGallery
-  %button.navbar-toggler{"aria-controls" => "navbarColor01", "aria-expanded" => "true", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor01", "data-toggle" => "collapse", type: "button"}
-    %span.navbar-toggler-icon
-  #navbarColor01.navbar-collapse.collapse.show
-    %ul.navbar-nav.mr-auto
-      %li.nav-item.active
-        = link_to "Home", home_index_path, class: 'nav-link'
-      %li.nav-item.justify-content-center{style: "text-align:center;"}
-        = link_to "Create", new_post_path, class: 'nav-link'
-      %li.nav-item
-        %a.nav-link{href: "#"} Categories
-      %li.nav-item.dropdown
-        %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Dropdown
-        .dropdown-menu
-          %a.dropdown-item{href: "#"} Action
-          %a.dropdown-item{href: "#"} Another action
-          %a.dropdown-item{href: "#"} Something else here
-          .dropdown-divider
-          %a.dropdown-item{href: "#"} Separated link
-      %input.navbar-brand.form-control.m-2{placeholder: "Search", type: "text"}/
-      %button.navbar-brand.btn.btn-secondary.m-2{type: "submit"} Search
-      - if user_signed_in?
+  .container-fluid
+    %a.navbar-brand{href: "#"} ImageGallery
+    %button.navbar-toggler{"aria-controls" => "navbarColor01", "aria-expanded" => "true", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor01", "data-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarColor01.navbar-collapse.collapse.show
+      %ul.navbar-nav.mr-auto
+        %li.nav-item.active
+          = link_to "Home", home_index_path, class: 'nav-link'
         %li.nav-item
-          = link_to "Edit Profile", edit_user_registration_path, class: 'nav-link'
+          = link_to "Create", new_post_path, class: 'nav-link'
         %li.nav-item
-          = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link'
-      - else
-        %li.nav-item
-          = link_to 'Sign In', new_user_session_path, class: 'nav-link'
-        %li.nav-item
-          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+          %a.nav-link{href: "#"} Categories
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Dropdown
+          .dropdown-menu
+            %a.dropdown-item{href: "#"} Action
+            %a.dropdown-item{href: "#"} Another action
+            %a.dropdown-item{href: "#"} Something else here
+            .dropdown-divider
+            %a.dropdown-item{href: "#"} Separated link
+        %input.navbar-brand.form-control.m-2{placeholder: "Search", type: "text"}/
+        %button.navbar-brand.btn.btn-secondary.m-2{type: "submit"} Search
+        - if user_signed_in?
+          %li.nav-item
+            = link_to "Edit Profile", edit_user_registration_path, class: 'nav-link'
+          %li.nav-item
+            = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link'
+        - else
+          %li.nav-item
+            = link_to 'Sign In', new_user_session_path, class: 'nav-link'
+          %li.nav-item
+            = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'

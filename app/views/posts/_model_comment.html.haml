@@ -1,13 +1,13 @@
 %div{id: "post#{comment.post_id}ModalComment#{comment.id}"}
   .d-flex.justify-content-between
     .d-flex
-      = image_tag comment.user.profile_pic.attached? ? comment.user.profile_pic : 'default_user.jpg', class: "img-thumbnail rounded-circle", style: "width: 2.5rem; max-height:2.5rem"
+      = image_tag comment.user.avatar.attached? ? comment.user.avatar : 'default_user.jpg', class: "img-thumbnail rounded-circle", style: "width: 2.5rem; max-height:2.5rem"
       .d-flex.flex-column.mx-3.justify-content-center
         %small.fw-bold{style: "overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem"}
           = link_to comment.user, class: "a-decoration-none", data: {turbo: false} do
             = comment.user.username
         %small{style: "max-width: 20rem"}
-          = comment.body
+          = comment.text
         %small.text-muted
           = time_ago_in_words(comment.created_at)
     - if comment.user == current_user

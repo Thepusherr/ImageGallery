@@ -1,0 +1,10 @@
+= turbo_frame_tag "search_results" do
+  - @users.each do |u|
+    %li.mt-3
+      .d-flex.justify-content-between
+        .d-flex
+          = image_tag u.avatar.url ? u.avatar.url : 'default_user.jpg', class: "img-thumbnail rounded-circle", style: "width: 2.5rem"
+          .d-flex.flex-column.mx-3.justify-content-center
+            %small.fw-bold{style: "overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem"}
+              = link_to u, class: "a-decoration-none", data: {turbo: false} do
+                = u.username
