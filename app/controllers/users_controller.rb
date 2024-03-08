@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def index
     if params[:search_query].present?
       @users = User.where("username LIKE ?", "%#{params[:search_query]}%")
+      @users = User.where("CONCAT(name, ' ', surname) LIKE ?", "%#{params[:search_query]}%")
     else
       @users = []
     end
@@ -12,8 +13,8 @@ class UsersController < ApplicationController
       render partial: "layouts/search_results", locals: { users: @users}
     end
   end
-  def show
 
+  def show
   end
 
   private

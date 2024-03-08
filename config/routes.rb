@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  get 'categiries/show'
+  get 'categories/show'
   get 'home/index'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like

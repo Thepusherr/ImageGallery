@@ -1,25 +1,20 @@
 class PostsController < InheritedResources::Base
   before_action :set_post, only: %i[ show edit update destroy ]
 
-  # GET /posts or /posts.json
   def index
     redirect_to root_path
   end
 
-  # GET /posts/1 or /posts/1.json
   def show
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts or /posts.json
   def create
     @post = current_user.posts.new(post_params)
 
@@ -34,7 +29,6 @@ class PostsController < InheritedResources::Base
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -47,7 +41,6 @@ class PostsController < InheritedResources::Base
     end
   end
 
-  # DELETE /posts/1 or /posts/1.json
   def destroy
     return if current_user != @post.user
 
@@ -60,12 +53,11 @@ class PostsController < InheritedResources::Base
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_post
     @post = Post.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:title, :text, :image, :user_id)
   end

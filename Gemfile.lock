@@ -149,7 +149,7 @@ GEM
     ffi (1.16.3)
     filepond-rails (1.0.1)
       rails (>= 7.0, < 8)
-    font-awesome-sass (6.5.1)
+    font-awesome-sass (6.2.0)
       sassc (~> 2.0)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
@@ -405,7 +405,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   filepond-rails
-  font-awesome-sass
+  font-awesome-sass (= 6.2.0)
   haml-rails
   html2haml
   importmap-rails
