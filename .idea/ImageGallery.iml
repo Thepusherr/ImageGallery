@@ -2656,6 +2656,7 @@
           <RakeTaskImpl id="spec">
             <subtasks>
               <RakeTaskImpl description="Run the code examples in spec/helpers" fullCommand="spec:helpers" id="helpers" />
+              <RakeTaskImpl description="Run the code examples in spec/mailers" fullCommand="spec:mailers" id="mailers" />
               <RakeTaskImpl description="Run the code examples in spec/models" fullCommand="spec:models" id="models" />
               <RakeTaskImpl description="Run the code examples in spec/requests" fullCommand="spec:requests" id="requests" />
               <RakeTaskImpl description="Run the code examples in spec/routing" fullCommand="spec:routing" id="routing" />

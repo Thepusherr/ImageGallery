@@ -20,10 +20,10 @@
   .card-body
     #post.carousel-inner
       = image_tag post.image, class: 'd-block w-100', style: 'max-height: 100%; object-fit: cover;'
-  -# %button.carousel-control-prev{"data-bs-target" => "#post", type: "button"}
-  -# %span.carousel-control-prev-icon.bg-dark.rounded-circle{"aria-hidden" => "true"}
-  -# %span.visually-hidden Previous
-  -# %button.carousel-control-next{"data-bs-target" => "#post", type: "button"}
-  -# %span.carousel-control-next-icon.bg-dark.rounded-circle{"aria-hidden" => "true"}
-  -# %span.visually-hidden Next
-  = render "posts/post_comments", post: post
+    = render "posts/post_actions", post: post
+    %p.card-text
+      %span.fw-bold
+        = post.user.name
+        = post.user.surname
+      = post.text
+    = render "posts/post_comments", post: post

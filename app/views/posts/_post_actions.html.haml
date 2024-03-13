@@ -1,0 +1,20 @@
+= turbo_frame_tag "post#{post.id}actions" do
+  .d-flex.justify-content-start.align-items-center.gap-1.mb-3
+    = button_to toggle_like_path(post_id: post.id), method: :post, style: "border:none; background:none", id: "post#{post.id}actions-likeBtn" do
+      %i{class: "#{post.likes.find_by(user: current_user) ? "fa-solid color-red" : "fa-regular"} fa-heart fa-xl"}
+    %a{"data-bs-target" => "#post post.id _commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
+      %i.fa-regular.fa-comment.fa-xl.fa-flip-horizontal.text-dark
+  %a.text-dark{"data-bs-target" => "#post post.id _likesModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
+    %small.fw-bold.my-1
+      = pluralize(post.likes.count, "like")
+  / Modal
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post post.id _likesModalLabel", id: "post post.id _likesModal", tabindex: "-1"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %h1.modal-title.fs-5{id: "post post.id _likesModalLabel"} Post likes
+          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+        .modal-body
+          .d-flex.flex-column.gap-3
+            - post.likers.each do |liker|
+              = render "posts/liker", liker: liker
