@@ -1,6 +1,6 @@
 = turbo_frame_tag "post#{post.id}comments" do
   - if post.comments.count > 0
-    %a{"data-bs-target" => "#post post.id _commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
+    %a{"data-bs-target" => "#post#{post.id}_commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
       %small.text-muted
         View all #{pluralize(post.comments.count, "comments")}
   - post.comments.last(5).each do |comment|
@@ -9,11 +9,11 @@
         %span.fw-bold= comment.user.username
       = comment.body
   / Modal
-  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post post.id _commentsModalLabel", id: "post post.id _commentsModal", tabindex: "-1"}
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_commentsModal", id: "post post.id _commentsModal", tabindex: "-1"}
     .modal-dialog
       .modal-content
         .modal-header
-          %h1.modal-title.fs-5{id: "post post.id _commentsModalLabel"} Post Comments
+          %h1.modal-title.fs-5{id: "post#{post.id}_commentsModal"} Post Comments
           %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
         .modal-body
           .d-flex.flex-column.gap-3

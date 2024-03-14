@@ -8,7 +8,9 @@
           - else
             = image_tag 'default-avatar.png', class: 'img-thumbnail rounded-circle', style: 'width: 10%'
         = link_to post.user, class: 'a-decoration-none' do
-          %span.fw-bold.mx-2= post.user.name
+          %span.fw-bold.mx-2
+            = post.user.name
+            = post.user.surname
       %div
         - if current_user == post.user
           .dropdown
@@ -26,4 +28,10 @@
         = post.user.name
         = post.user.surname
       = post.text
-    = render "posts/post_comments", post: post
+      = render "posts/post_comments", post: post
+    %small.text-muted= time_ago_in_words(post.created_at)
+    = form_with url: comments_path, method: :post, data: {controller: "comments", action: "turbo:submit-end->comments#clear"} do |f|
+      .card-footer.d-flex.justify-content-between.bg-white
+        = f.hidden_field :post_id, value: post.id
+        = f.text_area :comment_body, class: "w-75", placeholder: "Add a comment...", style: "border:none"
+        = f.submit "Post", class: "text-primary fw-bold", style: "background:none; border:none"

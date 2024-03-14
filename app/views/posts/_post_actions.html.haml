@@ -2,7 +2,7 @@
   .d-flex.justify-content-start.align-items-center.gap-1.mb-3
     = button_to toggle_like_path(post_id: post.id), method: :post, style: "border:none; background:none", id: "post#{post.id}actions-likeBtn" do
       %i{class: "#{post.likes.find_by(user: current_user) ? "fa-solid color-red" : "fa-regular"} fa-heart fa-xl"}
-    %a{"data-bs-target" => "#post post.id _commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
+    %a{"data-bs-target" => "#post#{post.id}_commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
       %i.fa-regular.fa-comment.fa-xl.fa-flip-horizontal.text-dark
   %a.text-dark{"data-bs-target" => "#post post.id _likesModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
     %small.fw-bold.my-1

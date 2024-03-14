@@ -2,7 +2,7 @@ class CommentsController < InheritedResources::Base
   before_action :set_post, only: [:create]
 
   def create
-    @comment = @post.comments.create(user: current_user, body: params[:comment_body])
+    @comment = @post.comments.create(user: current_user, text: params[:comment_body])
 
     respond_to do |format|
       format.turbo_stream do
