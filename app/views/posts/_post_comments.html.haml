@@ -6,8 +6,10 @@
   - post.comments.last(5).each do |comment|
     %p.card-text.m-0
       = link_to comment.user, class: "a-decoration-none", data: {turbo: false} do
-        %span.fw-bold= comment.user.username
-      = comment.body
+        %span.fw-bold
+          = comment.user.name
+          = comment.user.surname
+      = comment.text
   / Modal
   .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_commentsModal", id: "post post.id _commentsModal", tabindex: "-1"}
     .modal-dialog

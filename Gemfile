@@ -31,6 +31,7 @@ gem 'activestorage'
 gem 'active_storage_validations'
 gem 'filepond-rails'
 gem "font-awesome-sass", "6.2.0"
+gem 'friendly_id', '~> 5.5.0'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
