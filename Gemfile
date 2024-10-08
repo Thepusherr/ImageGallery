@@ -20,11 +20,12 @@ gem 'carrierwave', '~> 3.0'
 gem "mini_magick"
 gem 'kaminari'
 
-gem 'activeadmin', github: 'activeadmin/activeadmin', branch: 'master' # FIXME: revert to stable
+gem 'activeadmin' # FIXME: revert to stable
+gem 'sass-rails'
 gem "devise", "~> 4.9"
-# gem 'cancancan'
-# gem 'draper'
-# gem 'pundit'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
 gem 'html2haml'
 gem "haml-rails"
 gem 'activestorage'
