@@ -1,0 +1,14 @@
+= form_with(model: category) do |form|
+  - if category && category.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(category.errors.count, "error")
+        prohibited this category from being saved:
+      %ul
+        - category.errors.each do |error|
+          %li= error.full_message
+  = form.hidden_field :post_id
+  = form.label :text, "Text:"
+  = form.text_area :text
+  .actions
+    = form.submit

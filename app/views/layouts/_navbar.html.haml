@@ -1,18 +1,18 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.bg-gradient
   .container-fluid
     %a.navbar-brand{href: "#"} ImageGallery
     %button.navbar-toggler{"aria-controls" => "navbarColor01", "aria-expanded" => "true", "aria-label" => "Toggle navigation", "data-target" => "#navbarColor01", "data-toggle" => "collapse", type: "button"}
       %span.navbar-toggler-icon
-    #navbarColor01.navbar-collapse.collapse.w-100.justify-content-center.show
-      %ul.navbar-nav
+    #navbarColor01.navbar-collapse.collapse.w-100.justify-content-center.align-items-center.show
+      %ul.navbar-nav.justify-content-center.align-items-center
         %li.nav-item.active
-          = link_to "Home", home_index_path, class: 'nav-link'
+          = link_to "Home", home_index_path, class: 'nav-link text-white'
         %li.nav-item
-          = link_to "Create", new_post_path, class: 'nav-link'
+          = link_to "Create", new_post_path, class: 'nav-link text-white'
         %li.nav-item
-          %a.nav-link{href: "#"} Categories
+          = link_to "Categories", categories_index_path, class: 'nav-link text-white'
         %li.nav-item.dropdown
-          %a.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Dropdown
+          %a.nav-link.text-white.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Dropdown
           .dropdown-menu
             %a.dropdown-item{href: "#"} Action
             %a.dropdown-item{href: "#"} Another action
@@ -28,6 +28,6 @@
             = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link'
         - else
           %li.nav-item
-            = link_to 'Sign In', new_user_session_path, class: 'nav-link'
+            = link_to 'Sign In', new_user_session_path, class: 'nav-link text-white', style: 'width:65px;'
           %li.nav-item
-            = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+            = link_to 'Sign Up', new_user_registration_path, class: 'nav-link text-white width', style: 'width:75px;'

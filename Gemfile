@@ -14,6 +14,7 @@ gem "redis", ">= 4.0.1"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem 'bootstrap', '~> 5.3.2'
+gem 'popper_js', '~> 2.11.8'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem "sassc-rails"

@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  get 'categories/show'
   get 'home/index'
+  get 'categories/index'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like
   devise_scope :user do
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :likes
   resources :comments, only: [:create, :destroy]
   resources :posts
+  resources :categories
 
   root to: "home#index"
 end

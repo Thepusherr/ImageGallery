@@ -435,6 +435,7 @@ DEPENDENCIES
   kaminari
   mini_magick
   pg (~> 1.1)
+  popper_js (~> 2.11.8)
   puma (>= 5.0)
   pundit
   rails (~> 7.1.3)
