@@ -1,3 +1,17 @@
+= stylesheet_link_tag 'home_slider'
+= javascript_include_tag 'application'
+= stylesheet_link_tag "application", "data-turbo-track": "reload"
+
+%ul.slider
+  %li.item.item1{style: "background-image: url('https://images.unsplash.com/photo-1562624475-96c2bc08fab9?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTkxODI2OTF8&ixlib=rb-4.0.3&q=85&width=700')"}
+    %span Prague
+  %li.item.item2{style: "background-image: url('https://images.unsplash.com/photo-1534283844880-d5fd2ddd2cc9?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTkxODI5OTN8&ixlib=rb-4.0.3&q=85&width=700')"}
+    %span London
+  %li.item.item3{style: "background-image: url('https://images.unsplash.com/photo-1511745235279-2f7276d5ba65?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTkxODMwNTh8&ixlib=rb-4.0.3&q=85&width=700')"}
+    %span New York
+  %li.item.item4{style: "background-image: url('https://images.unsplash.com/photo-1560930950-5cc20e80e392?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTkxODI1OTd8&ixlib=rb-4.0.3&q=85&width=700')"}
+    %span Berlin
+
 .container
   .row
     -# - if user_signed_in?
@@ -7,6 +21,3 @@
     - @posts.each do |post|
       .col-3.justify-content-center.m-1
         = render 'posts/post', post: post
-    -# - else
-    -#   %h1 Home
-    -#   = link_to 'Sign in', new_user_session_path

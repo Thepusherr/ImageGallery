@@ -13,45 +13,45 @@
         %button.btn.btn-primary{type: "button"} Save changes
 %a.text-dark{"data-bs-target" => "#staticBackdrop", "data-bs-toggle" => "modal", type: "button"}
   %i.fa-regular.fa-square-plus.fa-xl
-.modal.fade.modal-lg#staticBackdrop{ role: "dialog", 'tabindex'=>"-1", 'aria-labelledby'=>"staticBackdropLabel" }
-  .modal-dialog.modal-dialog-centered
-    = form_with(model: post) do |form|
-      .modal-content
-        .modal-header
-          %h1#staticBackdropLabel.modal-title Create new post
-          %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
-        .modal-body.d-flex
-          .border-end.border-secondary.mx-2{style: "width: 60%"}
-            = form.file_field :image, multiple: false, id: "post-image", required: true
-          %div{style: "width:40%"}
-            - if post.errors.any?
-              %div{style: "color: red"}
-                %h2
-                  = pluralize(post.errors.count, "error")
-                  prohibited this post from being saved:
-                %ul
-                  - post.errors.each do |error|
-                    %li= error.full_message
-            .my-2
-              = image_tag current_user.avatar.url ? current_user.avatar.url : "default-avatar.png", class: "img-thumbnail rounded-circle", style: "width: 10%"
-              %span.fw-bold.mx-2
-                = current_user.name
-                = current_user.surname
-            %div
-              = form.text_area :title, placeholder: "Add location", class: "form-control"
-            %div
-              = form.text_area :text, rows: 8, placeholder: "Write a caption...", class: "form-control border-0", style: "resize:none"
-            -# .d-flex.justify-content-between.align-items-center.border.form-control.my-2{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-bs-toggle" => "collapse", href: "#collapseExample", role: "button"}
-            -#   %a.text-dark{style: "text-decoration: none"}
-            -#     Advanced Settings
-            -#   %i.fa-solid.fa-chevron-down
-            -# #collapseExample.collapse
-            -#   .card.card-body
-            -#     .form-check.form-switch
-            -#       = form.check_box :allow_comments, class: "form-check-input", role: "switch", checked: true
-            -#       = form.label :allow_comments, style: "display: block", class: "form-check-label"
-            -#     .form-check.form-switch
-            -#       = form.check_box :show_likes_counter, class: "form-check-input", role: "switch", checked: true
-            -#       = form.label :show_likes_counter, style: "display: block", class: "form-check-label"
-        .modal-footer
-          = form.submit "Post", class: "btn btn-primary"
+/.modal.fade.modal-lg#staticBackdrop{ role: "dialog", 'tabindex'=>"-1", 'aria-labelledby'=>"staticBackdropLabel" }
+/  .modal-dialog.modal-dialog-centered
+= form_with(model: post) do |form|
+  .modal-content
+    .modal-header
+      %h1#staticBackdropLabel.modal-title Create new post
+      %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+    .modal-body.d-flex
+      .border-end.border-secondary.mx-2{style: "width: 60%"}
+        = form.file_field :image, multiple: false, id: "post-image", required: true
+      %div{style: "width:40%"}
+        - if post.errors.any?
+          %div{style: "color: red"}
+            %h2
+              = pluralize(post.errors.count, "error")
+              prohibited this post from being saved:
+            %ul
+              - post.errors.each do |error|
+                %li= error.full_message
+        .my-2
+          = image_tag current_user.avatar.url ? current_user.avatar.url : "default-avatar.png", class: "img-thumbnail rounded-circle", style: "width: 10%"
+          %span.fw-bold.mx-2
+            = current_user.name
+            = current_user.surname
+        %div
+          = form.text_area :title, placeholder: "Add location", class: "form-control"
+        %div
+          = form.text_area :text, rows: 8, placeholder: "Write a caption...", class: "form-control border-0", style: "resize:none"
+        -# .d-flex.justify-content-between.align-items-center.border.form-control.my-2{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-bs-toggle" => "collapse", href: "#collapseExample", role: "button"}
+        -#   %a.text-dark{style: "text-decoration: none"}
+        -#     Advanced Settings
+        -#   %i.fa-solid.fa-chevron-down
+        -# #collapseExample.collapse
+        -#   .card.card-body
+        -#     .form-check.form-switch
+        -#       = form.check_box :allow_comments, class: "form-check-input", role: "switch", checked: true
+        -#       = form.label :allow_comments, style: "display: block", class: "form-check-label"
+        -#     .form-check.form-switch
+        -#       = form.check_box :show_likes_counter, class: "form-check-input", role: "switch", checked: true
+        -#       = form.label :show_likes_counter, style: "display: block", class: "form-check-label"
+    .modal-footer
+      = form.submit "Post", class: "btn btn-primary"

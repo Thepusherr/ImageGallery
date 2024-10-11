@@ -7,8 +7,8 @@
       %ul
         - category.errors.each do |error|
           %li= error.full_message
-  = form.hidden_field :post_id
-  = form.label :text, "Text:"
-  = form.text_area :text
+  = form.hidden_field :category_id
+  = form.label :text, "Category name:"
+  = form.text_field :text
   .actions
     = form.submit

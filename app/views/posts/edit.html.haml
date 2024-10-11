@@ -1,7 +1,10 @@
-%h1 Editing post
+.container#form-container
+  .row
+    .col-sm-12.justify-content-center
+      %h1 Editing post
+      %br/
+      = render 'form'
 
-= render 'form'
-
-= link_to 'Show', @post
-\|
-= link_to 'Back', posts_path
+      = link_to 'Show', @post
+      \|
+      = link_to 'Back', posts_path

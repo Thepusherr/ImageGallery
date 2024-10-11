@@ -4,6 +4,10 @@ class CategoriesController < ApplicationController
   def show
   end
 
+  def new
+    @category = Category.new
+  end
+
   def categories
     @categories = Category.where(user: current_user).order(created_at: :desc)
   end
