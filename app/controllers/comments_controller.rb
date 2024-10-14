@@ -9,7 +9,7 @@ class CommentsController < InheritedResources::Base
         render turbo_stream: turbo_stream.replace(
           "post#{@post.id}comments",
           partial: "posts/post_comments",
-          locals: { post: @post}
+          locals: { post: @post }
         )
       end
     end

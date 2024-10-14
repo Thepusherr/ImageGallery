@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :set_category, only: %i[ show edit update destroy ]
   before_action :categories
 
   def show
@@ -13,7 +14,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @posts = current_user.posts
+    @category = current_user.categories.new(category_params)
 
     respond_to do |format|
       if @category.save
@@ -39,7 +40,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    return if current_user != @post.user
+    return if current_user != current_user.categories.first.user
 
     @category.destroy
 
@@ -47,5 +48,15 @@ class CategoriesController < ApplicationController
       format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  def category_params
+    params.require(:category).permit(:name, :user_id)
   end
 end

@@ -3,7 +3,7 @@
     .col-sm-12.justify-content-center
       %h1 Editing Category
       %br/
-      = render 'form'
+      = render 'form', category: @category
       = link_to 'Show', @category
       \|
       = link_to 'Back', categories_path

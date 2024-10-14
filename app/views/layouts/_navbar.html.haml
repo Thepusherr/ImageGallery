@@ -8,17 +8,17 @@
         %li.nav-item.active
           = link_to "Home", home_index_path, class: 'nav-link text-white'
         %li.nav-item
-          = link_to "Create", new_post_path, class: 'nav-link text-white'
+          = link_to "New post", new_post_path, class: 'nav-link text-white'
         %li.nav-item
           = link_to "Categories", categories_path, class: 'nav-link text-white'
-        %li.nav-item.dropdown
-          %a.nav-link.text-white.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Dropdown
-          .dropdown-menu
-            %a.dropdown-item{href: "#"} Action
-            %a.dropdown-item{href: "#"} Another action
-            %a.dropdown-item{href: "#"} Something else here
-            .dropdown-divider
-            %a.dropdown-item{href: "#"} Separated link
+        -#%li.nav-item.dropdown
+            %a.nav-link.text-white.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"} Dropdown
+            .dropdown-menu
+              %a.dropdown-item{href: "#"} Action
+              %a.dropdown-item{href: "#"} Another action
+              %a.dropdown-item{href: "#"} Something else here
+              .dropdown-divider
+              %a.dropdown-item{href: "#"} Separated link
         %input.navbar-brand.form-control.m-2{placeholder: "Search", type: "text"}/
         %button.navbar-brand.btn.btn-secondary.m-2{type: "submit"} Search
         - if user_signed_in?
