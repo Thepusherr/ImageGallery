@@ -9,13 +9,23 @@
 #   end
 admin = AdminUser.create!(email: 'admin@example.com', password: '123123', password_confirmation: '123123') if Rails.env.development? 
 
-user1 = User.create!(name: 'John', surname: 'Jons', email: 'spunkspunkik@gmail.com', password: '123123', password_confirmation: '123123')
-user1.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
+# image = File.open(Rails.root.join('db/seeds/micropost_placeholder.png'))
+# image.rewind
+
+#user2.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
+
+user1 = User.new(name: 'John', surname: 'Jons', email: 'spunkspunkik@gmail.com', password: '123123', password_confirmation: '123123')
+user1.avatar = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
+user1.save!
+#user1.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
+
 # File.open(File.join(Rails.root,'app/assets/images/default-avatar.png'))
-user2 = User.create!(name: 'Bert', surname: 'Berner', email: 'spunkspunkik2@gmail.com', password: '123123', password_confirmation: '123123')
-user2.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
-post1 = Post.create!(title: 'My photo', text: '', user_id: user1.id)
-post1.image.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')) , filename: 'default-avatar.png') 
+user2 = User.new(name: 'Bert', surname: 'Berner', email: 'spunkspunkik2@gmail.com', password: '123123', password_confirmation: '123123')
+user2.avatar = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
+user2.save!
+post1 = Post.new(title: 'My photo', text: '', user_id: user1.id)
+post1.image = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
+post1.save!
 Comment.create!(text: 'Nice photo!', post_id: post1.id, user_id: user2.id)
 Comment.create!(text: 'Beautiful!', post_id: post1.id, user_id: user1.id)
 Like.create(user_id: user1.id, post_id: post1.id)

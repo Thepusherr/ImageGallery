@@ -3,25 +3,18 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+1. add .env file to root dir:  
+```
+mail_email=test@gmail.com  
+mail_password=test  
+```
 
-* Ruby version
-  ruby 3.3.0
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2. run this commands:  
+```
+rvm use 3.3.0  
+bundle install  
+rails db:create && rails db:migrate && rails db:seed 
+``` 
 
 # ImageGallery
 
