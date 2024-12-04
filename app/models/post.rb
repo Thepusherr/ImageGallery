@@ -15,4 +15,8 @@ class Post < ApplicationRecord
   # def image_size_validation
   #   errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
   # end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "image", "text", "title", "updated_at", "user_id"]
+  end
 end

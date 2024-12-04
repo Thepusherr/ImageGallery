@@ -55,11 +55,13 @@ GEM
       activemodel (>= 5.2.0)
       activestorage (>= 5.2.0)
       activesupport (>= 5.2.0)
-    activeadmin (4.0.0.beta5)
-      arbre (~> 2.0)
+    activeadmin (3.2.5)
+      arbre (~> 1.2, >= 1.2.1)
+      csv
       formtastic (>= 3.1)
       formtastic_i18n (>= 0.4)
       inherited_resources (~> 1.7)
+      jquery-rails (>= 4.2)
       kaminari (>= 1.2.1)
       railties (>= 6.1)
       ransack (>= 4.0)
@@ -94,7 +96,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
-    arbre (2.0.0)
+    arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
     autoprefixer-rails (10.4.16.0)
@@ -132,6 +134,7 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.1)
       irb (~> 1.10)
@@ -308,7 +311,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.1.0)
-    ransack (4.1.1)
+    ransack (4.2.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
@@ -414,7 +417,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_validations
-  activeadmin
+  activeadmin (~> 3.2)
   activestorage
   bootsnap
   bootstrap (~> 5.3.2)

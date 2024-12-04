@@ -22,7 +22,7 @@ gem 'carrierwave', '~> 3.0'
 gem "mini_magick"
 gem 'kaminari'
 
-gem 'activeadmin' # FIXME: revert to stable
+gem "activeadmin", "~> 3.2"
 gem 'sass-rails'
 gem "devise", "~> 4.9"
 gem 'cancancan'
