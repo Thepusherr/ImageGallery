@@ -22,4 +22,12 @@ class User < ApplicationRecord
   def avatar_size_validation
     errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["avatar_attachment", "avatar_blob", "categories", "posts"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["avatar", "created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "slug", "surname", "updated_at", "username"]
+  end
 end
