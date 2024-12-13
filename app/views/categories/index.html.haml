@@ -1,15 +1,12 @@
 .container#form-container
   .row
-    .col-sm-12.justify-content-center
+    .justify-content-center
       Categories
       %br/
       %table
-        %thead
-          %tr
-            %th{colspan: "3"}
         %tbody
           - @categories.each do |category|
-            %tr
+            %tr                                 
               %td= category.name
               %td= link_to 'Show', category
               %td= link_to 'Edit', edit_category_path(category)

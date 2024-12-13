@@ -11,6 +11,7 @@ class CategoriesController < ApplicationController
 
   def categories
     @categories = Category.where(user: current_user).order(created_at: :desc)
+    @posts = Post.where.
   end
 
   def create

@@ -32,16 +32,20 @@ ActiveAdmin.register_page "Dashboard" do
       h2 "Last 10 images", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500"
 
       h2 "user actions", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500" do
+        all_actions = []
+
+        User.all.map do |user|
+          all_actions << { user: user.email, action: user.last_sign_in_at, url: "#{root_url}/login", timestamp: user.last_sign_in_at }
+        end
+        
         table_for User.all do |u|
-          c.column("text") { |comment| comment.text }
-          c.column("user_id") { |comment| comment.user_id }
-          c.column("post_id") { |comment| comment.post_id }
-          c.column("created_at") { |comment| comment.updated_at? ? l(comment.created_at, :format => :long) : '-' }
-          c.column("updated_at") { |comment| comment.created_at? ? l(comment.updated_at, :format => :long) : '-' }
+          u.column("user") { |user| user.email }
+          u.column("action") { |user| user }
+          u.column("URL") { |user| user.post_id }
+          #u.column("created_at") { |user| user.updated_at? ? l(user.created_at, :format => :long) : '-' }
+          u.column("Timestamp") { |user| user.created_at? ? l(user.updated_at, :format => :long) : '-' }
         end
       end
-
-
 
       para "user navigation", class: "mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-200"
 
