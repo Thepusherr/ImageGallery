@@ -11,7 +11,19 @@ class CategoriesController < ApplicationController
 
   def categories
     @categories = Category.where(user: current_user).order(created_at: :desc)
-    @posts = Post.where.
+    @popular_categories = Category
+    .left_joins(posts: [:likes, :comments])
+    .select(
+      'categories.*, COUNT(posts.id) AS posts_count, COUNT(likes.id) AS likes_count, COUNT(comments.id) AS comments_count'
+    )
+    .group('categories.id')
+    .order('posts_count DESC, likes_count DESC, comments_count DESC')
+    .limit(5)
+  
+    @categories_with_images = @popular_categories.includes(posts: { image_attachment: :blob }).map do |category|
+      category_image = category.posts.find { |post| post.image.attached? }&.image
+      { category: category, image: category_image }
+    end
   end
 
   def create

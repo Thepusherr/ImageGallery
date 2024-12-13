@@ -11,6 +11,13 @@
               %td= link_to 'Show', category
               %td= link_to 'Edit', edit_category_path(category)
               %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+          - @categories_with_images.each do |entry|
+            .category
+              %h3= entry[:category].name
+              - if entry[:image]
+                = image_tag(entry[:image])
+              - else
+                %p No image available
       %br/
       %div
         = link_to "New category", new_category_path
