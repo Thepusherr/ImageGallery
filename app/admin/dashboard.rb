@@ -41,19 +41,24 @@ ActiveAdmin.register_page "Dashboard" do
         table_for User.all do |u|
           u.column("user") { |user| user.email }
           u.column("action") { |user| user }
-          u.column("URL") { |user| user.post_id }
+          #u.column("URL") { |user| user.post_id }
           #u.column("created_at") { |user| user.updated_at? ? l(user.created_at, :format => :long) : '-' }
           u.column("Timestamp") { |user| user.created_at? ? l(user.updated_at, :format => :long) : '-' }
         end
       end
 
-      para "user navigation", class: "mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-200"
+      h2 "user actions", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500" do
+        table_for UserEvent.order(timestamp: :desc).limit(10) do
+          column :user
+          column :action_type
+          column :url do |event|
+            link_to event.url, event.url, target: '_blank'
+          end
+          column :timestamp
+        end
+      end
 
-      para "user login time", class: "mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-200"
 
-      para "user logout time", class: "mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-200"
-
-      para "user logout time", class: "mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-200"
      
       # section "Tasks that are late" do
       #   table_for current_admin_user.tasks.where('due_date < ?', Time.now) do |t|

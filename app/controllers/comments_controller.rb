@@ -4,6 +4,14 @@ class CommentsController < InheritedResources::Base
   def create
     @comment = @post.comments.create(user: current_user, text: params[:comment_text])
 
+    if @comment.persisted?
+      UserEventLogger.log(
+        user: current_user,
+        action_type: 'commented',
+        url: url_for(:only_path => false) # request.fullpath
+      )
+    end
+
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(

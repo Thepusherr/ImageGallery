@@ -10,8 +10,14 @@ namespace :app do
       category_name = File.basename(category_folder)
       category = Category.find_or_create_by(name: category_name)
 
-      Dir.glob("#{category_folder}/*.jpg").each do |image_path|
-        category.images.create(image: File.open(image_path))
+      user1 = User.find_or_create_by(name: 'Bert', surname: 'Berner', email: 'spunkspunkik2@gmail.com', password: '123123', password_confirmation: '123123')
+      user1.avatar = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
+      user1.save!
+      Dir.glob("#{category_folder}/*.*").each do |image_path|
+        p image_path
+        post = Post.new(title: 'rake photo', text: '', user_id: user1.id)
+        post.image = File.open(Rails.root.join(image_path))
+        post.save!
       end
     end
   end
