@@ -1,4 +1,7 @@
 class Category < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   belongs_to :user
   
   has_and_belongs_to_many :posts
@@ -9,5 +12,9 @@ class Category < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["post", "posts", "user", "users"]
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
   end
 end

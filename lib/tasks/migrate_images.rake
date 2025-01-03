@@ -21,6 +21,6 @@ namespace :app do
         post.categories << category 
         post.save!
       end
-    end
+    end         
   end
 end
