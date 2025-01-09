@@ -3,5 +3,11 @@
     .justify-content-center
       %b Category name:
       %br/
-      = @category.name
+      %h1= @category.name
       %br/
+      %div
+        - @posts_with_images.each_with_index do |post, index|
+          = link_to image_category_path(@category, index + 1) do
+            = image_tag post.image, alt: "Image #{index + 1}"
+
+

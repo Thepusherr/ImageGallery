@@ -1,9 +1,10 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[ show edit update destroy show_image]
   before_action :categories
 
   def show
-    @category = Category.friendly.find(params[:id])
+    @posts_with_images = @category.posts.select { |post| post.image.attached? }
+    #@category_images = @category.posts.where(user: current_user).select { |post| post.image.attached? }.map(&:image)
   end
 
   def new
@@ -21,6 +22,11 @@ class CategoriesController < ApplicationController
     .order('posts_count DESC, likes_count DESC, comments_count DESC')
     .limit(5)
   
+    # @all_categories_with_images = @categories.includes(posts: { image_attachment: :blob }).map do |category|
+    #   category_image = category.posts.where(user: current_user).find { |post| post.image.attached? }&.image
+    #   { category: category, image: category_image }
+    # end
+
     @categories_with_images = @popular_categories.includes(posts: { image_attachment: :blob }).map do |category|
       category_image = category.posts.find { |post| post.image.attached? }&.image
       { category: category, image: category_image }
@@ -61,6 +67,15 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def show_image
+    @posts_with_images = @category.posts.select { |post| post.image.attached? }
+    @current_image_index = params[:image_index].to_i
+
+    if @current_image_index < 1 || @current_image_index > @posts_with_images.size
+      redirect_to category_path(@category), alert: 'Invalid image index'
     end
   end
 

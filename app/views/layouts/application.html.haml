@@ -10,9 +10,11 @@
     = javascript_importmap_tags
     %link{href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap", rel: "stylesheet"}/    
   %body
-    = render 'layouts/navbar'
-    - if notice
-      %p.notice= notice
-    - else
-      %p.alert= alert
-    = yield
+    .content
+      = render 'layouts/navbar'
+      - if notice
+        %p.notice= notice
+      - else
+        %p.alert= alert
+      = yield
+    = render 'layouts/footer'

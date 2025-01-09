@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   resources :likes
   resources :comments, only: [:create, :destroy]
   resources :posts
-  resources :categories, param: :id
+  resources :categories, param: :id do
+    member do
+      get ':image_index', to: 'categories#show_image', as: 'image'
+    end
+  end
 
   root to: "home#index"
 end
