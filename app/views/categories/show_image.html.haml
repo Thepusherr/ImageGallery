@@ -1,0 +1,9 @@
+%h1= @category.name
+%nav
+  - if @current_image_index > 1
+    = link_to 'Previous', image_category_path(@category, @current_image_index - 1), rel: 'prev'
+  - if @current_image_index < @posts_with_images.size
+    = link_to 'Next', image_category_path(@category, @current_image_index + 1), rel: 'next'
+%div
+  - current_post = @posts_with_images[@current_image_index - 1]
+  = image_tag current_post.image, alt: "Image #{@current_image_index}"
