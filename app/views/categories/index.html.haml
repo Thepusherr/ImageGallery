@@ -1,19 +1,20 @@
-.container(style="display: flex; flex-direction: column; align-items: center; text-align: center;")
-  .justify-content-center
-    %h1(style="font-size: 3rem; font-weight: bold;")
-      Categories
-    %br/
-    %br/
-    - @categories_with_images.each do |entry|
-      .image-row
-        .image-container
-          = image_tag(entry[:image], alt: entry[:name], class: 'img-fluid')
-          .overlay-text
-            = entry[:category].name
-        .button-group
-          = link_to 'Show', category_path(entry[:category]), class: 'btn btn-primary text-white', style: 'text-decoration: none;'
-          = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning text-dark', style: 'text-decoration: none;'
-          = link_to 'Destroy', entry[:category], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
-    %br/
-    %div
-      = link_to "New category", new_category_path, class: 'btn btn-success btn-lg text-white', style: 'text-decoration: none;'
+.container#form-container(style="display: flex; flex-direction: column; align-items: center; text-align: center;")
+  .row
+    .justify-content-center
+      %h1(style="font-size: 3rem; font-weight: bold;")
+        Categories
+      %br/
+      %br/
+      - @categories_with_images.each do |entry|
+        .image-row
+          .image-container
+            = image_tag(entry[:image], alt: entry[:name], class: 'img-fluid')
+            .overlay-text
+              = entry[:category].name
+          .button-group
+            = link_to 'Show', category_path(entry[:category]), class: 'btn btn-primary text-white', style: 'text-decoration: none;'
+            = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning text-dark', style: 'text-decoration: none;'
+            = link_to 'Destroy', entry[:category], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
+      %br/
+      %div
+        = link_to "New category", new_category_path, class: 'btn btn-success btn-lg text-white', style: 'text-decoration: none;'
