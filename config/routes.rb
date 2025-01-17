@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :categories, param: :id do
     member do
       get ':image_index', to: 'categories#show_image', as: 'image'
+      delete 'destroy', to: 'categories#destroy', as: 'destroy_category'
     end
   end
 

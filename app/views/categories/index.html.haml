@@ -14,7 +14,6 @@
           .button-group
             = link_to 'Show', category_path(entry[:category]), class: 'btn btn-primary text-white', style: 'text-decoration: none;'
             = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning text-dark', style: 'text-decoration: none;'
-            = link_to 'Destroy', entry[:category], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
-      %br/
+            = link_to 'Destroy', category_path(entry[:category]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
       %div
         = link_to "New category", new_category_path, class: 'btn btn-success btn-lg text-white', style: 'text-decoration: none;'

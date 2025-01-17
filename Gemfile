@@ -21,7 +21,7 @@ gem "sassc-rails"
 gem 'carrierwave', '~> 3.0'
 gem "mini_magick"
 gem 'kaminari'
-
+gem 'nokogiri', '~> 1.16', '>= 1.16.7'
 gem "activeadmin", "~> 3.2"
 gem 'sass-rails'
 gem "devise", "~> 4.9"

@@ -20,10 +20,46 @@
 @import "active_admin";
 @import "footer";
 
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Align body children in a column */
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
+  margin: 0;
+  font-family: sans-serif;
+  //background-color: #430b0b;
+  color: #222;
 }
+
+.content {
+  flex: 1; 
+}
+
+* {
+  box-sizing: border-box;
+
+  &::before, &::after {
+    box-sizing: border-box;
+  }
+}
+
+#form-container{
+  max-width: 1200px;
+  margin:1em auto;
+  box-shadow: 0 0 12px black;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: rgba(189, 157, 116, 0.5);;
+  color: black;
+}
+
 
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
@@ -108,3 +144,8 @@ img {
     font-size: 1rem;
   }
 }
+
+// #C6A57A
+// #171717
+// #222222
+// #b3d4fc
