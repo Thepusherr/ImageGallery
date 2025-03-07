@@ -6,6 +6,9 @@ import "stylesheets/active_admin"
 import * as FilePond from 'filepond';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 
+import AOS from 'aos';
+document.addEventListener('turbo:load', () => { AOS.init() });
+
 FilePond.registerPlugin(FilePondPluginImagePreview);
 
 document.addEventListener("turbo:load", loadFilePond);
