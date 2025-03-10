@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get 'home/index'
+  get 'home/about'
+  get 'home/contact'
+  get 'home/starter-page'
+  get 'home/gallery'
+  get 'home/gallery-single'
+  get 'home/services'
   get 'profile', to: 'profile#index'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like

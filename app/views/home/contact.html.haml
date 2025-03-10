@@ -4,12 +4,13 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %title Contact - PhotoFolio Bootstrap Template
+    %title Contact - ImageGallery
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "keywords"}/
     / Favicons
-    %link{:href => "assets/img/favicon.png", :rel => "icon"}/
-    %link{:href => "assets/img/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => asset_path("favicon.png"), :rel => "icon"}/
+    %link{:href => asset_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
+    
     / Fonts
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
@@ -20,24 +21,14 @@
     %link{:href => "assets/vendor/aos/aos.css", :rel => "stylesheet"}/
     %link{:href => "assets/vendor/glightbox/css/glightbox.min.css", :rel => "stylesheet"}/
     %link{:href => "assets/vendor/swiper/swiper-bundle.min.css", :rel => "stylesheet"}/
-    / Main CSS File
-    %link{:href => "assets/css/main.css", :rel => "stylesheet"}/
-    /
-      \=======================================================
-      * Template Name: PhotoFolio
-      * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
-      * Updated: Aug 07 2024 with Bootstrap v5.3.3
-      * Author: BootstrapMade.com
-      * License: https://bootstrapmade.com/license/
-      \========================================================
   %body.contact-page
     %header#header.header.d-flex.align-items-center.sticky-top
       .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
         %a.logo.d-flex.align-items-center.me-auto.me-xl-0{:href => "index.html"}
           / Uncomment the line below if you also wish to use an image logo
-          / <img src="assets/img/logo.png" alt="">
+          / %img{:alt => "", :src => image_path("logo.png")}
           %i.bi.bi-camera
-          %h1.sitename PhotoFolio
+          %h1.sitename ImageGallery
         %nav#navmenu.navmenu
           %ul
             %li
@@ -157,7 +148,7 @@
           %p
             ©
             %span Copyright
-            %strong.px-1.sitename PhotoFolio
+            %strong.px-1.sitename ImageGallery
             %span All Rights Reserved
         .social-links.d-flex.justify-content-center
           %a{:href => ""}
@@ -168,13 +159,6 @@
             %i.bi.bi-instagram
           %a{:href => ""}
             %i.bi.bi-linkedin
-        .credits
-          / All the links in the footer should remain intact.
-          / You can delete the links only if you've purchased the pro version.
-          / Licensing information: https://bootstrapmade.com/license/
-          / Purchase the pro version with working PHP/AJAX contact form: [buy-url]
-          Designed by
-          %a{:href => "https://bootstrapmade.com/"} BootstrapMade
     / Scroll Top
     %a#scroll-top.scroll-top.d-flex.align-items-center.justify-content-center{:href => "#"}
       %i.bi.bi-arrow-up-short
@@ -188,4 +172,4 @@
     %script{:src => "assets/vendor/glightbox/js/glightbox.min.js"}
     %script{:src => "assets/vendor/swiper/swiper-bundle.min.js"}
     / Main JS File
-    %script{:src => "assets/js/main.js"}
+    %script{:src => "assets/javascripts/main.js"}

@@ -4,12 +4,12 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %title About - PhotoFolio Bootstrap Template
+    %title About - ImageGallery
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "keywords"}/
     / Favicons
-    %link{:href => "assets/img/favicon.png", :rel => "icon"}/
-    %link{:href => "assets/img/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => asset_path("favicon.png"), :rel => "icon"}/ 
+    %link{:href => asset_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
     / Fonts
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
@@ -20,24 +20,14 @@
     %link{:href => "assets/vendor/aos/aos.css", :rel => "stylesheet"}/
     %link{:href => "assets/vendor/glightbox/css/glightbox.min.css", :rel => "stylesheet"}/
     %link{:href => "assets/vendor/swiper/swiper-bundle.min.css", :rel => "stylesheet"}/
-    / Main CSS File
-    %link{:href => "assets/css/main.css", :rel => "stylesheet"}/
-    /
-      \=======================================================
-      * Template Name: PhotoFolio
-      * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
-      * Updated: Aug 07 2024 with Bootstrap v5.3.3
-      * Author: BootstrapMade.com
-      * License: https://bootstrapmade.com/license/
-      \========================================================
   %body.about-page
     %header#header.header.d-flex.align-items-center.sticky-top
       .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
         %a.logo.d-flex.align-items-center.me-auto.me-xl-0{:href => "index.html"}
           / Uncomment the line below if you also wish to use an image logo
-          / <img src="assets/img/logo.png" alt="">
+          / %img{:alt => "", :src => image_path("logo.png")}
           %i.bi.bi-camera
-          %h1.sitename PhotoFolio
+          %h1.sitename ImageGallery
         %nav#navmenu.navmenu
           %ul
             %li
@@ -116,7 +106,7 @@
         .container{"data-aos" => "fade-up", "data-aos-delay" => "100"}
           .row.gy-4.justify-content-center
             .col-lg-4
-              %img.img-fluid{:alt => "", :src => "assets/img/profile-img.jpg"}/
+              %img.img-fluid{:alt => "", :src => image_path("profile-img.jpg")}
             .col-lg-5.content
               %h2 UI/UX DesiProfessional Photographer from New Yorkgner &amp; Web Developer.
               %p.fst-italic.py-3
@@ -212,7 +202,7 @@
                   %p
                     Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-1.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-1.jpg")}/
                     %h3 Saul Goodman
                     %h4 Ceo &amp; Founder
               / End testimonial item
@@ -227,7 +217,7 @@
                   %p
                     Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-2.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-2.jpg")}/
                     %h3 Sara Wilsson
                     %h4 Designer
               / End testimonial item
@@ -242,7 +232,7 @@
                   %p
                     Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-3.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-3.jpg")}/
                     %h3 Jena Karlis
                     %h4 Store Owner
               / End testimonial item
@@ -257,7 +247,7 @@
                   %p
                     Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-4.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-4.jpg")}/
                     %h3 Matt Brandon
                     %h4 Freelancer
               / End testimonial item
@@ -272,7 +262,7 @@
                   %p
                     Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-5.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-5.jpg")}/
                     %h3 John Larson
                     %h4 Entrepreneur
               / End testimonial item
@@ -284,7 +274,7 @@
           %p
             ©
             %span Copyright
-            %strong.px-1.sitename PhotoFolio
+            %strong.px-1.sitename ImageGallery
             %span All Rights Reserved
         .social-links.d-flex.justify-content-center
           %a{:href => ""}
@@ -295,13 +285,6 @@
             %i.bi.bi-instagram
           %a{:href => ""}
             %i.bi.bi-linkedin
-        .credits
-          / All the links in the footer should remain intact.
-          / You can delete the links only if you've purchased the pro version.
-          / Licensing information: https://bootstrapmade.com/license/
-          / Purchase the pro version with working PHP/AJAX contact form: [buy-url]
-          Designed by
-          %a{:href => "https://bootstrapmade.com/"} BootstrapMade
     / Scroll Top
     %a#scroll-top.scroll-top.d-flex.align-items-center.justify-content-center{:href => "#"}
       %i.bi.bi-arrow-up-short
@@ -315,4 +298,4 @@
     %script{:src => "assets/vendor/glightbox/js/glightbox.min.js"}
     %script{:src => "assets/vendor/swiper/swiper-bundle.min.js"}
     / Main JS File
-    %script{:src => "assets/js/main.js"}
+    %script{:src => "assets/javascripts/main.js"}
