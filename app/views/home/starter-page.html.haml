@@ -8,8 +8,8 @@
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "keywords"}/
     / Favicons
-    %link{:href => "assets/img/favicon.png", :rel => "icon"}/
-    %link{:href => "assets/img/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => asset_path("favicon.png"), :rel => "icon"}/
+    %link{:href => asset_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
     / Fonts
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
@@ -24,8 +24,6 @@
     %header#header.header.d-flex.align-items-center.sticky-top
       .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
         %a.logo.d-flex.align-items-center.me-auto.me-xl-0{:href => "index.html"}
-          / Uncomment the line below if you also wish to use an image logo
-          / <img src="assets/img/logo.png" alt="">
           %i.bi.bi-camera
           %h1.sitename ImageGallery
         %nav#navmenu.navmenu

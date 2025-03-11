@@ -8,8 +8,8 @@
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "keywords"}/
     / Favicons
-    %link{:href => "assets/img/favicon.png", :rel => "icon"}/
-    %link{:href => "assets/img/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => asset_path("favicon.png"), :rel => "icon"}/
+    %link{:href => asset_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
     / Fonts
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
@@ -24,8 +24,6 @@
     %header#header.header.d-flex.align-items-center.sticky-top
       .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
         %a.logo.d-flex.align-items-center.me-auto.me-xl-0{:href => "index.html"}
-          / Uncomment the line below if you also wish to use an image logo
-          / <img src="assets/img/logo.png" alt="">
           %i.bi.bi-camera
           %h1.sitename ImageGallery
         %nav#navmenu.navmenu
@@ -239,7 +237,7 @@
                   %p
                     Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-2.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-2.jpg")}/
                     %h3 Sara Wilsson
                     %h4 Designer
               / End testimonial item
@@ -254,7 +252,7 @@
                   %p
                     Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-3.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-3.jpg")}/
                     %h3 Jena Karlis
                     %h4 Store Owner
               / End testimonial item
@@ -269,7 +267,7 @@
                   %p
                     Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-4.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-4.jpg")}/
                     %h3 Matt Brandon
                     %h4 Freelancer
               / End testimonial item
@@ -284,7 +282,7 @@
                   %p
                     Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
                   .profile.mt-auto
-                    %img.testimonial-img{:alt => "", :src => "assets/img/testimonials/testimonials-5.jpg"}/
+                    %img.testimonial-img{:alt => "", :src => image_path("testimonials/testimonials-5.jpg")}/
                     %h3 John Larson
                     %h4 Entrepreneur
               / End testimonial item

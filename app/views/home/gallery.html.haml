@@ -8,8 +8,8 @@
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "keywords"}/
     / Favicons
-    %link{:href => "assets/img/favicon.png", :rel => "icon"}/
-    %link{:href => "assets/img/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => asset_path("favicon.png"), :rel => "icon"}/
+    %link{:href => asset_path("apple-touch-icon.png"), :rel => "apple-touch-icon"}/
     / Fonts
     %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
     %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
@@ -24,8 +24,6 @@
     %header#header.header.d-flex.align-items-center.sticky-top
       .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
         %a.logo.d-flex.align-items-center.me-auto.me-xl-0{:href => "index.html"}
-          / Uncomment the line below if you also wish to use an image logo
-          / <img src="assets/img/logo.png" alt="">
           %i.bi.bi-camera
           %h1.sitename ImageGallery
         %nav#navmenu.navmenu
@@ -107,72 +105,72 @@
           .row.gy-4.justify-content-center
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-1.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-1.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-1.jpg", :title => "Gallery 1"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-1.jpg"), :title => "Gallery 1"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-2.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-2.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-2.jpg", :title => "Gallery 2"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-2.jpg"), :title => "Gallery 2"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-3.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-3.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-3.jpg", :title => "Gallery 3"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-3.jpg"), :title => "Gallery 3"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-4.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-4.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-4.jpg", :title => "Gallery 4"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-4.jpg"), :title => "Gallery 4"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-5.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-5.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-5.jpg", :title => "Gallery 5"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-5.jpg"), :title => "Gallery 5"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-6.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-6.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-6.jpg", :title => "Gallery 6"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-6.jpg"), :title => "Gallery 6"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-7.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-7.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-7.jpg", :title => "Gallery 7"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-7.jpg"), :title => "Gallery 7"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
             / End Gallery Item
             .col-xl-3.col-lg-4.col-md-6
               .gallery-item.h-100
-                %img.img-fluid{:alt => "", :src => "assets/img/gallery/gallery-8-2.jpg"}/
+                %img.img-fluid{:alt => "", :src => image_path("gallery/gallery-8-2.jpg")}/
                 .gallery-links.d-flex.align-items-center.justify-content-center
-                  %a.glightbox.preview-link{:href => "assets/img/gallery/gallery-8-2.jpg", :title => "Gallery 8"}
+                  %a.glightbox.preview-link{:href => image_path("gallery/gallery-8-2.jpg"), :title => "Gallery 8"}
                     %i.bi.bi-arrows-angle-expand
                   %a.details-link{:href => "gallery-single.html"}
                     %i.bi.bi-link-45deg
