@@ -1,0 +1,57 @@
+%header#header.header.d-flex.align-items-center.sticky-top
+  .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
+    %a.logo.d-flex.align-items-center.me-auto.me-xl-0{href: "index.html"}
+      %i.bi.bi-camera
+      %h1.sitename ImageGallery
+    %nav#navmenu.navmenu
+      %ul
+        %li
+          %a{href: "starter_page.html"} Home
+        %li
+          %a{href: "about.html"} About
+        %li.dropdown
+          %a.active{href: "gallery.html"}
+            %span Gallery
+            %i.bi.bi-chevron-down.toggle-dropdown
+          %ul
+            %li
+              %a.active{href: "gallery.html"} Nature
+            %li
+              %a.active{href: "gallery.html"} People
+            %li
+              %a.active{href: "gallery.html"} Architecture
+            %li
+              %a.active{href: "gallery.html"} Animals
+            %li
+              %a.active{href: "gallery.html"} Sports
+            %li
+              %a.active{href: "gallery.html"} Travel
+            %li.dropdown
+              %a{href: "#"}
+                %span Deep Dropdown
+                %i.bi.bi-chevron-down.toggle-dropdown
+              %ul
+                %li
+                  %a{href: "#"} Deep Dropdown 1
+                %li
+                  %a{href: "#"} Deep Dropdown 2
+                %li
+                  %a{href: "#"} Deep Dropdown 3
+                %li
+                  %a{href: "#"} Deep Dropdown 4
+                %li
+                  %a{href: "#"} Deep Dropdown 5
+        %li
+          %a{href: "services.html"} Services
+        %li
+          %a{href: "contact.html"} Contact
+      %i.mobile-nav-toggle.d-xl-none.bi.bi-list
+    .header-social-links
+      %a.twitter{href: "#"}
+        %i.bi.bi-twitter-x
+      %a.facebook{href: "#"}
+        %i.bi.bi-facebook
+      %a.instagram{href: "#"}
+        %i.bi.bi-instagram
+      %a.linkedin{href: "#"}
+        %i.bi.bi-linkedin
