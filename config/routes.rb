@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/about'
   get 'home/contact'
-  get 'home/starter-page'
+  get 'home/starter_page'
   get 'home/gallery'
-  get 'home/gallery-single'
+  get 'home/gallery_single'
   get 'home/services'
   get 'profile', to: 'profile#index'
   get "up" => "rails/health#show", as: :rails_health_check

@@ -96,7 +96,7 @@
           .container
             %ol
               %li
-                %a{:href => "index.html"} Home
+                %a{:href => "starter_page.html"} Home
               %li.current Services
       / End Page Title
       / Services Section
@@ -185,30 +185,30 @@
         / End Section Title
         .container{"data-aos" => "fade-up", "data-aos-delay" => "100"}
           .swiper.init-swiper
-            %script.swiper-config{:type => "application/json"}
-              :cdata
+            %script{ type: "application/json", class: "swiper-config" }
+              :plain
                 {
-                "loop": true,
-                "speed": 600,
-                "autoplay": {
-                "delay": 5000
-                },
-                "slidesPerView": "auto",
-                "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-                },
-                "breakpoints": {
-                "320": {
-                "slidesPerView": 1,
-                "spaceBetween": 40
-                },
-                "1200": {
-                "slidesPerView": 3,
-                "spaceBetween": 1
-                }
-                }
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  },
+                  "breakpoints": {
+                    "320": {
+                      "slidesPerView": 1,
+                      "spaceBetween": 40
+                    },
+                    "1200": {
+                      "slidesPerView": 3,
+                      "spaceBetween": 1
+                    }
+                  }
                 }
             .swiper-wrapper
               .swiper-slide
