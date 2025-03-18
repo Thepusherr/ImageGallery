@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.friendly.find(params[:id])
+    @user = User.friendly.find_by(id: params[:id])
+    redirect_to users_path, alert: 'Пользователь не найден.' if @user.nil?
   end
 end

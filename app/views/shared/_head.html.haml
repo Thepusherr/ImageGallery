@@ -4,6 +4,9 @@
 %title= content_for?(:title) ? yield(:title) : "ImageGallery"
 = csrf_meta_tags
 = csp_meta_tag
+= stylesheet_link_tag 'home_slider'
+= javascript_include_tag 'application'
+= stylesheet_link_tag "application", "data-turbo-track": "reload"
 = stylesheet_link_tag "application", "data-turbo-track": "reload"
 = stylesheet_link_tag "main", media: "all", "data-turbo-track": "reload"
 = javascript_importmap_tags

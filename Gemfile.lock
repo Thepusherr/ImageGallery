@@ -159,6 +159,10 @@ GEM
     erubi (1.12.0)
     erubis (2.7.0)
     execjs (2.9.1)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     filepond-rails (1.0.1)
       rails (>= 7.0, < 8)
@@ -379,6 +383,8 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     sexp_processor (4.17.1)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -438,6 +444,8 @@ DEPENDENCIES
   devise (~> 4.9)
   dotenv
   draper
+  factory_bot (~> 6.5)
+  faker
   filepond-rails
   font-awesome-sass (= 6.2.0)
   friendly_id (~> 5.5.0)
@@ -460,6 +468,7 @@ DEPENDENCIES
   sass-rails
   sassc-rails
   selenium-webdriver
+  shoulda-matchers (~> 6.0)
   sprockets-rails
   stimulus-rails
   turbo-rails

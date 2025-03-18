@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   private
   def avatar_size_validation
-    errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes
+    errors[:avatar] << "should be less than 50 MB" if avatar.size > 50.megabytes
   end
 
   def self.ransackable_associations(auth_object = nil)

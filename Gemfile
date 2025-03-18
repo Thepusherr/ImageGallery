@@ -52,4 +52,7 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'factory_bot', '~> 6.5'
+  gem 'faker'
+  gem 'shoulda-matchers', '~> 6.0'
 end
