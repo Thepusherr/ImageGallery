@@ -1,43 +1,43 @@
-.container#form-container
-  .row
-    .col-sm-12.justify-content-center
-      %h2 Sign up
+.col-sm-12.d-flex.justify-content-center.align-items-center
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { :id => 'content-container'}) do |f|
+    %h2.text-center Sign up
+    %br/
+    = render "devise/shared/error_messages", resource: resource
+    .field.form-group.row
+      = f.label "Profile Photo"
+      .col-sm-5.form-control
+        = f.file_field :avatar, class: 'filepond', direct_upload: true
+    .field.form-group.row
+      = f.label :name
       %br/
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { :id => 'content-container'}) do |f|
-        = render "devise/shared/error_messages", resource: resource
-        .field.form-group.row
-          = f.label "Profile Photo"
-          .col-sm-5.form-control
-            = f.file_field :avatar, class: 'filepond', direct_upload: true
-        .field.form-group.row
-          = f.label :name
-          %br/
-          .col-sm-5.form-control
-            = f.text_field :name, autofocus: true, autocomplete: "name"
-        .field.form-group.row
-          = f.label :surname
-          %br/
-          .col-sm-5.form-control
-            = f.text_field :surname, autofocus: true, autocomplete: "surname"
-        .field.form-group.row
-          = f.label :email
-          %br/
-          .col-sm-5.form-control
-            = f.email_field :email, autofocus: true, autocomplete: "email"
-        .field.form-group.row
-          = f.label :password
-          - if @minimum_password_length
-            %em
-              (#{@minimum_password_length} characters minimum)
-          %br/
-          .col-sm-5.form-control
-            = f.password_field :password, autocomplete: "new-password"
-        .field
-          = f.label :password_confirmation
-          %br/
-          .col-sm-5.form-control
-            = f.password_field :password_confirmation, autocomplete: "new-password"
-        .actions
-          = f.submit "Sign up"
-        %br/
-        = render "devise/shared/links"
+      .col-sm-5.form-control
+        = f.text_field :name, autofocus: true, autocomplete: "name"
+    .field.form-group.row
+      = f.label :surname
+      %br/
+      .col-sm-5.form-control
+        = f.text_field :surname, autofocus: true, autocomplete: "surname"
+    .field.form-group.row
+      = f.label :email
+      %br/
+      .col-sm-5.form-control
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+    .field.form-group.row
+      = f.label :password
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      .col-sm-5.form-control
+        = f.password_field :password, autocomplete: "new-password"
+    .field.form-group.row
+      = f.label :password_confirmation
+      %br/
+      .col-sm-5.form-control
+        = f.password_field :password_confirmation, autocomplete: "new-password"
+    %br/
+    = f.submit "Sign up", class: "sign-up-button"
+    %br/
+    .log-in-button
+      = render "devise/shared/links"
+    %br/

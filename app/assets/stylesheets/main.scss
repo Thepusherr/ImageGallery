@@ -1507,3 +1507,63 @@ section, .section {
 .starter-section {
   /* Add your styles here */
 }
+
+.log-in-button {
+  border: 0;
+  --accent-color: #FF0000;
+  color: var(--accent-color);
+  background-color: transparent;
+  border: 2px solid #FF0000 !important;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+  height: 3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: #FF0000 !important;
+    --accent-color: #FFFFFF;
+    color: var(--accent-color);
+  }
+
+  .icon {
+    margin-right: 0.5rem;
+  }
+}
+
+.sign-up-button {
+  border: 0;
+  --accent-color: #FFFFFF;
+  color: var(--accent-color);
+  background-color: #FF0000;
+  border: 2px solid #FF0000 !important;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+  height: 3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: #FF0000 !important;
+    --accent-color: #FFFFFF;
+    color: var(--accent-color);
+  }
+
+  .icon {
+    margin-right: 0.5rem;
+  }
+}
