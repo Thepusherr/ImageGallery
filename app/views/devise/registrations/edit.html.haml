@@ -1,6 +1,6 @@
 .container#form-container
   .row
-    .col-sm-12
+    .col-sm-12.d-flex.justify-content-center.align-items-center
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => 'content-container'}) do |f|
         = render "devise/shared/error_messages", resource: resource
         %h2

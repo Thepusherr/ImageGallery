@@ -1,21 +1,22 @@
 .container#form-container
   .row
-    .col-sm-12.justify-content-center
-      %br/
-      %h2 Log in
+    .col-sm-12.d-flex.justify-content-center.align-items-center
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .field
+        %br/
+        %h2.text-center.mb-4 Log in
+        .field.mb-3
           = f.label :email
           %br/
           = f.email_field :email, autofocus: true, autocomplete: "email"
-        .field
+        .field.mb-3
           = f.label :password
           %br/
           = f.password_field :password, autocomplete: "current-password"
         - if devise_mapping.rememberable?
-          .field
+          .field.mb-3
             = f.check_box :remember_me
             = f.label :remember_me
-        .actions
-          = f.submit "Log in"
-      = render "devise/shared/links"
+        .actions.mb-3
+          = f.submit "Log in", class: "log-in-button"
+        %br/
+        = render "devise/shared/links"

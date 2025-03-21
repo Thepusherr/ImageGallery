@@ -1567,3 +1567,32 @@ section, .section {
     margin-right: 0.5rem;
   }
 }
+
+.orange-btn {
+  font-size: 17px;
+  line-height: 1.2353641176;
+  font-weight: 600;
+  letter-spacing: -0.001em;
+  font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif;
+  display: inline-block;
+  box-sizing: border-box;
+  color: rgb(255, 121, 27);
+  background-color: rgb(71, 30, 0);
+  white-space: nowrap;
+  border-radius: 6px;
+  padding: 6px 9px;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #FFD700;
+  color: #000000;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.custom-file-upload:hover {
+  background-color: #FFC107;
+}
