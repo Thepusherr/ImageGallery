@@ -48,7 +48,7 @@
 //   }
 // }
 
-// #form-container{
+// #form-container {
 //   max-width: 1200px;
 //   margin:1em auto;
 //   box-shadow: 0 0 12px black;
@@ -59,6 +59,10 @@
 //   background-color: rgba(189, 157, 116, 0.5);;
 //   color: black;
 // }
+
+#main-container {
+  min-height: 100vh;
+}
 
 
 // h1, h2, h3 {
