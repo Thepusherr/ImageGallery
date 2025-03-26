@@ -6,6 +6,8 @@
   --nav-font:"Inter",  sans-serif;
   --background-color:#000000;
 
+  --black-150: hsl(210, 8%, 95%);
+
   /* Background color for the entire website, including individual sections */
   --default-color:#fafafa;
 
@@ -1576,7 +1578,7 @@ section, .section {
   padding: 6px 9px;
 }
 
-.custom-file-upload {
+.custom-file-upload-btn {
   display: inline-block;
   padding: 10px 20px;
   cursor: pointer;
@@ -1586,7 +1588,7 @@ section, .section {
   text-align: center;
 }
 
-.custom-file-upload:hover {
+.custom-file-upload-btn:hover {
   background-color: #FFC107;
 }
 
@@ -1604,8 +1606,20 @@ section, .section {
   text-transform: uppercase;
   letter-spacing: 1px;
   width: 100%;
+  text-align: center;
 
   &:hover {
     background-color: color-mix(in srgb, var(--accent-color) 90%, white 10%);
   }
+}
+
+.btn-lg {
+  font-size: 6.4vw;
+  line-height: 16vw;
+  border-radius: 8vw;
+  background-color: #307fef;
+  text-align: center;
+  font-weight: 600;
+  display: block;
+  color: #fff;
 }

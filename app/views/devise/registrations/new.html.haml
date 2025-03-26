@@ -4,7 +4,7 @@
       %h2.text-center.mb-4 Sign up
       = render "devise/shared/error_messages", resource: resource
       .form-group.mb-4
-        %label{ for: 'avatar', class: 'form-label custom-file-upload' } Upload profile photo
+        %label{ for: 'avatar', class: 'form-label custom-file-upload-btn' } Upload profile photo
         = f.file_field :avatar, id: 'avatar', class: 'form-control-file', style: 'display: none;', direct_upload: true
       .form-group.mb-4
         = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: :name
