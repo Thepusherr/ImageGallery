@@ -1,6 +1,11 @@
 class UserEvent < ApplicationRecord
   belongs_to :user
 
+  # Add validations
+  validates :action_type, presence: true
+  validates :url, presence: true
+  validates :user, presence: true
+
   def self.ransackable_associations(auth_object = nil)
     ["user"]
   end
