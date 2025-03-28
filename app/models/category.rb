@@ -6,6 +6,9 @@ class Category < ApplicationRecord
   
   has_and_belongs_to_many :posts, dependent: :destroy
 
+  validates :name, presence: true, uniqueness: { scope: :user_id }
+  validates :user, presence: true
+
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "name", "updated_at", "user_id"]
   end

@@ -2,11 +2,11 @@ class Post < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :categories
   has_one_attached :image
-  has_many :comments
-  has_many :likes
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
 
-  validates :image, presence: true
+  validates :title, :text, :user, :image, presence: true
   # validate :image_size_validation
 
   private
