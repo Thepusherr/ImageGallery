@@ -1,0 +1,8 @@
+%nav
+  %ul.pagination.justify-content-center
+    = link_to_previous_page(paginator, raw('←'), class: 'page-link')
+    = link_to_next_page(paginator, raw('→'), class: 'page-link')
+    %li
+      %span.current-page
+        = current_page
+    = paginator.page_gap
