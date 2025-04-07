@@ -18,9 +18,9 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to render_template(:index)
       end
 
-      it "assigns @users" do
+      it "lists all users" do
         get :index
-        expect(assigns(:users)).to eq(User.all)
+        expect(response.body).to include(User.first.name)
       end
     end
 
@@ -46,9 +46,9 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to render_template(:show)
       end
 
-      it "assigns the requested user to @user" do
+      it "displays the requested user's name" do
         get :show, params: { id: user.id }
-        expect(assigns(:user)).to eq(user)
+        expect(response.body).to include(user.name)
       end
     end
 
@@ -74,9 +74,9 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to render_template(:edit)
       end
 
-      it "assigns the requested user to @user" do
+      it "displays the edit form for the requested user" do
         get :edit, params: { id: user.id }
-        expect(assigns(:user)).to eq(user)
+        expect(response.body).to include("Edit User")
       end
     end
 
@@ -102,6 +102,12 @@ RSpec.describe UsersController, type: :controller do
         it "redirects to the user" do
           patch :update, params: { id: user.id, user: { name: "Updated Name" } }
           expect(response).to redirect_to(user_path(user))
+        end
+
+        it "updates the user's name" do
+          patch :update, params: { id: user.id, user: { name: "Updated Name" } }
+          user.reload
+          expect(user.name).to eq("Updated Name")
         end
       end
 

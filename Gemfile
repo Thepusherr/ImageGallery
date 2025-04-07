@@ -34,7 +34,7 @@ gem 'activestorage'
 gem 'active_storage_validations'
 gem 'filepond-rails'
 gem "font-awesome-sass", "6.2.0"
-gem 'friendly_id', '~> 5.5.0'
+gem 'friendly_id', '~> 5.5.0 '
 gem 'pusher'
 
 group :development, :test do
@@ -55,4 +55,5 @@ group :test do
   gem 'factory_bot', '~> 6.5'
   gem 'faker'
   gem 'shoulda-matchers', '~> 6.0'
+  gem 'rails-controller-testing'
 end

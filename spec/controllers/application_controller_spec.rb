@@ -11,6 +11,13 @@ RSpec.describe ApplicationController, type: :controller do
     end
   end
 
+  before do
+    routes.draw do
+      get 'index', to: 'anonymous#index'
+      get 'raise_exception', to: 'anonymous#raise_exception'
+    end
+  end
+
   describe "GET #index" do
     it "returns a successful response" do
       get :index
@@ -25,9 +32,9 @@ RSpec.describe ApplicationController, type: :controller do
 
   describe "Exception Handling" do
     it "rescues from StandardError and renders a 500 error page" do
-      expect {
-        get :raise_exception
-      }.to raise_error(StandardError, 'An error occurred')
+      get :raise_exception
+      expect(response).to have_http_status(:internal_server_error)
+      expect(response.body).to include('We\'re sorry, but something went wrong.')
     end
   end
 end

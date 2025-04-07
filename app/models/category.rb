@@ -1,4 +1,5 @@
 class Category < ApplicationRecord
+  enum visibility: { visible: 0, hidden: 1 }, _default: :visible
   extend FriendlyId
   friendly_id :name, use: :slugged
 

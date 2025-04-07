@@ -43,15 +43,14 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to be_successful
     end
 
-      it "renders the show template" do
-        get :show, params: { id: post.id }
-        expect(response).to render_template(:show)
-      end
+    it "renders the show template" do
+      get :show, params: { id: post.id }
+      expect(response).to render_template(:show)
+    end
 
-      it "assigns the requested post to @post" do
-        get :show, params: { id: post.id }
-        expect(assigns(:post)).to eq(post)
-      end
+    it "assigns the requested post to @post" do
+      get :show, params: { id: post.id }
+      expect(assigns(:post)).to eq(post)
     end
 
     context "when user is not signed in" do

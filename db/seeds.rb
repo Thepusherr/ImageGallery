@@ -23,7 +23,7 @@ user1.save!
 user2 = User.new(name: 'Bert', surname: 'Berner', email: 'spunkspunkik2@gmail.com', password: '123123', password_confirmation: '123123')
 user2.avatar = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
 user2.save!
-post1 = Post.new(title: 'My photo', text: '', user_id: user1.id)
+post1 = Post.new(title: 'My photo', text: 'This is my first post!', user_id: user1.id)
 post1.image = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
 post1.save!
 Comment.create!(text: 'Nice photo!', post_id: post1.id, user_id: user2.id)

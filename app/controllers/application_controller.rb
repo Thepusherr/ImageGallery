@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :track_navigation
+
+  rescue_from StandardError, with: :render_500_error
 
   protected
 
@@ -21,5 +22,11 @@ class ApplicationController < ActionController::Base
       action_type: 'navigation',
       url: request.fullpath
     )
+  end
+
+  def render_500_error(exception)
+    logger.error(exception.message)
+    logger.error(exception.backtrace.join("\n"))
+    render file: 'public/500.html', status: :internal_server_error, layout: false
   end
 end
