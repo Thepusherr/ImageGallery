@@ -13,6 +13,30 @@
 # it.
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+# Load frozen array patch to fix issues with frozen arrays in Rails Engine
+begin
+  frozen_array_patch_path = File.join(File.dirname(__FILE__), 'support/frozen_array_patch.rb')
+  require frozen_array_patch_path if File.exist?(frozen_array_patch_path)
+rescue => e
+  puts "Failed to load frozen array patch: #{e.message}"
+end
+
+# Load frozen array patch to fix issues with frozen arrays in Rails Engine
+begin
+  frozen_array_patch_path = File.join(File.dirname(__FILE__), 'support/frozen_array_patch.rb')
+  require frozen_array_patch_path if File.exist?(frozen_array_patch_path)
+rescue => e
+  puts "Failed to load frozen array patch: #{e.message}"
+end
+
+# Load UserEventLogger mock for tests
+begin
+  mock_path = File.join(File.dirname(__FILE__), 'support/user_event_logger_mock.rb')
+  require mock_path if File.exist?(mock_path)
+rescue => e
+  puts "Failed to load UserEventLogger mock: #{e.message}"
+end
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

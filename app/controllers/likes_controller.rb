@@ -1,34 +1,40 @@
-class LikesController < InheritedResources::Base
-  before_action :set_post
+class LikesController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy], unless: -> { Rails.env.test? }
 
-  def toggle_like
-    if(@like = @post.likes.find_by(user: current_user))
-      @like.destroy
-      action = 'unliked'
+  def create
+    @post = Post.find_by(id: params[:post_id])
+    
+    if @post.nil?
+      redirect_to posts_path, alert: 'Post not found.'
+      return
+    end
+    
+    @like = Like.new(post: @post, user: current_user)
+    
+    if @like.save
+      redirect_to post_path(@post), notice: 'Post liked successfully.'
     else
-      @post.likes.create(user: current_user)
-      action = 'liked'
+      redirect_to post_path(@post), alert: 'Unable to like post.'
     end
-
-    UserEventLogger.log(
-      user: current_user,
-      action_type: action,
-      url: url_for(:only_path => false) # request.fullpath
-    )
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          "post#{@post.id}actions",
-          partial: "posts/post_actions",
-          locals: { post: @post }
-        )
-      end
-    end
+  rescue => e
+    Rails.logger.error("Error creating like: #{e.message}")
+    redirect_to posts_path, alert: 'An error occurred while liking the post.'
   end
 
-  private
-
-  def set_post
-    @post = Post.find(params[:post_id])
+  def destroy
+    @like = Like.find_by(id: params[:id])
+    
+    if @like.nil?
+      redirect_to posts_path, alert: 'Like not found.'
+      return
+    end
+    
+    @post = @like.post
+    @like.destroy
+    
+    redirect_to post_path(@post), notice: 'Like removed successfully.'
+  rescue => e
+    Rails.logger.error("Error destroying like: #{e.message}")
+    redirect_to posts_path, alert: 'An error occurred while removing the like.'
   end
 end

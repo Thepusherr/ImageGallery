@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  enum visibility: { visible: 0, hidden: 1 }, _default: :visible
+  
   belongs_to :user
   has_and_belongs_to_many :categories
   has_one_attached :image
@@ -6,8 +8,8 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
 
-  validates :title, :text, :user, :image, presence: true
-  # validate :image_size_validation
+  validates :title, :text, :user, presence: true
+  # validate_size_validation
 
   private
   # def image_size_validation

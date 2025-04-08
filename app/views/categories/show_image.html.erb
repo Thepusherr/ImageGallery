@@ -1,0 +1,28 @@
+<h1><%= @category.name %> - Image <%= @current_image_index %></h1>
+
+<% if @posts_with_images.present? && @current_image_index > 0 && @current_image_index <= @posts_with_images.size %>
+  <% current_post = @posts_with_images[@current_image_index - 1] %>
+  <div class="image-container">
+    <%= image_tag current_post.image, class: 'img-fluid' %>
+  </div>
+  
+  <div class="post-details">
+    <h3><%= current_post.title %></h3>
+    <p><%= current_post.text %></p>
+  </div>
+  
+  <div class="navigation">
+    <% if @current_image_index > 1 %>
+      <%= link_to "Previous", show_image_category_path(@category, image_index: @current_image_index - 1), class: 'btn btn-primary' %>
+    <% end %>
+    
+    <% if @current_image_index < @posts_with_images.size %>
+      <%= link_to "Next", show_image_category_path(@category, image_index: @current_image_index + 1), class: 'btn btn-primary' %>
+    <% end %>
+    
+    <%= link_to "Back to Category", category_path(@category), class: 'btn btn-secondary' %>
+  </div>
+<% else %>
+  <p>No image found.</p>
+  <%= link_to "Back to Category", category_path(@category), class: 'btn btn-secondary' %>
+<% end %>

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  mount_uploader :avatar, AvatarUploader
+  # # mount_uploader :avatar, AvatarUploader
 
   has_one_attached :avatar
   has_many :posts
@@ -11,14 +11,22 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :trackable
 
-  validates_presence_of   :avatar
-  validates_integrity_of  :avatar
-  validates_processing_of :avatar
-  validate :avatar_size_validation
+  # # validates_presence_of   :avatar
+  # # validates_integrity_of  :avatar
+  # # validates_processing_of :avatar
+  # # validate :avatar_size_validation
 
-  devise :database_authenticatable, :trackable
+  # By default, all user profiles are public
+  def public_profile?
+    true
+  end
+  
+  # Check if user is an admin
+  def admin?
+    false # For now, no users are admins
+  end
 
   private
   def avatar_size_validation

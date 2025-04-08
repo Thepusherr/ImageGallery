@@ -21,13 +21,15 @@ Rails.application.routes.draw do
 
 
 
-  resources :users, only: [:show, :index]
+  resources :users
   resources :likes
   resources :comments, only: [:create, :destroy]
-  resources :posts
+  resources :posts do
+    resources :likes, only: [:create]
+  end
   resources :categories, param: :id do
     member do
-      get ':image_index', to: 'categories#show_image', as: 'image'
+      get 'show_image/:image_index', to: 'categories#show_image', as: 'show_image'
       delete 'destroy', to: 'categories#destroy', as: 'destroy_category'
     end
   end

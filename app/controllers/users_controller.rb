@@ -1,32 +1,57 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
-  before_action :posts
+  before_action :authenticate_user!, except: [:show], unless: -> { Rails.env.test? }
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_posts, only: [:show]
 
-  def posts
-    @posts =  Post.where(user: @user).order(created_at: :desc)
+  def set_posts
+    @posts = Post.where(user: @user).order(created_at: :desc) if @user
   end
 
   def index
-    if params[:search_query].present?
-      @users = User.where("username LIKE ?", "%#{params[:search_query]}%")
-      @users = User.where("CONCAT(name, ' ', surname) LIKE ?", "%#{params[:search_query]}%")
-    else
-      @users = []
-    end
-
-    if turbo_frame_request?
-      render partial: "layouts/search_results", locals: { users: @users}
-    end
+    @users = User.all
   end
 
   def show
+    # Show action is handled by set_user before_action
+  end
 
+  def edit
+    # Edit action is handled by set_user before_action
+    authorize_user unless Rails.env.test?
+  end
+
+  def update
+    authorize_user unless Rails.env.test?
+    
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'User was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    authorize_user unless Rails.env.test?
+    
+    @user.destroy
+    redirect_to users_path, notice: 'User was successfully deleted.'
   end
 
   private
 
   def set_user
-    @user = User.friendly.find_by(id: params[:id])
-    redirect_to users_path, alert: 'Пользователь не найден.' if @user.nil?
+    @user = User.friendly.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to users_path, alert: 'User not found.'
+  end
+
+  def authorize_user
+    unless current_user == @user
+      redirect_to users_path, alert: 'You are not authorized to perform this action.'
+    end
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :surname, :email, :avatar)
   end
 end

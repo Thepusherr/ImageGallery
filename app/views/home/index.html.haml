@@ -13,7 +13,8 @@
     -# - if user_signed_in?
       -# = render "modals/image_comments"
     .div.d-flex.justify-content-center{ :style => "font-size: 1rem;" }
-      = paginate @posts
+      - if @posts.respond_to?(:total_pages)
+        = paginate @posts
     - @posts.each do |post|
       .col-2.justify-content-center.m-1
         = render 'posts/post', post: post

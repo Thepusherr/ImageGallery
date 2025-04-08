@@ -16,7 +16,6 @@ gem "bootsnap", require: false
 gem 'bootstrap', '~> 5.3.2'
 gem 'popper_js', '~> 2.11.8'
 gem 'jquery-rails'
-gem 'bootstrap-sass', '~> 3.4.1'
 gem "sassc-rails"
 gem 'carrierwave', '~> 3.0'
 gem "mini_magick"
@@ -56,4 +55,5 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 6.0'
   gem 'rails-controller-testing'
+  gem 'database_cleaner-active_record'
 end

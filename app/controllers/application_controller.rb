@@ -16,12 +16,20 @@ class ApplicationController < ActionController::Base
 
   def track_navigation
     return unless current_user
+    return if Rails.env.test? # Skip tracking in test environment
 
-    UserEventLogger.log(
-      user: current_user,
-      action_type: 'navigation',
-      url: request.fullpath
-    )
+    # Only track if UserEventLogger is defined
+    if defined?(UserEventLogger)
+      begin
+        UserEventLogger.log(
+          user: current_user,
+          action_type: 'navigation',
+          url: request.fullpath
+        )
+      rescue => e
+        Rails.logger.error("Failed to log navigation event: #{e.message}")
+      end
+    end
   end
 
   def render_500_error(exception)

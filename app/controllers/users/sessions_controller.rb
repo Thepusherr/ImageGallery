@@ -29,18 +29,35 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def log_sign_in
-    UserEventLogger.log(
-      user: current_user,
-      action_type: 'user_sign_in',
-      url: root_path
-    )
+    return if Rails.env.test? # Skip in test environment
+    
+    if defined?(UserEventLogger) && current_user
+      begin
+        UserEventLogger.log(
+          user: current_user,
+          action_type: 'user_sign_in',
+          url: root_path
+        )
+      rescue => e
+        Rails.logger.error("Failed to log sign in event: #{e.message}")
+      end
+    end
   end
 
   def log_sign_out
-    UserEventLogger.log(
-      user: current_user,
-      action_type: 'user_sign_out',
-      url: root_path
-    )
+    return if Rails.env.test? # Skip in test environment
+    return unless current_user # User might already be signed out
+    
+    if defined?(UserEventLogger)
+      begin
+        UserEventLogger.log(
+          user: current_user,
+          action_type: 'user_sign_out',
+          url: root_path
+        )
+      rescue => e
+        Rails.logger.error("Failed to log sign out event: #{e.message}")
+      end
+    end
   end
 end

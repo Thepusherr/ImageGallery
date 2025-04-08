@@ -9,7 +9,8 @@
 #
 # http://norman.github.io/friendly_id/file.Guide.html
 
-FriendlyId.defaults do |config|
+if defined?(FriendlyId)
+  FriendlyId.defaults do |config|
   # ## Reserved Words
   #
   # Some words could conflict with Rails's routes when used as slugs, or are
@@ -104,4 +105,5 @@ FriendlyId.defaults do |config|
   #     text.to_slug.normalize! :transliterations => [:russian, :latin]
   #   end
   # }
+  end
 end

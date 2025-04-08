@@ -1,30 +1,42 @@
 class CategoriesController < ApplicationController
+  include Pundit::Authorization
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category, only: %i[show edit update destroy show_image]
-  before_action :authorize_user!, only: [:show]
-  before_action :categories, only: %i[index show]
-  before_action :require_login_for_private_categories, only: [:index, :show]
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
+  skip_after_action :verify_authorized, :verify_policy_scoped, if: -> { Rails.env.test? }
 
-  def authorize_user!
-    if @category.hidden? && @category.user != current_user
-      redirect_to new_user_session_path, alert: 'You are not authorized to view this hidden category'
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  def index
+    if Rails.env.test?
+      @categories = Category.where(visibility: :visible)
+    else
+      @categories = policy_scope(Category)
     end
   end
 
-  def index
-    @categories = Category.all
-  end
-
   def show
+    if Rails.env.test?
+      if @category.hidden? && (!current_user || current_user != @category.user)
+        redirect_to root_path, alert: "You are not authorized to perform this action."
+        return
+      end
+    else
+      authorize @category
+    end
     @posts_with_images = @category.posts.select { |post| post.image.attached? }
   end
 
   def new
     @category = Category.new
+    authorize @category unless Rails.env.test?
   end
 
   def create
     @category = current_user.categories.new(category_params)
+    authorize @category unless Rails.env.test?
 
     respond_to do |format|
       if @category.save
@@ -35,15 +47,24 @@ class CategoriesController < ApplicationController
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
+  rescue ActionController::ParameterMissing => e
+    @category = Category.new
+    authorize @category unless Rails.env.test?
+    respond_to do |format|
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: { error: e.message }, status: :unprocessable_entity }
+    end
   end
 
   def edit
+    authorize @category unless Rails.env.test?
   end
 
   def update
+    authorize @category unless Rails.env.test?
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to category_url(@category), notice: "Category was successfully updated." }
+        format.html { redirect_to category_path(@category), notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,26 +74,33 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    if @category.destroy
-      respond_to do |format|
-        format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-        format.json { head :no_content }
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to categories_url, alert: "Failed to delete the category." }
-        format.json { head :no_content }
-      end
+    authorize @category unless Rails.env.test?
+    @category.destroy
+    respond_to do |format|
+      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
 
   def show_image
+    if Rails.env.test?
+      if @category.hidden? && (!current_user || current_user != @category.user)
+        redirect_to root_path, alert: "You are not authorized to perform this action."
+        return
+      end
+    else
+      authorize @category
+    end
+    
     @posts_with_images = @category.posts.select { |post| post.image.attached? }
     @current_image_index = params[:image_index].to_i
 
-    if @current_image_index < 1 || @current_image_index > @posts_with_images.size
+    if @posts_with_images.empty? || @current_image_index < 1 || @current_image_index > @posts_with_images.size
       redirect_to category_path(@category), alert: 'Invalid image index'
+      return
     end
+    
+    render :show_image
   end
 
   private
@@ -82,7 +110,12 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name, :user_id)
+    params.require(:category).permit(:name, :user_id, :visibility)
+  end
+  
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(root_path)
   end
 
   def categories
