@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:show], unless: -> { Rails.env.test? }
+  before_action :authenticate_user!, except: [:show]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_posts, only: [:show]
 
@@ -17,11 +17,11 @@ class UsersController < ApplicationController
 
   def edit
     # Edit action is handled by set_user before_action
-    authorize_user unless Rails.env.test?
+    authorize_user
   end
 
   def update
-    authorize_user unless Rails.env.test?
+    authorize_user
     
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'User was successfully updated.'
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    authorize_user unless Rails.env.test?
+    authorize_user
     
     @user.destroy
     redirect_to users_path, notice: 'User was successfully deleted.'
