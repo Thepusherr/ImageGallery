@@ -24,8 +24,8 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it "assigns visible categories to @categories" do
-        visible_category = create(:category, user: user)
-        hidden_category = create(:category, :hidden, user: user)
+        visible_category = create(:category, user: user, name: "Visible Category")
+        hidden_category = create(:category, :hidden, user: user, name: "Hidden Category")
         
         get :index
         expect(assigns(:categories)).to include(visible_category)
@@ -217,6 +217,7 @@ RSpec.describe CategoriesController, type: :controller do
 
         it "redirects to the category" do
           patch :update, params: { id: category.id, category: { name: "Updated Category" } }
+          category.reload
           expect(response).to redirect_to(category_path(category))
         end
       end

@@ -15,6 +15,7 @@ class CategoriesController < ApplicationController
     else
       @categories = policy_scope(Category)
     end
+    Rails.logger.debug "Categories in index action: #{@categories.inspect}"
   end
 
   def show
@@ -27,6 +28,7 @@ class CategoriesController < ApplicationController
       authorize @category
     end
     @posts_with_images = @category.posts.select { |post| post.image.attached? }
+    Rails.logger.debug "Posts with images in show action: #{@posts_with_images.inspect}"
   end
 
   def new

@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy], unless: -> { Rails.env.test? }
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def create
     @post = Post.find_by(id: params[:post_id])

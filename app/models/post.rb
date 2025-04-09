@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  attribute :visibility, :integer
+  enum visibility: { public_visibility: 0, private_visibility: 1, draft: 2 }
   enum visibility: { visible: 0, hidden: 1 }, _default: :visible
   
   belongs_to :user
