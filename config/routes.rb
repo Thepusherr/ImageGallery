@@ -32,6 +32,8 @@ Rails.application.routes.draw do
       get 'show_image/:image_index', to: 'categories#show_image', as: 'show_image'
       delete 'destroy', to: 'categories#destroy', as: 'destroy_category'
     end
+    
+    resource :subscription, only: [:create, :destroy]
   end
 
   root to: "home#index"

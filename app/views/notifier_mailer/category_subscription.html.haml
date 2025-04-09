@@ -1,0 +1,19 @@
+%h1 Subscription Confirmation
+%p
+  Hello #{@user.name},
+%p
+  You have successfully subscribed to the 
+  %strong= @category.name
+  category.
+%p
+  You will now receive notifications when new images are added to this category.
+%p
+  = link_to "View Category", category_url(@category)
+%p
+  If you wish to unsubscribe, you can do so by visiting the category page and clicking the "Unsubscribe" button.
+%p
+  Thank you for using our Image Gallery!
+%p
+  Best regards,
+  %br
+  The Image Gallery Team

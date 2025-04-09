@@ -1,8 +1,12 @@
 .container#main-container
   .row
     .justify-content-center
-      %h1(style="font-size: 3rem; font-weight: bold; text-align: center;")
-        =@category.name.pluralize.capitalize
+      .d-flex.justify-content-between.align-items-center.mb-4
+        .d-flex.justify-content-between.align-items-center.mb-4
+        %h1(style="font-size: 3rem; font-weight: bold;")
+          =@category.name.pluralize.capitalize
+        = render 'subscription', category: @category
+        = render 'subscription', category: @category
       / Gallery Section
       %section#gallery.gallery.section
         .container-fluid{"data-aos" => "fade-up", "data-aos-delay" => "100"}

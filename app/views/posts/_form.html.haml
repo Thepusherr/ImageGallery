@@ -41,6 +41,18 @@
           = form.text_area :title, placeholder: "Add location", class: "form-control"
         %div
           = form.text_area :text, rows: 8, placeholder: "Write a caption...", class: "form-control border-0", style: "resize:none"
+        %div.mt-3
+          %label.form-label Categories:
+          = form.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
+            .form-check
+              = b.check_box(class: "form-check-input")
+              = b.label(class: "form-check-label")
+        %div.mt-3
+          %label.form-label Categories:
+          = form.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
+            .form-check
+              = b.check_box(class: "form-check-input")
+              = b.label(class: "form-check-label")
         -# .d-flex.justify-content-between.align-items-center.border.form-control.my-2{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-bs-toggle" => "collapse", href: "#collapseExample", role: "button"}
         -#   %a.text-dark{style: "text-decoration: none"}
         -#     Advanced Settings

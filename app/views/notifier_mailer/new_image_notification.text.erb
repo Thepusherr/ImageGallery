@@ -1,0 +1,19 @@
+New Image Added
+
+Hello <%= @user.name %>,
+
+A new image has been added to the <%= @category.name %> category that you're subscribed to.
+
+Image Details:
+Title: <%= @post.title %>
+Added by: <%= @post.user.name %>
+Added on: <%= @post.created_at.strftime('%B %d, %Y at %H:%M') %>
+
+To view the image, visit: <%= category_url(@category) %>
+
+If you wish to unsubscribe from this category, you can do so by visiting the category page and clicking the "Unsubscribe" button.
+
+Thank you for using our Image Gallery!
+
+Best regards,
+The Image Gallery Team
