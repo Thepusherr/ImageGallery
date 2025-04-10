@@ -16,6 +16,23 @@ class CategoriesController < ApplicationController
       @categories = policy_scope(Category)
     end
     Rails.logger.debug "Categories in index action: #{@categories.inspect}"
+    
+    # Set up categories with images for the view
+    @popular_categories = @categories
+      .left_joins(posts: [:likes, :comments])
+      .select('categories.*, COUNT(DISTINCT posts.id) AS posts_count, COUNT(DISTINCT likes.id) AS likes_count, COUNT(DISTINCT comments.id) AS comments_count')
+      .group('categories.id')
+      .order('COUNT(DISTINCT posts.id) DESC, COUNT(DISTINCT likes.id) DESC, COUNT(DISTINCT comments.id) DESC')
+      .limit(10)
+
+    @categories_with_images = @popular_categories.includes(posts: { image_attachment: :blob }).map do |category|
+      post_with_image = category.posts.find { |post| post.image.attached? }
+      image = post_with_image&.image || 'default-avatar.png'
+      { category: category, image: image }
+    end
+    
+    Rails.logger.debug "Popular Categories: #{@popular_categories.inspect}"
+    Rails.logger.debug "Categories with Images: #{@categories_with_images.inspect}"
   end
 
   def show

@@ -1,8 +1,20 @@
 %nav
   %ul.pagination.justify-content-center
-    = link_to_previous_page(paginator, raw('←'), class: 'page-link')
-    = link_to_next_page(paginator, raw('→'), class: 'page-link')
-    %li
-      %span.current-page
-        = current_page
-    = paginator.page_gap
+    -# The paginator variable is not the collection, so we need to use the collection passed to the paginate method
+    - if defined?(@posts) && @posts.respond_to?(:prev_page) && @posts.prev_page
+      %li.page-item
+        = link_to_prev_page @posts, raw('←'), class: 'page-link'
+    - else
+      %li.page-item.disabled
+        %span.page-link ←
+        
+    %li.page-item
+      %span.page-link
+        = "Page #{@posts.try(:current_page) || 1}"
+        
+    - if defined?(@posts) && @posts.respond_to?(:next_page) && @posts.next_page
+      %li.page-item
+        = link_to_next_page @posts, raw('→'), class: 'page-link'
+    - else
+      %li.page-item.disabled
+        %span.page-link →

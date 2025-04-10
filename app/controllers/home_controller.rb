@@ -9,10 +9,11 @@ class HomeController < ApplicationController
                   end
     
     # Use pagination if available, otherwise just get all posts
-    @posts = posts_query.respond_to?(:page) ? posts_query.page(params[:page]) : posts_query
+    @posts = posts_query.page(params[:page])
   end
 
   def index
+    posts
   end
 
   def about

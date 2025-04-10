@@ -1,31 +1,31 @@
 %header#header.header.d-flex.align-items-center.sticky-top
   .container-fluid.position-relative.d-flex.align-items-center.justify-content-between
-    %a.logo.d-flex.align-items-center.me-auto.me-xl-0{href: "index.html"}
+    = link_to root_path, class: "logo d-flex align-items-center me-auto me-xl-0" do
       %i.bi.bi-camera
       %h1.sitename ImageGallery
     %nav#navmenu.navmenu
       %ul
         %li
-          %a{href: "starter_page.html"} Home
+          = link_to "Home", home_starter_page_path
         %li
-          %a{href: "about.html"} About
+          = link_to "About", home_about_path
         %li.dropdown
-          %a.active{href: "gallery.html"}
+          = link_to home_gallery_path, class: "active" do
             %span Gallery
             %i.bi.bi-chevron-down.toggle-dropdown
           %ul
             %li
-              %a.active{href: "gallery.html"} Nature
+              = link_to "Nature", home_gallery_path, class: "active"
             %li
-              %a.active{href: "gallery.html"} People
+              = link_to "People", home_gallery_path, class: "active"
             %li
-              %a.active{href: "gallery.html"} Architecture
+              = link_to "Architecture", home_gallery_path, class: "active"
             %li
-              %a.active{href: "gallery.html"} Animals
+              = link_to "Animals", home_gallery_path, class: "active"
             %li
-              %a.active{href: "gallery.html"} Sports
+              = link_to "Sports", home_gallery_path, class: "active"
             %li
-              %a.active{href: "gallery.html"} Travel
+              = link_to "Travel", home_gallery_path, class: "active"
             %li.dropdown
               %a{href: "#"}
                 %span Deep Dropdown
@@ -42,9 +42,9 @@
                 %li
                   %a{href: "#"} Deep Dropdown 5
         %li
-          %a{href: "services.html"} Services
+          = link_to "Services", home_services_path
         %li
-          %a{href: "contact.html"} Contact
+          = link_to "Contact", home_contact_path
       %i.mobile-nav-toggle.d-xl-none.bi.bi-list
     .header-social-links
       %a.twitter{href: "#"}
