@@ -1,7 +1,7 @@
 %div{id: "post#{comment.post_id}ModalComment#{comment.id}"}
   .d-flex.justify-content-between
     .d-flex
-      = image_tag comment.user.avatar.url ? comment.user.avatar.url : 'default-avatar.png', class: "img-thumbnail rounded-circle", style: "width: 2.5rem; max-height:2.5rem"
+      = image_tag comment.user.avatar.attached? ? comment.user.avatar : asset_path('default-avatar.png'), class: "img-thumbnail rounded-circle", style: "width: 2.5rem; max-height:2.5rem"
       .d-flex.flex-column.mx-3.justify-content-center
         %small.fw-bold{style: "overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem"}
           = link_to comment.user, class: "a-decoration-none", data: {turbo: false} do

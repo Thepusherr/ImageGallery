@@ -15,7 +15,7 @@
   %i.fa-regular.fa-square-plus.fa-xl
 /.modal.fade.modal-lg#staticBackdrop{ role: "dialog", 'tabindex'=>"-1", 'aria-labelledby'=>"staticBackdropLabel" }
 /  .modal-dialog.modal-dialog-centered
-= form_with(model: post) do |form|
+= form_with(model: post, local: true) do |form|
   .modal-content
     .modal-header
       %h1#staticBackdropLabel.modal-title Create new post
@@ -33,7 +33,7 @@
               - post.errors.each do |error|
                 %li= error.full_message
         .my-2
-          = image_tag current_user.avatar.url ? current_user.avatar.url : "default-avatar.png", class: "img-thumbnail rounded-circle", style: "width: 10%"
+          = image_tag current_user.avatar.attached? ? current_user.avatar : asset_path("default-avatar.png"), class: "img-thumbnail rounded-circle", style: "width: 10%"
           %span.fw-bold.mx-2
             = current_user.name
             = current_user.surname
@@ -41,12 +41,6 @@
           = form.text_area :title, placeholder: "Add location", class: "form-control"
         %div
           = form.text_area :text, rows: 8, placeholder: "Write a caption...", class: "form-control border-0", style: "resize:none"
-        %div.mt-3
-          %label.form-label Categories:
-          = form.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
-            .form-check
-              = b.check_box(class: "form-check-input")
-              = b.label(class: "form-check-label")
         %div.mt-3
           %label.form-label Categories:
           = form.collection_check_boxes :category_ids, Category.all, :id, :name do |b|

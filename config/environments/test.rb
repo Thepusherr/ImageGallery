@@ -36,6 +36,13 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
+  
+  # Set URL options for ActiveStorage in test environment
+  config.active_storage.resolve_model_to_route = :rails_storage_proxy
+  config.active_storage.default_url_options = { host: 'test.host' }
+  
+  # Disable ActiveStorage routes in test environment to avoid URL generation issues
+  config.active_storage.draw_routes = false
 
   config.action_mailer.perform_caching = false
 

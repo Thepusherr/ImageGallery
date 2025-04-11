@@ -58,11 +58,11 @@ Like.create!(user_id: user1.id, post_id: post3.id)
 Like.create!(user_id: user2.id, post_id: post2.id)
 Like.create!(user_id: user1.id, post_id: post5.id)
 # Create categories
-category1 = Category.create!(name: 'Nature', user_id: user1.id)
-category2 = Category.create!(name: 'Travel', user_id: user1.id)
-category3 = Category.create!(name: 'Food', user_id: user2.id)
-category4 = Category.create!(name: 'Portraits', user_id: user2.id)
-category5 = Category.create!(name: 'Architecture', user_id: user1.id)
+category1 = Category.create!(name: 'Nature', user_id: user1.id, visibility: :visible)
+category2 = Category.create!(name: 'Travel', user_id: user1.id, visibility: :visible)
+category3 = Category.create!(name: 'Food', user_id: user2.id, visibility: :visible)
+category4 = Category.create!(name: 'Portraits', user_id: user2.id, visibility: :visible)
+category5 = Category.create!(name: 'Architecture', user_id: user1.id, visibility: :visible)
 
 # Associate posts with categories
 post1.categories << category1

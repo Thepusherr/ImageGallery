@@ -1,5 +1,5 @@
 .container.border-bottom.d-flex.justify-content-center.align-items-center.gap-5{style: "min-height: 20rem"}
-  = image_tag user.avatar.attached? ? user.avatar : 'default-avatar.png', class: "img-thumbnail rounded-circle w-25", style: "max-width: 8rem; max-height: 8rem"
+  = image_tag user.avatar.attached? ? user.avatar : asset_path('default-avatar.png'), class: "img-thumbnail rounded-circle w-25", style: "max-width: 8rem; max-height: 8rem"
   .w-50.d-flex.flex-column.gap-4
     .d-flex.gap-3.align-items-center
       %p.m-0.fw-bold= user.username

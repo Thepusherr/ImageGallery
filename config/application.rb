@@ -17,6 +17,9 @@ module ImageGallery
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     # config.autoload_lib(ignore: %w(assets tasks))  # Removed for Rails 7.0 compatibility
 
+    # Add custom middleware to set ActiveStorage::Current.url_options for each request
+    # We'll initialize this in an initializer instead to avoid frozen middleware stack issues
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

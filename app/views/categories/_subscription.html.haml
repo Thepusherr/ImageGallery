@@ -3,17 +3,8 @@
     - if current_user.subscribed_categories.include?(category)
       = button_to category_subscription_path(category), method: :delete, class: "btn btn-danger", data: { turbo: true } do
         %i.fa.fa-bell-slash
-        Unsubscribe
+          Unsubscribe
     - else
       = button_to category_subscription_path(category), method: :post, class: "btn btn-primary", data: { turbo: true } do
         %i.fa.fa-bell
-        Subscribe- if user_signed_in?
-  %div{id: "category_subscription"}
-    - if current_user.subscribed_categories.include?(category)
-      = button_to category_subscription_path(category), method: :delete, class: "btn btn-danger", data: { turbo: true } do
-        %i.fa.fa-bell-slash
-        Unsubscribe
-    - else
-      = button_to category_subscription_path(category), method: :post, class: "btn btn-primary", data: { turbo: true } do
-        %i.fa.fa-bell
-        Subscribe
+          Subscribe

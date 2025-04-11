@@ -1,6 +1,6 @@
 .d-flex.justify-content-between
   .d-flex
-    = image_tag liker.avatar.url ? liker.avatar.url : 'default-avatar.png', class: "img-thumbnail rounded-circle", style: "width: 2.5rem"
+    = image_tag liker.avatar.attached? ? liker.avatar : asset_path('default-avatar.png'), class: "img-thumbnail rounded-circle", style: "width: 2.5rem"
     .d-flex.flex-column.mx-3.justify-content-center
       %small.fw-bold{style: "overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem"}
         = link_to liker, class: "a-decoration-none", data: {turbo: false} do

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActiveStorage::Engine => '/rails/active_storage'
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users

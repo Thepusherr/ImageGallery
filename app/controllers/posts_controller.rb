@@ -109,28 +109,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :text, :image, :user_id, category_ids: [])
   end
-  
-  def notify_subscribers
-    return unless @post.image.attached?
-    
-    # Get all categories associated with this post
-    categories = Category.where(id: params[:post][:category_ids])
-    
-    categories.each do |category|
-      # Get all subscribers for this category
-      subscribers = category.subscribers
-      
-      # Send notification to each subscriber
-      subscribers.each do |subscriber|
-        # Skip notification to the post creator
-        next if subscriber == current_user
-        
-        begin
-          NotifierMailer.new_image_notification(subscriber, category, @post).deliver_later
-        rescue => e
-          Rails.logger.error("Failed to send notification to #{subscriber.email}: #{e.message}")
-        end
-      end
-    end
-  end
 end

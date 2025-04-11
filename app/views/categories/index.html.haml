@@ -7,19 +7,23 @@
       %br/
       - if @categories_with_images.present?
         - @categories_with_images.each do |entry|
-          .image-row
-            .image-container
-              - if entry[:image].is_a?(String)
-                = image_tag(entry[:image], alt: entry[:category].name, class: 'img-fluid')
-              - else
-                = image_tag(entry[:image].present? ? entry[:image] : 'default-avatar.png', alt: entry[:category].name, class: 'img-fluid')
-              .overlay-text
-                = entry[:category].name
-            .button-group
-              = link_to 'Show', category_path(entry[:category]), class: 'btn btn-primary text-white', style: 'text-decoration: none;'
-              - if user_signed_in? && current_user == entry[:category].user
-                = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning text-dark', style: 'text-decoration: none;'
-                = link_to 'Destroy', category_path(entry[:category]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
+          - if entry && entry[:category].present?
+            .image-row
+              .image-container
+                - begin
+                  - if entry[:image].present?
+                    = image_tag(entry[:image], alt: entry[:category].name, class: 'img-fluid')
+                  - else
+                    = image_tag(asset_path('default-avatar.png'), alt: entry[:category].name, class: 'img-fluid')
+                - rescue => e
+                  = image_tag(asset_path('default-avatar.png'), alt: entry[:category].name, class: 'img-fluid')
+                .overlay-text
+                  = entry[:category].name
+              .button-group
+                = link_to 'Show', category_path(entry[:category]), class: 'btn btn-primary text-white', style: 'text-decoration: none;'
+                - if user_signed_in? && current_user == entry[:category].user
+                  = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning text-dark', style: 'text-decoration: none;'
+                  = link_to 'Destroy', category_path(entry[:category]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
       - else
         .alert.alert-info
           %p No categories found. Create a new category to get started!
