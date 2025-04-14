@@ -43,7 +43,14 @@ RSpec.describe "/comments", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_comment_url
+      # Создаем пользователя и входим в систему
+      user = FactoryBot.create(:user)
+      sign_in user
+      
+      # Создаем пост для комментария
+      post = FactoryBot.create(:post, user: user)
+      
+      get new_comment_url(post_id: post.id)
       expect(response).to be_successful
     end
   end

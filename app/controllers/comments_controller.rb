@@ -1,6 +1,14 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:create]
+
+  def new
+    @comment = Comment.new
+    # Для тестов
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+    end
+  end
 
   def create
     comment_params = params[:comment] || {}

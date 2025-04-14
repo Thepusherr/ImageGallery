@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "posts/new", type: :view do
   before(:each) do
-    assign(:post, Post.new())
+    user = FactoryBot.create(:user)
+    assign(:post, Post.new(user: user, title: "", text: ""))
+    
+    # Имитируем current_user для представления
+    allow(view).to receive(:current_user).and_return(user)
   end
 
   it "renders new post form" do

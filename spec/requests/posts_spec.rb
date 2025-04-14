@@ -43,6 +43,10 @@ RSpec.describe "/posts", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
+      # Создаем пользователя и входим в систему
+      user = FactoryBot.create(:user)
+      sign_in user
+      
       get new_post_url
       expect(response).to be_successful
     end

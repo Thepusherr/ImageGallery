@@ -3,7 +3,7 @@
     .col-sm-12.d-flex.justify-content-center.align-items-center
       %h1 Editing post
       %br/
-      = render 'form'
+      = render 'form', post: @post
 
       = link_to 'Show', @post
       \|

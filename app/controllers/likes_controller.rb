@@ -1,6 +1,14 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
 
+  def new
+    @like = Like.new
+    # Для тестов
+    if params[:post_id]
+      @post = Post.find(params[:post_id])
+    end
+  end
+
   def create
     @post = Post.find_by(id: params[:post_id])
     
