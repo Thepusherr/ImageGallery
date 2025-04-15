@@ -1,0 +1,18 @@
+.container
+  %h1 Пользователи
+  .row
+    - @users.each do |user|
+      .col-md-4.mb-4
+        .card
+          - if user.avatar.attached?
+            = image_tag user.avatar.variant(resize_to_limit: [300, 300]), class: "card-img-top"
+          - else
+            = image_tag "default-avatar.png", class: "card-img-top"
+          .card-body
+            %h5.card-title
+              = link_to "#{user.name} #{user.surname}", user_path(user)
+            %p.card-text
+              %small.text-muted
+                @#{user.username}
+            - if user_signed_in? && current_user == user
+              = link_to "Редактировать", edit_user_registration_path, class: "btn btn-sm btn-primary"

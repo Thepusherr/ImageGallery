@@ -1,6 +1,20 @@
 class User < ApplicationRecord
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
+  
+  # Define slug candidates for friendly_id
+  def slug_candidates
+    [
+      :username,
+      [:name, :surname],
+      [:name, :surname, :id]
+    ]
+  end
+  
+  # Regenerate slug when name, surname or username changes
+  def should_generate_new_friendly_id?
+    name_changed? || surname_changed? || username_changed? || slug.blank?
+  end
 
   # # mount_uploader :avatar, AvatarUploader
 
@@ -17,6 +31,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  # Validations
+  validates :name, presence: true
+  validates :surname, presence: true
+  validates :username, presence: true, uniqueness: true
+  
   # # validates_presence_of   :avatar
   # # validates_integrity_of  :avatar
   # # validates_processing_of :avatar
