@@ -1,0 +1,4 @@
+= turbo_stream.remove "post#{@comment.post_id}ModalComment#{@comment.id}"
+
+= turbo_stream.replace "post#{@post.id}comments" do
+  = render "posts/post_comments", post: @post

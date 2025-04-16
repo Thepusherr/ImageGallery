@@ -1,0 +1,2 @@
+= turbo_stream.replace "post#{@post.id}comments" do
+  = render "posts/post_comments", post: @post, error: 'You are not authorized to delete this comment.'

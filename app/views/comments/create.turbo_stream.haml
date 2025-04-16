@@ -1,0 +1,5 @@
+= turbo_stream.replace "post#{@post.id}comments" do
+  = render "posts/post_comments", post: @post
+
+= turbo_stream.replace "post#{@post.id}comment_form" do
+  = render "posts/comment_form", post: @post
