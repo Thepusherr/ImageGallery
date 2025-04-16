@@ -1,4 +1,6 @@
 = turbo_frame_tag "post#{post.id}comments" do
+  - if defined?(error) && error.present?
+    .alert.alert-danger= error
   - if post.comments.count > 0
     %a{"data-bs-target" => "#post#{post.id}_commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
       %small.text-muted
@@ -11,7 +13,7 @@
           = comment.user.surname
       = comment.text
   / Modal
-  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_commentsModal", id: "post post.id _commentsModal", tabindex: "-1"}
+  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_commentsModal", id: "post#{post.id}_commentsModal", tabindex: "-1"}
     .modal-dialog
       .modal-content
         .modal-header

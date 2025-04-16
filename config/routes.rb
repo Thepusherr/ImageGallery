@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :posts do
     resources :likes, only: [:create]
+    resources :comments, only: [:create]
   end
   resources :categories, param: :id do
     member do

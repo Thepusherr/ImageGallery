@@ -11,8 +11,11 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment_params = params[:comment] || {}
-    @comment = @post.comments.new(user: current_user, text: comment_params[:text])
+    # Получаем текст комментария из параметров формы
+    # Поддерживаем как params[:comment][:text], так и params[:text]
+    text = params[:comment].present? ? params[:comment][:text] : params[:text]
+    
+    @comment = @post.comments.new(user: current_user, text: text)
 
     if @comment.save
       # Log the comment event if UserEventLogger is available
@@ -29,19 +32,28 @@ class CommentsController < ApplicationController
       end
       
       respond_to do |format|
-        format.html { redirect_to post_path(@post), notice: 'Comment was successfully created.' }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            "post#{@post.id}comments",
-            partial: "posts/post_comments",
-            locals: { post: @post }
-          )
-        end
+        format.html { 
+          # Для предотвращения перехода при AJAX-запросе
+          if request.xhr?
+            render json: { success: true }
+          else
+            redirect_to post_path(@post), notice: 'Comment was successfully created.'
+          end
+        }
+        format.turbo_stream
       end
     else
       respond_to do |format|
-        format.html { redirect_to post_path(@post), alert: 'Failed to create comment.' }
-        format.turbo_stream { head :unprocessable_entity }
+        format.html { 
+          if request.xhr?
+            render json: { success: false, errors: @comment.errors.full_messages }, status: :unprocessable_entity
+          else
+            redirect_to post_path(@post), alert: 'Failed to create comment.'
+          end
+        }
+        format.turbo_stream { 
+          render template: "comments/error"
+        }
       end
     end
   end
@@ -54,16 +66,12 @@ class CommentsController < ApplicationController
       @comment.destroy
       respond_to do |format|
         format.html { redirect_to post_path(@post), notice: 'Comment was successfully deleted.' }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.remove(
-            "post#{@comment.post_id}ModalComment#{@comment.id}"
-          )
-        end
+        format.turbo_stream
       end
     else
       respond_to do |format|
         format.html { redirect_to post_path(@post), alert: 'You are not authorized to delete this comment.' }
-        format.turbo_stream { head :forbidden }
+        format.turbo_stream { render template: "comments/destroy_error" }
       end
     end
   end
