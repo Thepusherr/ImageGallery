@@ -1,0 +1,13 @@
+// Показываем ошибку
+alert("Failed to create comment.");
+
+// Предотвращаем переход на страницу поста
+if (window.history && window.history.pushState) {
+  window.history.pushState({}, "", window.location.pathname.replace('/comments.js', ''));
+}
+
+// Обновляем URL в адресной строке
+if (window.location.pathname.includes('/comments.js')) {
+  var newUrl = window.location.pathname.replace('/comments.js', '');
+  window.history.replaceState({}, "", newUrl);
+}

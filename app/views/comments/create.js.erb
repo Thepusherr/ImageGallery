@@ -1,0 +1,14 @@
+// Обновляем список комментариев
+document.getElementById("post<%= @post.id %>comments").outerHTML = "<%= j render 'posts/post_comments', post: @post %>";
+
+// Очищаем форму
+var form = document.querySelector('.js-comment-form-vanilla');
+if (form) {
+  form.reset();
+}
+
+// Обновляем URL в адресной строке
+if (window.location.pathname.includes('/comments.js')) {
+  var newUrl = window.location.pathname.replace('/comments.js', '');
+  window.history.replaceState({}, "", newUrl);
+}

@@ -12,8 +12,7 @@ class CommentsController < ApplicationController
 
   def create
     # Получаем текст комментария из параметров формы
-    # Поддерживаем как params[:comment][:text], так и params[:text]
-    text = params[:comment].present? ? params[:comment][:text] : params[:text]
+    text = params[:text]
     
     @comment = @post.comments.new(user: current_user, text: text)
 
@@ -33,27 +32,29 @@ class CommentsController < ApplicationController
       
       respond_to do |format|
         format.html { 
-          # Для предотвращения перехода при AJAX-запросе
           if request.xhr?
-            render json: { success: true }
+            # Для AJAX-запросов возвращаем Turbo Stream
+            render template: "comments/create", formats: [:turbo_stream]
           else
             redirect_to post_path(@post), notice: 'Comment was successfully created.'
           end
         }
         format.turbo_stream
+        format.json { render json: { success: true } }
+        format.js
       end
     else
       respond_to do |format|
         format.html { 
           if request.xhr?
-            render json: { success: false, errors: @comment.errors.full_messages }, status: :unprocessable_entity
+            render template: "comments/error", formats: [:turbo_stream], status: :unprocessable_entity
           else
             redirect_to post_path(@post), alert: 'Failed to create comment.'
           end
         }
-        format.turbo_stream { 
-          render template: "comments/error"
-        }
+        format.turbo_stream { render template: "comments/error" }
+        format.json { render json: { success: false, errors: @comment.errors.full_messages }, status: :unprocessable_entity }
+        format.js { render template: "comments/error" }
       end
     end
   end

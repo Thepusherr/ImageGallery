@@ -8,10 +8,12 @@
         %li
           = link_to "Home", home_starter_page_path
         %li
+          = link_to "Profile", profile_path
+        %li
           = link_to "About", home_about_path
         %li.dropdown
           = link_to home_gallery_path, class: "active" do
-            %span Gallery
+            %span Categories
             %i.bi.bi-chevron-down.toggle-dropdown
           %ul
             %li

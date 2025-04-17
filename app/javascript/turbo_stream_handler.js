@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Предотвращаем переходы по умолчанию для форм с Turbo
   document.addEventListener('turbo:before-visit', (event) => {
     // Если URL содержит /posts/ и есть форма комментария, предотвращаем переход
-    if (event.detail.url.includes('/posts/') && document.querySelector('form[data-controller="comments"]')) {
+    if (event.detail.url.includes('/posts/') && document.querySelector('.js-comment-form')) {
       event.preventDefault();
     }
   });
@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Предотвращаем переходы по умолчанию для форм с Turbo
   document.addEventListener('turbo:before-fetch-response', (event) => {
     // Если ответ содержит редирект и есть форма комментария, предотвращаем переход
-    if (event.detail.fetchResponse.response.redirected && document.querySelector('form[data-controller="comments"]')) {
+    if (event.detail.fetchResponse && event.detail.fetchResponse.response && 
+        event.detail.fetchResponse.response.redirected && 
+        document.querySelector('.js-comment-form')) {
       event.preventDefault();
     }
   });
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Предотвращаем переходы по умолчанию для форм с Turbo
   document.addEventListener('turbo:before-fetch-request', (event) => {
     // Если цель - форма комментария, предотвращаем переход
-    if (event.target.tagName === 'FORM' && event.target.dataset.controller === 'comments') {
+    if (event.target.tagName === 'FORM' && event.target.classList.contains('js-comment-form')) {
       event.preventDefault();
     }
   });

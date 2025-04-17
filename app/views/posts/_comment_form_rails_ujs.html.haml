@@ -1,0 +1,7 @@
+%div{id: "post#{post.id}comment_form"}
+  = form_tag post_comments_path(post, format: :js), method: :post, class: "js-comment-form-rails-ujs", data: {remote: true, type: :js} do
+    .card-footer.d-flex.justify-content-between.bg-white.mt-3
+      - if defined?(error) && error.present?
+        .alert.alert-danger= error
+      = text_field_tag :text, nil, class: "w-100", placeholder: "Add a comment...", style: "border:none"
+      = submit_tag "Post", class: "text-primary fw-bold", style: "background:none; border:none"

@@ -2,57 +2,12 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "turbo_stream_handler"
-
-// Глобальный обработчик для предотвращения переходов по умолчанию для форм с Turbo
-document.addEventListener('DOMContentLoaded', () => {
-  // Отключаем Turbo для форм комментариев
-  document.addEventListener('submit', (event) => {
-    if (event.target.dataset.controller === 'comments') {
-      // Предотвращаем стандартное поведение формы
-      event.preventDefault();
-      
-      // Получаем форму и отправляем ее через AJAX
-      const form = event.target;
-      const url = form.action;
-      const formData = new FormData(form);
-      
-      fetch(url, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'text/vnd.turbo-stream.html, text/html, application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        credentials: 'same-origin'
-      })
-      .then(response => {
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error('Network response was not ok');
-      })
-      .then(html => {
-        // Обрабатываем ответ в формате Turbo Stream
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const turboStreamElements = doc.querySelectorAll('turbo-stream');
-        
-        if (turboStreamElements.length > 0) {
-          // Применяем каждый Turbo Stream элемент
-          turboStreamElements.forEach(element => {
-            document.body.appendChild(element);
-          });
-        }
-        
-        // Очищаем форму
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
-  });
-});
+import "comment_form_handler"
+import "jquery_comment_handler"
+import "ujs_comment_handler"
+import "direct_upload"
+import "rails_ujs_handler"
+import "vanilla_handler"
 import "stylesheets/active_admin"
 import "stylesheets/main"
 
