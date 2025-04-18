@@ -7,10 +7,12 @@
 %br/
 %b Comments
 %br/
-- @post.comments.each do |comment|
-  = comment.text
-  %br/
-= render "comments/form", comment: @comment
+= turbo_frame_tag "post#{@post.id}comments" do
+  - @post.comments.each do |comment|
+    = render partial: "comments/comment", locals: { comment: comment }
+    %br/
+= turbo_frame_tag "post#{@post.id}comment_form" do
+  = render "posts/comment_form", post: @post
 
 = link_to 'Edit', edit_post_path(@post)
 \|

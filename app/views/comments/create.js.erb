@@ -1,14 +1,18 @@
 // Обновляем список комментариев
-document.getElementById("post<%= @post.id %>comments").outerHTML = "<%= j render 'posts/post_comments', post: @post %>";
-
-// Очищаем форму
-var form = document.querySelector('.js-comment-form-vanilla');
-if (form) {
-  form.reset();
+console.log('JS response executed');
+var commentsElement = document.getElementById("post<%= @post.id %>comments");
+if (commentsElement) {
+  commentsElement.outerHTML = "<%= j render 'posts/post_comments', post: @post %>";
+  console.log('Comments updated');
+} else {
+  console.error('Comments element not found: post<%= @post.id %>comments');
 }
 
-// Обновляем URL в адресной строке
-if (window.location.pathname.includes('/comments.js')) {
-  var newUrl = window.location.pathname.replace('/comments.js', '');
-  window.history.replaceState({}, "", newUrl);
+// Очищаем поле ввода
+var inputField = document.querySelector('#comment-text');
+if (inputField) {
+  inputField.value = '';
+  console.log('Input field cleared');
+} else {
+  console.error('Input field not found');
 }

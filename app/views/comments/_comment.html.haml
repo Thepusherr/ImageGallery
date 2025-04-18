@@ -1,0 +1,4 @@
+%div.comment
+  %strong= comment.user.name
+  %p= comment.text
+  %small= time_ago_in_words(comment.created_at) + " ago"

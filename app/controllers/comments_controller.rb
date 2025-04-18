@@ -31,30 +31,13 @@ class CommentsController < ApplicationController
       end
       
       respond_to do |format|
-        format.html { 
-          if request.xhr?
-            # Для AJAX-запросов возвращаем Turbo Stream
-            render template: "comments/create", formats: [:turbo_stream]
-          else
-            redirect_to post_path(@post), notice: 'Comment was successfully created.'
-          end
-        }
+        format.html { render turbo_stream: turbo_stream.replace("post#{@post.id}comments", partial: "comments/comments", locals: { post: @post }) }
         format.turbo_stream
-        format.json { render json: { success: true } }
-        format.js
       end
     else
       respond_to do |format|
-        format.html { 
-          if request.xhr?
-            render template: "comments/error", formats: [:turbo_stream], status: :unprocessable_entity
-          else
-            redirect_to post_path(@post), alert: 'Failed to create comment.'
-          end
-        }
-        format.turbo_stream { render template: "comments/error" }
-        format.json { render json: { success: false, errors: @comment.errors.full_messages }, status: :unprocessable_entity }
-        format.js { render template: "comments/error" }
+        format.html { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form_vanilla", locals: { post: @post, error: @comment.errors.full_messages.join(', ') }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form_vanilla", locals: { post: @post, error: @comment.errors.full_messages.join(', ') }) }
       end
     end
   end
