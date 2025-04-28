@@ -1,6 +1,29 @@
 .container#main-container
   .row
-    .col-sm-12.d-flex.justify-content-center.align-items-center
+    .col-sm-12.d-flex.justify-content-center.align-items-center.profile
+      %form.php-email-form{:action => "forms/contact.php", "data-aos" => "fade-up", "data-aos-delay" => "300", :method => "post"}
+        .row.gy-4
+          .col-md-12
+            - if current_user.avatar.url
+              = image_tag current_user.avatar.url, style: "width: 200px"
+          .col-md-6
+            %input.form-control{:name => "name", :placeholder => "Your Name", :required => "", :type => "text"}/
+          .col-md-6
+            %input.form-control{:name => "email", :placeholder => "Your Surname", :required => "", :type => "email"}/
+          .col-md-12
+            %input.form-control{:name => "subject", :placeholder => "Your Email", :required => "", :type => "text"}/
+          .col-md-12
+            %input.form-control{:name => "subject", :placeholder => "Your Password", :required => "", :type => "text"}/
+          .col-md-12
+            %input.form-control{:name => "subject", :placeholder => "Password Confirmation", :required => "", :type => "text"}/
+          .col-md-12
+            %input.form-control{:name => "subject", :placeholder => "Current Password", :required => "", :type => "text"}/
+          .col-md-12.text-center
+            .loading Loading
+            .error-message
+            .sent-message Your message has been sent. Thank you!
+            %button{:type => "submit"} Update
+
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => 'content-container'}) do |f|
         = render "devise/shared/error_messages", resource: resource
         %h2
