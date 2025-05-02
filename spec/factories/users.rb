@@ -20,7 +20,7 @@ FactoryBot.define do
           File.open(file_path, 'wb') do |f|
             f.write('Test avatar content')
           end
-        end
+        end     
           
         user.avatar.attach(io: File.open(file_path), filename: 'test_avatar.jpg', content_type: 'image/jpeg')
       end

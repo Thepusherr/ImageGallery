@@ -8,8 +8,6 @@ class Category < ApplicationRecord
   has_and_belongs_to_many :posts, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
   has_many :subscribers, through: :subscriptions, source: :user
-  has_many :subscriptions, dependent: :destroy
-  has_many :subscribers, through: :subscriptions, source: :user
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :user, presence: true
