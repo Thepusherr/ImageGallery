@@ -4,6 +4,7 @@ FactoryBot.define do
     password { 'password123' }
     name { 'Test User' }
     surname { 'Surname' }
+    sequence(:username) { |n| "testuser#{n}" }
     
     # Skip avatar attachment in basic factory to speed up tests
     

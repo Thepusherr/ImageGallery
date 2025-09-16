@@ -29,7 +29,25 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
-      h2 "Last 10 images", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500"
+      h2 "Last 10 images", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500" do
+        table_for Post.joins(:image_attachment).order(created_at: :desc).limit(10) do |p|
+          p.column('Image') do |post|
+            if post.image.attached?
+              image_tag post.image, style: 'width: 60px; height: 60px; object-fit: cover; border-radius: 4px;'
+            else
+              'No image'
+            end
+          end
+          p.column('Title') { |post| link_to post.title, admin_post_path(post) }
+          p.column('User') { |post| post.user.name if post.user }
+          p.column('Categories') do |post|
+            post.categories.map(&:name).join(', ')
+          end
+          p.column('Likes') { |post| post.likes.count }
+          p.column('Comments') { |post| post.comments.count }
+          p.column('Created') { |post| l(post.created_at, format: :short) }
+        end
+      end
 
       h2 "user actions", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500" do
         all_actions = []
