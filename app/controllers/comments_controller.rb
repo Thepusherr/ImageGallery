@@ -31,8 +31,8 @@ class CommentsController < ApplicationController
       end
       
       respond_to do |format|
-        format.html { render turbo_stream: turbo_stream.replace("post#{@post.id}comments", partial: "comments/comments", locals: { post: @post }) }
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comments", partial: "posts/post_comments", locals: { post: @post }) }
+        format.html { redirect_to @post }
       end
     else
       respond_to do |format|

@@ -29,3 +29,71 @@
 
 en:
   hello: "Hello world"
+
+  # Navigation
+  navigation:
+    home: "Home"
+    profile: "Profile"
+    about: "About"
+    categories: "Categories"
+    services: "Services"
+    contact: "Contact"
+    gallery: "Gallery"
+
+  # User actions
+  user:
+    sign_in: "Sign In"
+    sign_up: "Sign Up"
+    sign_out: "Sign Out"
+    edit_profile: "Edit Profile"
+    forgot_password: "Forgot your password?"
+
+  # Posts
+  posts:
+    title: "Title"
+    content: "Content"
+    create: "Create Post"
+    edit: "Edit"
+    delete: "Delete"
+    like: "Like"
+    likes: "likes"
+    comment: "Comment"
+    comments: "comments"
+
+  # Categories
+  categories:
+    name: "Name"
+    create: "Create Category"
+    edit: "Edit"
+    delete: "Delete"
+
+  # Common
+  common:
+    save: "Save"
+    cancel: "Cancel"
+    back: "Back"
+    edit: "Edit"
+    delete: "Delete"
+    create: "Create"
+    update: "Update"
+    search: "Search"
+
+  # Language switcher
+  language:
+    english: "English"
+    russian: "Русский"
+    switch_to: "Switch to"
+    switched_to: "Language switched to %{locale}"
+    en: "English"
+    ru: "Russian"
+
+  # Devise
+  devise:
+    registrations:
+      signed_up: "Welcome! You have signed up successfully."
+    sessions:
+      signed_in: "Signed in successfully."
+      signed_out: "Signed out successfully."
+      or_sign_in_with: "Or sign in with"
+      sign_in_with_github: "Sign in with GitHub"
+      sign_in_with_google: "Sign in with Google"

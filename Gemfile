@@ -36,6 +36,12 @@ gem "font-awesome-sass", "6.2.0"
 gem 'friendly_id', '~> 5.5.0 '
 gem 'pusher'
 
+# OmniAuth
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem 'rspec-rails', '~> 6.1.0'

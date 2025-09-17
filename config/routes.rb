@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   mount ActiveStorage::Engine => '/rails/active_storage'
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
   ActiveAdmin.routes(self)
 
@@ -16,6 +18,9 @@ Rails.application.routes.draw do
   get 'profile', to: 'profile#index'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like
+
+  # Locale switching
+  get 'switch_locale/:locale', to: 'locales#switch', as: :switch_locale
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end

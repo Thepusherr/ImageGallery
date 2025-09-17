@@ -13,13 +13,14 @@ RSpec.describe CommentsController, type: :controller do
 
       it "creates a new comment" do
         expect {
-          post :create, params: { post_id: post_obj.id, comment: { text: "Great post!" } }
+          post :create, params: { post_id: post_obj.id, text: "Great post!" }
         }.to change(Comment, :count).by(1)
       end
 
-      it "redirects to the post show page" do
-        post :create, params: { post_id: post_obj.id, comment: { text: "Great post!" } }
-        expect(response).to redirect_to(post_path(post_obj))
+      it "returns turbo stream response" do
+        post :create, params: { post_id: post_obj.id, text: "Great post!" }, format: :turbo_stream
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to include('text/vnd.turbo-stream.html')
       end
     end
 

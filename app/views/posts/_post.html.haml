@@ -21,7 +21,8 @@
                 = button_to 'Delete post', post, method: :delete, class: 'dropdown-item'
   .card-body
     #post.carousel-inner
-      = image_tag post.image, class: 'd-block w-100', style: 'max-height: 100%; object-fit: cover;'
+      - if post.image.present?
+        = image_tag post.image.medium.url, class: 'd-block w-100', style: 'max-height: 100%; object-fit: cover;'
     = render "posts/post_actions", post: post
     %p.card-text
       %span.fw-bold

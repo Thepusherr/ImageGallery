@@ -9,6 +9,7 @@ RSpec.describe "comments/edit", type: :view do
 
   before(:each) do
     assign(:comment, comment)
+    assign(:post, post_obj)
     # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end

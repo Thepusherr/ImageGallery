@@ -1,0 +1,70 @@
+ru:
+  hello: "Привет мир"
+  
+  # Navigation
+  navigation:
+    home: "Главная"
+    profile: "Профиль"
+    about: "О нас"
+    categories: "Категории"
+    services: "Услуги"
+    contact: "Контакты"
+    gallery: "Галерея"
+    
+  # User actions
+  user:
+    sign_in: "Войти"
+    sign_up: "Регистрация"
+    sign_out: "Выйти"
+    edit_profile: "Редактировать профиль"
+    forgot_password: "Забыли пароль?"
+    
+  # Posts
+  posts:
+    title: "Заголовок"
+    content: "Содержание"
+    create: "Создать пост"
+    edit: "Редактировать"
+    delete: "Удалить"
+    like: "Нравится"
+    likes: "лайков"
+    comment: "Комментарий"
+    comments: "комментариев"
+    
+  # Categories
+  categories:
+    name: "Название"
+    create: "Создать категорию"
+    edit: "Редактировать"
+    delete: "Удалить"
+    
+  # Common
+  common:
+    save: "Сохранить"
+    cancel: "Отмена"
+    back: "Назад"
+    edit: "Редактировать"
+    delete: "Удалить"
+    create: "Создать"
+    update: "Обновить"
+    search: "Поиск"
+    
+  # Language switcher
+  language:
+    english: "English"
+    russian: "Русский"
+    switch_to: "Переключить на"
+    switched_to: "Язык переключен на %{locale}"
+    en: "Английский"
+    ru: "Русский"
+
+  # Devise
+  devise:
+    registrations:
+      signed_up: "Добро пожаловать! Вы успешно зарегистрировались."
+    sessions:
+      signed_in: "Вход выполнен успешно."
+      signed_out: "Выход выполнен успешно."
+      or_sign_in_with: "Или войдите с помощью"
+      sign_in_with_github: "Войти через GitHub"
+      sign_in_with_google: "Войти через Google"

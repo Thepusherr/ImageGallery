@@ -279,9 +279,10 @@ RSpec.describe CategoriesController, type: :controller do
       post.categories << category
       
       # Ensure the post has an image attached
-      unless post.image.attached?
+      unless post.image.present?
         file_path = Rails.root.join('spec/fixtures/test_image.jpg')
-        post.image.attach(io: File.open(file_path), filename: 'test_image.jpg', content_type: 'image/jpeg')
+        post.image = File.open(file_path)
+        post.save!
       end
       
       post

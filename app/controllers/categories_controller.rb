@@ -31,8 +31,8 @@ class CategoriesController < ApplicationController
           .order('COUNT(DISTINCT posts.id) DESC, COUNT(DISTINCT likes.id) DESC, COUNT(DISTINCT comments.id) DESC')
           .limit(10)
 
-        @categories_with_images = @popular_categories.includes(posts: { image_attachment: :blob }).map do |category|
-          post_with_image = category.posts.find { |post| post.image.attached? }
+        @categories_with_images = @popular_categories.includes(:posts).map do |category|
+          post_with_image = category.posts.find { |post| post.image.present? }
           image = post_with_image&.image || nil
           { category: category, image: image }
         end
@@ -59,7 +59,7 @@ class CategoriesController < ApplicationController
     else
       authorize @category
     end
-    @posts_with_images = @category.posts.select { |post| post.image.attached? }
+    @posts_with_images = @category.posts.select { |post| post.image.present? }
     Rails.logger.debug "Posts with images in show action: #{@posts_with_images.inspect}"
   end
 
@@ -126,7 +126,7 @@ class CategoriesController < ApplicationController
       authorize @category
     end
     
-    @posts_with_images = @category.posts.select { |post| post.image.attached? }
+    @posts_with_images = @category.posts.select { |post| post.image.present? }
     @current_image_index = params[:image_index].to_i
 
     if @posts_with_images.empty? || @current_image_index < 1 || @current_image_index > @posts_with_images.size
@@ -163,8 +163,8 @@ class CategoriesController < ApplicationController
       .order('posts_count DESC, likes_count DESC, comments_count DESC')
       .limit(5)
 
-    @categories_with_images = @popular_categories.includes(posts: { image_attachment: :blob }).map do |category|
-      category_image = category.posts.find { |post| post.image.attached? }&.image
+    @categories_with_images = @popular_categories.includes(:posts).map do |category|
+      category_image = category.posts.find { |post| post.image.present? }&.image
       { category: category, image: category_image || nil }
     end
     

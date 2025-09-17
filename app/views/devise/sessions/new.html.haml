@@ -18,5 +18,17 @@
             = f.label :remember_me
         .actions.mb-3
           = f.submit "Log in", class: "green-btn"
+
+        .social-login.mb-3
+          %hr.my-4
+          %p.text-center.text-muted= t('devise.sessions.or_sign_in_with')
+          .d-grid.gap-2
+            = link_to user_github_omniauth_authorize_path, method: :post, class: "btn btn-dark btn-block mb-2" do
+              %i.fab.fa-github.me-2
+              = t('devise.sessions.sign_in_with_github')
+            = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-danger btn-block" do
+              %i.fab.fa-google.me-2
+              = t('devise.sessions.sign_in_with_google')
+
         %br/
         = render "devise/shared/links"

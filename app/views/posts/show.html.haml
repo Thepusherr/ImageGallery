@@ -1,7 +1,7 @@
 = @post.title
 %br/
-- if @post.image.attached?
-  = image_tag @post.image, width: "200px"
+- if @post.image.present?
+  = image_tag @post.image.large.url, width: "800px", style: "max-width: 100%; height: auto;"
 %br/
 = @post.text
 %br/

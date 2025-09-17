@@ -30,10 +30,10 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
       h2 "Last 10 images", class: "text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-500" do
-        table_for Post.joins(:image_attachment).order(created_at: :desc).limit(10) do |p|
+        table_for Post.where.not(image: [nil, '']).order(created_at: :desc).limit(10) do |p|
           p.column('Image') do |post|
-            if post.image.attached?
-              image_tag post.image, style: 'width: 60px; height: 60px; object-fit: cover; border-radius: 4px;'
+            if post.image.present? && post.image.thumb.present?
+              image_tag post.image.thumb.url, style: 'width: 60px; height: 60px; object-fit: cover; border-radius: 4px;'
             else
               'No image'
             end

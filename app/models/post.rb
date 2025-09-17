@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   
   belongs_to :user
   has_and_belongs_to_many :categories
-  has_one_attached :image
+  mount_uploader :image, ImageUploader
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user

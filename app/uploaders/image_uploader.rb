@@ -1,4 +1,7 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+# frozen_string_literal: true
+
+# Image uploader for posts
+class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -29,22 +32,25 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  # Тумба маленькая (thumbnail) - используется в админ панели и на аватарах пользователей
   version :thumb do
-    process resize_to_fit: [50, 50]
+    process resize_to_fit: [150, 150]
   end
-
+  
+  # Тумба средняя - используется как preview на categories/index
   version :medium do
-    process resize_to_fit: [300, 300]
+    process resize_to_fit: [400, 400]
   end
-
+  
+  # Полноразмерная - используется на /image/show
   version :large do
-    process resize_to_fit: [800, 800]
+    process resize_to_fit: [1200, 1200]
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg png)
+    %w[jpg jpeg png gif]
   end
 
   def size_range

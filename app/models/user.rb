@@ -29,7 +29,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
+         :recoverable, :rememberable, :validatable, :trackable, :omniauthable,
+         omniauth_providers: [:github, :google_oauth2]
 
   # Validations
   validates :name, presence: true
@@ -49,6 +50,32 @@ class User < ApplicationRecord
   # Check if user is an admin
   def admin?
     false # For now, no users are admins
+  end
+
+  # OmniAuth methods
+  def self.from_omniauth(auth)
+    where(email: auth.info.email).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.name = (auth.info.name.present? && auth.info.name != auth.info.email) ? auth.info.name : (auth.info.first_name || 'User')
+      user.surname = auth.info.last_name || 'Surname'
+      user.username = generate_username_from_email(auth.info.email)
+      user.provider = auth.provider
+      user.uid = auth.uid
+    end
+  end
+
+  def self.generate_username_from_email(email)
+    base_username = email.split('@').first.gsub(/[^a-zA-Z0-9]/, '')
+    username = base_username
+    counter = 1
+
+    while User.exists?(username: username)
+      username = "#{base_username}#{counter}"
+      counter += 1
+    end
+
+    username
   end
 
   private

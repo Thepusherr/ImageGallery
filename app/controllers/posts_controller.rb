@@ -83,7 +83,7 @@ class PostsController < ApplicationController
   end
   
   def notify_subscribers
-    return unless @post.image.attached?
+    return unless @post.image.present?
     
     # Get all categories associated with this post
     categories = Category.where(id: params[:post][:category_ids])
