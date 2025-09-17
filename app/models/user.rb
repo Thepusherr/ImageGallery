@@ -36,7 +36,9 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :surname, presence: true
   validates :username, presence: true, uniqueness: true
-  
+
+  after_create :send_welcome_email
+
   # # validates_presence_of   :avatar
   # # validates_integrity_of  :avatar
   # # validates_processing_of :avatar
@@ -89,5 +91,18 @@ class User < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["avatar", "created_at", "email", "encrypted_password", "id", "id_value", "name", "remember_created_at", "reset_password_sent_at", "reset_password_token", "slug", "surname", "updated_at", "username"]
+  end
+
+  private
+
+  def send_welcome_email
+    EmailNotificationJob.perform_later(
+      'welcome',
+      email,
+      {
+        user_name: "#{name} #{surname}".strip,
+        username: username
+      }
+    )
   end
 end

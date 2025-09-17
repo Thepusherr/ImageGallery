@@ -119,18 +119,20 @@ ActiveAdmin.register_page 'Image Scraper' do
     end
     div class: 'image-scraper-container' do
       # Form for URL input
-      form action: admin_image_scraper_path, method: :post, class: 'url-scraper-form' do |f|
+      form action: admin_image_scraper_scrape_path, method: :post, class: 'url-scraper-form' do
+        input type: 'hidden', name: 'authenticity_token', value: form_authenticity_token
+
         div class: 'form-group' do
           label 'Enter URL to scrape images from:', for: 'scraper_url'
-          input type: 'url', 
-                name: 'scraper_url', 
+          input type: 'url',
+                name: 'scraper_url',
                 id: 'scraper_url',
                 placeholder: 'https://example.com/page-with-images',
                 value: params[:scraper_url],
                 class: 'form-control',
                 required: true
         end
-        
+
         div class: 'form-group' do
           input type: 'submit', value: 'Scrape Images', class: 'btn btn-primary'
         end
@@ -156,7 +158,8 @@ ActiveAdmin.register_page 'Image Scraper' do
           end
           
           if images.any?
-            form action: admin_image_scraper_download_path, method: :post, class: 'image-selection-form' do |f|
+            form action: admin_image_scraper_download_path, method: :post, class: 'image-selection-form' do
+              input type: 'hidden', name: 'authenticity_token', value: form_authenticity_token
               input type: 'hidden', name: 'source_url', value: params[:scraper_url]
               
               div class: 'images-grid' do
@@ -227,7 +230,7 @@ ActiveAdmin.register_page 'Image Scraper' do
   end
 
   # Handle URL scraping
-  page_action :index, method: :post do
+  page_action :scrape, method: :post do
     redirect_to admin_image_scraper_path(scraper_url: params[:scraper_url])
   end
 

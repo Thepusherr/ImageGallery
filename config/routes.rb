@@ -3,10 +3,15 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    sessions: 'users/sessions'
   }
 
   ActiveAdmin.routes(self)
+
+  # Resque Web UI (only for admins)
+  require 'resque/server'
+  mount Resque::Server.new, at: '/admin/resque'
 
   get 'home/index'
   get 'home/about'

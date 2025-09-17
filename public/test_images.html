@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Images Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .image-item { text-align: center; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        .bg-image { width: 200px; height: 150px; background-size: cover; background-position: center; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Test Images for Scraping</h1>
+    <div class="gallery">
+        <div class="image-item">
+            <h3>Regular IMG tags</h3>
+            <img src="https://picsum.photos/300/200?random=1" alt="Random Image 1">
+            <p>Image 1</p>
+        </div>
+        
+        <div class="image-item">
+            <img src="https://picsum.photos/300/200?random=2" alt="Random Image 2">
+            <p>Image 2</p>
+        </div>
+        
+        <div class="image-item">
+            <img src="https://picsum.photos/300/200?random=3" alt="Random Image 3">
+            <p>Image 3</p>
+        </div>
+        
+        <div class="image-item">
+            <h3>Background Images</h3>
+            <div class="bg-image" style="background-image: url('https://picsum.photos/300/200?random=4')"></div>
+            <p>Background Image 1</p>
+        </div>
+        
+        <div class="image-item">
+            <div class="bg-image" style="background-image: url('https://picsum.photos/300/200?random=5')"></div>
+            <p>Background Image 2</p>
+        </div>
+        
+        <div class="image-item">
+            <h3>Different formats</h3>
+            <img src="https://via.placeholder.com/300x200.jpg" alt="JPG Image">
+            <p>JPG Image</p>
+        </div>
+        
+        <div class="image-item">
+            <img src="https://via.placeholder.com/300x200.png" alt="PNG Image">
+            <p>PNG Image</p>
+        </div>
+        
+        <div class="image-item">
+            <img src="https://via.placeholder.com/300x200.gif" alt="GIF Image">
+            <p>GIF Image</p>
+        </div>
+    </div>
+</body>
+</html>

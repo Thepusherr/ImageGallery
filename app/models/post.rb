@@ -13,9 +13,44 @@ class Post < ApplicationRecord
   validates :title, :text, :user, presence: true
   # validate_size_validation
 
-  private
+  after_create :log_post_creation
+  after_create :process_image_in_background
+  after_create :notify_category_subscribers
 
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "image", "text", "title", "updated_at", "user_id"]
+  end
+
+  private
+
+  def log_post_creation
+    UserEventLogger.log(user, 'post_creation', "/posts/#{id}", { post_id: id, title: title })
+  end
+
+  def process_image_in_background
+    return unless image.present?
+
+    # Queue image processing jobs
+    ImageProcessingJob.perform_later(id, 'optimize')
+    ImageProcessingJob.perform_later(id, 'analyze')
+  end
+
+  def notify_category_subscribers
+    # Notify users subscribed to this post's categories
+    categories.each do |category|
+      category.subscriptions.includes(:user).each do |subscription|
+        next if subscription.user_id == user_id # Don't notify the post creator
+
+        EmailNotificationJob.perform_later(
+          'new_post_in_category',
+          subscription.user.email,
+          {
+            post_title: title,
+            category_name: category.name,
+            author_name: user.name || user.email
+          }
+        )
+      end
+    end
   end
 end

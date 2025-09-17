@@ -4,11 +4,35 @@ class Comment < ApplicationRecord
 
   validates :text, presence: true
 
+  after_create :log_comment_event
+  after_create :send_notification_email
+
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "post_id", "text", "updated_at", "user_id"]
   end
 
   def self.ransackable_associations(auth_object = nil)
     ["post", "user"]
+  end
+
+  private
+
+  def log_comment_event
+    UserEventLogger.log(user, 'comment', "/posts/#{post.id}", { comment_id: id, post_id: post.id })
+  end
+
+  def send_notification_email
+    # Send email notification to post owner (if different from commenter)
+    return if post.user_id == user.id
+
+    EmailNotificationJob.perform_later(
+      'new_comment',
+      post.user.email,
+      {
+        post_title: post.title,
+        commenter_name: user.name || user.email,
+        comment_text: text.truncate(100)
+      }
+    )
   end
 end

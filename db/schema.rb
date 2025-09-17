@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_16_130605) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_17_130505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_16_130605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+  end
+
+  create_table "failed_login_attempts", force: :cascade do |t|
+    t.string "ip_address"
+    t.string "email"
+    t.integer "attempts_count", default: 1
+    t.datetime "last_attempt_at"
+    t.datetime "blocked_until"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_failed_login_attempts_on_email"
+    t.index ["ip_address"], name: "index_failed_login_attempts_on_ip_address"
+    t.index ["last_attempt_at"], name: "index_failed_login_attempts_on_last_attempt_at"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

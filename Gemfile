@@ -63,3 +63,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'database_cleaner-active_record'
 end
+
+gem "resque", "~> 2.7"
+
+gem "recaptcha", "~> 5.21"
