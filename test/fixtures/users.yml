@@ -1,0 +1,11 @@
+one:
+  email: test@example.com
+  encrypted_password: $2a$12$..IgiowbWYdS2z.26iVnuOl0mc48gD8sfLqeG3rUQ7SgfL6wcLMDq
+  created_at: <%= 1.day.ago %>
+  updated_at: <%= 1.day.ago %>
+
+two:
+  email: test2@example.com
+  encrypted_password: $2a$12$..IgiowbWYdS2z.26iVnuOl0mc48gD8sfLqeG3rUQ7SgfL6wcLMDq
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 2.days.ago %>

@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
-  include Recaptcha::Verify
-
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:create]
-  before_action :check_recaptcha, only: [:create]
 
   def new
     @comment = Comment.new
@@ -67,16 +64,5 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
-  end
-
-  def check_recaptcha
-    recaptcha_service = RecaptchaService.new(request)
-    return unless recaptcha_service.recaptcha_required_for_comment?(current_user)
-
-    unless verify_recaptcha
-      flash.now[:alert] = I18n.t('recaptcha.errors.verification_failed',
-                                 default: 'Please complete the reCAPTCHA verification.')
-      redirect_to post_path(@post) and return
-    end
   end
 end

@@ -1,34 +1,28 @@
-.container#main-container
-  .row
-    .col-sm-12.d-flex.justify-content-center.align-items-center{:style => "margin-top: 100px;"}
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        %br/
-        %h2.text-center.mb-4 Log in
-        .field.mb-3
-          = f.label :email
-          %br/
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "email"
-        .field.mb-3
-          = f.label :password
-          %br/
-          = f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "password"
-        - if devise_mapping.rememberable?
-          .field.mb-3
-            = f.check_box :remember_me
-            = f.label :remember_me
-        .actions.mb-3
-          = f.submit "Log in", class: "green-btn"
+%h2 Log in
 
-        .social-login.mb-3
-          %hr.my-4
-          %p.text-center.text-muted= t('devise.sessions.or_sign_in_with')
-          .d-grid.gap-2
-            = link_to user_github_omniauth_authorize_path, method: :post, class: "btn btn-dark btn-block mb-2" do
-              %i.fab.fa-github.me-2
-              = t('devise.sessions.sign_in_with_github')
-            = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-danger btn-block" do
-              %i.fab.fa-google.me-2
-              = t('devise.sessions.sign_in_with_google')
+= form_for(resource || User.new, as: resource_name, url: session_path(resource_name)) do |f|
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, autocomplete: "email"
 
-        %br/
-        = render "devise/shared/links"
+  .field
+    = f.label :password
+    %br/
+    = f.password_field :password, autocomplete: "current-password"
+
+  - if devise_mapping.rememberable?
+    .field
+      = f.check_box :remember_me
+      = f.label :remember_me
+
+  - if defined?(@recaptcha_required) && @recaptcha_required
+    .field
+      .alert.alert-warning
+        = t('devise.failure.recaptcha_required', default: 'Please complete the reCAPTCHA verification below.')
+      = recaptcha_tags
+
+  .actions
+    = f.submit "Log in"
+
+= render "devise/shared/links"

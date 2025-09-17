@@ -8,8 +8,6 @@ class RecaptchaService
 
   # Check if reCAPTCHA is required for login
   def recaptcha_required_for_login?(email)
-    return false if Rails.env.test? # Skip in tests
-    
     FailedLoginAttempt.blocked?(@ip_address, email) ||
       recent_failed_attempts_count(email) >= 3
   end
@@ -36,7 +34,10 @@ class RecaptchaService
 
   # Record failed login attempt
   def record_failed_login(email)
-    FailedLoginAttempt.record_failure(@ip_address, email)
+    Rails.logger.debug "RecaptchaService: Recording failed login for #{email} from #{@ip_address}"
+    result = FailedLoginAttempt.record_failure(@ip_address, email)
+    Rails.logger.debug "RecaptchaService: Record result: #{result.inspect}"
+    result
   end
 
   # Clear failed attempts on successful login

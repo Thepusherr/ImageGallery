@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Resque Web UI (only for admins)
-  require 'resque/server'
-  mount Resque::Server.new, at: '/admin/resque'
+  # Resque Web UI (commented out for now - requires authentication setup)
+  # require 'resque/server'
+  # mount Resque::Server.new, at: '/admin/resque'
 
   get 'home/index'
   get 'home/about'

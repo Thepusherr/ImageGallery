@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'ostruct'
+
 namespace :demo do
   desc 'Demonstrate Resque background jobs'
   task resque: :environment do

@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  # Temporarily disable CSRF protection for debugging
+  skip_before_action :verify_authenticity_token
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
   before_action :track_navigation

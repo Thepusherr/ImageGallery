@@ -17,11 +17,15 @@ class FailedLoginAttempt < ApplicationRecord
 
   # Record a failed login attempt
   def self.record_failure(ip_address, email)
+    Rails.logger.debug "FailedLoginAttempt: Recording failure for #{email} from #{ip_address}"
     attempt = find_or_initialize_by(ip_address: ip_address, email: email)
+    Rails.logger.debug "FailedLoginAttempt: Found/created attempt: #{attempt.inspect}"
 
     if attempt.persisted?
+      Rails.logger.debug "FailedLoginAttempt: Incrementing existing attempt"
       attempt.increment!(:attempts_count)
     else
+      Rails.logger.debug "FailedLoginAttempt: Creating new attempt"
       attempt.attempts_count = 1
     end
 
@@ -30,6 +34,7 @@ class FailedLoginAttempt < ApplicationRecord
       blocked_until: attempt.should_be_blocked? ? 1.hour.from_now : nil
     )
 
+    Rails.logger.debug "FailedLoginAttempt: Final attempt: #{attempt.inspect}"
     attempt
   end
 
