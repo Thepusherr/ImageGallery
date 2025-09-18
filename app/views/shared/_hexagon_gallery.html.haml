@@ -1,0 +1,27 @@
+-# Grid Gallery Component
+-# Usage: = render 'shared/hexagon_gallery', images: @images, size: '100px'
+-#
+-# Parameters:
+-#   images: Array of image objects or URLs
+-#   size: CSS size variable (default: '100px')
+-#   css_class: Additional CSS classes (optional)
+
+- images ||= []
+- size ||= '100px'
+- css_class ||= ''
+
+
+
+- if images.any?
+  %article.grid-gallery{class: css_class, style: "--size: #{size}"}
+    - images.each_with_index do |image, index|
+      - shift_class = (index + 1) % 5 == 4 ? "shifted" : ""
+      - if image.is_a?(String)
+        %img{src: image, alt: "Gallery image", tabindex: "0", class: shift_class}
+      - elsif image.respond_to?(:url)
+        %img{src: image.url, alt: image.try(:alt_text) || "Gallery image", tabindex: "0", class: shift_class}
+      - elsif image.respond_to?(:image) && image.image.attached?
+        %img{src: url_for(image.image), alt: image.try(:title) || image.try(:description) || "Gallery image", tabindex: "0", class: shift_class}
+      - else
+        %img{src: image, alt: "Gallery image", tabindex: "0", class: shift_class}
+

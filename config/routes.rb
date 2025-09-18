@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'home/gallery'
   get 'home/gallery_single'
   get 'home/services'
+
   get 'profile', to: 'profile#index'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like

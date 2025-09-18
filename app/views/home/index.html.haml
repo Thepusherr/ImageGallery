@@ -8,6 +8,22 @@
   %li.item.item4{style: "background-image: url('https://images.unsplash.com/photo-1560930950-5cc20e80e392?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTkxODI1OTd8&ixlib=rb-4.0.3&q=85&width=700')"}
     %span Berlin
 
+-# Grid Gallery Component Demo
+.container.my-5
+  .row
+    .col-12.text-center
+      %h2.mb-4  
+  .row.justify-content-center
+    .col-12.col-lg-10
+      - if @posts.any? && @posts.select { |post| post.image.present? }.count >= 8
+        -# Use real posts if we have enough with images
+        - gallery_images = @posts.select { |post| post.image.present? }.first(8).map { |post| post.image.url }
+        = render 'shared/hexagon_gallery', images: gallery_images, size: '100px', css_class: 'size-medium'
+      - else
+        -# Fallback to demo images
+        - demo_images = ['https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop']
+        = render 'shared/hexagon_gallery', images: demo_images, size: '100px', css_class: 'size-medium'
+
 .container
   .row
     -# - if user_signed_in?

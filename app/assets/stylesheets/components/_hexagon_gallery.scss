@@ -1,0 +1,126 @@
+// Grid Gallery Component Styles
+// Exact reproduction of the original hexagon gallery design
+
+.grid-gallery {
+  --size: 100px;
+  display: grid;
+  grid-template-columns: repeat(6, var(--size));
+  grid-auto-rows: var(--size);
+  gap: 5px;
+  place-items: start center;
+  margin: 0 auto var(--size) auto;
+  justify-content: center;
+  max-width: calc(var(--size) * 6 + 25px);
+
+
+
+  img {
+    width: calc(var(--size) * 2);
+    height: calc(var(--size) * 2);
+    object-fit: cover;
+    grid-column: auto / span 2;
+    border-radius: 5px;
+    clip-path: path("M90,10 C100,0 100,0 110,10 190,90 190,90 190,90 200,100 200,100 190,110 190,110 110,190 110,190 100,200 100,200 90,190 90,190 10,110 10,110 0,100 0,100 10,90Z");
+    transition: clip-path 0.25s, filter 0.75s;
+
+    &:nth-child(5n - 1),
+    &.shifted {
+      grid-column: 2 / span 2;
+    }
+
+    &:hover {
+      clip-path: path("M0,0 C0,0 200,0 200,0 200,0 200,100 200,100 200,100 200,200 200,200 200,200 100,200 100,200 100,200 100,200 0,200 0,200 0,100 0,100 0,100 0,100 0,100Z");
+      transition: clip-path 0.25s, filter 0.25s;
+      z-index: 1;
+      transform: scale(1.05);
+    }
+
+    &:focus {
+      outline: 1px dashed black;
+      outline-offset: -5px;
+    }
+  }
+
+  // Simple hover effect - dim all images when hovering over gallery
+  &:hover img:not(:hover) {
+    filter: brightness(0.5) contrast(0.5);
+    transition: filter 0.3s ease;
+  }
+
+  // Ensure hovered image stays bright
+  img:hover {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+// Size variants
+.grid-gallery {
+  &.size-small {
+    --size: 60px;
+  }
+
+  &.size-medium {
+    --size: 100px;
+  }
+
+  &.size-large {
+    --size: 140px;
+  }
+
+  &.size-xl {
+    --size: 180px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .grid-gallery {
+    --size: 80px;
+    grid-template-columns: repeat(4, var(--size));
+    gap: 3px;
+
+    img {
+      &:nth-child(5n - 1) {
+        grid-column: auto / span 2; // Reset for mobile
+      }
+
+      &:nth-child(3n - 1) {
+        grid-column: 2 / span 2; // New pattern for 4 columns
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-gallery {
+    --size: 60px;
+    grid-template-columns: repeat(3, var(--size));
+    gap: 2px;
+
+    img {
+      &:nth-child(5n - 1),
+      &:nth-child(3n - 1) {
+        grid-column: auto / span 2; // Reset patterns
+      }
+
+      &:nth-child(2n) {
+        grid-column: 2 / span 2; // Simple alternating pattern for 3 columns
+      }
+    }
+  }
+}
+
+// Additional theme variants for grid-gallery
+.grid-gallery {
+  &.theme-dark {
+    img:focus {
+      outline-color: #ffffff;
+    }
+  }
+
+  &.theme-colorful {
+    img:focus {
+      outline-color: #ff6b6b;
+    }
+  }
+}

@@ -46,4 +46,6 @@ class HomeController < ApplicationController
 
   def starter_page
   end
+
+
 end
