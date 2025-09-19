@@ -51,16 +51,19 @@
     .header-social-links
       / Language switcher
       .dropdown.d-inline-block.me-3
-        %button.btn.btn-sm.btn-outline-secondary.dropdown-toggle{type: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false"}
+        %button.btn.btn-sm.btn-outline-light.dropdown-toggle{type: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false"}
           %i.bi.bi-globe
           = I18n.locale.upcase
-        %ul.dropdown-menu
+        %ul.dropdown-menu.dropdown-menu-dark
           %li
-            = link_to switch_locale_path(:en), class: "dropdown-item #{'active' if I18n.locale == :en}" do
-              🇺🇸 English
+            %a.dropdown-item.text-light{href: "javascript:void(0)", class: "#{'active' if I18n.locale == :en}", onclick: "return switchLanguage('en', event);"}
+              English
           %li
-            = link_to switch_locale_path(:ru), class: "dropdown-item #{'active' if I18n.locale == :ru}" do
-              🇷🇺 Русский
+            %a.dropdown-item.text-light{href: "javascript:void(0)", class: "#{'active' if I18n.locale == :ru}", onclick: "return switchLanguage('ru', event);"}
+              Русский
+          %li
+            %a.dropdown-item.text-light{href: "javascript:void(0)", class: "#{'active' if I18n.locale == :uk}", onclick: "return switchLanguage('uk', event);"}
+              Українська
 
       %a.twitter{href: "#"}
         %i.bi.bi-twitter-x

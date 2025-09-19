@@ -59,6 +59,33 @@ en:
     likes: "likes"
     comment: "Comment"
     comments: "comments"
+    new_post: "New Post"
+    show_post: "Show Post"
+    all_posts: "All Posts"
+    no_posts: "No posts"
+    created_successfully: "Post was successfully created"
+    updated_successfully: "Post was successfully updated"
+    deleted_successfully: "Post was successfully deleted"
+
+  # Comments
+  comments:
+    new_comment: "New Comment"
+    add_comment: "Add Comment"
+    write_comment: "Write a comment..."
+    post_comment: "Post Comment"
+    edit_comment: "Edit Comment"
+    delete_comment: "Delete Comment"
+    comment_text: "Comment Text"
+    no_comments: "No comments"
+    comments_count:
+      zero: "comments"
+      one: "comment"
+      other: "comments"
+    created_successfully: "Comment was successfully created"
+    updated_successfully: "Comment was successfully updated"
+    deleted_successfully: "Comment was successfully deleted"
+    delete_error: "You cannot delete this comment"
+    unauthorized: "You are not authorized to delete this comment"
 
   # Categories
   categories:
@@ -78,14 +105,33 @@ en:
     update: "Update"
     search: "Search"
 
+  # Gallery
+  gallery:
+    featured_gallery: "Featured Gallery"
+    no_images: "No images to display"
+    image_gallery: "Image Gallery"
+    view_gallery: "View Gallery"
+
+  # Likes
+  likes:
+    like: "Like"
+    unlike: "Unlike"
+    likes_count:
+      zero: "likes"
+      one: "like"
+      other: "likes"
+
   # Language switcher
   language:
     english: "English"
     russian: "Русский"
+    ukrainian: "Українська"
     switch_to: "Switch to"
     switched_to: "Language switched to %{locale}"
     en: "English"
     ru: "Russian"
+    uk: "Ukrainian"
+    invalid_locale: "Invalid language"
 
   # Devise
   devise:
@@ -97,3 +143,37 @@ en:
       or_sign_in_with: "Or sign in with"
       sign_in_with_github: "Sign in with GitHub"
       sign_in_with_google: "Sign in with Google"
+
+  # Forms
+  forms:
+    email: "Email"
+    password: "Password"
+    password_confirmation: "Password Confirmation"
+    current_password: "Current Password"
+    new_password: "New Password"
+    remember_me: "Remember me"
+    submit: "Submit"
+    required_field: "Required field"
+    optional_field: "Optional field"
+
+  # Flash messages
+  flash:
+    success: "Operation completed successfully"
+    error: "An error occurred"
+    notice: "Notice"
+    alert: "Alert"
+    warning: "Warning"
+
+  # Time and dates
+  time:
+    ago: "ago"
+    just_now: "just now"
+    minutes_ago:
+      one: "minute ago"
+      other: "minutes ago"
+    hours_ago:
+      one: "hour ago"
+      other: "hours ago"
+    days_ago:
+      one: "day ago"
+      other: "days ago"

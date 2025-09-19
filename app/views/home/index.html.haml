@@ -12,7 +12,7 @@
 .container.my-5
   .row
     .col-12.text-center
-      %h2.mb-4  
+      %h2.mb-4= t('gallery.featured_gallery')
   .row.justify-content-center
     .col-12.col-lg-10
       - if @posts.any? && @posts.select { |post| post.image.present? }.count >= 8
@@ -34,3 +34,14 @@
     - @posts.each do |post|
       .col-2.justify-content-center.m-1
         = render 'posts/post', post: post
+
+-# Glowing border sections
+.container-fluid.my-5
+  .glowing-border
+    %h1 Ask anything
+    %p Trying to wrap your head around a new topic? Looking for specific recommendations? Need help deciding between two products? Just ask. We'll probably get it wrong, but we'll sure sound like we know what we're talking about!
+
+  .glowing-border.right
+    %h1 Ask anything
+    %p Trying to wrap your head around a new topic? Looking for specific recommendations? Need help deciding between two products? Just ask. We'll probably get it wrong, but we'll sure sound like we know what we're talking about!
+

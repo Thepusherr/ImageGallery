@@ -12,9 +12,28 @@ class LocalesController < ApplicationController
       session[:locale] = locale
       I18n.locale = locale
 
-      redirect_to(request.referer || '/', notice: "Language switched to #{locale}")
+      if request.xhr?
+        translations = {
+          gallery_title: t('gallery.featured_gallery'),
+          navigation: {
+            home: t('navigation.home'),
+            profile: t('navigation.profile'),
+            about: t('navigation.about'),
+            categories: t('navigation.categories'),
+            services: t('navigation.services'),
+            contact: t('navigation.contact')
+          }
+        }
+        render json: { status: 'success', translations: translations }
+      else
+        redirect_to(request.referer || '/')
+      end
     else
-      redirect_to(request.referer || '/', alert: 'Invalid locale')
+      if request.xhr?
+        render json: { status: 'error' }
+      else
+        redirect_to(request.referer || '/', alert: t('language.invalid_locale'))
+      end
     end
   end
 end

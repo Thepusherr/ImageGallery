@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   # Locale switching
   get 'switch_locale/:locale', to: 'locales#switch', as: :switch_locale
+  patch 'switch_locale/:locale', to: 'locales#switch'
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end

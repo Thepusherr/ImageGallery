@@ -1,0 +1,198 @@
+uk:
+  hello: "Привіт світ"
+  
+  # Navigation
+  navigation:
+    home: "Головна"
+    profile: "Профіль"
+    about: "Про нас"
+    categories: "Категорії"
+    services: "Послуги"
+    contact: "Контакти"
+    gallery: "Галерея"
+    
+  # User actions
+  user:
+    sign_in: "Увійти"
+    sign_up: "Реєстрація"
+    sign_out: "Вийти"
+    edit_profile: "Редагувати профіль"
+    forgot_password: "Забули пароль?"
+    
+  # Posts
+  posts:
+    title: "Заголовок"
+    content: "Зміст"
+    create: "Створити пост"
+    edit: "Редагувати"
+    delete: "Видалити"
+    like: "Подобається"
+    likes: "лайків"
+    comment: "Коментар"
+    comments: "коментарів"
+    new_post: "Новий пост"
+    show_post: "Показати пост"
+    all_posts: "Всі пости"
+    no_posts: "Немає постів"
+    created_successfully: "Пост успішно створено"
+    updated_successfully: "Пост успішно оновлено"
+    deleted_successfully: "Пост успішно видалено"
+
+  # Comments
+  comments:
+    new_comment: "Новий коментар"
+    add_comment: "Додати коментар"
+    write_comment: "Написати коментар..."
+    post_comment: "Відправити коментар"
+    edit_comment: "Редагувати коментар"
+    delete_comment: "Видалити коментар"
+    comment_text: "Текст коментаря"
+    no_comments: "Немає коментарів"
+    comments_count:
+      zero: "коментарів"
+      one: "коментар"
+      few: "коментарі"
+      many: "коментарів"
+      other: "коментарів"
+    created_successfully: "Коментар успішно додано"
+    updated_successfully: "Коментар успішно оновлено"
+    deleted_successfully: "Коментар успішно видалено"
+    delete_error: "Ви не можете видалити цей коментар"
+    unauthorized: "У вас немає прав для видалення цього коментаря"
+
+  # Categories
+  categories:
+    name: "Назва"
+    create: "Створити категорію"
+    edit: "Редагувати"
+    delete: "Видалити"
+    
+  # Common
+  common:
+    save: "Зберегти"
+    cancel: "Скасувати"
+    back: "Назад"
+    edit: "Редагувати"
+    delete: "Видалити"
+    create: "Створити"
+    update: "Оновити"
+    search: "Пошук"
+
+  # Gallery
+  gallery:
+    featured_gallery: "Рекомендована галерея"
+    no_images: "Немає зображень для відображення"
+    image_gallery: "Галерея зображень"
+    view_gallery: "Переглянути галерею"
+
+  # Likes
+  likes:
+    like: "Подобається"
+    unlike: "Не подобається"
+    likes_count:
+      zero: "лайків"
+      one: "лайк"
+      few: "лайки"
+      many: "лайків"
+      other: "лайків"
+
+  # Language switcher
+  language:
+    english: "English"
+    russian: "Русский"
+    ukrainian: "Українська"
+    switch_to: "Перемкнути на"
+    switched_to: "Мову перемкнено на %{locale}"
+    en: "Англійська"
+    ru: "Російська"
+    uk: "Українська"
+    invalid_locale: "Неправильна мова"
+
+  # Devise
+  devise:
+    registrations:
+      signed_up: "Ласкаво просимо! Ви успішно зареєструвалися."
+    sessions:
+      signed_in: "Вхід виконано успішно."
+      signed_out: "Вихід виконано успішно."
+      or_sign_in_with: "Або увійдіть за допомогою"
+      sign_in_with_github: "Увійти через GitHub"
+      sign_in_with_google: "Увійти через Google"
+
+  # Forms
+  forms:
+    email: "Email"
+    password: "Пароль"
+    password_confirmation: "Підтвердження пароля"
+    current_password: "Поточний пароль"
+    new_password: "Новий пароль"
+    remember_me: "Запам'ятати мене"
+    submit: "Відправити"
+    required_field: "Обов'язкове поле"
+    optional_field: "Необов'язкове поле"
+
+  # Flash messages
+  flash:
+    success: "Операція виконана успішно"
+    error: "Сталася помилка"
+    notice: "Повідомлення"
+    alert: "Увага"
+    warning: "Попередження"
+
+  # Time and dates
+  time:
+    ago: "тому"
+    just_now: "щойно"
+    minutes_ago:
+      one: "хвилину тому"
+      few: "хвилини тому"
+      many: "хвилин тому"
+      other: "хвилин тому"
+    hours_ago:
+      one: "годину тому"
+      few: "години тому"
+      many: "годин тому"
+      other: "годин тому"
+    days_ago:
+      one: "день тому"
+      few: "дні тому"
+      many: "днів тому"
+      other: "днів тому"
+
+  # Errors
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      inclusion: "має неприпустиме значення"
+      exclusion: "має зарезервоване значення"
+      invalid: "має неправильне значення"
+      confirmation: "не збігається зі значенням поля Підтвердження"
+      accepted: "потрібно підтвердити"
+      empty: "не може бути порожнім"
+      blank: "не може бути порожнім"
+      present: "потрібно залишити порожнім"
+      too_long:
+        one: "занадто довге (максимум %{count} символ)"
+        few: "занадто довге (максимум %{count} символи)"
+        many: "занадто довге (максимум %{count} символів)"
+        other: "занадто довге (максимум %{count} символів)"
+      too_short:
+        one: "занадто коротке (мінімум %{count} символ)"
+        few: "занадто коротке (мінімум %{count} символи)"
+        many: "занадто коротке (мінімум %{count} символів)"
+        other: "занадто коротке (мінімум %{count} символів)"
+      wrong_length:
+        one: "неправильної довжини (може бути довжиною рівно %{count} символ)"
+        few: "неправильної довжини (може бути довжиною рівно %{count} символи)"
+        many: "неправильної довжини (може бути довжиною рівно %{count} символів)"
+        other: "неправильної довжини (може бути довжиною рівно %{count} символів)"
+      not_a_number: "не є числом"
+      not_an_integer: "не є цілим числом"
+      greater_than: "може мати значення більше %{count}"
+      greater_than_or_equal_to: "може мати значення більше або дорівнює %{count}"
+      equal_to: "може мати лише значення, що дорівнює %{count}"
+      less_than: "може мати значення менше %{count}"
+      less_than_or_equal_to: "може мати значення менше або дорівнює %{count}"
+      other_than: "може мати будь-яке значення, крім %{count}"
+      odd: "може бути лише непарним"
+      even: "може бути лише парним"

@@ -49,12 +49,12 @@ class CommentsController < ApplicationController
     if @comment.user == current_user
       @comment.destroy
       respond_to do |format|
-        format.html { redirect_to post_path(@post), notice: 'Comment was successfully deleted.' }
+        format.html { redirect_to post_path(@post), notice: t('comments.deleted_successfully') }
         format.turbo_stream
       end
     else
       respond_to do |format|
-        format.html { redirect_to post_path(@post), alert: 'You are not authorized to delete this comment.' }
+        format.html { redirect_to post_path(@post), alert: t('comments.unauthorized') }
         format.turbo_stream { render template: "comments/destroy_error" }
       end
     end

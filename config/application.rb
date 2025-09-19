@@ -29,7 +29,7 @@ module ImageGallery
     # config.eager_load_paths << Rails.root.join("extras")
 
     # I18n configuration
-    config.i18n.available_locales = [:en, :ru]
+    config.i18n.available_locales = [:en, :ru, :uk]
     config.i18n.default_locale = :en
   end
 end
