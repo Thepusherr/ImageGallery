@@ -22,6 +22,12 @@ class LocalesController < ApplicationController
             categories: t('navigation.categories'),
             services: t('navigation.services'),
             contact: t('navigation.contact')
+          },
+          user: {
+            sign_in: t('user.sign_in'),
+            sign_up: t('user.sign_up'),
+            sign_out: t('user.sign_out'),
+            edit_profile: t('user.edit_profile', default: 'Edit Profile')
           }
         }
         render json: { status: 'success', translations: translations }

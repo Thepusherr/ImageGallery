@@ -1,56 +1,78 @@
-.container#main-container
-  .col-sm-12.d-flex.justify-content-center.align-items-center.min-vw-50
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => 'content-container'}) do |f|
-      = render "devise/shared/error_messages", resource: resource
-      %h2
-        Edit #{resource_name.to_s.humanize}
-      .field.form-group.row
-        - if current_user.avatar.url
-          = image_tag current_user.avatar.url, style: "width: 200px"
-        .col-sm-5
-          = f.file_field :avatar, class: '   mm ', direct_upload: true
-      .field.form-group.row
-        = f.label :name
-        %br/
-        .col-sm-5
-          = f.text_field :name, autofocus: true, autocomplete: "name"
-      .field.form-group.row
-        = f.label :surname
-        %br/
-        .col-sm-5
-          = f.text_field :surname, autofocus: true, autocomplete: "surname"
-      .field.form-group.row
-        = f.label :email
-        %br/
-        .col-sm-5
-          = f.email_field :email, autofocus: true, autocomplete: "email"
-      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-        %div
-          Currently waiting confirmation for: #{resource.unconfirmed_email}
-      .field.form-group.row
-        = f.label :password
-        %i (leave blank if you don't want to change it)
-        %br/
-        .col-sm-5
-          = f.password_field :password, autocomplete: "new-password"
-        - if @minimum_password_length
-          %br/
-          %em
-            = @minimum_password_length
-            characters minimum
-      .field.form-group.row
-        = f.label :password_confirmation
-        %br/
-        .col-sm-5
-          = f.password_field :password_confirmation, autocomplete: "new-password"
-      .field.form-group.row
-        = f.label :current_password
-        %i (we need your current password to confirm your changes)
-        %br/
-        .col-sm-5
-          = f.password_field :current_password, autocomplete: "current-password"
-      .actions
-        = f.submit "Update"
-      %div
-        #{button_to "delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete}
-      = link_to "Back", :back
+.container#main-container.py-5
+  .row.justify-content-center
+    .col-lg-8.col-xl-6
+      .card.bg-dark.border-secondary
+        .card-header.bg-dark.border-secondary.text-center
+          %h2.mb-0.text-light
+            = t('user.edit_profile')
+        .card-body.p-4
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'profile-form'}) do |f|
+            = render "devise/shared/error_messages", resource: resource
+
+            / Avatar Upload Section
+            .avatar-upload-container.text-center.mb-4
+              .avatar-preview.mb-3
+                - if current_user.avatar.attached?
+                  = image_tag current_user.avatar, class: "avatar-image rounded-circle", id: "avatar-preview"
+                - else
+                  .avatar-placeholder.rounded-circle.d-flex.align-items-center.justify-content-center{id: "avatar-preview"}
+                    %i.bi.bi-person-fill.fs-1.text-muted
+              .avatar-upload-wrapper
+                = f.file_field :avatar, class: 'avatar-input d-none', direct_upload: true, id: 'avatar-input', accept: 'image/*'
+                %label.btn.avatar-upload-btn{for: 'avatar-input'}
+                  %i.bi.bi-camera.me-2
+                  Choose Photo
+                %small.text-muted.d-block.mt-2
+                  JPG, PNG or GIF (max 5MB)
+
+            / Personal Information
+            .row.mb-3
+              .col-md-6
+                = f.label :name, class: "form-label text-light"
+                = f.text_field :name, class: "form-control bg-dark text-light border-secondary", autocomplete: "name"
+              .col-md-6
+                = f.label :surname, class: "form-label text-light"
+                = f.text_field :surname, class: "form-control bg-dark text-light border-secondary", autocomplete: "surname"
+
+            .mb-3
+              = f.label :email, class: "form-label text-light"
+              = f.email_field :email, class: "form-control bg-dark text-light border-secondary", autocomplete: "email"
+
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              .alert.alert-info.text-center
+                Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+            / Password Section
+            %hr.border-secondary.my-4
+            %h5.text-light.mb-3 Change Password
+
+            .mb-3
+              = f.label :password, class: "form-label text-light"
+              %small.text-info.ms-2 (leave blank if you don't want to change it)
+              = f.password_field :password, class: "form-control bg-dark text-light border-secondary", autocomplete: "new-password"
+              - if @minimum_password_length
+                %small.text-warning.mt-1.d-block
+                  %i.bi.bi-info-circle.me-1
+                  Minimum #{@minimum_password_length} characters
+
+            .mb-3
+              = f.label :password_confirmation, class: "form-label text-light"
+              = f.password_field :password_confirmation, class: "form-control bg-dark text-light border-secondary", autocomplete: "new-password"
+
+            .mb-4
+              = f.label :current_password, class: "form-label text-light"
+              %small.text-info.ms-2
+                %i.bi.bi-shield-lock.me-1
+                we need your current password to confirm your changes
+              = f.password_field :current_password, class: "form-control bg-dark text-light border-secondary", autocomplete: "current-password"
+
+            / Action Buttons
+            .d-grid.gap-2.mb-4
+              = f.submit "Update Profile", class: "btn btn-success btn-lg"
+
+            / Secondary Actions
+            .row.g-2
+              .col-6
+                = link_to "Delete Account", registration_path(resource_name), method: :delete, data: { confirm: "Are you sure you want to delete your account? This action cannot be undone.", turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger w-100"
+              .col-6
+                = link_to "Back to Profile", profile_path, class: "btn btn-outline-light w-100"

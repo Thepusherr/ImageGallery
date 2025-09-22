@@ -120,7 +120,105 @@
         }
       });
     }
+
+    // Обновляем пользовательский dropdown
+    if (translations.user) {
+      // Обновляем кнопки входа/регистрации
+      const signInBtn = document.querySelector('a[href*="sign_in"] span, a[href*="sign_in"]');
+      if (signInBtn && translations.user.sign_in) {
+        if (signInBtn.tagName === 'SPAN') {
+          signInBtn.textContent = translations.user.sign_in;
+        } else {
+          const span = signInBtn.querySelector('span');
+          if (span) span.textContent = translations.user.sign_in;
+        }
+        console.log('Updated sign in button');
+      }
+
+      const signUpBtn = document.querySelector('a[href*="sign_up"] span, a[href*="sign_up"]');
+      if (signUpBtn && translations.user.sign_up) {
+        if (signUpBtn.tagName === 'SPAN') {
+          signUpBtn.textContent = translations.user.sign_up;
+        } else {
+          const span = signUpBtn.querySelector('span');
+          if (span) span.textContent = translations.user.sign_up;
+        }
+        console.log('Updated sign up button');
+      }
+
+      // Обновляем dropdown пользователя
+      const profileLink = document.querySelector('.dropdown-item[href*="profile"]');
+      if (profileLink && translations.navigation.profile) {
+        const textNode = Array.from(profileLink.childNodes).find(node => node.nodeType === 3 && node.textContent.trim());
+        if (textNode) {
+          textNode.textContent = ' ' + translations.navigation.profile;
+        }
+        console.log('Updated profile link');
+      }
+
+      const editProfileLink = document.querySelector('.dropdown-item[href*="edit"]');
+      if (editProfileLink && translations.user.edit_profile) {
+        const textNode = Array.from(editProfileLink.childNodes).find(node => node.nodeType === 3 && node.textContent.trim());
+        if (textNode) {
+          textNode.textContent = ' ' + translations.user.edit_profile;
+        }
+        console.log('Updated edit profile link');
+      }
+
+      const signOutLink = document.querySelector('a[data-method="delete"]');
+      if (signOutLink && translations.user.sign_out) {
+        const textNode = Array.from(signOutLink.childNodes).find(node => node.nodeType === 3 && node.textContent.trim());
+        if (textNode) {
+          textNode.textContent = ' ' + translations.user.sign_out;
+        }
+        console.log('Updated sign out link');
+      }
+    }
   }
+
+  // Avatar upload preview
+  document.addEventListener('DOMContentLoaded', function() {
+    const avatarInput = document.getElementById('avatar-input');
+    const avatarPreview = document.getElementById('avatar-preview');
+
+    if (avatarInput && avatarPreview) {
+      avatarInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+
+        if (file) {
+          // Validate file type
+          if (!file.type.startsWith('image/')) {
+            alert('Please select an image file');
+            return;
+          }
+
+          // Validate file size (5MB)
+          if (file.size > 5 * 1024 * 1024) {
+            alert('File size must be less than 5MB');
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            // Remove existing content
+            avatarPreview.innerHTML = '';
+
+            // Create new image element
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'avatar-image rounded-circle';
+            img.id = 'avatar-preview';
+
+            avatarPreview.appendChild(img);
+
+            console.log('Avatar preview updated');
+          };
+
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  });
 
 / Favicons
 %link{href: asset_path("favicon.png"), rel: "icon"}/
@@ -236,23 +334,679 @@
 
   .header .navmenu a {
     text-decoration: none !important;
+    color: var(--nav-color) !important;
+    transition: color 0.3s ease !important;
+    font-family: var(--nav-font) !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
   }
 
   .header .navmenu a:hover {
     text-decoration: none !important;
+    color: var(--nav-hover-color) !important;
+  }
+
+  .header .navmenu a.active {
+    color: var(--nav-hover-color) !important;
   }
 
   .header .logo i {
     color: #ffffff !important;
   }
 
-  /* Force dark background and white text */
-  body {
-    background-color: #000000 !important;
+  /* Restore beautiful navigation hover effects */
+  .header .navmenu li:hover > a {
+    color: var(--nav-hover-color) !important;
   }
 
+  .header .navmenu .dropdown ul a {
+    color: var(--nav-dropdown-color) !important;
+  }
+
+  .header .navmenu .dropdown ul a:hover {
+    color: var(--nav-dropdown-hover-color) !important;
+  }
+
+  /* Fix breadcrumbs styling */
+  .breadcrumbs {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    padding: 10px 0 !important;
+  }
+
+  .breadcrumbs ol {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .breadcrumbs ol li {
+    margin-right: 10px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 14px !important;
+  }
+
+  .breadcrumbs ol li a {
+    color: var(--accent-color) !important;
+    text-decoration: none !important;
+    transition: color 0.3s !important;
+  }
+
+  .breadcrumbs ol li a:hover {
+    color: #ffffff !important;
+  }
+
+  .breadcrumbs ol li.current {
+    color: #ffffff !important;
+  }
+
+  .breadcrumbs ol li:not(:last-child):after {
+    content: "/" !important;
+    margin-left: 10px !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* Remove any existing separators from main.scss */
+  .breadcrumbs ol li + li:before {
+    content: none !important;
+    display: none !important;
+  }
+
+  .breadcrumbs ol li:before {
+    content: none !important;
+  }
+
+  /* Fix page content styling */
+  .page-title .heading h1 {
+    color: #ffffff !important;
+    font-family: var(--heading-font) !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .page-title .heading p {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+
+  .page-title .heading .cta-btn {
+    background-color: var(--accent-color) !important;
+    color: #ffffff !important;
+    padding: 12px 30px !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    margin-top: 20px !important;
+    transition: background-color 0.3s !important;
+  }
+
+  .page-title .heading .cta-btn:hover {
+    background-color: #1e8a63 !important;
+  }
+
+  /* Fix section content */
+  .starter-section .section-title h2 {
+    color: #ffffff !important;
+    font-family: var(--heading-font) !important;
+  }
+
+  .starter-section .section-title p {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .starter-section .container p {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Fix comment form styles */
+  .card-footer input[type="text"] {
+    background: transparent !important;
+    border: none !important;
+    color: var(--default-color) !important;
+    font-size: 14px !important;
+  }
+
+  .card-footer input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 14px !important;
+  }
+
+  .card-footer input[type="submit"] {
+    background: none !important;
+    border: none !important;
+    color: var(--accent-color) !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    padding: 5px 10px !important;
+  }
+
+  .card-footer input[type="submit"]:hover {
+    color: #1e8a63 !important;
+  }
+
+  /* Fix like button and icons */
+  .button_to button {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .button_to button i {
+    color: var(--default-color) !important;
+    transition: color 0.3s !important;
+  }
+
+  .button_to button:hover i {
+    color: var(--accent-color) !important;
+  }
+
+  /* Bootstrap Icons for like/comment */
+  .button_to button i.bi-heart {
+    color: var(--default-color) !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+  }
+
+  .button_to button i.bi-heart-fill {
+    color: var(--accent-color) !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+  }
+
+  .button_to button i.bi-heart:hover {
+    color: var(--accent-color) !important;
+  }
+
+  /* Fix comment icon */
+  a i.bi-chat {
+    color: var(--default-color) !important;
+    transition: color 0.3s !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+  }
+
+  a:hover i.bi-chat {
+    color: var(--accent-color) !important;
+  }
+
+  /* Fix like count alignment */
+  .d-flex.justify-content-start.align-items-center {
+    align-items: center !important;
+  }
+
+  .d-flex.justify-content-start.align-items-center .button_to {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .d-flex.justify-content-start.align-items-center .button_to button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 4px !important;
+  }
+
+  /* Fix like count text alignment */
+  small.fw-bold.my-1 {
+    line-height: 1.25rem !important;
+    vertical-align: middle !important;
+  }
+
+  /* Fix FontAwesome icons display */
+  .fa-heart, .fa-comment {
+    display: inline-block !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-rendering: auto !important;
+    line-height: 1 !important;
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .fa-regular {
+    font-weight: 400 !important;
+  }
+
+  .fa-solid {
+    font-weight: 900 !important;
+  }
+
+  /* Force FontAwesome content */
+  .fa-heart.fa-regular:before {
+    content: "\\f004" !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 400 !important;
+  }
+
+  .fa-heart.fa-solid:before {
+    content: "\\f004" !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+  }
+
+  .fa-comment.fa-regular:before {
+    content: "\\f075" !important;
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 400 !important;
+  }
+
+  /* Remove any background colors from icons */
+  i.fa-heart, i.fa-comment {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Modern avatar upload styles */
+  .avatar-upload-container {
+    max-width: 300px !important;
+    margin: 0 auto !important;
+  }
+
+  .avatar-preview {
+    position: relative !important;
+    display: inline-block !important;
+  }
+
+  .avatar-image, .avatar-placeholder {
+    width: 150px !important;
+    height: 150px !important;
+    object-fit: cover !important;
+    border: 3px solid var(--accent-color) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .avatar-placeholder {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-style: dashed !important;
+  }
+
+  .avatar-upload-wrapper {
+    position: relative !important;
+  }
+
+  label.avatar-upload-btn {
+    background-color: transparent !important;
+    border: 2px solid var(--accent-color) !important;
+    color: var(--accent-color) !important;
+    transition: all 0.3s ease !important;
+    padding: 12px 24px !important;
+    border-radius: 25px !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: auto !important;
+    height: auto !important;
+    line-height: normal !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+  }
+
+  label.avatar-upload-btn:hover {
+    background-color: var(--accent-color) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+    text-decoration: none !important;
+  }
+
+  label.avatar-upload-btn i {
+    font-size: 1rem !important;
+    margin-right: 8px !important;
+  }
+
+  .avatar-input {
+    display: none !important;
+  }
+
+  /* Preview animation */
+  .avatar-image:hover, .avatar-placeholder:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3) !important;
+  }
+
+  /* Profile form styles */
+  .profile-form .form-control {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .profile-form .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25) !important;
+    color: #ffffff !important;
+  }
+
+  .profile-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  .profile-form .form-label {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Card styles */
+  .card.bg-dark {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .card-header.bg-dark {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Button styles */
+  .btn-success {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    font-weight: 600 !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .btn-success:hover {
+    background-color: #1e8a63 !important;
+    border-color: #1e8a63 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+  }
+
+  .btn-outline-danger {
+    border-color: #dc3545 !important;
+    color: #dc3545 !important;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+  }
+
+  .btn-outline-secondary {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+  }
+
+  .btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Secondary action buttons - exclude avatar button */
+  .profile-form .btn-outline-danger:not(.avatar-upload-btn),
+  .profile-form .btn-outline-light:not(.avatar-upload-btn) {
+    padding: 10px 16px !important;
+    border-radius: 6px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+  }
+
+  .profile-form .btn-outline-danger:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+  }
+
+  /* Fix button_to form alignment */
+  .row.g-2 form {
+    margin: 0 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .row.g-2 form button {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Ensure both buttons have same height - exclude avatar button */
+  .row.g-2 .btn:not(.avatar-upload-btn) {
+    min-height: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 10px 16px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Fix text visibility for hints and small text */
+  .profile-form small.text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.875rem !important;
+  }
+
+  .profile-form .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  /* Alert styles */
+  .alert-info {
+    background-color: rgba(13, 202, 240, 0.1) !important;
+    border-color: rgba(13, 202, 240, 0.3) !important;
+    color: #0dcaf0 !important;
+  }
+
+  /* Colored hint text */
+  .profile-form .text-info {
+    color: #17a2b8 !important;
+    font-size: 0.875rem !important;
+  }
+
+  .profile-form .text-warning {
+    color: #ffc107 !important;
+    font-size: 0.875rem !important;
+  }
+
+  .profile-form .text-success {
+    color: var(--accent-color) !important;
+    font-size: 0.875rem !important;
+  }
+
+  /* Icon spacing in hints */
+  .profile-form small i {
+    opacity: 0.8 !important;
+  }
+
+  /* Force dark background */
+  body {
+    background-color: #000000 !important;
+    color: #fafafa !important;
+  }
+
+  /* Ensure CSS variables are applied */
+  * {
+    color: inherit;
+  }
+
+  /* Fix gallery title */
   h2.mb-4 {
     color: #ffffff !important;
+  }
+
+  /* Ensure all headings use the theme color */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color) !important;
+  }
+
+  /* Ensure labels use proper color */
+  label {
+    color: var(--default-color) !important;
+  }
+
+  /* Ensure form elements have proper styling */
+  .form-control, input[type="text"], input[type="email"], input[type="password"], textarea {
+    background-color: var(--surface-color) !important;
+    color: var(--default-color) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .form-control:focus, input:focus, textarea:focus {
+    background-color: var(--surface-color) !important;
+    color: var(--default-color) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(39, 167, 118, 0.25) !important;
+  }
+
+  /* Fix placeholder text color */
+  .form-control::placeholder, input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Fix Update button specifically */
+  .actions input[type="submit"][value="Update"] {
+    background-color: var(--accent-color) !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+  }
+
+  .actions input[type="submit"][value="Update"]:hover {
+    background-color: #1e8a63 !important;
+  }
+
+  /* Fix delete account button - it's actually a button element */
+  button[type="submit"]:has-text("delete my account"),
+  button[data-confirm*="Are you sure?"] {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: 1px solid #dc3545 !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    margin-top: 10px !important;
+  }
+
+  button[type="submit"]:has-text("delete my account"):hover,
+  button[data-confirm*="Are you sure?"]:hover {
+    background-color: #c82333 !important;
+    border-color: #c82333 !important;
+    color: #ffffff !important;
+  }
+
+  /* More specific selector for delete button */
+  div button[type="submit"] {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: 1px solid #dc3545 !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    margin-top: 10px !important;
+  }
+
+  div button[type="submit"]:hover {
+    background-color: #c82333 !important;
+    border-color: #c82333 !important;
+  }
+
+  /* User avatar and auth buttons in navbar */
+  .header-social-links .btn {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+  }
+
+  /* Fix Sign Up button */
+  .header-social-links .btn-light {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+  }
+
+  .header-social-links .btn-light:hover {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* Fix Sign In button */
+  .header-social-links .btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+  }
+
+  .header-social-links .btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+  }
+
+  .header-social-links .dropdown-toggle {
+    max-width: 150px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .header-social-links .dropdown-toggle span {
+    max-width: 80px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: inline-block !important;
+  }
+
+  /* Social links spacing */
+  .header-social-links a.twitter,
+  .header-social-links a.facebook,
+  .header-social-links a.instagram,
+  .header-social-links a.linkedin {
+    font-size: 14px !important;
+    opacity: 0.7 !important;
+    transition: opacity 0.3s !important;
+  }
+
+  .header-social-links a.twitter:hover,
+  .header-social-links a.facebook:hover,
+  .header-social-links a.instagram:hover,
+  .header-social-links a.linkedin:hover {
+    opacity: 1 !important;
   }
 
   /* Glowing Border Effects */

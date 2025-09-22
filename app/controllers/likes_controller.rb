@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy, :toggle_like]
 
   def new
     @like = Like.new
@@ -74,5 +74,29 @@ class LikesController < ApplicationController
   rescue => e
     Rails.logger.error("Error destroying like: #{e.message}")
     redirect_to posts_path, alert: 'An error occurred while removing the like.'
+  end
+
+  def toggle_like
+    @post = Post.find_by(id: params[:post_id])
+
+    if @post.nil?
+      render turbo_stream: turbo_stream.replace("post#{params[:post_id]}actions", partial: "posts/post_actions", locals: { post: @post })
+      return
+    end
+
+    existing_like = @post.likes.find_by(user: current_user)
+
+    if existing_like
+      # Unlike
+      existing_like.destroy
+    else
+      # Like
+      @post.likes.create(user: current_user)
+    end
+
+    render turbo_stream: turbo_stream.replace("post#{@post.id}actions", partial: "posts/post_actions", locals: { post: @post })
+  rescue => e
+    Rails.logger.error("Error toggling like: #{e.message}")
+    render turbo_stream: turbo_stream.replace("post#{params[:post_id]}actions", partial: "posts/post_actions", locals: { post: @post })
   end
 end

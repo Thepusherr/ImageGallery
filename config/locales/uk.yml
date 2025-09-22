@@ -159,6 +159,71 @@ uk:
       many: "днів тому"
       other: "днів тому"
 
+  # DateTime distance in words
+  datetime:
+    distance_in_words:
+      half_a_minute: "півхвилини"
+      less_than_x_seconds:
+        one: "менше секунди"
+        few: "менше %{count} секунд"
+        many: "менше %{count} секунд"
+        other: "менше %{count} секунд"
+      x_seconds:
+        one: "%{count} секунда"
+        few: "%{count} секунди"
+        many: "%{count} секунд"
+        other: "%{count} секунд"
+      less_than_x_minutes:
+        one: "менше хвилини"
+        few: "менше %{count} хвилин"
+        many: "менше %{count} хвилин"
+        other: "менше %{count} хвилин"
+      x_minutes:
+        one: "%{count} хвилина"
+        few: "%{count} хвилини"
+        many: "%{count} хвилин"
+        other: "%{count} хвилин"
+      about_x_hours:
+        one: "близько години"
+        few: "близько %{count} годин"
+        many: "близько %{count} годин"
+        other: "близько %{count} годин"
+      x_hours:
+        one: "%{count} година"
+        few: "%{count} години"
+        many: "%{count} годин"
+        other: "%{count} годин"
+      x_days:
+        one: "%{count} день"
+        few: "%{count} дні"
+        many: "%{count} днів"
+        other: "%{count} днів"
+      about_x_months:
+        one: "близько місяця"
+        few: "близько %{count} місяців"
+        many: "близько %{count} місяців"
+        other: "близько %{count} місяців"
+      x_months:
+        one: "%{count} місяць"
+        few: "%{count} місяці"
+        many: "%{count} місяців"
+        other: "%{count} місяців"
+      about_x_years:
+        one: "близько року"
+        few: "близько %{count} років"
+        many: "близько %{count} років"
+        other: "близько %{count} років"
+      over_x_years:
+        one: "більше року"
+        few: "більше %{count} років"
+        many: "більше %{count} років"
+        other: "більше %{count} років"
+      almost_x_years:
+        one: "майже рік"
+        few: "майже %{count} роки"
+        many: "майже %{count} років"
+        other: "майже %{count} років"
+
   # Errors
   errors:
     format: "%{attribute} %{message}"
