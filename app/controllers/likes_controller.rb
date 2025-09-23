@@ -80,7 +80,10 @@ class LikesController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
 
     if @post.nil?
-      render turbo_stream: turbo_stream.replace("post#{params[:post_id]}actions", partial: "posts/post_actions", locals: { post: @post })
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{params[:post_id]}actions", partial: "posts/post_actions", locals: { post: @post }) }
+        format.html { redirect_back(fallback_location: root_path) }
+      end
       return
     end
 
@@ -94,9 +97,15 @@ class LikesController < ApplicationController
       @post.likes.create(user: current_user)
     end
 
-    render turbo_stream: turbo_stream.replace("post#{@post.id}actions", partial: "posts/post_actions", locals: { post: @post })
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}actions", partial: "posts/post_actions", locals: { post: @post }) }
+      format.html { redirect_back(fallback_location: root_path) }
+    end
   rescue => e
     Rails.logger.error("Error toggling like: #{e.message}")
-    render turbo_stream: turbo_stream.replace("post#{params[:post_id]}actions", partial: "posts/post_actions", locals: { post: @post })
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{params[:post_id]}actions", partial: "posts/post_actions", locals: { post: @post }) }
+      format.html { redirect_back(fallback_location: root_path) }
+    end
   end
 end

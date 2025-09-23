@@ -490,50 +490,90 @@
     color: #1e8a63 !important;
   }
 
-  /* Fix like button and icons */
-  .button_to button {
+  /* Fix like button and icons - high specificity */
+  .button_to button[id*="likeBtn"] {
     background: none !important;
+    background-color: transparent !important;
     border: none !important;
-    padding: 0 !important;
+    padding: 8px !important;
     cursor: pointer !important;
-  }
-
-  .button_to button i {
-    color: var(--default-color) !important;
-    transition: color 0.3s !important;
-  }
-
-  .button_to button:hover i {
-    color: var(--accent-color) !important;
-  }
-
-  /* Bootstrap Icons for like/comment */
-  .button_to button i.bi-heart {
-    color: var(--default-color) !important;
+    margin: 0 !important;
     font-size: 1.25rem !important;
-    vertical-align: middle !important;
+    color: var(--default-color) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  .button_to button i.bi-heart-fill {
-    color: var(--accent-color) !important;
-    font-size: 1.25rem !important;
-    vertical-align: middle !important;
+  .button_to button[id*="likeBtn"]:hover {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
   }
 
-  .button_to button i.bi-heart:hover {
-    color: var(--accent-color) !important;
-  }
-
-  /* Fix comment icon */
-  a i.bi-chat {
+  .button_to button[id*="likeBtn"] i {
     color: var(--default-color) !important;
     transition: color 0.3s !important;
     font-size: 1.25rem !important;
-    vertical-align: middle !important;
+    display: inline-block !important;
   }
 
-  a:hover i.bi-chat {
+  .button_to button[id*="likeBtn"]:hover i {
     color: var(--accent-color) !important;
+  }
+
+  /* Fix comment links */
+  a[data-bs-toggle="modal"] i.bi-chat {
+    color: var(--default-color) !important;
+    transition: color 0.3s !important;
+    font-size: 1.25rem !important;
+    display: inline-block !important;
+  }
+
+  a[data-bs-toggle="modal"]:hover i.bi-chat {
+    color: var(--accent-color) !important;
+  }
+
+  /* Bootstrap Icons for like/comment - specific styles */
+  .button_to button[id*="likeBtn"] i.bi-heart {
+    color:rgb(0, 0, 0) !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+    font-family: "bootstrap-icons" !important;
+  }
+
+  .button_to button[id*="likeBtn"] i.bi-heart-fill {
+    color: #27a776 !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+    font-family: "bootstrap-icons" !important;
+  }
+
+  .button_to button[id*="likeBtn"]:hover i.bi-heart {
+    color: #27a776 !important;
+  }
+
+  /* Fix comment icon - specific styles */
+  a[data-bs-toggle="modal"] i.bi-chat {
+    color:rgb(0, 0, 0) !important;
+    transition: color 0.3s !important;
+    font-size: 1.25rem !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+    font-family: "bootstrap-icons" !important;
+  }
+
+  a[data-bs-toggle="modal"]:hover i.bi-chat {
+    color: #27a776 !important;
+  }
+
+  /* Header buttons same height */
+  .header-social-links .btn {
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
   }
 
   /* Fix like count alignment */
@@ -927,8 +967,8 @@
     color: #ffffff !important;
   }
 
-  /* More specific selector for delete button */
-  div button[type="submit"] {
+  /* More specific selector for delete button - exclude like buttons */
+  div button[type="submit"]:not([id*="likeBtn"]) {
     background-color: #dc3545 !important;
     color: #ffffff !important;
     border: 1px solid #dc3545 !important;
@@ -939,7 +979,7 @@
     margin-top: 10px !important;
   }
 
-  div button[type="submit"]:hover {
+  div button[type="submit"]:not([id*="likeBtn"]):hover {
     background-color: #c82333 !important;
     border-color: #c82333 !important;
   }
