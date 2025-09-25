@@ -1623,3 +1623,16 @@ section, .section {
   display: block;
   color: #fff;
 }
+
+/* Like button styles */
+.bi-heart-fill {
+  color: #dc3545 !important;
+}
+
+.bi-heart {
+  color: #6c757d !important;
+}
+
+.bi-heart:hover {
+  color: #dc3545 !important;
+}

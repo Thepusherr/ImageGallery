@@ -1,3 +1,0 @@
-<%= turbo_stream.update "post#{@post.id}comments" do %>
-  <%= render partial: "comments/comment", locals: { comment: @comment } %>
-<% end %>

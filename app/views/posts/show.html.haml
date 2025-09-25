@@ -5,13 +5,15 @@
 %br/
 = @post.text
 %br/
+= render "posts/post_actions", post: @post
+%br/
 %b Comments
 %br/
-= turbo_frame_tag "post#{@post.id}comments" do
+%div{id: "post#{@post.id}comments"}
   - @post.comments.each do |comment|
     = render partial: "comments/comment", locals: { comment: comment }
     %br/
-= turbo_frame_tag "post#{@post.id}comment_form" do
+%div{id: "post#{@post.id}comment_form"}
   = render "posts/comment_form", post: @post
 
 = link_to 'Edit', edit_post_path(@post)

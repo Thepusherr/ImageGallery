@@ -1,0 +1,6 @@
+%div{id: "turbo-test"}
+  %h4 Turbo Test
+  = form_with url: "/test_turbo", method: :post, local: false do |f|
+    = f.submit "Test Turbo", class: "btn btn-primary"
+  %div{id: "turbo-result"}
+    Test result will appear here

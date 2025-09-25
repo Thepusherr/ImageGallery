@@ -17,9 +17,9 @@ class UserEventLogger
     true
   end
 
-  def self.log(user:, action_type:, url:)
+  def self.log(user:, action_type:, url:, metadata: nil)
     # Record the call but don't do anything
-    @@calls << { method: :log, user: user, action_type: action_type, url: url }
+    @@calls << { method: :log, user: user, action_type: action_type, url: url, metadata: metadata }
     true
   end
 

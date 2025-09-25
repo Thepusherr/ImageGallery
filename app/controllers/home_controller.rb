@@ -47,5 +47,13 @@ class HomeController < ApplicationController
   def starter_page
   end
 
+  def test_turbo
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("turbo-result", "<div id='turbo-result'>Turbo is working! Time: #{Time.current}</div>")
+      end
+      format.html { redirect_to root_path, notice: "Turbo test completed" }
+    end
+  end
 
 end

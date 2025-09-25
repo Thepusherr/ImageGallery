@@ -1,33 +1,20 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-import "turbo_stream_handler"
-import "comment_form_handler"
-import "jquery_comment_handler"
-import "ujs_comment_handler"
-import "direct_upload"
-import "rails_ujs_handler"
-import "vanilla_handler"
-import "stylesheets/active_admin"
-import "stylesheets/main"
 
-import * as FilePond from 'filepond';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+console.log('Application.js loading...');
 
-import AOS from 'aos';
-document.addEventListener('turbo:load', () => { AOS.init() });
+// Ensure Turbo is properly initialized
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, Turbo should be active');
+  console.log('Turbo object:', window.Turbo);
+});
 
-FilePond.registerPlugin(FilePondPluginImagePreview);
+// Add Turbo event listeners for debugging
+document.addEventListener('turbo:before-fetch-request', function(event) {
+  console.log('Turbo request starting:', event.detail.url);
+});
 
-document.addEventListener("turbo:load", loadFilePond);
+document.addEventListener('turbo:before-fetch-response', function(event) {
+  console.log('Turbo response received:', event.detail.fetchResponse);
+});
 
-function loadFilePond(){
-    const input = document.querySelector('.filepond');
-    FilePond.create(input);
-    const pond = FilePond.create(input, {
-        credits: {},
-        storeAsFile: true,
-        allowMultiple: false,
-        allowReorder: true,
-    });
-}

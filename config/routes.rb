@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'profile', to: 'profile#index'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like
+  post "test_turbo", to: "home#test_turbo"
 
   # Locale switching
   get 'switch_locale/:locale', to: 'locales#switch', as: :switch_locale

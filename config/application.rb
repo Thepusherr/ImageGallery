@@ -31,5 +31,8 @@ module ImageGallery
     # I18n configuration
     config.i18n.available_locales = [:en, :ru, :uk]
     config.i18n.default_locale = :en
+
+    # Ensure Turbo Stream support
+    config.force_ssl = false # Allow HTTP for development
   end
 end

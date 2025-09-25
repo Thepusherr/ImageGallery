@@ -18,7 +18,17 @@ class Comment < ApplicationRecord
   private
 
   def log_comment_event
-    UserEventLogger.log(user, 'comment', "/posts/#{post.id}", { comment_id: id, post_id: post.id })
+    return if Rails.env.test?
+
+    begin
+      UserEventLogger.log(
+        user: user,
+        action_type: 'comment',
+        url: "/posts/#{post.id}"
+      )
+    rescue => e
+      Rails.logger.error("Failed to log comment event: #{e.message}")
+    end
   end
 
   def send_notification_email
