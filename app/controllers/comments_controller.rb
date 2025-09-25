@@ -13,10 +13,23 @@ class CommentsController < ApplicationController
   def create
     # Получаем текст комментария из параметров формы
     text = params[:text]
-    
+
+    Rails.logger.info("Creating comment for post #{@post.id} by user #{current_user.id}: #{text}")
+
+    if text.blank?
+      Rails.logger.warn("Comment text is blank")
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form_vanilla", locals: { post: @post, error: "Comment cannot be empty" }) }
+        format.html { redirect_to @post, alert: "Comment cannot be empty" }
+      end
+      return
+    end
+
     @comment = @post.comments.new(user: current_user, text: text)
 
     if @comment.save
+      Rails.logger.info("Comment created successfully: #{@comment.id}")
+
       # Log the comment event if UserEventLogger is available
       if defined?(UserEventLogger)
         begin
@@ -29,16 +42,28 @@ class CommentsController < ApplicationController
           Rails.logger.error("Failed to log user event: #{e.message}")
         end
       end
-      
+
+      # Принудительно перезагружаем пост с комментариями
+      @post = Post.find(@post.id)
+      @post.reload
+
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comments", partial: "posts/post_comments", locals: { post: @post }) }
-        format.html { redirect_to @post }
+        format.turbo_stream # Будет использовать create.turbo_stream.haml
+        format.html { redirect_back(fallback_location: @post) }
       end
     else
+      Rails.logger.error("Failed to create comment: #{@comment.errors.full_messages}")
       respond_to do |format|
-        format.html { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form_vanilla", locals: { post: @post, error: @comment.errors.full_messages.join(', ') }) }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form_vanilla", locals: { post: @post, error: @comment.errors.full_messages.join(', ') }) }
+        format.html { redirect_back(fallback_location: @post, alert: @comment.errors.full_messages.join(', ')) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form", locals: { post: @post, error: @comment.errors.full_messages.join(', ') }) }
       end
+    end
+  rescue => e
+    Rails.logger.error("Error creating comment: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}comment_form", partial: "posts/comment_form", locals: { post: @post, error: "An error occurred while creating the comment" }) }
+      format.html { redirect_back(fallback_location: @post, alert: "An error occurred while creating the comment") }
     end
   end
 

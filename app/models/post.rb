@@ -24,7 +24,7 @@ class Post < ApplicationRecord
   private
 
   def log_post_creation
-    UserEventLogger.log(user, 'post_creation', "/posts/#{id}", { post_id: id, title: title })
+    UserEventLogger.log(user: user, action_type: 'post_creation', url: "/posts/#{id}")
   end
 
   def process_image_in_background

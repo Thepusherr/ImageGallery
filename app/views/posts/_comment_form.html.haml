@@ -1,8 +1,7 @@
-= turbo_frame_tag "post#{post.id}comment_form" do
-  %form.js-comment-form{action: post_comments_path(post, format: :turbo_stream), method: "post", data: {post_id: post.id}}
-    = hidden_field_tag :authenticity_token, form_authenticity_token
+%div{id: "post#{post.id}comment_form"}
+  = form_with url: post_comments_path(post), method: :post, local: false do |f|
     .card-footer.d-flex.justify-content-between.bg-white.mt-3
       - if defined?(error) && error.present?
         .alert.alert-danger= error
-      %input.w-100{type: "text", name: "text", placeholder: "Add a comment...", style: "border:none"}
-      %input.text-primary.fw-bold{type: "submit", value: "Post", style: "background:none; border:none"}
+      = text_field_tag :text, nil, class: "w-100", placeholder: "Add a comment...", style: "border:none; color: #000 !important; background-color: white !important; outline: none; box-shadow: none;"
+      = f.submit "Post", class: "text-primary fw-bold", style: "background:none; border:none"
