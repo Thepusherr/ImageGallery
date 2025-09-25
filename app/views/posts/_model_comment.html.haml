@@ -3,13 +3,13 @@
     .d-flex
       = image_tag comment.user.avatar.attached? ? comment.user.avatar : asset_path('default-avatar.png'), class: "img-thumbnail rounded-circle", style: "width: 2.5rem; max-height:2.5rem"
       .d-flex.flex-column.mx-3.justify-content-center
-        %small.fw-bold{style: "overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem"}
-          = link_to comment.user, class: "a-decoration-none", data: {turbo: false} do
+        %small.fw-bold{style: "overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem; color: #000 !important;"}
+          = link_to comment.user, class: "a-decoration-none", data: {turbo: false}, style: "color: #000 !important;" do
             = comment.user.name
             = comment.user.surname
-        %small{style: "max-width: 20rem"}
+        %small{style: "max-width: 20rem; color: #000 !important;"}
           = comment.text
-        %small.text-muted
+        %small.text-muted{style: "color: #6c757d !important;"}
           = time_ago_in_words(comment.created_at)
     - if comment.user == current_user
       = button_to comment_path(id: comment.id), method: :delete, style: "background:none; border:none" do
