@@ -14,36 +14,31 @@ class CategoriesController < ApplicationController
       if Rails.env.test?
         @categories = Category.where(visibility: :visible)
         @categories_with_images = []
-        
+
         # In test environment, we don't need to load images
         @categories.each do |category|
           @categories_with_images << { category: category, image: nil }
         end
       else
         @categories = policy_scope(Category)
-        Rails.logger.debug "Fetched Categories: #{@categories.inspect}"
-        
-        # Set up categories with images for the view
-        @popular_categories = @categories
-          .left_joins(posts: [:likes, :comments])
-          .select('categories.*, COUNT(DISTINCT posts.id) AS posts_count, COUNT(DISTINCT likes.id) AS likes_count, COUNT(DISTINCT comments.id) AS comments_count')
-          .group('categories.id')
-          .order('COUNT(DISTINCT posts.id) DESC, COUNT(DISTINCT likes.id) DESC, COUNT(DISTINCT comments.id) DESC')
-          .limit(10)
+        Rails.logger.debug "Fetched Categories: #{@categories.count} categories"
 
-        @categories_with_images = @popular_categories.includes(:posts).map do |category|
+        # Simply get all categories and find images for them
+        @categories_with_images = @categories.includes(:posts).map do |category|
           post_with_image = category.posts.find { |post| post.image.present? }
-          image = post_with_image&.image || nil
-          { category: category, image: image }
+          if post_with_image
+            { category: category, image: post_with_image.image.url }
+          else
+            { category: category, image: nil }
+          end
         end
-        
-        Rails.logger.debug "Popular Categories: #{@popular_categories.inspect}"
-        Rails.logger.debug "Categories with Images: #{@categories_with_images.inspect}"
+
+        Rails.logger.debug "Categories with Images: #{@categories_with_images.count} entries"
       end
     rescue => e
       Rails.logger.error "Error in CategoriesController#index: #{e.message}"
       Rails.logger.error e.backtrace.join("\n")
-      
+
       # Ensure we have something to render even if there's an error
       @categories ||= Category.none
       @categories_with_images ||= []
@@ -51,16 +46,22 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    if Rails.env.test?
-      if @category.hidden? && (!current_user || current_user != @category.user)
-        redirect_to root_path, alert: "You are not authorized to perform this action."
-        return
+    begin
+      if Rails.env.test?
+        if @category.hidden? && (!current_user || current_user != @category.user)
+          redirect_to root_path, alert: "You are not authorized to perform this action."
+          return
+        end
+      else
+        authorize @category
       end
-    else
-      authorize @category
+      @posts_with_images = @category.posts.select { |post| post.image.present? }
+      Rails.logger.debug "Posts with images in show action: #{@posts_with_images.inspect}"
+    rescue => e
+      Rails.logger.error "Error in categories#show: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      redirect_to categories_path, alert: "Category not found or access denied."
     end
-    @posts_with_images = @category.posts.select { |post| post.image.present? }
-    Rails.logger.debug "Posts with images in show action: #{@posts_with_images.inspect}"
   end
 
   def new
@@ -140,7 +141,8 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-    @category = Category.friendly.find(params[:id])
+    category_id = params[:id] || params[:category_id]
+    @category = Category.friendly.find(category_id)
   end
 
   def category_params

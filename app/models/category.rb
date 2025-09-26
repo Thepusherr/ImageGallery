@@ -9,7 +9,7 @@ class Category < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :subscribers, through: :subscriptions, source: :user
 
-  validates :name, presence: true, uniqueness: { scope: :user_id }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :user, presence: true
 
   def self.ransackable_attributes(auth_object = nil)

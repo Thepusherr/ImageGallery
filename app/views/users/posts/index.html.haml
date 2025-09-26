@@ -1,5 +1,5 @@
 - content_for :title do
-  Gallery - ImageGallery
+  = "#{@user.name || @user.email}'s Posts - ImageGallery"
 
 %main.main
   / Page Title
@@ -8,29 +8,21 @@
       .container
         .row.d-flex.justify-content-center.text-center
           .col-lg-8
-            %h1
-              - if @selected_category
-                = @selected_category.name.capitalize + " Gallery"
-              - else
-                Gallery
-            %p.mb-3
-              - if @selected_category
-                = "Explore beautiful #{@selected_category.name.downcase} images from our community."
-              - else
-                Explore our collection of beautiful images from talented photographers.
-            - if user_signed_in?
-              = link_to new_post_path, class: "btn btn-primary btn-lg" do
-                %i.bi.bi-plus-circle.me-2
-                = t('posts.create_new')
-            %a.cta-btn{href: "contact.html"}
-              Available for Hire
-              %br/
+            %h1 
+              = "#{@user.name || @user.email}'s Posts"
+            %p.mb-0 
+              = "Explore posts by #{@user.name || @user.email}"
     %nav.breadcrumbs
       .container
         %ol
           %li
-            %a{href: "index.html"} Home
-          %li.current Gallery
+            = link_to "Home", root_path
+          %li
+            = link_to "Users", users_path
+          %li
+            = link_to @user.name || @user.email, user_path(@user)
+          %li.current Posts
+
   / Gallery Section
   %section#gallery.gallery.section
     .container-fluid{"data-aos" => "fade-up", "data-aos-delay" => "100"}
@@ -52,8 +44,4 @@
         - else
           .col-12.text-center
             %p.text-muted
-              - if @selected_category
-                = "No images found in #{@selected_category.name.downcase} category."
-              - else
-                No images found.
-
+              = "#{@user.name || @user.email} hasn't posted any images yet."

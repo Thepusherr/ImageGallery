@@ -3,7 +3,24 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts = Post.all
+    @posts = if params[:user_id].present?
+               user = User.friendly.find(params[:user_id])
+               # Show only posts with categories for user posts too
+               user.posts.joins(:categories).where(visibility: :visible).order(created_at: :desc).distinct
+             else
+               # Show only posts with categories (as per requirements)
+               Post.joins(:categories).where(visibility: :visible).order(created_at: :desc).distinct
+             end
+    @selected_user = User.friendly.find(params[:user_id]) if params[:user_id].present?
+  rescue ActiveRecord::RecordNotFound
+    @posts = Post.joins(:categories).where(visibility: :visible).order(created_at: :desc).distinct
+    @selected_user = nil
+  end
+
+  def uncategorized
+    # Show posts without categories (admin only)
+    @posts = Post.left_joins(:categories).where(categories: { id: nil }).order(created_at: :desc)
+    render :index
   end
 
   def show

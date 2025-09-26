@@ -22,6 +22,8 @@
         %img{src: image.url, alt: image.try(:alt_text) || "Gallery image", tabindex: "0", class: shift_class}
       - elsif image.respond_to?(:image) && image.image.attached?
         %img{src: url_for(image.image), alt: image.try(:title) || image.try(:description) || "Gallery image", tabindex: "0", class: shift_class}
+      - elsif image.respond_to?(:image) && image.image.present?
+        %img{src: image.image.url, alt: image.try(:title) || image.try(:description) || "Gallery image", tabindex: "0", class: shift_class}
       - else
         %img{src: image, alt: "Gallery image", tabindex: "0", class: shift_class}
 

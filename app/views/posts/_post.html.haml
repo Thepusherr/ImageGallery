@@ -30,6 +30,7 @@
         = post.user.surname
       = post.text
       = render "posts/post_comments", post: post
+    = render 'shared/post_categories', post: post
     %small.text-muted= time_ago_in_words(post.created_at)
     = render "posts/comment_form", post: post
 

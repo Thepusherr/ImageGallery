@@ -1,0 +1,15 @@
+- if post.categories.any?
+  .post-categories.mt-2
+    - post.categories.each_with_index do |category, index|
+      - badge_colors = ['primary', 'success', 'info', 'warning', 'danger', 'dark']
+      - color_class = badge_colors[category.name.hash % badge_colors.length]
+      = link_to category_path(category),
+        class: "badge bg-#{color_class} text-decoration-none me-1 mb-1 category-badge",
+        title: "View #{category.name} category" do
+        %i.bi.bi-tag-fill.me-1
+        = category.name
+- else
+  .post-categories.mt-2
+    %span.badge.bg-light.text-muted.border
+      %i.bi.bi-question-circle.me-1
+      Uncategorized

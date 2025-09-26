@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
   before_action :track_navigation
+  before_action :load_navbar_categories
 
   rescue_from StandardError, with: :render_500_error
 
@@ -15,6 +16,35 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def load_navbar_categories
+    if current_user
+      # For logged-in users: show their categories and subscriptions first, then popular ones
+      user_categories = current_user.categories.where(visibility: :visible)
+      subscribed_categories = current_user.subscriptions.includes(:category)
+                                         .map(&:category)
+                                         .select { |cat| cat.visibility == 'visible' }
+
+      user_relevant_categories = (user_categories + subscribed_categories).uniq
+
+      # Fill remaining slots with popular categories
+      remaining_slots = 8 - user_relevant_categories.size
+      if remaining_slots > 0
+        popular_categories = Category.where(visibility: :visible)
+                                   .where.not(id: user_relevant_categories.map(&:id))
+                                   .limit(remaining_slots)
+        @navbar_categories = user_relevant_categories + popular_categories.to_a
+      else
+        @navbar_categories = user_relevant_categories.first(8)
+      end
+    else
+      # For guests: show popular categories
+      @navbar_categories = Category.where(visibility: :visible).limit(8)
+    end
+  rescue => e
+    Rails.logger.error("Failed to load navbar categories: #{e.message}")
+    @navbar_categories = []
+  end
 
   def set_locale
     I18n.locale = params[:locale] || session[:locale] || I18n.default_locale

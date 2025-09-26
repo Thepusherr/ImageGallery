@@ -43,10 +43,21 @@
           = form.text_area :text, rows: 8, placeholder: "Write a caption...", class: "form-control border-0", style: "resize:none"
         %div.mt-3
           %label.form-label Categories:
-          = form.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
-            .form-check
-              = b.check_box(class: "form-check-input")
-              = b.label(class: "form-check-label")
+          .categories-selection
+            = form.collection_check_boxes :category_ids, Category.where(visibility: :visible), :id, :name do |b|
+              .form-check.category-option
+                = b.check_box(class: "form-check-input")
+                = b.label(class: "form-check-label badge bg-light text-dark border me-2 mb-1 category-checkbox-label") do
+                  %i.bi.bi-tag.me-1
+                  = b.text
+          .mt-2
+            %small.text-muted
+              %i.bi.bi-info-circle.me-1
+              Select categories that best describe your image. You can select multiple categories.
+          .mt-2
+            = link_to new_category_path, class: "btn btn-sm btn-outline-primary", target: "_blank" do
+              %i.bi.bi-plus-circle.me-1
+              Create New Category
         -# .d-flex.justify-content-between.align-items-center.border.form-control.my-2{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-bs-toggle" => "collapse", href: "#collapseExample", role: "button"}
         -#   %a.text-dark{style: "text-decoration: none"}
         -#     Advanced Settings

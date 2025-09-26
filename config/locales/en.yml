@@ -39,6 +39,7 @@ en:
     services: "Services"
     contact: "Contact"
     gallery: "Gallery"
+    my_posts: "My Posts"
 
   # User actions
   user:
@@ -53,6 +54,7 @@ en:
     title: "Title"
     content: "Content"
     create: "Create Post"
+    create_new: "New Post"
     edit: "Edit"
     delete: "Delete"
     like: "Like"
@@ -93,6 +95,9 @@ en:
     create: "Create Category"
     edit: "Edit"
     delete: "Delete"
+    no_categories: "No categories available"
+    create_new: "Create New Category"
+    view_all: "View All Categories"
 
   # Common
   common:

@@ -19,10 +19,12 @@ Rails.application.routes.draw do
   get 'home/contact'
   get 'home/starter_page'
   get 'home/gallery'
+  get 'home/gallery/:category_id', to: 'categories#show', as: 'home_gallery_category'
   get 'home/gallery_single'
   get 'home/services'
 
   get 'profile', to: 'profile#index'
+  get 'my_posts', to: 'users/posts#my_posts'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like
   post "test_turbo", to: "home#test_turbo"
@@ -36,12 +38,17 @@ Rails.application.routes.draw do
 
 
 
-  resources :users
+  resources :users do
+    resources :posts, only: [:index], controller: 'users/posts'
+  end
   resources :likes
   resources :comments
   resources :posts do
     resources :likes, only: [:create]
     resources :comments, only: [:create]
+    collection do
+      get :uncategorized
+    end
   end
   resources :categories, param: :id do
     member do

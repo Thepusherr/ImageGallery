@@ -4,8 +4,14 @@
 .container
   .row
     .col-md-12
-      %h2 Featured Images
-      %p Explore our collection of beautiful images.
+      .d-flex.justify-content-between.align-items-center.mb-4
+        %div
+          %h2 Featured Images
+          %p.mb-0 Explore our collection of beautiful images.
+        - if user_signed_in?
+          = link_to new_post_path, class: "btn btn-primary" do
+            %i.bi.bi-plus-circle.me-2
+            = t('posts.create_new')
       
       - if @posts.present?
         .div.d-flex.justify-content-center{ :style => "font-size: 1rem;" }
@@ -15,11 +21,13 @@
           - @posts.each do |post|
             .col-md-4.mb-4
               .card
-                - if post.image.attached?
-                  = image_tag post.image, class: 'card-img-top'
+                - if post.image.present?
+                  = image_tag post.image.url, class: 'card-img-top'
                 .card-body
                   %h5.card-title= post.title
-                  %p.card-text= post.text
-                  = link_to 'View Post', post_path(post), class: 'btn btn-sm btn-primary'
+                  %p.card-text= truncate(post.text, length: 100)
+                  = render 'shared/post_categories', post: post
+                  .mt-2
+                    = link_to 'View Post', post_path(post), class: 'btn btn-sm btn-primary'
       - else
         %p No posts found.

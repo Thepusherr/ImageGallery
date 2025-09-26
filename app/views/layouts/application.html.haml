@@ -6,3 +6,8 @@
     = render 'shared/header'
     = yield
     = render 'shared/footer'
+
+    / Floating Action Button for creating posts (mobile only)
+    - if user_signed_in?
+      = link_to new_post_path, class: "fab-create-post", title: t('posts.create_new') do
+        %i.bi.bi-plus

@@ -1,31 +1,56 @@
-.container#main-container(style="display: flex; flex-direction: column; align-items: center; text-align: center;")
-  .row
-    .justify-content-center
-      %h1(style="font-size: 3rem; font-weight: bold;")
-        Categories
-      %br/
-      %br/
+%main.main
+  / Page Title
+  .page-title{"data-aos" => "fade"}
+    .heading
+      .container
+        .row.d-flex.justify-content-center.text-center
+          .col-lg-8
+            %h1 Categories
+            %p.mb-0 Explore all image categories
+    %nav.breadcrumbs
+      .container
+        %ol
+          %li
+            = link_to "Home", root_path
+          %li.current Categories
+
+  / Categories Section
+  %section#categories.section
+    .container{"data-aos" => "fade-up", "data-aos-delay" => "100"}
       - if @categories_with_images.present?
-        - @categories_with_images.each do |entry|
-          - if entry && entry[:category].present?
-            .image-row
-              .image-container
-                - begin
-                  - if entry[:image].present?
-                    = image_tag(entry[:image], alt: entry[:category].name, class: 'img-fluid')
-                  - else
-                    = image_tag(asset_path('default-avatar.png'), alt: entry[:category].name, class: 'img-fluid')
-                - rescue => e
-                  = image_tag(asset_path('default-avatar.png'), alt: entry[:category].name, class: 'img-fluid')
-                .overlay-text
-                  = entry[:category].name
-              .button-group
-                = link_to 'Show', category_path(entry[:category]), class: 'btn btn-primary text-white', style: 'text-decoration: none;'
-                - if user_signed_in? && current_user == entry[:category].user
-                  = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning text-dark', style: 'text-decoration: none;'
-                  = link_to 'Destroy', category_path(entry[:category]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger text-white', style: 'text-decoration: none;'
+        .row.gy-4.justify-content-center
+          - @categories_with_images.each do |entry|
+            - if entry && entry[:category].present?
+              .col-xl-3.col-lg-4.col-md-6.col-sm-6
+                .card.h-100.category-card
+                  .position-relative.category-image-container
+                    - begin
+                      - if entry[:image].present?
+                        = image_tag(entry[:image], alt: entry[:category].name, class: 'card-img-top category-image')
+                      - else
+                        = image_tag(asset_path('default-avatar.png'), alt: entry[:category].name, class: 'card-img-top category-image')
+                    - rescue => e
+                      = image_tag(asset_path('default-avatar.png'), alt: entry[:category].name, class: 'card-img-top category-image')
+                    .category-overlay
+                      %h5.category-name= entry[:category].name
+                  .card-body.text-center
+                    %h6.card-title= entry[:category].name
+                    %p.card-text.text-muted
+                      = pluralize(entry[:category].posts.count, 'post')
+                    - if user_signed_in? && current_user == entry[:category].user
+                      .btn-group.w-100{role: "group"}
+                        = link_to 'View', category_path(entry[:category]), class: 'btn btn-primary btn-sm'
+                        = link_to 'Edit', edit_category_path(entry[:category]), class: 'btn btn-warning btn-sm'
+                        = link_to 'Delete', category_path(entry[:category]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm'
+                    - else
+                      = link_to 'View', category_path(entry[:category]), class: 'btn btn-primary w-100'
       - else
-        .alert.alert-info
-          %p No categories found. Create a new category to get started!
-      %div
-        = link_to "New category", new_category_path, class: 'btn btn-success btn-lg text-white', style: 'text-decoration: none;'
+        .row.justify-content-center
+          .col-lg-6.text-center
+            .alert.alert-info
+              %h4 No categories found
+              %p Create a new category to get started!
+
+      .row.justify-content-center.mt-4
+        .col-auto
+          = link_to "Create New Category", new_category_path, class: 'btn btn-success btn-lg'

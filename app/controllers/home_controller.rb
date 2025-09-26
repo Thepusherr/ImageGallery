@@ -36,6 +36,21 @@ class HomeController < ApplicationController
   end
 
   def gallery
+    begin
+      if params[:category_id].present?
+        @selected_category = Category.friendly.find(params[:category_id])
+        @posts = @selected_category.posts.where(visibility: :visible).includes(:user)
+      else
+        @selected_category = nil
+        # Show only posts with categories (as per requirements)
+        @posts = Post.joins(:categories).where(visibility: :visible).includes(:user, :categories).distinct
+      end
+
+      @posts = @posts.select { |post| post.image.present? }
+    rescue ActiveRecord::RecordNotFound
+      @posts = Post.joins(:categories).where(visibility: :visible).includes(:user, :categories).distinct.select { |post| post.image.present? }
+      @selected_category = nil
+    end
   end
 
   def gallery_single

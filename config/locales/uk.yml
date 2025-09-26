@@ -10,6 +10,7 @@ uk:
     services: "Послуги"
     contact: "Контакти"
     gallery: "Галерея"
+    my_posts: "Мої пости"
     
   # User actions
   user:
@@ -24,6 +25,7 @@ uk:
     title: "Заголовок"
     content: "Зміст"
     create: "Створити пост"
+    create_new: "Новий пост"
     edit: "Редагувати"
     delete: "Видалити"
     like: "Подобається"
@@ -66,6 +68,9 @@ uk:
     create: "Створити категорію"
     edit: "Редагувати"
     delete: "Видалити"
+    no_categories: "Категорії відсутні"
+    create_new: "Створити нову категорію"
+    view_all: "Переглянути всі категорії"
     
   # Common
   common:
