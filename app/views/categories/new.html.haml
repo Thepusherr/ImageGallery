@@ -1,9 +1,11 @@
-.container#main-container
+.container#main-container.py-5
   .row
-    .justify-content-center
-      %h2 New Category
-      %br/
-      = render "form", category: @category
-      %br/
-      %div
-        = link_to "Back to categories", categories_path
+    .col-md-8.offset-md-2
+      .card.bg-dark.border-secondary
+        .card-header.bg-dark.border-secondary
+          %h2.mb-0.text-light New Category
+        .card-body
+          = render "form", category: @category
+          %hr.border-secondary
+          .d-flex.gap-2
+            = link_to "Back to categories", categories_path, class: "btn btn-secondary"

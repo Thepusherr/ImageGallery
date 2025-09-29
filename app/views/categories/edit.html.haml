@@ -1,9 +1,12 @@
-.container#main-container
+.container#main-container.py-5
   .row
-    .justify-content-center
-      %h1 Editing Category
-      %br/
-      = render 'form', category: @category
-      = link_to 'Show', @category
-      \|
-      = link_to 'Back', categories_path
+    .col-md-8.offset-md-2
+      .card.bg-dark.border-secondary
+        .card-header.bg-dark.border-secondary
+          %h2.mb-0.text-light Editing Category
+        .card-body
+          = render 'form', category: @category
+          %hr.border-secondary
+          .d-flex.gap-2
+            = link_to 'Show', @category, class: "btn btn-info"
+            = link_to 'Back', categories_path, class: "btn btn-secondary"

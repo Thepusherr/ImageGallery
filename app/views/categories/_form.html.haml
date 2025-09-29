@@ -1,14 +1,20 @@
-= form_with(model: category) do |form|
+= form_with(model: category, local: true) do |form|
   - if category && category.errors.any?
-    #error_explanation
-      %h2
+    .alert.alert-danger
+      %h4
         = pluralize(category.errors.count, "error")
         prohibited this category from being saved:
       %ul
         - category.errors.each do |error|
           %li= error.full_message
-  = form.hidden_field :category_id
-  = form.label :text, "Category name:"
-  = form.text_field :name
+
+  .mb-3
+    = form.label :name, "Category name:", class: "form-label text-light"
+    = form.text_field :name, class: "form-control bg-dark text-light border-secondary"
+
+  .mb-3
+    = form.label :visibility, "Visibility:", class: "form-label text-light"
+    = form.select :visibility, options_for_select([['Public', 'visible'], ['Private', 'hidden']], category.visibility || 'visible'), {}, { class: "form-select bg-dark text-light border-secondary" }
+
   .actions
-    = form.submit
+    = form.submit class: "btn btn-primary"
