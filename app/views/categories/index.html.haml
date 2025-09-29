@@ -22,7 +22,7 @@
           - @categories_with_images.each do |entry|
             - if entry && entry[:category].present?
               .col-xl-3.col-lg-4.col-md-6.col-sm-6
-                .card.h-100.category-card
+                .card.h-100.category-card.bg-dark.border-secondary
                   .position-relative.category-image-container
                     - begin
                       - if entry[:image].present?
@@ -34,9 +34,19 @@
                     .category-overlay
                       %h5.category-name= entry[:category].name
                   .card-body.text-center
-                    %h6.card-title= entry[:category].name
-                    %p.card-text.text-muted
+                    %h6.card-title.text-light= entry[:category].name
+                    %p.card-text.text-muted.mb-1
                       = pluralize(entry[:category].posts.count, 'post')
+                    %p.card-text.text-muted.small.mb-2
+                      %i.bi.bi-people.me-1
+                      = pluralize(entry[:category].subscriptions.count, 'subscriber')
+
+                    / Subscription button for all users
+                    - if user_signed_in?
+                      .mb-2
+                        = render 'subscription', category: entry[:category]
+
+                    / Action buttons
                     - if user_signed_in? && current_user == entry[:category].user
                       .btn-group.w-100{role: "group"}
                         = link_to 'View', category_path(entry[:category]), class: 'btn btn-primary btn-sm'
@@ -47,8 +57,8 @@
       - else
         .row.justify-content-center
           .col-lg-6.text-center
-            .alert.alert-info
-              %h4 No categories found
+            .alert.alert-info.bg-dark.border-secondary.text-light
+              %h4.text-light No categories found
               %p Create a new category to get started!
 
       .row.justify-content-center.mt-4

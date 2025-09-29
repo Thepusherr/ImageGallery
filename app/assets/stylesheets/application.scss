@@ -24,6 +24,10 @@
 @import "components/hexagon_gallery";
 @import "components/post_categories";
 
+
+
+
+
 // html, body {
 //   height: 100%;
 //   margin: 0;
@@ -327,3 +331,444 @@
     }
   }
 }
+
+// Keep dark theme for all pages - remove white background override
+// Posts index page dark theme
+body.posts-controller.index-action,
+body.categories-controller.index-action {
+  .main {
+    background: var(--background-color) !important;
+    color: var(--text-color) !important;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--text-color) !important;
+    }
+
+    .card {
+      background: var(--bs-dark) !important;
+      border: 1px solid var(--bs-secondary) !important;
+      color: var(--bs-light) !important;
+
+      .card-body {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+      }
+
+      .card-title {
+        color: var(--bs-light) !important;
+      }
+
+      .card-text {
+        color: var(--bs-light) !important;
+      }
+
+      .card-footer {
+        background: var(--bs-dark) !important;
+        border-top: 1px solid var(--bs-secondary) !important;
+      }
+    }
+
+    .text-muted {
+      color: #6c757d !important;
+    }
+
+    a:not(.btn) {
+      color: var(--bs-info) !important;
+
+      &:hover {
+        color: lighten(#0dcaf0, 10%) !important;
+      }
+    }
+  }
+}
+
+// Content area fixes removed - using dark theme everywhere
+
+// Category form fixes - keep dark theme but ensure proper styling
+body.categories-controller.new-action,
+body.categories-controller.edit-action,
+body.categories-controller.create-action,
+body.categories-controller.update-action {
+  #main-container {
+    .card {
+      background: var(--bs-dark) !important;
+      border: 1px solid var(--bs-secondary) !important;
+      color: var(--bs-light) !important;
+
+      .card-header {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+        border-bottom: 1px solid var(--bs-secondary) !important;
+      }
+
+      .card-body {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+      }
+    }
+
+    .form-label {
+      color: var(--bs-light) !important;
+    }
+
+    .form-control, .form-select {
+      background: var(--bs-dark) !important;
+      color: var(--bs-light) !important;
+      border: 1px solid var(--bs-secondary) !important;
+
+      &:focus {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+        border-color: var(--bs-primary) !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+      }
+    }
+
+    .alert-danger {
+      background: #842029 !important;
+      border-color: #721c24 !important;
+      color: #f8d7da !important;
+
+      h4 {
+        color: #f8d7da !important;
+      }
+    }
+  }
+}
+
+// Post form fixes - dark theme
+body.posts-controller.new-action,
+body.posts-controller.edit-action,
+body.posts-controller.create-action,
+body.posts-controller.update-action {
+  #main-container {
+    .card {
+      background: var(--bs-dark) !important;
+      border: 1px solid var(--bs-secondary) !important;
+      color: var(--bs-light) !important;
+
+      .card-header {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+        border-bottom: 1px solid var(--bs-secondary) !important;
+      }
+
+      .card-body {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+      }
+
+      .card-footer {
+        background: var(--bs-dark) !important;
+        border-top: 1px solid var(--bs-secondary) !important;
+      }
+    }
+
+    .form-label {
+      color: var(--bs-light) !important;
+    }
+
+    .form-control, .form-select {
+      background: var(--bs-dark) !important;
+      color: var(--bs-light) !important;
+      border: 1px solid var(--bs-secondary) !important;
+
+      &:focus {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+        border-color: var(--bs-primary) !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+      }
+
+      &::placeholder {
+        color: #6c757d !important;
+      }
+    }
+
+    .form-text {
+      color: #6c757d !important;
+    }
+
+    .alert-danger {
+      background: #842029 !important;
+      border-color: #721c24 !important;
+      color: #f8d7da !important;
+
+      h5 {
+        color: #f8d7da !important;
+      }
+    }
+  }
+}
+
+// User edit form fixes - dark theme
+body.devise-registrations-controller.edit-action {
+  background: var(--background-color) !important;
+
+  #main-container {
+    background: var(--background-color) !important;
+  }
+
+  .profile-form {
+    .card {
+      background: var(--bs-dark) !important;
+      border: 1px solid var(--bs-secondary) !important;
+      color: var(--bs-light) !important;
+
+      .card-header {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+        border-bottom: 1px solid var(--bs-secondary) !important;
+      }
+
+      .card-body {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+      }
+    }
+
+    .form-label {
+      color: var(--bs-light) !important;
+    }
+
+    .form-control {
+      background: var(--bs-dark) !important;
+      color: var(--bs-light) !important;
+      border: 1px solid var(--bs-secondary) !important;
+
+      &:focus {
+        background: var(--bs-dark) !important;
+        color: var(--bs-light) !important;
+        border-color: var(--bs-primary) !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+      }
+    }
+
+    .text-muted {
+      color: #6c757d !important;
+    }
+
+    .text-info {
+      color: #0dcaf0 !important;
+    }
+
+    .text-warning {
+      color: #ffc107 !important;
+    }
+
+    .avatar-placeholder {
+      background: #343a40 !important;
+      border: 2px dashed var(--bs-secondary) !important;
+      color: #6c757d !important;
+    }
+
+    .avatar-upload-btn {
+      background: var(--bs-primary) !important;
+      border-color: var(--bs-primary) !important;
+      color: white !important;
+    }
+
+    hr {
+      border-color: var(--bs-secondary) !important;
+    }
+
+    h5 {
+      color: var(--bs-light) !important;
+    }
+  }
+}
+
+// Gallery fixes for consistent image sizes
+.gallery {
+  .gallery-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .position-relative {
+      height: 250px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+
+// Fix category badge colors for dark theme - override main.scss link colors
+.post-categories {
+  a.category-badge {
+    text-decoration: none !important;
+
+    // Override main.scss a { color: var(--accent-color); }
+    &:link, &:visited {
+      text-decoration: none !important;
+    }
+
+    // Specific color overrides for each badge type
+    &.bg-primary {
+      background-color: #0d6efd !important;
+      color: #ffffff !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #ffffff !important;
+      }
+    }
+
+    &.bg-success {
+      background-color: #198754 !important;
+      color: #ffffff !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #ffffff !important;
+      }
+    }
+
+    &.bg-info {
+      background-color: #0dcaf0 !important;
+      color: #000000 !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #000000 !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #000000 !important;
+      }
+    }
+
+    &.bg-warning {
+      background-color: #ffc107 !important;
+      color: #000000 !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #000000 !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #000000 !important;
+      }
+    }
+
+    &.bg-danger {
+      background-color: #dc3545 !important;
+      color: #ffffff !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #ffffff !important;
+      }
+    }
+
+    &.bg-secondary {
+      background-color: #6c757d !important;
+      color: #ffffff !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #ffffff !important;
+      }
+    }
+
+    &.bg-dark {
+      background-color: #495057 !important;
+      color: #ffffff !important;
+
+      &, &:link, &:visited, &:hover, &:focus, &:active {
+        color: #ffffff !important;
+        text-decoration: none !important;
+      }
+
+      .bi, i {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+// Fix comment input field styling - override inline styles
+.card-footer {
+  input[type="text"][placeholder="Add a comment..."] {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    color: #212529 !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    transition: all 0.2s ease !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    &:focus {
+      background-color: white !important;
+      border-color: #0d6efd !important;
+      color: #212529 !important;
+      outline: 0 !important;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15) !important;
+    }
+
+    &::placeholder {
+      color: #6c757d !important;
+      opacity: 0.8 !important;
+    }
+
+    &:hover {
+      background-color: white !important;
+      border-color: #adb5bd !important;
+      color: #212529 !important;
+    }
+  }
+
+  input[type="submit"] {
+    background-color: #0d6efd !important;
+    border: 1px solid #0d6efd !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+      background-color: #0b5ed7 !important;
+      border-color: #0a58ca !important;
+      color: white !important;
+      transform: translateY(-1px) !important;
+    }
+  }
+}
+
+
