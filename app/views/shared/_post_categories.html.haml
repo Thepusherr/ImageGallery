@@ -1,15 +1,18 @@
 - if post.categories.any?
   .post-categories.mt-2
     - post.categories.each_with_index do |category, index|
-      - badge_colors = ['primary', 'success', 'info', 'warning', 'danger', 'dark']
-      - color_class = badge_colors[category.name.hash % badge_colors.length]
+      - badge_colors = ['primary', 'success', 'info', 'warning', 'danger', 'secondary']
+      - color_class = badge_colors[category.name.hash.abs % badge_colors.length]
+      - text_color = (color_class == 'info' || color_class == 'warning') ? 'text-dark' : 'text-white'
       = link_to category_path(category),
-        class: "badge bg-#{color_class} text-decoration-none me-1 mb-1 category-badge",
-        title: "View #{category.name} category" do
-        %i.bi.bi-tag-fill.me-1
-        = category.name
+        class: "badge bg-#{color_class} #{text_color} text-decoration-none me-1 mb-1 category-badge",
+        title: "View #{category.name} category",
+        style: "color: #{(color_class == 'info' || color_class == 'warning') ? '#000000' : '#ffffff'} !important;" do
+        %i.bi.bi-tag-fill.me-1{style: "color: #{(color_class == 'info' || color_class == 'warning') ? '#000000' : '#ffffff'} !important;"}
+        %span{style: "color: #{(color_class == 'info' || color_class == 'warning') ? '#000000' : '#ffffff'} !important;"}
+          = category.name
 - else
   .post-categories.mt-2
-    %span.badge.bg-light.text-muted.border
+    %span.badge.bg-secondary.text-light.border.border-secondary
       %i.bi.bi-question-circle.me-1
       Uncategorized
