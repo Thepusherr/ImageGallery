@@ -46,8 +46,8 @@
                       %i.bi.bi-arrows-angle-expand
                     = link_to post_path(post), class: "details-link" do
                       %i.bi.bi-link-45deg
-                .gallery-info.p-2
-                  %h6.mb-1= post.title
+                .gallery-info.p-2.bg-dark.border-top.border-secondary
+                  %h6.mb-1.text-light= post.title
                   = render 'shared/post_categories', post: post
         - else
           .col-12.text-center
