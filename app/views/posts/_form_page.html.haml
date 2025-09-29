@@ -13,37 +13,37 @@
   .row
     .col-md-6
       .mb-4{"data-controller" => "image-preview", "data-image-preview-container-target" => "container"}
-        %label.form-label.fw-bold
+        %label.form-label.fw-bold.text-light
           %i.fas.fa-image.me-2
           Post Image *
-        = form.file_field :image, multiple: false, class: "form-control", required: true, accept: "image/*", "data-image-preview-input-target" => "input"
-        .form-text Choose an image for your post
-        
+        = form.file_field :image, multiple: false, class: "form-control bg-dark text-light border-secondary", required: true, accept: "image/*", "data-image-preview-input-target" => "input"
+        .form-text.text-muted Choose an image for your post
+
       .mb-4
-        %label.form-label.fw-bold
+        %label.form-label.fw-bold.text-light
           %i.fas.fa-map-marker-alt.me-2
           Location
-        = form.text_field :title, placeholder: "Add location (optional)", class: "form-control"
-        .form-text Where was this photo taken?
+        = form.text_field :title, placeholder: "Add location (optional)", class: "form-control bg-dark text-light border-secondary"
+        .form-text.text-muted Where was this photo taken?
 
     .col-md-6
       .mb-4
         .d-flex.align-items-center.mb-3.user-info
           = image_tag current_user.avatar.attached? ? current_user.avatar : asset_path("default-avatar.png"), class: "img-thumbnail rounded-circle me-3", style: "width: 50px; height: 50px; object-fit: cover;"
           %div
-            %h6.mb-0.fw-bold
+            %h6.mb-0.fw-bold.text-light
               = current_user.name
               = current_user.surname
             %small.text-muted Posting as
-        
-        %label.form-label.fw-bold
+
+        %label.form-label.fw-bold.text-light
           %i.fas.fa-pen.me-2
           Caption
-        = form.text_area :text, rows: 6, placeholder: "Write a caption...", class: "form-control", style: "resize: vertical;"
-        .form-text Tell your story...
+        = form.text_area :text, rows: 6, placeholder: "Write a caption...", class: "form-control bg-dark text-light border-secondary", style: "resize: vertical;"
+        .form-text.text-muted Tell your story...
 
       .mb-4
-        %label.form-label.fw-bold
+        %label.form-label.fw-bold.text-light
           %i.fas.fa-tags.me-2
           Categories
         .row
@@ -52,7 +52,7 @@
               = form.collection_check_boxes :category_ids, [category], :id, :name do |b|
                 .form-check
                   = b.check_box(class: "form-check-input")
-                  = b.label(class: "form-check-label")
+                  = b.label(class: "form-check-label text-light")
 
   .row.mt-4
     .col-12

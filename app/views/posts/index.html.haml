@@ -6,7 +6,7 @@
     .row
       .col-12
         .d-flex.justify-content-between.align-items-center.mb-4
-          %h1.display-4
+          %h1.display-4.text-light
             - if @selected_user
               = "#{@selected_user.name || @selected_user.email}'s Posts"
             - else
@@ -17,20 +17,20 @@
           .row.gy-4
             - @posts.each do |post|
               .col-xl-3.col-lg-4.col-md-6
-                .card.h-100
+                .card.h-100.bg-dark.border-secondary
                   - if post.image.present?
                     = image_tag post.image.url, class: "card-img-top", style: "height: 200px; object-fit: cover;"
                   .card-body
-                    %h5.card-title= post.title
-                    %p.card-text= truncate(post.text, length: 100)
+                    %h5.card-title.text-light= post.title
+                    %p.card-text.text-light= truncate(post.text, length: 100)
                     = render 'shared/post_categories', post: post
                     .mt-2
                       %small.text-muted
                         by
-                        = link_to post.user.name || post.user.email, user_path(post.user)
+                        = link_to post.user.name || post.user.email, user_path(post.user), class: "text-info"
                         = time_ago_in_words(post.created_at)
                         ago
-                  .card-footer.bg-transparent
+                  .card-footer.bg-dark.border-secondary
                     .d-flex.justify-content-between
                       = link_to 'View', post, class: "btn btn-sm btn-outline-primary"
                       .btn-group{role: "group"}
@@ -41,7 +41,7 @@
                             class: "btn btn-sm btn-outline-danger"
         - else
           .text-center.py-5
-            %h3.text-muted No posts found
+            %h3.text-light No posts found
             %p.text-muted
               - if @selected_user
                 = "#{@selected_user.name || @selected_user.email} hasn't posted anything yet."
