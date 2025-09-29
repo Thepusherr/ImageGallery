@@ -1,4 +1,4 @@
-.container#main-container.py-5
+.container#main-container.py-5.profile-form
   .row.justify-content-center
     .col-lg-8.col-xl-6
       .card.bg-dark.border-secondary
@@ -6,7 +6,7 @@
           %h2.mb-0.text-light
             = t('user.edit_profile')
         .card-body.p-4
-          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'profile-form'}) do |f|
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put}) do |f|
             = render "devise/shared/error_messages", resource: resource
 
             / Avatar Upload Section
@@ -19,7 +19,7 @@
                     %i.bi.bi-person-fill.fs-1.text-muted
               .avatar-upload-wrapper
                 = f.file_field :avatar, class: 'avatar-input d-none', direct_upload: true, id: 'avatar-input', accept: 'image/*'
-                %label.btn.avatar-upload-btn{for: 'avatar-input'}
+                %label.btn.btn-primary.avatar-upload-btn{for: 'avatar-input'}
                   %i.bi.bi-camera.me-2
                   Choose Photo
                 %small.text-muted.d-block.mt-2
@@ -28,43 +28,43 @@
             / Personal Information
             .row.mb-3
               .col-md-6
-                = f.label :name, class: "form-label text-light"
-                = f.text_field :name, class: "form-control bg-dark text-light border-secondary", autocomplete: "name"
+                = f.label :name, class: "form-label"
+                = f.text_field :name, class: "form-control", autocomplete: "name"
               .col-md-6
-                = f.label :surname, class: "form-label text-light"
-                = f.text_field :surname, class: "form-control bg-dark text-light border-secondary", autocomplete: "surname"
+                = f.label :surname, class: "form-label"
+                = f.text_field :surname, class: "form-control", autocomplete: "surname"
 
             .mb-3
-              = f.label :email, class: "form-label text-light"
-              = f.email_field :email, class: "form-control bg-dark text-light border-secondary", autocomplete: "email"
+              = f.label :email, class: "form-label"
+              = f.email_field :email, class: "form-control", autocomplete: "email"
 
             - if devise_mapping.confirmable? && resource.pending_reconfirmation?
               .alert.alert-info.text-center
                 Currently waiting confirmation for: #{resource.unconfirmed_email}
 
             / Password Section
-            %hr.border-secondary.my-4
-            %h5.text-light.mb-3 Change Password
+            %hr.my-4
+            %h5.mb-3 Change Password
 
             .mb-3
-              = f.label :password, class: "form-label text-light"
-              %small.text-info.ms-2 (leave blank if you don't want to change it)
-              = f.password_field :password, class: "form-control bg-dark text-light border-secondary", autocomplete: "new-password"
+              = f.label :password, class: "form-label"
+              %small.text-muted.ms-2 (leave blank if you don't want to change it)
+              = f.password_field :password, class: "form-control", autocomplete: "new-password"
               - if @minimum_password_length
-                %small.text-warning.mt-1.d-block
+                %small.text-muted.mt-1.d-block
                   %i.bi.bi-info-circle.me-1
                   Minimum #{@minimum_password_length} characters
 
             .mb-3
-              = f.label :password_confirmation, class: "form-label text-light"
-              = f.password_field :password_confirmation, class: "form-control bg-dark text-light border-secondary", autocomplete: "new-password"
+              = f.label :password_confirmation, class: "form-label"
+              = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password"
 
             .mb-4
-              = f.label :current_password, class: "form-label text-light"
-              %small.text-info.ms-2
+              = f.label :current_password, class: "form-label"
+              %small.text-muted.ms-2
                 %i.bi.bi-shield-lock.me-1
                 we need your current password to confirm your changes
-              = f.password_field :current_password, class: "form-control bg-dark text-light border-secondary", autocomplete: "current-password"
+              = f.password_field :current_password, class: "form-control", autocomplete: "current-password"
 
             / Action Buttons
             .d-grid.gap-2.mb-4
@@ -75,4 +75,4 @@
               .col-6
                 = link_to "Delete Account", registration_path(resource_name), method: :delete, data: { confirm: "Are you sure you want to delete your account? This action cannot be undone.", turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger w-100"
               .col-6
-                = link_to "Back to Profile", profile_path, class: "btn btn-outline-light w-100"
+                = link_to "Back to Profile", profile_path, class: "btn btn-outline-secondary w-100"
