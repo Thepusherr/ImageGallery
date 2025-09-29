@@ -12,28 +12,28 @@
         %li
           = link_to t('navigation.about'), home_about_path
         %li.dropdown
-          = link_to home_gallery_path, class: "active" do
+          = link_to home_gallery_path, class: (controller_name == 'home' && action_name == 'gallery') ? "active" : "" do
             %span= t('navigation.categories')
             %i.bi.bi-chevron-down.toggle-dropdown
           %ul
             - if user_signed_in?
               %li
-                = link_to t('categories.create_new'), new_category_path, class: "active"
+                = link_to t('categories.create_new'), new_category_path
               %li
                 %hr.dropdown-divider
             %li
-              = link_to t('categories.view_all'), categories_path, class: "active"
+              = link_to t('categories.view_all'), categories_path
             - if @navbar_categories&.any?
               %li
                 %hr.dropdown-divider
               - @navbar_categories.each do |category|
                 %li
-                  = link_to category.name, home_gallery_category_path(category), class: "active"
+                  = link_to category.name, home_gallery_category_path(category)
             - else
               %li
                 %hr.dropdown-divider
               %li
-                = link_to t('categories.no_categories'), home_gallery_path, class: "active"
+                = link_to t('categories.no_categories'), home_gallery_path
         %li
           = link_to t('navigation.services'), home_services_path
         %li

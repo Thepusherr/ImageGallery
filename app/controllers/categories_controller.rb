@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
         Rails.logger.debug "Fetched Categories: #{@categories.count} categories"
 
         # Simply get all categories and find images for them
-        @categories_with_images = @categories.includes(:posts).map do |category|
+        @categories_with_images = @categories.includes(:posts, :subscriptions).map do |category|
           post_with_image = category.posts.find { |post| post.image.present? }
           if post_with_image
             { category: category, image: post_with_image.image.url }

@@ -28,7 +28,7 @@ class SubscriptionsController < ApplicationController
         end
         
         format.html { redirect_to category_path(@category), notice: "You have successfully subscribed to #{@category.name}." }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("category_subscription", partial: "categories/subscription", locals: { category: @category }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("category_subscription_#{@category.id}", partial: "categories/subscription", locals: { category: @category }) }
       else
         format.html { redirect_to category_path(@category), alert: "Failed to subscribe: #{@subscription.errors.full_messages.join(', ')}" }
         format.turbo_stream { head :unprocessable_entity }
@@ -55,7 +55,7 @@ class SubscriptionsController < ApplicationController
         end
         
         format.html { redirect_to category_path(@category), notice: "You have unsubscribed from #{@category.name}." }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("category_subscription", partial: "categories/subscription", locals: { category: @category }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("category_subscription_#{@category.id}", partial: "categories/subscription", locals: { category: @category }) }
       else
         format.html { redirect_to category_path(@category), alert: "Failed to unsubscribe." }
         format.turbo_stream { head :unprocessable_entity }
