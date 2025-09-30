@@ -22,8 +22,8 @@
       .mb-4
         %label.form-label.fw-bold.text-light
           %i.fas.fa-map-marker-alt.me-2
-          Location
-        = form.text_field :title, placeholder: "Add location (optional)", class: "form-control bg-dark text-light border-secondary"
+          Location *
+        = form.text_field :title, placeholder: "Add location", class: "form-control bg-dark text-light border-secondary", required: true
         .form-text.text-muted Where was this photo taken?
 
     .col-md-6
@@ -46,13 +46,21 @@
         %label.form-label.fw-bold.text-light
           %i.fas.fa-tags.me-2
           Categories
-        .row
-          - Category.all.each do |category|
-            .col-md-6.col-lg-4
-              = form.collection_check_boxes :category_ids, [category], :id, :name do |b|
-                .form-check
-                  = b.check_box(class: "form-check-input")
-                  = b.label(class: "form-check-label text-light")
+        .categories-selection
+          = form.collection_check_boxes :category_ids, Category.where(visibility: :visible), :id, :name do |b|
+            .form-check.category-option.d-inline-block
+              = b.check_box(class: "form-check-input", style: "display: none;")
+              = b.label(class: "form-check-label badge bg-secondary text-light border border-secondary me-2 mb-2 category-checkbox-label", style: "cursor: pointer; padding: 8px 12px; font-size: 0.9rem;") do
+                %i.bi.bi-tag.me-1
+                = b.text
+        .mt-2
+          %small.text-muted
+            %i.bi.bi-info-circle.me-1
+            Select categories that best describe your image. You can select multiple categories.
+        .mt-2
+          = link_to new_category_path, class: "btn btn-sm btn-outline-primary", target: "_blank" do
+            %i.bi.bi-plus-circle.me-1
+            Create New Category
 
   .row.mt-4
     .col-12

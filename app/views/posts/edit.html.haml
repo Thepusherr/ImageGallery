@@ -1,10 +1,22 @@
-.container#main-container
-  .row
-    .col-sm-12.d-flex.justify-content-center.align-items-center
-      %h1 Editing post
-      %br/
-      = render 'form', post: @post
+- content_for :title do
+  Edit Post - ImageGallery
 
-      = link_to 'Show', @post
-      \|
-      = link_to 'Back', posts_path
+%main.main
+  .container.mt-4.py-5#main-container
+    .row.justify-content-center
+      .col-lg-10.col-xl-8
+        .card.bg-dark.border-secondary.shadow-lg
+          .card-header.bg-dark.border-secondary
+            %h2.mb-0.text-light
+              %i.fas.fa-edit.me-2
+              Edit Post
+          .card-body.p-4
+            = render 'form', post: @post
+          .card-footer.bg-dark.border-secondary
+            .d-flex.justify-content-between.align-items-center
+              = link_to @post, class: "btn btn-outline-secondary" do
+                %i.fas.fa-eye.me-2
+                View Post
+              = link_to posts_path, class: "btn btn-outline-secondary" do
+                %i.fas.fa-arrow-left.me-2
+                Back to Posts

@@ -1,47 +1,53 @@
-.card.h-100{ id: "#{dom_id post}"}
-  .card-header.bg-white
-    .d-flex.justify-content-between
-      %div
-        = link_to post.user, class: 'a-decoration-none' do
+.card.h-100.bg-dark.border-secondary{ id: "#{dom_id post}"}
+  .card-header.bg-dark.border-secondary
+    .d-flex.justify-content-between.align-items-center
+      %div.d-flex.align-items-center
+        = link_to post.user, class: 'text-decoration-none' do
           - if post.user.avatar.attached?
-            = image_tag post.user.avatar, class: 'img-thumbnail rounded-circle', style: 'width: 10%'
+            = image_tag post.user.avatar, class: 'rounded-circle me-2', style: 'width: 32px; height: 32px; object-fit: cover;'
           - else
-            = image_tag asset_path('default-avatar.png'), class: 'img-thumbnail rounded-circle', style: 'width: 10%'
-        = link_to post.user, class: 'a-decoration-none' do
-          %span.fw-bold.mx-2
+            = image_tag asset_path('default-avatar.png'), class: 'rounded-circle me-2', style: 'width: 32px; height: 32px; object-fit: cover;'
+        = link_to post.user, class: 'text-decoration-none' do
+          %span.fw-bold.text-light
             = post.user.name
             = post.user.surname
       %div
         - if current_user == post.user
           .dropdown
-            %a.text-dark.fs-4{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button", style: "text-decoration:none"}
-              \...
-            %ul.dropdown-menu
+            %a.text-light.fs-5{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button", style: "text-decoration:none"}
+              %i.fas.fa-ellipsis-h
+            %ul.dropdown-menu.dropdown-menu-dark.dropdown-menu-end
               %li
-                = button_to 'Delete post', post, method: :delete, class: 'dropdown-item'
-  .card-body
-    #post.carousel-inner
-      - if post.image.present?
-        = image_tag post.image.medium.url, class: 'd-block w-100', style: 'max-height: 100%; object-fit: cover;'
-    = render "posts/post_actions", post: post
-    %p.card-text
-      %span.fw-bold
-        = post.user.name
-        = post.user.surname
-      = post.text
+                = button_to 'Delete post', post, method: :delete, class: 'dropdown-item text-danger', data: { turbo_confirm: 'Are you sure?' }
+  .card-body.bg-dark.p-0
+    - if post.image.present?
+      = image_tag post.image.medium.url, class: 'd-block w-100', style: 'object-fit: contain; max-height: 400px;'
+    .p-3
+      = render "posts/post_actions", post: post
+
+      = render 'shared/post_categories', post: post
+
+      %p.card-text.mb-2.mt-2
+        %span.fw-bold.text-light
+          = post.user.name
+          = post.user.surname
+        %span.text-light= post.text
+
+      %small.text-secondary.d-block.mb-2
+        = time_ago_in_words(post.created_at)
+        ago
+
       = render "posts/post_comments", post: post
-    = render 'shared/post_categories', post: post
-    %small.text-muted= time_ago_in_words(post.created_at)
-    = render "posts/comment_form", post: post
+      = render "posts/comment_form", post: post
 
 / Modal для комментариев (вне области Turbo Stream обновлений)
 .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_commentsModal", id: "post#{post.id}_commentsModal", tabindex: "-1"}
   .modal-dialog
-    .modal-content
-      .modal-header
-        %h1.modal-title.fs-5{id: "post#{post.id}_commentsModal", style: "color: #000 !important;"} Post Comments
-        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
-      .modal-body{id: "post#{post.id}_modal_body"}
+    .modal-content.bg-dark.text-light
+      .modal-header.border-secondary
+        %h1.modal-title.fs-5.text-light{id: "post#{post.id}_commentsModal"} Post Comments
+        %button.btn-close.btn-close-white{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
+      .modal-body.bg-dark{id: "post#{post.id}_modal_body"}
         .d-flex.flex-column.gap-3
           - Comment.where(post: post).order(:created_at).each do |comment|
             = render "posts/model_comment", comment: comment

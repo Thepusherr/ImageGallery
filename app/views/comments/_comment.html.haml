@@ -1,4 +1,10 @@
-%div.comment
-  %strong= comment.user.name
-  %p= comment.text
-  %small= time_ago_in_words(comment.created_at) + " ago"
+%div.comment.mb-3.pb-3.border-bottom.border-secondary
+  .d-flex.align-items-start
+    = image_tag comment.user.avatar.attached? ? comment.user.avatar : asset_path("default-avatar.png"), class: "rounded-circle me-2 flex-shrink-0", style: "width: 32px; height: 32px; object-fit: cover;"
+    %div.flex-grow-1{style: "min-width: 0;"}
+      %p.mb-1{style: "word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;"}
+        %strong.me-2.text-light= comment.user.name || comment.user.email
+        %span.text-light= comment.text
+      %small.text-secondary
+        = time_ago_in_words(comment.created_at)
+        ago
