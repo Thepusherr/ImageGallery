@@ -335,7 +335,9 @@
 // Keep dark theme for all pages - remove white background override
 // Posts index page dark theme
 body.posts-controller.index-action,
-body.categories-controller.index-action {
+body.categories-controller.index-action,
+body.sessions-controller.new-action,
+body.sessions-controller.create-action {
   .main {
     background: var(--background-color) !important;
     color: var(--text-color) !important;
@@ -383,6 +385,57 @@ body.categories-controller.index-action {
 }
 
 // Content area fixes removed - using dark theme everywhere
+
+// Devise forms dark theme
+body.sessions-controller,
+body.registrations-controller,
+body.passwords-controller {
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  .form-control {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border: 1px solid #6c757d !important;
+
+    &:focus {
+      background-color: #212529 !important;
+      color: #f8f9fa !important;
+      border-color: #0d6efd !important;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    }
+
+    &::placeholder {
+      color: #6c757d !important;
+    }
+  }
+
+  .form-check-input {
+    background-color: #212529 !important;
+    border-color: #6c757d !important;
+
+    &:checked {
+      background-color: #0d6efd !important;
+      border-color: #0d6efd !important;
+    }
+
+    &:focus {
+      border-color: #0d6efd !important;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    }
+  }
+
+  .devise-links {
+    .btn-link {
+      text-decoration: none !important;
+
+      &:hover {
+        text-decoration: underline !important;
+      }
+    }
+  }
+}
 
 // Category form fixes - keep dark theme but ensure proper styling
 body.categories-controller.new-action,

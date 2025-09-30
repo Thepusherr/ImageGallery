@@ -25,14 +25,14 @@
         = render 'shared/hexagon_gallery', images: demo_images, size: '100px', css_class: 'size-medium'
 
 .container
-  .row
+  .row.g-3
     -# - if user_signed_in?
       -# = render "modals/image_comments"
-    .div.d-flex.justify-content-center{ :style => "font-size: 1rem;" }
+    .col-12.d-flex.justify-content-center{ :style => "font-size: 1rem;" }
       - if @posts.respond_to?(:total_pages)
         = paginate @posts
     - @posts.each do |post|
-      .col-2.justify-content-center.m-1
+      .col-12.col-sm-6.col-md-4.col-lg-3
         = render 'posts/post', post: post
 
 -# Glowing border sections
