@@ -308,23 +308,23 @@
     color: #ffffff !important;
   }
 
-  .btn-outline-light {
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light {
     color: #f8f9fa !important;
     border-color: #f8f9fa !important;
     background-color: transparent !important;
   }
 
-  .btn-outline-light:hover,
-  .btn-outline-light:focus,
-  .btn-outline-light:active,
-  .btn-outline-light.show {
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:hover,
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:focus,
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:active,
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light.show {
     background-color: rgba(248, 249, 250, 0.1) !important;
     color: #f8f9fa !important;
     border-color: #f8f9fa !important;
   }
 
-  .btn-outline-light:not(:disabled):not(.disabled):active,
-  .btn-outline-light:not(:disabled):not(.disabled).active {
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:not(:disabled):not(.disabled):active,
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:not(:disabled):not(.disabled).active {
     background-color: rgba(248, 249, 250, 0.1) !important;
     color: #f8f9fa !important;
     border-color: #f8f9fa !important;
@@ -564,7 +564,7 @@
 
   /* Fix comment icon - specific styles */
   a[data-bs-toggle="modal"] i.bi-chat {
-    color:rgb(0, 0, 0) !important;
+    color: #ffffff !important;
     transition: color 0.3s !important;
     font-size: 1.25rem !important;
     vertical-align: middle !important;
@@ -574,6 +574,48 @@
 
   a[data-bs-toggle="modal"]:hover i.bi-chat {
     color: #27a776 !important;
+  }
+
+  /* Comment toggle icon styles */
+  a[data-bs-toggle="collapse"] i.bi-chat {
+    color: #ffffff !important;
+    transition: color 0.3s !important;
+    vertical-align: middle !important;
+    display: inline-block !important;
+    font-family: "bootstrap-icons" !important;
+  }
+
+  a[data-bs-toggle="collapse"]:hover i.bi-chat {
+    color: #27a776 !important;
+  }
+
+  /* Chevron animation */
+  i.bi-chevron-down, i.bi-chevron-up {
+    transition: transform 0.3s ease !important;
+  }
+
+  /* Custom scrollbar for comments section */
+  .collapse[id*="commentsCollapse"] > div {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+  }
+
+  .collapse[id*="commentsCollapse"] > div::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .collapse[id*="commentsCollapse"] > div::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .collapse[id*="commentsCollapse"] > div::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .collapse[id*="commentsCollapse"] > div::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
   }
 
   /* Header buttons same height */
@@ -763,6 +805,81 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
+  /* Devise forms - card with visible border and backgrounds */
+  body.sessions-controller .card.bg-dark.border-secondary,
+  body.registrations-controller .card.bg-dark.border-secondary,
+  body.passwords-controller .card.bg-dark.border-secondary {
+    border: 1px solid #6c757d !important;
+    background-color: #212529 !important;
+  }
+
+  body.sessions-controller .card-header.bg-dark.border-secondary,
+  body.registrations-controller .card-header.bg-dark.border-secondary,
+  body.passwords-controller .card-header.bg-dark.border-secondary {
+    border-bottom: 1px solid #6c757d !important;
+    background-color: #212529 !important;
+  }
+
+  body.sessions-controller .card-body,
+  body.registrations-controller .card-body,
+  body.passwords-controller .card-body {
+    background-color: #212529 !important;
+  }
+
+  /* Post show page - comment input field */
+  body.posts-controller.show-action input[type="text"][placeholder*="comment"] {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border-color: #6c757d !important;
+    -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+    -webkit-text-fill-color: #f8f9fa !important;
+  }
+
+  body.posts-controller.show-action input[type="text"][placeholder*="comment"]:focus {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border-color: #0d6efd !important;
+    -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+    -webkit-text-fill-color: #f8f9fa !important;
+  }
+
+  /* Post show page - links in post actions */
+  body.posts-controller.show-action a.text-light,
+  body.posts-controller.show-action a.text-light:hover,
+  body.posts-controller.show-action a.text-light:focus,
+  body.posts-controller.show-action a.text-light:active {
+    color: #f8f9fa !important;
+    text-decoration: none !important;
+  }
+
+  /* Post comment links - keep white color on hover */
+  a.post-comment-link,
+  a.post-comment-link:hover,
+  a.post-comment-link:focus,
+  a.post-comment-link:active,
+  a.post-comment-link:visited {
+    color: #f8f9fa !important;
+    text-decoration: none !important;
+  }
+
+  /* Category checkbox labels - interactive badges */
+  .category-checkbox-label {
+    transition: all 0.3s ease !important;
+  }
+
+  .category-checkbox-label:hover {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3) !important;
+  }
+
+  .form-check-input:checked + .category-checkbox-label {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #ffffff !important;
+  }
+
   /* Button styles */
   .btn-success {
     background-color: var(--accent-color) !important;
@@ -802,14 +919,14 @@
     color: #ffffff !important;
   }
 
-  .btn-outline-light {
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light {
     border-color: rgba(255, 255, 255, 0.4) !important;
     color: #ffffff !important;
     font-weight: 500 !important;
     transition: all 0.3s ease !important;
   }
 
-  .btn-outline-light:hover {
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:hover {
     background-color: rgba(255, 255, 255, 0.15) !important;
     border-color: #ffffff !important;
     color: #ffffff !important;
@@ -940,6 +1057,102 @@
     color: rgba(255, 255, 255, 0.6) !important;
   }
 
+  /* Devise sessions/login page - dark theme inputs */
+  body.sessions-controller .form-control,
+  body.sessions-controller input[type="email"],
+  body.sessions-controller input[type="password"],
+  body.registrations-controller .form-control,
+  body.registrations-controller input[type="text"],
+  body.registrations-controller input[type="email"],
+  body.registrations-controller input[type="password"],
+  body.passwords-controller .form-control,
+  body.passwords-controller input[type="email"],
+  body.passwords-controller input[type="password"] {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border: 1px solid #6c757d !important;
+    -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+    -webkit-text-fill-color: #f8f9fa !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+
+  body.sessions-controller .form-control:focus,
+  body.sessions-controller input[type="email"]:focus,
+  body.sessions-controller input[type="password"]:focus,
+  body.registrations-controller .form-control:focus,
+  body.registrations-controller input[type="text"]:focus,
+  body.registrations-controller input[type="email"]:focus,
+  body.registrations-controller input[type="password"]:focus,
+  body.passwords-controller .form-control:focus,
+  body.passwords-controller input[type="email"]:focus,
+  body.passwords-controller input[type="password"]:focus {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    -webkit-box-shadow: 0 0 0 1000px #212529 inset, 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    -webkit-text-fill-color: #f8f9fa !important;
+  }
+
+  body.sessions-controller .form-control::placeholder,
+  body.sessions-controller input::placeholder,
+  body.registrations-controller .form-control::placeholder,
+  body.registrations-controller input::placeholder,
+  body.passwords-controller .form-control::placeholder,
+  body.passwords-controller input::placeholder {
+    color: #6c757d !important;
+  }
+
+  /* Fix custom file upload button */
+  .custom-file-upload-btn {
+    background-color: #FFD700 !important;
+    color: #000000 !important;
+    border: 2px solid #FFD700 !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    display: block !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+  }
+
+  .custom-file-upload-btn:hover {
+    background-color: #FFC107 !important;
+    border-color: #FFC107 !important;
+    color: #000000 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
+  }
+
+  /* Fix outline-light buttons in devise forms - same as subscription buttons */
+  body.sessions-controller .btn-outline-light,
+  body.sessions-controller button.btn-outline-light,
+  body.registrations-controller .btn-outline-light,
+  body.registrations-controller button.btn-outline-light,
+  body.passwords-controller .btn-outline-light,
+  body.passwords-controller button.btn-outline-light,
+  .devise-links .btn-outline-light,
+  .devise-links button.btn-outline-light {
+    border: 2px solid transparent !important;
+    background-color: transparent !important;
+    color: #f8f9fa !important;
+  }
+
+  body.sessions-controller .btn-outline-light:hover,
+  body.sessions-controller button.btn-outline-light:hover,
+  body.registrations-controller .btn-outline-light:hover,
+  body.registrations-controller button.btn-outline-light:hover,
+  body.passwords-controller .btn-outline-light:hover,
+  body.passwords-controller button.btn-outline-light:hover,
+  .devise-links .btn-outline-light:hover,
+  .devise-links button.btn-outline-light:hover {
+    background-color: transparent !important;
+    border: 2px solid #dc3545 !important;
+    color: #f8f9fa !important;
+  }
+
   /* Fix Update button specifically */
   .actions input[type="submit"][value="Update"] {
     background-color: var(--accent-color) !important;
@@ -974,8 +1187,8 @@
     color: #ffffff !important;
   }
 
-  /* More specific selector for delete button - exclude like buttons */
-  div button[type="submit"]:not([id*="likeBtn"]) {
+  /* More specific selector for delete button - exclude like buttons and OAuth buttons */
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) div button[type="submit"]:not([id*="likeBtn"]) {
     background-color: none !important;
     color: #dc3545 !important;
     border: 1px solid #ffffff !important;
@@ -986,7 +1199,7 @@
     margin-top: 10px !important;
   }
 
-  div button[type="submit"]:not([id*="likeBtn"]):hover {
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) div button[type="submit"]:not([id*="likeBtn"]):hover {
     background-color: #ffffff !important;
     border-color: #c82333 !important;
   }
@@ -1013,15 +1226,20 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
   }
 
-  /* Fix Sign In button */
-  .header-social-links .btn-outline-light {
-    border-color: rgba(255, 255, 255, 0.5) !important;
+  /* Fix Sign In button and language switcher in header - must be after Devise rules */
+  header .header-social-links .btn-outline-light,
+  header .header-social-links button.btn-outline-light,
+  header .header-social-links a.btn-outline-light {
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    background-color: transparent !important;
     color: #ffffff !important;
   }
 
-  .header-social-links .btn-outline-light:hover {
+  header .header-social-links .btn-outline-light:hover,
+  header .header-social-links button.btn-outline-light:hover,
+  header .header-social-links a.btn-outline-light:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
-    border-color: #ffffff !important;
+    border: 1px solid #ffffff !important;
     color: #ffffff !important;
   }
 

@@ -2,16 +2,28 @@
   - if defined?(error) && error.present?
     .alert.alert-danger= error
   - comments_count = Comment.where(post: post).count
+
+  -# Разделитель между временем поста и комментариями
   - if comments_count > 0
-    %a{"data-controller" => "modal", "data-action" => "click->modal#open", "data-bs-target" => "#post#{post.id}_commentsModal", href: "#", style: "text-decoration: none; color: #6c757d !important;"}
-      %small.text-muted{style: "color: #6c757d !important;"}
-        View all #{pluralize(comments_count, "comments")}
-  -# Показываем последние 5 комментариев
-  - recent_comments = Comment.where(post: post).order(:created_at).last(5)
-  - recent_comments.each do |comment|
-    %p.card-text.m-0{style: "color: #000 !important;"}
-      = link_to comment.user, class: "a-decoration-none", data: {turbo: false}, style: "color: #000 !important;" do
-        %span.fw-bold{style: "color: #000 !important;"}
-          = comment.user.name
-          = comment.user.surname
-      = comment.text
+    %hr.my-3{style: "border-color: rgba(255, 255, 255, 0.1);"}
+
+    -# Кнопка для скрытия/раскрытия комментариев
+    %div{"data-controller" => "comments-toggle"}
+      %a.d-flex.align-items-center.gap-2{"data-bs-toggle" => "collapse", "data-bs-target" => "#post#{post.id}commentsCollapse", "data-action" => "click->comments-toggle#toggle", href: "#", style: "text-decoration: none;", "aria-expanded" => "false", "aria-controls" => "post#{post.id}commentsCollapse"}
+        %i.bi.bi-chat.text-light{style: "font-size: 1.1rem;"}
+        %small.text-secondary
+          View all #{pluralize(comments_count, "comments")}
+        %i.bi.bi-chevron-down.text-secondary.ms-auto{"data-comments-toggle-target" => "chevron", style: "font-size: 0.8rem;"}
+
+    -# Сворачиваемая область с комментариями
+    .collapse{id: "post#{post.id}commentsCollapse"}
+      .mt-3{style: "max-height: 400px; overflow-y: auto;"}
+        -# Показываем ВСЕ комментарии
+        - all_comments = Comment.where(post: post).order(:created_at)
+        - all_comments.each do |comment|
+          %p.card-text.m-0.mb-2{style: "word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;"}
+            = link_to comment.user, class: "text-decoration-none text-light", data: {turbo: false} do
+              %span.fw-bold
+                = comment.user.name
+                = comment.user.surname
+            %span.text-light= comment.text
