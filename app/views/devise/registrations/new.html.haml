@@ -1,21 +1,39 @@
-.container#main-container
-  .col-sm-12.d-flex.justify-content-center.align-items-center.min-vw-50
-    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: 'content-container' }) do |f|
-      %h2.text-center.mb-4 Sign up
-      = render "devise/shared/error_messages", resource: resource
-      .form-group.mb-4
-        %label{ for: 'avatar', class: 'form-label custom-file-upload-btn' } Upload profile photo
-        = f.file_field :avatar, id: 'avatar', class: 'form-control-file', style: 'display: none;', direct_upload: true
-      .form-group.mb-4
-        = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', placeholder: :name
-      .form-group.mb-4
-        = f.text_field :surname, autocomplete: "surname", class: 'form-control', placeholder: :surname
-      .form-group.mb-4
-        = f.email_field :email, autocomplete: "email", class: 'form-control', placeholder: :email
-      .form-group.mb-4
-        = f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: :password
-      .form-group.mb-4
-        = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: :password_confirmation
-      = f.submit "Sign up", class: "sign-up-button"
-      %br/
-      = render "devise/shared/links"
+%main.main
+  .container#main-container.py-5
+    .row.justify-content-center
+      .col-lg-6.col-xl-5
+        .card.bg-dark.border-secondary.shadow-lg
+          .card-header.bg-dark.border-secondary.text-center.py-4
+            %h2.mb-0.text-light Sign up
+          .card-body.p-4
+            = render "devise/shared/error_messages", resource: resource
+            = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+              .form-group.mb-4
+                %label{ for: 'avatar', class: 'form-label custom-file-upload-btn' } Upload profile photo
+                = f.file_field :avatar, id: 'avatar', class: 'form-control-file', style: 'display: none;', direct_upload: true
+
+              .form-group.mb-4
+                = f.label :name, class: "form-label text-light"
+                = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control bg-dark text-light border-secondary', placeholder: "Enter your name"
+
+              .form-group.mb-4
+                = f.label :surname, class: "form-label text-light"
+                = f.text_field :surname, autocomplete: "surname", class: 'form-control bg-dark text-light border-secondary', placeholder: "Enter your surname"
+
+              .form-group.mb-4
+                = f.label :email, class: "form-label text-light"
+                = f.email_field :email, autocomplete: "email", class: 'form-control bg-dark text-light border-secondary', placeholder: "Enter your email"
+
+              .form-group.mb-4
+                = f.label :password, class: "form-label text-light"
+                = f.password_field :password, autocomplete: "new-password", class: 'form-control bg-dark text-light border-secondary', placeholder: "Enter your password"
+
+              .form-group.mb-4
+                = f.label :password_confirmation, class: "form-label text-light"
+                = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control bg-dark text-light border-secondary', placeholder: "Confirm your password"
+
+              .d-grid.mb-3
+                = f.submit "Sign up", class: "btn btn-primary btn-lg"
+
+            .text-center.mt-4
+              = render "devise/shared/links"

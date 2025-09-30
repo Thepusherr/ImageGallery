@@ -1,28 +1,33 @@
-%h2 Log in
+%main.main
+  .container#main-container.py-5
+    .row.justify-content-center
+      .col-lg-6.col-xl-5
+        .card.bg-dark.border-secondary.shadow-lg
+          .card-header.bg-dark.border-secondary.text-center.py-4
+            %h2.mb-0.text-light Log in
+          .card-body.p-4
+            = form_for(resource || User.new, as: resource_name, url: session_path(resource_name)) do |f|
+              .form-group.mb-4
+                = f.label :email, class: "form-label text-light"
+                = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control bg-dark text-light border-secondary", placeholder: "Enter your email", style: "background-color: #212529 !important; color: #f8f9fa !important; border-color: #6c757d !important;"
 
-= form_for(resource || User.new, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+              .form-group.mb-4
+                = f.label :password, class: "form-label text-light"
+                = f.password_field :password, autocomplete: "current-password", class: "form-control bg-dark text-light border-secondary", placeholder: "Enter your password", style: "background-color: #212529 !important; color: #f8f9fa !important; border-color: #6c757d !important;"
 
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
+              - if devise_mapping.rememberable?
+                .form-check.mb-4
+                  = f.check_box :remember_me, class: "form-check-input bg-dark border-secondary"
+                  = f.label :remember_me, class: "form-check-label text-light"
 
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
+              - if defined?(@recaptcha_required) && @recaptcha_required
+                .mb-4
+                  .alert.alert-warning.bg-dark.border-warning.text-warning
+                    = t('devise.failure.recaptcha_required', default: 'Please complete the reCAPTCHA verification below.')
+                  = recaptcha_tags
 
-  - if defined?(@recaptcha_required) && @recaptcha_required
-    .field
-      .alert.alert-warning
-        = t('devise.failure.recaptcha_required', default: 'Please complete the reCAPTCHA verification below.')
-      = recaptcha_tags
+              .d-grid.mb-3
+                = f.submit "Log in", class: "btn btn-primary btn-lg"
 
-  .actions
-    = f.submit "Log in"
-
-= render "devise/shared/links"
+            .text-center.mt-4
+              = render "devise/shared/links"
