@@ -881,6 +881,48 @@
   }
 
   /* Button styles */
+  /* Primary button - use accent color (green) instead of blue, except for auth pages */
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary {
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:hover,
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:focus,
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:active {
+    background-color: #1e8a63 !important;
+    border-color: #1e8a63 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(39, 167, 118, 0.4) !important;
+  }
+
+  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:disabled {
+    background-color: rgba(39, 167, 118, 0.5) !important;
+    border-color: rgba(39, 167, 118, 0.5) !important;
+    opacity: 0.6 !important;
+  }
+
+  /* Keep default blue for auth pages (sign in, sign up, password reset) */
+  body.sessions-controller .btn-primary,
+  body.registrations-controller .btn-primary,
+  body.passwords-controller .btn-primary {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    color: #ffffff !important;
+  }
+
+  body.sessions-controller .btn-primary:hover,
+  body.registrations-controller .btn-primary:hover,
+  body.passwords-controller .btn-primary:hover {
+    background-color: #0b5ed7 !important;
+    border-color: #0a58ca !important;
+  }
+
   .btn-success {
     background-color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
@@ -1101,6 +1143,58 @@
   body.passwords-controller .form-control::placeholder,
   body.passwords-controller input::placeholder {
     color: #6c757d !important;
+  }
+
+  /* Fix browser validation styling - keep text white even with invalid state */
+  body.sessions-controller .form-control:invalid,
+  body.sessions-controller input:invalid,
+  body.registrations-controller .form-control:invalid,
+  body.registrations-controller input:invalid,
+  body.passwords-controller .form-control:invalid,
+  body.passwords-controller input:invalid {
+    color: #f8f9fa !important;
+    -webkit-text-fill-color: #f8f9fa !important;
+    background-color: #212529 !important;
+    -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+  }
+
+  /* Fix autofill styling - force white text color */
+  body.sessions-controller input:-webkit-autofill,
+  body.sessions-controller input:-webkit-autofill:hover,
+  body.sessions-controller input:-webkit-autofill:focus,
+  body.sessions-controller input:-webkit-autofill:active,
+  body.registrations-controller input:-webkit-autofill,
+  body.registrations-controller input:-webkit-autofill:hover,
+  body.registrations-controller input:-webkit-autofill:focus,
+  body.registrations-controller input:-webkit-autofill:active,
+  body.passwords-controller input:-webkit-autofill,
+  body.passwords-controller input:-webkit-autofill:hover,
+  body.passwords-controller input:-webkit-autofill:focus,
+  body.passwords-controller input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+    -webkit-text-fill-color: #f8f9fa !important;
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+    caret-color: #f8f9fa !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+
+  /* Additional fix for browser autocomplete dropdown selection */
+  body.sessions-controller input[type="email"],
+  body.sessions-controller input[type="password"],
+  body.registrations-controller input[type="email"],
+  body.registrations-controller input[type="password"],
+  body.passwords-controller input[type="email"],
+  body.passwords-controller input[type="password"] {
+    color-scheme: dark !important;
+  }
+
+  /* Force white text on all input states */
+  body.sessions-controller input,
+  body.registrations-controller input,
+  body.passwords-controller input {
+    color: #f8f9fa !important;
+    -webkit-text-fill-color: #f8f9fa !important;
   }
 
   /* Fix custom file upload button */

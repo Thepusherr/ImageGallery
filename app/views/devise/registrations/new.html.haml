@@ -7,7 +7,7 @@
             %h2.mb-0.text-light Sign up
           .card-body.p-4
             = render "devise/shared/error_messages", resource: resource
-            = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { novalidate: true }) do |f|
               .form-group.mb-4
                 %label{ for: 'avatar', class: 'form-label custom-file-upload-btn' } Upload profile photo
                 = f.file_field :avatar, id: 'avatar', class: 'form-control-file', style: 'display: none;', direct_upload: true

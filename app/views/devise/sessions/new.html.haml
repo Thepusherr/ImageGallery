@@ -6,14 +6,14 @@
           .card-header.bg-dark.border-secondary.text-center.py-4
             %h2.mb-0.text-light Log in
           .card-body.p-4
-            = form_for(resource || User.new, as: resource_name, url: session_path(resource_name)) do |f|
+            = form_for(resource || User.new, as: resource_name, url: session_path(resource_name), html: { novalidate: true }) do |f|
               .form-group.mb-4
                 = f.label :email, class: "form-label text-light"
-                = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control bg-dark text-light border-secondary", placeholder: "Enter your email", style: "background-color: #212529 !important; color: #f8f9fa !important; border-color: #6c757d !important;"
+                = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control bg-dark text-light border-secondary", placeholder: "Enter your email"
 
               .form-group.mb-4
                 = f.label :password, class: "form-label text-light"
-                = f.password_field :password, autocomplete: "current-password", class: "form-control bg-dark text-light border-secondary", placeholder: "Enter your password", style: "background-color: #212529 !important; color: #f8f9fa !important; border-color: #6c757d !important;"
+                = f.password_field :password, autocomplete: "current-password", class: "form-control bg-dark text-light border-secondary", placeholder: "Enter your password"
 
               - if devise_mapping.rememberable?
                 .form-check.mb-4
