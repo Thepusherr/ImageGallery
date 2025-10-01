@@ -1,10 +1,10 @@
 - if user_signed_in?
   %div{id: "category_subscription_#{category.id}"}
     - if current_user.subscribed_categories.include?(category)
-      = button_to category_subscription_path(category), method: :delete, class: "btn btn-outline-danger btn-sm w-100", data: { turbo: true } do
+      = button_to category_subscription_path(category), method: :delete, class: "btn btn-outline-danger btn-sm w-100 subscription-btn", data: { turbo: true }, style: "border-color: transparent !important; background-color: transparent !important; color: #dc3545 !important;" do
         %i.bi.bi-bell-slash.me-1
         Unsubscribe
     - else
-      = button_to category_subscription_path(category), method: :post, class: "btn btn-outline-success btn-sm w-100", data: { turbo: true } do
+      = button_to category_subscription_path(category), method: :post, class: "btn btn-outline-success btn-sm w-100 subscription-btn", data: { turbo: true }, style: "border-color: transparent !important; background-color: transparent !important; color: #198754 !important;" do
         %i.bi.bi-bell.me-1
         Subscribe
