@@ -307,19 +307,23 @@
 
     &.btn-outline-success {
       border-color: transparent !important;
+      color: #198754 !important;
 
       &:hover {
         background-color: transparent !important;
-        border-color: #dc3545 !important;
+        border-color: #198754 !important;
+        color: #198754 !important;
       }
     }
 
     &.btn-outline-danger {
       border-color: transparent !important;
+      color: #dc3545 !important;
 
       &:hover {
         background-color: transparent !important;
         border-color: #dc3545 !important;
+        color: #dc3545 !important;
       }
     }
   }
