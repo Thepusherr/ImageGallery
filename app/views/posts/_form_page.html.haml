@@ -48,9 +48,12 @@
           Categories
         .categories-selection
           = form.collection_check_boxes :category_ids, Category.where(visibility: :visible), :id, :name do |b|
+            - badge_colors = ['primary', 'success', 'info', 'warning', 'danger', 'secondary']
+            - color_class = badge_colors[b.object.name.hash.abs % badge_colors.length]
+            - text_color = (color_class == 'info' || color_class == 'warning') ? 'text-dark' : 'text-white'
             .form-check.category-option.d-inline-block
               = b.check_box(class: "form-check-input", style: "display: none;")
-              = b.label(class: "form-check-label badge bg-secondary text-light border border-secondary me-2 mb-2 category-checkbox-label", style: "cursor: pointer; padding: 8px 12px; font-size: 0.9rem;") do
+              = b.label(class: "form-check-label badge bg-#{color_class} #{text_color} border border-#{color_class} me-2 mb-2 category-checkbox-label", style: "cursor: pointer; padding: 8px 12px; font-size: 0.9rem;") do
                 %i.bi.bi-tag.me-1
                 = b.text
         .mt-2
