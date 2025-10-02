@@ -101,6 +101,11 @@ class LikesController < ApplicationController
       Rails.logger.info("User #{current_user.id} liked post #{@post.id}")
     end
 
+    # Broadcast to all users viewing this post
+    LikesChannel.broadcast_to(@post, {
+      html: render_to_string(partial: "posts/post_actions", locals: { post: @post })
+    })
+
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace("post#{@post.id}actions", partial: "posts/post_actions", locals: { post: @post }) }
       format.html { redirect_back(fallback_location: root_path) }

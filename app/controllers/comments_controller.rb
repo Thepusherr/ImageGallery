@@ -47,6 +47,12 @@ class CommentsController < ApplicationController
       @post = Post.find(@post.id)
       @post.reload
 
+      # Broadcast new comment to all users viewing this post
+      CommentsChannel.broadcast_to(@post, {
+        comments_html: render_to_string(partial: "posts/post_comments", locals: { post: @post }),
+        actions_html: render_to_string(partial: "posts/post_actions", locals: { post: @post })
+      })
+
       respond_to do |format|
         format.turbo_stream # Будет использовать create.turbo_stream.haml
         format.html { redirect_back(fallback_location: @post) }

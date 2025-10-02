@@ -3,7 +3,7 @@
   \- ImageGallery
 
 %main.main
-  .container.py-5#main-container
+  .container.py-5#main-container{"data-controller" => "likes", "data-likes-post-id-value" => @post.id}
     .row.justify-content-center
       .col-lg-8.col-xl-7
         .card.bg-dark.border-secondary.shadow-lg
@@ -78,3 +78,5 @@
             .mt-3
               %div{id: "post#{@post.id}comment_form"}
                 = render "posts/comment_form", post: @post
+
+

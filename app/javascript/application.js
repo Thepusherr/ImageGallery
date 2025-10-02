@@ -1,5 +1,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
+import "channels"
 
 console.log('Application.js loading...');
 

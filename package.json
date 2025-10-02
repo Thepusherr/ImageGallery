@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@rails/actioncable": "^8.0.300",
     "bootstrap-icons": "^1.11.3"
   }
 }
