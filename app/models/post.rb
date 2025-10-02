@@ -9,6 +9,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
+  has_many :views, dependent: :destroy
+  has_many :viewers, through: :views, source: :user
 
   validates :title, :text, :user, presence: true
   # validate_size_validation
@@ -19,6 +21,10 @@ class Post < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "image", "text", "title", "updated_at", "user_id"]
+  end
+
+  def views_count
+    views.count
   end
 
   private

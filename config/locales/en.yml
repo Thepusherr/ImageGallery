@@ -126,6 +126,22 @@ en:
       one: "like"
       other: "likes"
 
+  # ActiveSupport pluralization
+  activerecord:
+    models:
+      like:
+        zero: "likes"
+        one: "like"
+        other: "likes"
+      comment:
+        zero: "comments"
+        one: "comment"
+        other: "comments"
+      view:
+        zero: "views"
+        one: "view"
+        other: "views"
+
   # Language switcher
   language:
     english: "English"

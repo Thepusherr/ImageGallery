@@ -46,8 +46,13 @@ Rails.application.routes.draw do
   resources :posts do
     resources :likes, only: [:create]
     resources :comments, only: [:create]
+    member do
+      get :time_update
+    end
     collection do
       get :uncategorized
+      post :track_view
+      post :update_times
     end
   end
   resources :categories, param: :id do

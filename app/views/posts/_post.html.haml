@@ -33,9 +33,7 @@
           = post.user.surname
         %span.text-light= post.text
 
-      %small.text-secondary.d-block.mb-2
-        = time_ago_in_words(post.created_at)
-        ago
+      = render "posts/post_time", post: post
 
       = render "posts/post_comments", post: post
       = render "posts/comment_form", post: post

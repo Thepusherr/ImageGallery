@@ -101,6 +101,28 @@ uk:
       many: "лайків"
       other: "лайків"
 
+  # ActiveSupport pluralization
+  activerecord:
+    models:
+      like:
+        zero: "лайків"
+        one: "лайк"
+        few: "лайки"
+        many: "лайків"
+        other: "лайків"
+      comment:
+        zero: "коментарів"
+        one: "коментар"
+        few: "коментарі"
+        many: "коментарів"
+        other: "коментарів"
+      view:
+        zero: "переглядів"
+        one: "перегляд"
+        few: "перегляди"
+        many: "переглядів"
+        other: "переглядів"
+
   # Language switcher
   language:
     english: "English"
@@ -167,42 +189,42 @@ uk:
   # DateTime distance in words
   datetime:
     distance_in_words:
+      about_x_hours:
+        one: "близько години тому"
+        few: "близько %{count} годин тому"
+        many: "близько %{count} годин тому"
+        other: "близько %{count} годин тому"
+      x_days:
+        one: "%{count} день тому"
+        few: "%{count} дні тому"
+        many: "%{count} днів тому"
+        other: "%{count} днів тому"
       half_a_minute: "півхвилини"
       less_than_x_seconds:
-        one: "менше секунди"
-        few: "менше %{count} секунд"
-        many: "менше %{count} секунд"
-        other: "менше %{count} секунд"
+        one: "менше секунди тому"
+        few: "менше %{count} секунд тому"
+        many: "менше %{count} секунд тому"
+        other: "менше %{count} секунд тому"
       x_seconds:
-        one: "%{count} секунда"
-        few: "%{count} секунди"
-        many: "%{count} секунд"
-        other: "%{count} секунд"
+        one: "%{count} секунда тому"
+        few: "%{count} секунди тому"
+        many: "%{count} секунд тому"
+        other: "%{count} секунд тому"
       less_than_x_minutes:
-        one: "менше хвилини"
-        few: "менше %{count} хвилин"
-        many: "менше %{count} хвилин"
-        other: "менше %{count} хвилин"
+        one: "менше хвилини тому"
+        few: "менше %{count} хвилин тому"
+        many: "менше %{count} хвилин тому"
+        other: "менше %{count} хвилин тому"
       x_minutes:
-        one: "%{count} хвилина"
-        few: "%{count} хвилини"
-        many: "%{count} хвилин"
-        other: "%{count} хвилин"
-      about_x_hours:
-        one: "близько години"
-        few: "близько %{count} годин"
-        many: "близько %{count} годин"
-        other: "близько %{count} годин"
+        one: "%{count} хвилина тому"
+        few: "%{count} хвилини тому"
+        many: "%{count} хвилин тому"
+        other: "%{count} хвилин тому"
       x_hours:
-        one: "%{count} година"
-        few: "%{count} години"
-        many: "%{count} годин"
-        other: "%{count} годин"
-      x_days:
-        one: "%{count} день"
-        few: "%{count} дні"
-        many: "%{count} днів"
-        other: "%{count} днів"
+        one: "%{count} година тому"
+        few: "%{count} години тому"
+        many: "%{count} годин тому"
+        other: "%{count} годин тому"
       about_x_months:
         one: "близько місяця"
         few: "близько %{count} місяців"
@@ -228,6 +250,13 @@ uk:
         few: "майже %{count} роки"
         many: "майже %{count} років"
         other: "майже %{count} років"
+    prompts:
+      second: "секунда"
+      minute: "хвилина"
+      hour: "година"
+      day: "день"
+      month: "місяць"
+      year: "рік"
 
   # Errors
   errors:

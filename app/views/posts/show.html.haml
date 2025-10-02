@@ -53,9 +53,7 @@
 
             / Post Date
             .mt-2
-              %small.text-secondary
-                = time_ago_in_words(@post.created_at)
-                ago
+              = render "posts/post_time", post: @post
 
           / Comments Section
           .card-footer.bg-dark.border-secondary.p-3

@@ -14,6 +14,7 @@ class LocalesController < ApplicationController
 
       if request.xhr?
         translations = {
+          locale: locale,
           gallery_title: t('gallery.featured_gallery'),
           navigation: {
             home: t('navigation.home'),

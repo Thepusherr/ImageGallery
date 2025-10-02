@@ -73,6 +73,6 @@
             / Secondary Actions
             .row.g-2
               .col-6
-                = link_to "Delete Account", registration_path(resource_name), method: :delete, data: { confirm: "Are you sure you want to delete your account? This action cannot be undone.", turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger w-100"
+                = link_to "Delete Account", registration_path(resource_name), method: :delete, data: { confirm: "Are you sure you want to delete your account? This action cannot be undone.", turbo_confirm: "Are you sure?" }, class: "btn btn-hover-outline-danger w-100"
               .col-6
                 = link_to "Back to Profile", profile_path, class: "btn btn-outline-secondary w-100"

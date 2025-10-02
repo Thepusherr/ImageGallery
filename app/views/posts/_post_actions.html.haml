@@ -1,15 +1,19 @@
 %div{id: "post#{post.id}actions"}
-  .d-flex.justify-content-start.align-items-center.gap-2.mb-3.flex-wrap
+  .d-flex.justify-content-start.align-items-center.gap-1.mb-3.flex-nowrap
     = form_with url: toggle_like_path, method: :post, local: false, style: "display: inline;", id: "like-form-#{post.id}" do |f|
       = hidden_field_tag :post_id, post.id
       %button{type: "submit", style: "border:none; background:none; padding:0; cursor:pointer; line-height: 1;", id: "post#{post.id}actions-likeBtn"}
-        %i{class: "#{post.likes.find_by(user: current_user) ? "bi bi-heart-fill text-danger" : "bi bi-heart text-light"} fs-4", id: "heart-#{post.id}"}
-    %span.text-light.me-2
-      = pluralize(post.likes.count, "like")
+        %i{class: "#{post.likes.find_by(user: current_user) ? "bi bi-heart-fill text-danger" : "bi bi-heart text-light"}", id: "heart-#{post.id}", style: "font-size: 1.1rem;"}
+    %span.text-light.me-1{style: "font-size: 0.9rem;"}
+      = pluralize(post.likes.count, t("activerecord.models.like.one"), t("activerecord.models.like.other"))
     %a.post-comment-link{"data-bs-target" => "#post#{post.id}_commentsModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none; line-height: 1;"}
-      %i.bi.bi-chat.fs-5.text-light
-    %span.text-light
-      = pluralize(post.comments.count, "comment")
+      %i.bi.bi-chat.text-light{style: "font-size: 1.1rem;"}
+    %span.text-light.me-1{style: "font-size: 0.9rem;"}
+      = pluralize(post.comments.count, t("activerecord.models.comment.one"), t("activerecord.models.comment.other"))
+    %span.text-light.d-flex.align-items-center.gap-1
+      %i.bi.bi-eye.text-light{style: "font-size: 1.1rem;"}
+      %span.text-light{style: "font-size: 0.9rem;"}
+        = pluralize(post.views_count, t("activerecord.models.view.one"), t("activerecord.models.view.other"))
   %a.text-light{"data-bs-target" => "#post#{post.id}_likesModal", "data-bs-toggle" => "modal", href: "#", style: "text-decoration: none"}
   / Modal
   .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_likesModalLabel", id: "post#{post.id}_likesModal", tabindex: "-1"}

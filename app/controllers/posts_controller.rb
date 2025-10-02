@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show, :time_update]
+  before_action :set_post, only: %i[ show edit update destroy time_update ]
 
   def index
     @posts = if params[:user_id].present?
@@ -24,6 +24,41 @@ class PostsController < ApplicationController
   end
 
   def show
+    # Views are now tracked automatically via JavaScript when post becomes visible
+  end
+
+  def track_view
+    post = Post.find(params[:post_id])
+
+    # Track view if user is signed in and hasn't viewed this post yet
+    if user_signed_in? && current_user != post.user
+      view_created = post.views.find_or_create_by(user: current_user) do |view|
+        view.viewed_at = Time.current
+      end
+
+      # Broadcast view count update if a new view was created
+      if view_created.persisted? && view_created.created_at == view_created.updated_at
+        ViewsChannel.broadcast_to(post, {
+          actions_html: render_to_string(partial: "posts/post_actions", locals: { post: post })
+        })
+      end
+    end
+
+    head :ok
+  end
+
+  def update_times
+    TimeUpdateJob.perform_later
+    head :ok
+  end
+
+  def time_update
+    # Устанавливаем локаль если передана
+    if params[:locale].present?
+      I18n.locale = params[:locale]
+    end
+
+    render partial: "posts/post_time", locals: { post: @post }
   end
 
   def new

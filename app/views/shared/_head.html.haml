@@ -4,6 +4,57 @@
 %title= content_for?(:title) ? yield(:title) : "ImageGallery"
 = csrf_meta_tags
 = csp_meta_tag
+%meta{name: "user-signed-in", content: user_signed_in?}
+
+:javascript
+  // Обновление времени постов каждую минуту
+  function updatePostTimes() {
+    updatePostTimesWithLocale();
+  }
+
+  // Обновление времени постов с учетом локали
+  function updatePostTimesWithLocale(locale = null) {
+    const timeElements = document.querySelectorAll('[id$="time"]');
+
+    timeElements.forEach(element => {
+      const postId = element.id.replace('post', '').replace('time', '');
+      if (postId) {
+        // Отправляем AJAX запрос для получения обновленного времени
+        const url = locale ?
+          `/posts/${postId}/time_update?locale=${locale}` :
+          `/posts/${postId}/time_update`;
+
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'Accept': 'text/html',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+        .then(response => response.text())
+        .then(html => {
+          if (html.trim()) {
+            element.outerHTML = html;
+          }
+        })
+        .catch(error => console.log('Time update error:', error));
+      }
+    });
+  }
+
+  // Запускаем обновление времени каждую минуту
+  document.addEventListener('DOMContentLoaded', function() {
+    // Обновляем сразу при загрузке
+    setTimeout(updatePostTimes, 1000);
+
+    // Затем каждую минуту
+    setInterval(updatePostTimes, 60000);
+  });
+
+  // Обновляем время при навигации через Turbo
+  document.addEventListener('turbo:load', function() {
+    setTimeout(updatePostTimes, 1000);
+  });
 = stylesheet_link_tag 'home_slider'
 = stylesheet_link_tag "application", "data-turbo-track": "reload"
 = stylesheet_link_tag "main", media: "all", "data-turbo-track": "reload"
@@ -93,6 +144,9 @@
       galleryTitle.textContent = translations.gallery_title;
       console.log('Updated gallery title to:', translations.gallery_title);
     }
+
+    // Обновляем время постов с новыми переводами
+    updatePostTimesWithLocale(translations.locale);
 
     // Обновляем навигацию
     const navLinks = document.querySelectorAll('.navmenu a');
@@ -306,28 +360,6 @@
   .dropdown-item.text-light.active {
     background-color: #0d6efd !important;
     color: #ffffff !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light {
-    color: #f8f9fa !important;
-    border-color: #f8f9fa !important;
-    background-color: transparent !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:hover,
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:focus,
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:active,
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light.show {
-    background-color: rgba(248, 249, 250, 0.1) !important;
-    color: #f8f9fa !important;
-    border-color: #f8f9fa !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:not(:disabled):not(.disabled):active,
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:not(:disabled):not(.disabled).active {
-    background-color: rgba(248, 249, 250, 0.1) !important;
-    color: #f8f9fa !important;
-    border-color: #f8f9fa !important;
   }
 
   /* Fix navigation styles */
@@ -882,30 +914,6 @@
 
   /* Button styles */
   /* Primary button - use accent color (green) instead of blue, except for auth pages */
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary {
-    background-color: var(--accent-color) !important;
-    border-color: var(--accent-color) !important;
-    color: #ffffff !important;
-    font-weight: 500 !important;
-    border-radius: 6px !important;
-    transition: all 0.3s ease !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:hover,
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:focus,
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:active {
-    background-color: #1e8a63 !important;
-    border-color: #1e8a63 !important;
-    color: #ffffff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(39, 167, 118, 0.4) !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-primary:disabled {
-    background-color: rgba(39, 167, 118, 0.5) !important;
-    border-color: rgba(39, 167, 118, 0.5) !important;
-    opacity: 0.6 !important;
-  }
 
   /* Keep default blue for auth pages (sign in, sign up, password reset) */
   body.sessions-controller .btn-primary,
@@ -946,6 +954,21 @@
     transition: all 0.3s ease !important;
   }
 
+  .btn-hover-outline-danger {
+    border-color: #dc3545 !important;
+    color: #dc3545 !important;
+    filter: brightness(80%) !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: transparent !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+      filter: brightness(100%) !important;
+    }
+  }
+
   .btn-outline-danger:hover,
   .btn-outline-danger:focus,
   .btn-outline-danger:active {
@@ -965,21 +988,6 @@
     background-color: rgba(255, 255, 255, 0.1) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
     color: #ffffff !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light {
-    border-color: rgba(255, 255, 255, 0.4) !important;
-    color: #ffffff !important;
-    font-weight: 500 !important;
-    transition: all 0.3s ease !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) .btn-outline-light:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    border-color: #ffffff !important;
-    color: #ffffff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2) !important;
   }
 
   /* Secondary action buttons - exclude avatar button */
@@ -1285,23 +1293,6 @@
     background-color: #c82333 !important;
     border-color: #c82333 !important;
     color: #ffffff !important;
-  }
-
-  /* More specific selector for delete button - exclude like buttons and OAuth buttons */
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) div button[type="submit"]:not([id*="likeBtn"]) {
-    background-color: none !important;
-    color: #dc3545 !important;
-    border: 1px solid #ffffff !important;
-    padding: 8px 16px !important;
-    border-radius: 4px !important;
-    cursor: pointer !important;
-    font-size: 24px !important;
-    margin-top: 10px !important;
-  }
-
-  body:not(.sessions-controller):not(.registrations-controller):not(.passwords-controller) div button[type="submit"]:not([id*="likeBtn"]):hover {
-    background-color: #ffffff !important;
-    border-color: #c82333 !important;
   }
 
   /* User avatar and auth buttons in navbar */
