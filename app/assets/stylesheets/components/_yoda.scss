@@ -1,0 +1,384 @@
+body {
+  background: #ae96
+}
+
+article {
+  --skin: #ae9;
+  --skin-dark: #596;
+  --skin2: #f97;
+  --skin2-dark: #f55;
+  --cloak: #fdb;
+  --cloak-dark: #b98;
+  --suit: #b62;
+  font-size: 1vmin;
+  width: 80em;
+  aspect-ratio: 1;
+  position: relative;
+
+  &::before {
+    content:"";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50%;
+    height: 1.5em;
+    width: 80%;
+    background: #000;
+    border-radius: 5em;
+  }
+
+  *, *::before, *::after {
+    position: absolute;
+    box-sizing: border-box;
+  }
+  
+  .body {
+    left: 50%;
+    bottom: 0;
+    translate:-50%;
+    width: 50%;
+    height: 46%;
+    
+    .cloak {
+      inset: 0;
+      border: 1.5em solid;
+      border-radius: 50% / 150% 150% 0 0;
+      box-shadow:
+        inset -0.35em 2em var(--cloak-dark),
+        inset 0.5em 2em var(--cloak-dark);
+      background: 
+        conic-gradient(at 20% 87%, #0000 51%, #000 0 56%, var(--cloak-dark) 0 58%, #0000 0),
+        conic-gradient(at 85% 94%, #0000 40%, #000 0 50%, #0000 0),
+        conic-gradient(at 80% 90%, #0000 43%, #000 0 50%, #0000 0),
+        radial-gradient(50% 125% at 0 100%, var(--cloak) calc(90% - 1em), #000 0 90%, #0000 0),
+        radial-gradient(50% 125% at 100% 100%, var(--cloak) calc(90% - 1em), #000 0 90%, #0000 0),
+        radial-gradient(150% 100% at 50% 0, #0002 20%, #0000 0),
+        conic-gradient(from -36deg at 50% 20%, var(--skin-dark) 72deg, #0000 0),
+        conic-gradient(from -36deg at 50% 25%, #000 72deg, #0000 0),
+        conic-gradient(from -38deg at 50% 35%, var(--suit) 76deg, #0000 0),
+        conic-gradient(from -38deg at 50% 40%, #000 76deg, #0000 0),
+        var(--suit);
+      
+      &::before {
+        content: "";
+        width: 15%;
+        height: 15%;
+        border: 1.5em solid;
+        border-right: 0;
+        border-top: 0.75em solid;
+        border-radius: 100% 0 0 0;
+        bottom: -1.5em;
+        background: var(--cloak);
+        left: 0;
+        translate: -87%;
+        box-shadow:
+        inset 1.5em 0em var(--cloak-dark);
+      }
+      
+      &::after {
+        content: "";
+        width: 15%;
+        height: 18%;
+        border: 1.5em solid;
+        border-left: 0;
+        border-top: 0.5em solid;
+        border-radius: 0 100% 0 0;
+        bottom: -1.5em;
+        background: var(--cloak);
+        right: 0;
+        translate: 90%;
+        box-shadow:
+          inset -1.5em 0em var(--cloak-dark);
+      }
+      
+      .stick {
+        width: 10%;
+        height: 45%;
+        border: 1.25em solid;
+        border-radius: 100% / 60% 60% 200% 200% 5em;
+        rotate: -3deg;
+        background: silver;
+        bottom: -5%;
+        left: 50%;
+        translate: -50%;
+        box-shadow: inset -0.5em 1em #0003;
+      }
+      
+      .shoulder {
+        --s:
+          conic-gradient(at 50% 50%, #0000 120deg, #000 0 130deg, #0000 0),
+          conic-gradient(at 50% 85%, #0000 90deg, #000 0 125deg, #0000 0);
+        width: 50%;
+        height: 26%;
+        left: 1%;
+        top: 10%;
+        border-radius: 0 100% 0 0;
+        background:
+          var(--s),
+          radial-gradient(90% 55% at 95% 25%, var(--cloak) 99.9%, #0000 0),
+          radial-gradient(100% 50% at 100% 25%, var(--cloak-dark) 99.9%, #0000 0),
+          radial-gradient(90% 55% at 95% 75%, var(--cloak) 99.9%, #0000 0),
+        radial-gradient(100% 50% at 100% 75%, var(--cloak-dark) 99.9%, #0000 0);
+        filter:
+          drop-shadow(-1.5em 0)
+          drop-shadow(0 -1em 0);
+        rotate: 33deg;
+        border-right: 0.5em solid;
+        box-shadow: inset -2em 1.5em 0 -1.5em var(--cloak-dark);
+        
+        &.right {
+          scale: -1 1;
+          rotate: -35deg;
+          left: 51%;
+          top: 9%;
+          width: 48%;
+          height: 28%;
+
+          --s: conic-gradient(at 70% 70%, #0000 100deg, #000 0 125deg, #0000 0);
+        }
+      }
+      
+      .arm {
+        width: 55%;
+        height: 45%;
+        border: 1.5em solid;
+        border-radius: 0 0 10% 100%;
+        border-top: 0;
+        top: 30%;
+        left: -12%;
+        rotate: 30deg;
+        background: linear-gradient(90deg, var(--cloak) 50%, #0000 0);
+        box-shadow:
+                      inset -1em -1em var(--cloak-dark),
+          1.5em 1.5em 0 -0.5em var(--cloak-dark)
+          ;
+        
+        &::before {
+          content:"";
+          border: 1.5em solid;
+          width: 80%;
+          height: 50%;
+          border-radius: 100% 0 0 0;
+          border-right: 0;
+          border-bottom: 0;
+          border-left: 0.5em solid;
+          right: 0;
+          background: var(--cloak);
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 20%);
+          box-shadow: 
+            inset 0 1em #fff,
+            inset -1em 0em var(--cloak-dark),
+            -2em 0em 0 -0.5em var(--cloak-dark);
+        }
+        
+        &::after {
+          content: "";
+          width: 50%;
+          aspect-ratio: 1;
+          border: 1.5em solid;
+          background: 
+            linear-gradient(25deg, #0000 60%, var(--skin-dark) 0),
+            var(--skin);
+          box-shadow: inset -1em 1em var(--skin-dark);
+          border-radius: 50%;
+          left: 94%;
+          top: -5%;
+        }
+        
+        &.right {
+          transform: scaleX(-1) rotate(60deg);
+          left: 55%;
+          box-shadow:
+            inset -1em 0em var(--cloak-dark),
+            inset 0em -1.25em var(--cloak-dark),
+          1.5em 2.5em 0 -1.5em var(--cloak-dark)
+          ;
+
+          &::before {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
+          }
+
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+  
+  .head {
+    left: 50%;
+    top: 15%;
+    translate: -50%;
+    width: 53%;
+    height: 46%;
+    
+    .ear {
+      width: 60%;
+      height: 48%;
+      border: 1.5em solid;
+      border-radius: 20% 50% 40% 100%;
+      transform: skew(20deg) rotate(-7deg) translateY(-50%);
+      top: 50%;
+      left: -37%;
+      background: var(--skin);
+      box-shadow:
+        inset -0.5em 1em #fff,
+        inset -1.25em -2.5em var(--skin-dark),
+        inset 1em 1em var(--skin-dark)
+        ;
+      
+      &.right {
+        left: auto;
+        right: -35%;
+        transform: scaleX(-1) skew(20deg) rotate(-8deg) translateY(-50%);
+      }
+      
+      &::before {
+        content: "";
+        width:  65%;
+        aspect-ratio: 1;
+        border-radius: 100% 0% 100% 0%;
+        background: var(--skin2);
+        border: 0.25em solid #0000;
+        border-top: 2em solid #000;
+        border-left: 0.5em solid #000;
+        rotate: 55deg;
+        left: 20%;
+        top: 0%;
+        scale: 1.1 0.9;
+        box-shadow: 
+          1em -1.5em var(--skin-dark),
+          inset -0.5em 4.5em var(--skin2-dark)
+      }
+    }
+    
+    .face {
+      inset: 0;
+      border-radius: 100% / 110% 109% 72% 72%;
+      border: 1.5em solid;
+      border-bottom: 1.75em solid;
+      clip-path: polygon(0 0, 100% 0, 100% 34%, 95% 45%, 98% 50%,  100% 45%,  100% 100%, -10% 100%, 1% 45%, 3% 48%, 5% 45%, 0 34%);
+      background:
+        radial-gradient(100% 100% at 50% 100%, var(--skin) 66%, #0000 0),
+        radial-gradient(40% 90% at 23% 100%, var(--skin) 75%, #0000 0),
+        radial-gradient(40% 90% at 77% 100%, var(--skin) 75%, #0000 0),
+        radial-gradient(37% 93% at 23% 100%, #fff 75%, #0000 0),
+        radial-gradient(37% 93% at 77% 100%, #fff 75%, #0000 0),
+        linear-gradient(90deg, #0000 calc(50% - 0.25em), var(--skin-dark) 0 calc(50% + 0.25em), #0000 0),
+        radial-gradient(farthest-side at 100% 100%, #0000 calc(100% - 0.35em), var(--skin-dark) 0 99.99%, #0000 0) 100% 100% / 50% 100% no-repeat,
+        radial-gradient(farthest-side at 0% 100%, #0000 calc(100% - 0.35em), var(--skin-dark) 0 99.99%, #0000 0) 0% 100% / 50% 100% no-repeat,
+        radial-gradient(100% 70% at 35% 100%, #0000 calc(80% - 0.5em), var(--skin-dark) 0 80%, #0000 0) 62% 7% / 18% 25% no-repeat,
+        radial-gradient(100% 70% at 65% 100%, #0000 calc(80% - 0.5em), var(--skin-dark) 0 80%, #0000 0) 38% 7% / 18% 25% no-repeat,
+        radial-gradient(100% 70% at 5% 100%, #0000 calc(80% - 0.5em), var(--skin-dark) 0 80%, #0000 0) 83% 15% / 18% 25% no-repeat,
+        radial-gradient(100% 70% at 95% 100%, #0000 calc(80% - 0.5em), var(--skin-dark) 0 80%, #0000 0) 17% 15% / 18% 25% no-repeat,
+        
+        var(--skin);
+      box-shadow: 
+        inset 0em 2em 0 -0.5em #fff,
+        inset 0.25em -1em var(--skin-dark),
+        inset -0.25em -1em var(--skin-dark),
+        inset 0 -1.5em var(--skin-dark);
+      
+      .mouth {
+        width: 20%;
+        aspect-ratio: 1.5;
+        border: 1.5em solid #0000;
+        border-bottom: 1.5em solid #000;
+        border-radius: 50%;
+        top: 72%;
+        left: 50%;
+        translate: -50%;
+        
+        &::before, &::after {
+          content: "";
+          width: calc(100% + 3em);
+          height: calc(100% + 3em);
+          border: 1.5em solid #0000;
+          border-top: 1.5em solid #000;
+          border-radius: 50%;
+          left: 50%;
+          translate: -97% 1.5em;
+        }
+        
+        &::after {
+          translate: -3% 1.5em;
+        }
+      }
+      
+      /* smiling */
+      .mouth {
+        scale: 1 -1;
+        top: 80%;
+      }
+      
+      .eye {
+        --x: 25%;
+        left: var(--x);
+        top: 63%;
+        width: 20%;
+        aspect-ratio: 1;
+        translate: -50% -50%;
+/*         clip-path: polygon(0 5%, 100% 20%, 100% 100%, 0 100%); */
+        background:
+          radial-gradient(circle at 35% 35%, #fff 20%, #0000 calc(20% + 1px)),
+          radial-gradient(circle at 27% 63%, #fff 5%, #0000 calc(5% + 1px)),
+          radial-gradient(circle at 13% 55%, #fff 8%, #0000 calc(8% + 1px)),
+          #000;
+        border-radius: 50%;
+        
+        &.right {
+/*           clip-path: polygon(0 20%, 100% 5%, 100% 100%, 0 100%); */
+          left: calc(100% - var(--x));
+        }
+      }
+      
+      .cheek {
+        --x: 17%;
+        left: var(--x);
+        top: 77%;
+        width: 18%;
+        aspect-ratio: 3 / 2;
+        translate: -50% -50%;
+        background:
+          var(--skin2);
+        border-radius: 50%;
+        
+        &.right {
+          left: calc(100% - var(--x));
+        }
+      }
+      
+      .nose {
+        top: 70%;
+        left: 50%;
+        translate: -50% -50%;
+        background: var(--skin-dark);
+        width: 13%;
+        height: 10%;
+        border-radius: 50%;
+        
+        &::before {
+          content: "";
+          height: 60%;
+          width: 125%;
+          left: 50%;
+          top: 25%;
+          background: var(--skin-dark);
+          border-radius: 3em;
+          translate: -50% 0;
+        }
+        
+        &::after {
+          content: "";
+          width: 100%;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          top: 60%;
+          translate: 0 -50%;
+          box-shadow: 0 -1.25em 0 -0.75em #fff
+        }
+      }
+    }
+  }
+}
