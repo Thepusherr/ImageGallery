@@ -19,6 +19,7 @@ PUSHER_CLUSTER=
 rvm use 3.3.0   
 bundle install  
 rails db:create && rails db:migrate && rails db:seed  
+bundle exec rake app:migrate_images
 ```  
 
 # ImageGallery
