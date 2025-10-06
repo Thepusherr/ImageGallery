@@ -34,22 +34,37 @@
             Glowing Card
             %br
             Effect Demo
-  / /Starter Section Section
-%article{"role" => "img", "aria-label" => "cartoon of yoda in kawaii style"}
-  .body
-    .cloak
-      .stick
-      .shoulder.left
-      .shoulder.right
-      .arm.left
-      .arm.right
-  .head
-    .ear.left
-    .ear.right
-    .face
-      .cheek.left
-      .cheek.right
-      .eye.left
-      .eye.right
-      .nose
-      .mouth
+
+      / Neon sign demo
+      .row.justify-content-center.mt-5
+        .col-md-8.text-center
+          .neon-sign Flicker
+
+      / Spiral demo
+      .row.justify-content-center.mt-5
+        .col-md-10.text-center
+          .spiral-container
+            .logarithmic
+              - 100.times do
+                .arm
+  / Yoda demo
+  .row.justify-content-center.mt-5
+    .col-md-6.text-center
+      %article{"role" => "img", "aria-label" => "cartoon of yoda in kawaii style"}
+        .body
+          .cloak
+            .stick
+            .shoulder.left
+            .shoulder.right
+            .arm.left
+            .arm.right
+        .head
+          .ear.left
+          .ear.right
+          .face
+            .cheek.left
+            .cheek.right
+            .eye.left
+            .eye.right
+            .nose
+            .mouth
