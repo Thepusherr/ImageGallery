@@ -1,0 +1,166 @@
+/* Tubes Cursor Component - WebGL/WebGPU Interactive Background */
+
+.tubes-cursor-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  // Ensure canvas fills container
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+
+  // Content overlay
+  .tubes-content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    pointer-events: none; // Allow mouse events to pass through to canvas
+
+    h3 {
+      margin: 0;
+      padding: 0;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      line-height: 1;
+      user-select: none;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      font-weight: 400;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      max-width: 600px;
+      user-select: none;
+    }
+
+    .tubes-instructions {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-top: 10px;
+      pointer-events: auto; // Allow interaction with instructions
+    }
+  }
+
+  // Loading state
+  &.loading {
+    .tubes-content::after {
+      content: "Loading WebGL...";
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+    }
+  }
+
+  // Error state
+  &.error {
+    background: linear-gradient(135deg, #2d1a1a 0%, #3d2d2d 100%);
+
+    .tubes-content::after {
+      content: "WebGL not supported - showing fallback";
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      color: rgba(255, 100, 100, 0.7);
+      font-size: 0.8rem;
+    }
+
+    // Fallback animated background
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(249, 103, 251, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(83, 188, 40, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(105, 88, 213, 0.3) 0%, transparent 50%);
+      animation: fallbackPulse 4s ease-in-out infinite;
+      z-index: 1;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .tubes-cursor-container {
+    height: 50vh;
+    min-height: 300px;
+    margin: 15px auto;
+
+    .tubes-content {
+      gap: 10px;
+      padding: 15px;
+
+      h3 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .tubes-instructions {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .tubes-cursor-container {
+    height: 40vh;
+    min-height: 250px;
+
+    .tubes-content {
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Fallback animation
+@keyframes fallbackPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}

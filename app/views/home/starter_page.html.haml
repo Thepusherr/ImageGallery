@@ -1,3 +1,5 @@
+
+
 %main.main
   / Page Title
   .page-title{"data-aos" => "fade"}
@@ -68,3 +70,51 @@
             .eye.right
             .nose
             .mouth
+
+  / Tubes Cursor demo
+  .row.justify-content-center.mt-5
+    .col-md-12
+      .tubes-cursor-container#tubes-demo
+        %canvas#tubes-canvas
+        .tubes-content
+          %h3 Interactive Tubes
+          %p Experience this WebGL-powered interactive background effect. Move your cursor around and click to change colors!
+          .tubes-instructions Click anywhere or press Space to randomize colors
+
+
+
+
+
+  / Snow Effect demo
+  .row.justify-content-center.mt-5
+    .col-md-12
+      .snow-effect-container#snow-demo
+        .snow-container#snow-container
+          %i.snow-container__item{style: "left: 10%; animation-delay: 0s; --offset: 1;"}
+          %i.snow-container__item{style: "left: 30%; animation-delay: 2s; --offset: 1.2;"}
+          %i.snow-container__item{style: "left: 50%; animation-delay: 4s; --offset: 0.8;"}
+          %i.snow-container__item{style: "left: 70%; animation-delay: 6s; --offset: 1.5;"}
+          %i.snow-container__item{style: "left: 90%; animation-delay: 8s; --offset: 1.1;"}
+        .snow-man
+          .snow-man__head
+            .snow-man__eye
+            .snow-man__eye
+            .snow-man__nose
+          .snow-man__body
+        .snow-content
+          %h3 Winter Wonderland
+          %p Beautiful animated snowfall effect with a cheerful snowman. Watch the snowflakes gently fall from the sky!
+          .snow-instructions Click to add more snowflakes
+
+
+
+  / Swirl Effect demo
+  .row.justify-content-center.mt-5
+    .col-md-12
+      .swirl-effect-container#swirl-demo
+        .swirl#swirl-container
+        .swirl-content
+          %h3 Hypnotic Swirl
+          %p Mesmerizing animated pattern inspired by mathematical beauty. Watch the colorful dots dance in perfect harmony!
+          .swirl-instructions Click to restart animation
+

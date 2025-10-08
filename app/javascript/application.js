@@ -2,6 +2,11 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "channels"
 
+// Visual effects
+import "tubes_cursor"
+import "snow_effect"
+import "swirl_effect"
+
 console.log('Application.js loading...');
 
 // Ensure Turbo is properly initialized
