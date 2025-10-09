@@ -6,6 +6,7 @@ import "channels"
 import "tubes_cursor"
 import "snow_effect"
 import "swirl_effect"
+import "start_coding_button"
 
 console.log('Application.js loading...');
 

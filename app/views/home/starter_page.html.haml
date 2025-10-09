@@ -29,6 +29,15 @@
     .container{"data-aos" => "fade-up"}
       %p Use this page as a starter for your own custom pages.
 
+      / Start Coding Button Section
+      .row.justify-content-center.mt-4.mb-5
+        .col-md-8.text-center
+          .start-coding-container
+            %a.start-coding-btn.start-coding-btn--pulse{:href => new_post_path}
+              %i.btn-icon.bi.bi-code-slash
+              Start Coding
+            .btn-subtitle Create your first post and begin your coding journey!
+
       / Card with inner glow demo
       .row.justify-content-center.mt-5
         .col-md-6.text-center
@@ -117,4 +126,64 @@
           %h3 Hypnotic Swirl
           %p Mesmerizing animated pattern inspired by mathematical beauty. Watch the colorful dots dance in perfect harmony!
           .swirl-instructions Click to restart animation
+
+  / Start Coding Button Variations Demo
+  .row.justify-content-center.mt-5
+    .col-md-12
+      .container.text-center
+        %h3.mb-4 Start Coding Button Variations
+        %p.mb-5 Different styles inspired by CodePen's modern button effects
+
+        / Default gradient button
+        .row.justify-content-center.mb-4
+          .col-md-4.mb-3
+            .start-coding-container
+              %a.start-coding-btn{:href => new_post_path}
+                %i.btn-icon.bi.bi-code-slash
+                Default Style
+              .btn-subtitle Gradient with hover effects
+
+        / Neon style button
+        .row.justify-content-center.mb-4
+          .col-md-4.mb-3
+            .start-coding-container
+              %a.start-coding-btn.start-coding-btn--neon{:href => new_post_path}
+                %i.btn-icon.bi.bi-lightning
+                Neon Style
+              .btn-subtitle Cyberpunk inspired glow
+
+        / Glass morphism button
+        .row.justify-content-center.mb-4
+          .col-md-4.mb-3
+            .start-coding-container
+              %a.start-coding-btn.start-coding-btn--glass{:href => new_post_path}
+                %i.btn-icon.bi.bi-gem
+                Glass Style
+              .btn-subtitle Modern glassmorphism effect
+
+        / Rainbow border button
+        .row.justify-content-center.mb-4
+          .col-md-4.mb-3
+            .start-coding-container
+              %a.start-coding-btn.start-coding-btn--rainbow{:href => new_post_path}
+                %i.btn-icon.bi.bi-palette
+                Rainbow Border
+              .btn-subtitle Animated colorful border effect
+
+        / CodePen style buttons
+        .row.justify-content-center.mb-4
+          .col-md-6.mb-3
+            .start-coding-container
+              %a.start-coding-btn.start-coding-btn--codepen-hover-only{:href => new_post_path}
+                %span
+                  %i.btn-icon.bi.bi-mouse
+                  Hover Only
+              .btn-subtitle Animates only on hover (original)
+          .col-md-6.mb-3
+            .start-coding-container
+              %a.start-coding-btn.start-coding-btn--static-rainbow{:href => new_post_path}
+                %span
+                  %i.btn-icon.bi.bi-palette-fill
+                  Static Rainbow
+              .btn-subtitle Always visible rainbow border
 

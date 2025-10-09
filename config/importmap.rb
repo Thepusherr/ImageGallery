@@ -9,8 +9,10 @@ pin 'filepond', to: 'https://ga.jspm.io/npm:filepond@4.30.4/dist/filepond.js', p
 pin 'aos', to: 'aos.js', preload: true
 # Visual effects
 pin "tubes_cursor"
-pin "snow_effect"
+pin  "snow_effect"
 pin "swirl_effect"
+pin "start_coding_button"
+pin_all_from "app/javascript/components/buttons", under: "components/buttons"
 
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/channels", under: "channels"

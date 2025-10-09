@@ -1,0 +1,145 @@
+// Neon Style Button Component - Beautiful version from original styles
+// Neon button with glow effects and color changing
+
+.start-coding-btn--neon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #00ff88;
+  background: transparent;
+  border: 2px solid #00ff88;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 0 10px rgba(0, 255, 136, 0.3),
+    inset 0 0 10px rgba(0, 255, 136, 0.1);
+
+  // Prevent text selection
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  // Icon styling
+  .btn-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  // Animated background overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  // Hover effects
+  &:hover {
+    color: #00ff88;
+    text-decoration: none;
+    transform: translateY(-2px);
+    background: rgba(0, 255, 136, 0.1);
+    box-shadow:
+      0 0 20px rgba(0, 255, 136, 0.6),
+      inset 0 0 20px rgba(0, 255, 136, 0.2);
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+
+    .btn-icon {
+      transform: translateX(3px);
+    }
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  // Focus state
+  &:focus {
+    outline: none;
+    box-shadow:
+      0 0 20px rgba(0, 255, 136, 0.6),
+      0 0 0 3px rgba(0, 255, 136, 0.3);
+  }
+
+  // Active/Click effect
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+// Color variants for neon button (used by JavaScript)
+.start-coding-btn--neon.neon-pink {
+  color: #ff00ff;
+  border-color: #ff00ff;
+  box-shadow: 
+    0 0 10px #ff00ff,
+    inset 0 0 10px rgba(255, 0, 255, 0.1);
+  text-shadow: 0 0 5px #ff00ff;
+
+  &:hover {
+    color: #ff00ff;
+    box-shadow: 
+      0 0 20px #ff00ff,
+      0 0 40px #ff00ff,
+      inset 0 0 20px rgba(255, 0, 255, 0.2);
+    text-shadow: 0 0 10px #ff00ff;
+  }
+}
+
+.start-coding-btn--neon.neon-green {
+  color: #00ff00;
+  border-color: #00ff00;
+  box-shadow: 
+    0 0 10px #00ff00,
+    inset 0 0 10px rgba(0, 255, 0, 0.1);
+  text-shadow: 0 0 5px #00ff00;
+
+  &:hover {
+    color: #00ff00;
+    box-shadow: 
+      0 0 20px #00ff00,
+      0 0 40px #00ff00,
+      inset 0 0 20px rgba(0, 255, 0, 0.2);
+    text-shadow: 0 0 10px #00ff00;
+  }
+}
+
+.start-coding-btn--neon.neon-orange {
+  color: #ff6600;
+  border-color: #ff6600;
+  box-shadow: 
+    0 0 10px #ff6600,
+    inset 0 0 10px rgba(255, 102, 0, 0.1);
+  text-shadow: 0 0 5px #ff6600;
+
+  &:hover {
+    color: #ff6600;
+    box-shadow: 
+      0 0 20px #ff6600,
+      0 0 40px #ff6600,
+      inset 0 0 20px rgba(255, 102, 0, 0.2);
+    text-shadow: 0 0 10px #ff6600;
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .start-coding-btn--neon {
+    // Neon effects work better in dark theme, no changes needed
+  }
+}
