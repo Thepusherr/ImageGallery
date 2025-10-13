@@ -1,9 +1,15 @@
 // Swirl Effect
-document.addEventListener('DOMContentLoaded', function() {
+function initializeSwirlEffect() {
   console.log('Initializing Swirl Effect...');
 
   const swirlDemo = document.getElementById('swirl-demo');
   const swirlContainer = document.getElementById('swirl-container');
+
+  // Skip if elements don't exist on this page
+  if (!swirlDemo || !swirlContainer) {
+    console.log('Swirl elements not found on this page, skipping initialization');
+    return;
+  }
 
   function createSwirlDots() {
     if (!swirlContainer) return;
@@ -58,4 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   console.log('Swirl Effect initialized successfully');
-});
+}
+
+// Initialize on page load and Turbo navigation
+document.addEventListener('DOMContentLoaded', initializeSwirlEffect);
+document.addEventListener('turbo:load', initializeSwirlEffect);

@@ -5,7 +5,9 @@ function generateRandomColors(count) {
     .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
 }
 
-document.addEventListener('DOMContentLoaded', async function() {
+let tubesApp = null; // Store reference for cleanup
+
+async function initializeTubesCursor() {
   console.log('Starting Tubes Cursor initialization...');
 
   try {
@@ -15,6 +17,18 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.log('Canvas element:', canvas);
     console.log('Container element:', container);
 
+    // Skip if elements don't exist on this page
+    if (!canvas || !container) {
+      console.log('Tubes elements not found on this page, skipping initialization');
+      return;
+    }
+
+    // Clean up previous instance if it exists
+    if (tubesApp && typeof tubesApp.destroy === 'function') {
+      tubesApp.destroy();
+      tubesApp = null;
+    }
+
     if (canvas && container) {
       container.classList.add('loading');
       console.log('Loading TubesCursor library...');
@@ -22,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       const { default: TubesCursor } = await import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js");
       console.log('TubesCursor library loaded:', TubesCursor);
 
-      const app = TubesCursor(canvas, {
+      tubesApp = TubesCursor(canvas, {
         tubes: {
           colors: ["#f967fb", "#53bc28", "#6958d5"],
           lights: {
@@ -32,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
       });
 
-      console.log('TubesCursor app created:', app);
+      console.log('TubesCursor app created:', tubesApp);
       container.classList.remove('loading');
 
       // Add click interaction
@@ -41,8 +55,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const lightsColors = generateRandomColors(4);
         console.log('Changing colors:', colors, lightsColors);
         try {
-          app.tubes.setColors(colors);
-          app.tubes.setLightsColors(lightsColors);
+          tubesApp.tubes.setColors(colors);
+          tubesApp.tubes.setLightsColors(lightsColors);
         } catch (e) {
           console.warn('Error changing colors:', e);
         }
@@ -69,4 +83,18 @@ document.addEventListener('DOMContentLoaded', async function() {
       console.log('Set error state on container');
     }
   }
-});
+}
+
+// Clean up function for Turbo navigation
+function cleanupTubesCursor() {
+  if (tubesApp && typeof tubesApp.destroy === 'function') {
+    console.log('Cleaning up TubesCursor...');
+    tubesApp.destroy();
+    tubesApp = null;
+  }
+}
+
+// Initialize on page load and Turbo navigation
+document.addEventListener('DOMContentLoaded', initializeTubesCursor);
+document.addEventListener('turbo:load', initializeTubesCursor);
+document.addEventListener('turbo:before-cache', cleanupTubesCursor);
