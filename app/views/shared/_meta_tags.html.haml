@@ -1,0 +1,8 @@
+-# Basic Meta Tags
+%meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{charset: "utf-8"}/
+%meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+%title= content_for?(:title) ? yield(:title) : "ImageGallery"
+= csrf_meta_tags
+= csp_meta_tag
+%meta{name: "user-signed-in", content: user_signed_in?}

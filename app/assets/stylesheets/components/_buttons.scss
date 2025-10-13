@@ -1,0 +1,292 @@
+/* Button styles */
+/* Primary button - use accent color (green) instead of blue, except for auth pages */
+
+/* Keep default blue for auth pages (sign in, sign up, password reset) */
+body.sessions-controller .btn-primary,
+body.registrations-controller .btn-primary,
+body.passwords-controller .btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  color: #ffffff !important;
+}
+
+body.sessions-controller .btn-primary:hover,
+body.registrations-controller .btn-primary:hover,
+body.passwords-controller .btn-primary:hover {
+  background-color: #0b5ed7 !important;
+  border-color: #0a58ca !important;
+}
+
+.btn-success {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  font-weight: 600 !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-success:hover {
+  background-color: #1e8a63 !important;
+  border-color: #1e8a63 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+
+.btn-outline-danger {
+  border-color: transparent !important;
+  background-color: transparent !important;
+  color: #dc3545 !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-hover-outline-danger {
+  border-color: #dc3545 !important;
+  color: #dc3545 !important;
+  filter: brightness(80%) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+    filter: brightness(100%) !important;
+  }
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger:active {
+  background-color: transparent !important;
+  border-color: #dc3545 !important;
+  color: #dc3545 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+}
+
+.btn-outline-secondary {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.btn-outline-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+}
+
+/* Secondary action buttons - exclude avatar button */
+.profile-form .btn-outline-danger:not(.avatar-upload-btn),
+.profile-form .btn-outline-light:not(.avatar-upload-btn) {
+  padding: 10px 16px !important;
+  border-radius: 6px !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+}
+
+.profile-form .btn-outline-danger:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3) !important;
+}
+
+/* Fix button_to form alignment */
+.row.g-2 form {
+  margin: 0 !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+.row.g-2 form button {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ensure both buttons have same height - exclude avatar button */
+.row.g-2 .btn:not(.avatar-upload-btn) {
+  min-height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 16px !important;
+  line-height: 1.4 !important;
+}
+
+/* Fix custom file upload button */
+.custom-file-upload-btn {
+  background-color: #FFD700 !important;
+  color: #000000 !important;
+  border: 2px solid #FFD700 !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  display: block !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
+}
+
+.custom-file-upload-btn:hover {
+  background-color: #FFC107 !important;
+  border-color: #FFC107 !important;
+  color: #000000 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* Fix outline-light buttons in devise forms - same as subscription buttons */
+body.sessions-controller .btn-outline-light,
+body.sessions-controller button.btn-outline-light,
+body.registrations-controller .btn-outline-light,
+body.registrations-controller button.btn-outline-light,
+body.passwords-controller .btn-outline-light,
+body.passwords-controller button.btn-outline-light,
+.devise-links .btn-outline-light,
+.devise-links button.btn-outline-light {
+  border: 2px solid transparent !important;
+  background-color: transparent !important;
+  color: #f8f9fa !important;
+}
+
+body.sessions-controller .btn-outline-light:hover,
+body.sessions-controller button.btn-outline-light:hover,
+body.registrations-controller .btn-outline-light:hover,
+body.registrations-controller button.btn-outline-light:hover,
+body.passwords-controller .btn-outline-light:hover,
+body.passwords-controller button.btn-outline-light:hover,
+.devise-links .btn-outline-light:hover,
+.devise-links button.btn-outline-light:hover {
+  background-color: transparent !important;
+  border: 2px solid #dc3545 !important;
+  color: #f8f9fa !important;
+}
+
+/* Fix Update button specifically */
+.actions input[type="submit"][value="Update"] {
+  background-color: var(--accent-color) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+}
+
+.actions input[type="submit"][value="Update"]:hover {
+  background-color: #1e8a63 !important;
+}
+
+/* Fix delete account button - it's actually a button element */
+button[type="submit"]:has-text("delete my account"),
+button[data-confirm*="Are you sure?"] {
+  background-color: #dc3545 !important;
+  color: #ffffff !important;
+  border: 1px solid #dc3545 !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  margin-top: 10px !important;
+}
+
+button[type="submit"]:has-text("delete my account"):hover,
+button[data-confirm*="Are you sure?"]:hover {
+  background-color: #c82333 !important;
+  border-color: #c82333 !important;
+  color: #ffffff !important;
+}
+
+/* User avatar and auth buttons in navbar */
+.header-social-links .btn {
+  font-size: 12px !important;
+  padding: 4px 8px !important;
+}
+
+/* Fix Sign Up button */
+.header-social-links .btn-light {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+}
+
+.header-social-links .btn-light:hover {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Fix Sign In button and language switcher in header - must be after Devise rules */
+header .header-social-links .btn-outline-light,
+header .header-social-links button.btn-outline-light,
+header .header-social-links a.btn-outline-light {
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+header .header-social-links .btn-outline-light:hover,
+header .header-social-links button.btn-outline-light:hover,
+header .header-social-links a.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid #ffffff !important;
+  color: #ffffff !important;
+}
+
+.header-social-links .dropdown-toggle {
+  max-width: 150px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.header-social-links .dropdown-toggle span {
+  max-width: 80px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: inline-block !important;
+}
+
+/* Social links spacing */
+.header-social-links a.twitter,
+.header-social-links a.facebook,
+.header-social-links a.instagram,
+.header-social-links a.linkedin {
+  font-size: 14px !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.3s !important;
+}
+
+.header-social-links a.twitter:hover,
+.header-social-links a.facebook:hover,
+.header-social-links a.instagram:hover,
+.header-social-links a.linkedin:hover {
+  opacity: 1 !important;
+}
+
+/* Subscription buttons hover states */
+.subscription-btn.btn-outline-success:hover,
+.subscription-btn.btn-outline-success:focus,
+.subscription-btn.btn-outline-success:active {
+  border-color: #198754 !important;
+  background-color: transparent !important;
+  color: #198754 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(25, 135, 84, 0.3);
+}
+
+.subscription-btn.btn-outline-danger:hover,
+.subscription-btn.btn-outline-danger:focus,
+.subscription-btn.btn-outline-danger:active {
+  border-color: #dc3545 !important;
+  background-color: transparent !important;
+  color: #dc3545 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+}

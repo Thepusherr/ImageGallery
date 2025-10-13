@@ -1,0 +1,44 @@
+/* Fix page content styling */
+.page-title .heading h1 {
+  color: #ffffff !important;
+  font-family: var(--heading-font) !important;
+  font-weight: 700 !important;
+  margin-bottom: 20px !important;
+}
+
+.page-title .heading p {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+.page-title .heading .cta-btn {
+  background-color: var(--accent-color) !important;
+  color: #ffffff !important;
+  padding: 12px 30px !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  margin-top: 20px !important;
+  transition: background-color 0.3s !important;
+}
+
+.page-title .heading .cta-btn:hover {
+  background-color: #1e8a63 !important;
+}
+
+/* Fix section content */
+.starter-section .section-title h2 {
+  color: #ffffff !important;
+  font-family: var(--heading-font) !important;
+}
+
+.starter-section .section-title p {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.starter-section .container p {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}

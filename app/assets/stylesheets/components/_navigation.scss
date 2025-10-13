@@ -1,0 +1,45 @@
+/* Fix navigation styles */
+.header .logo {
+  text-decoration: none !important;
+}
+
+.header .logo:hover {
+  text-decoration: none !important;
+}
+
+.header .navmenu a {
+  text-decoration: none !important;
+  color: var(--nav-color) !important;
+  transition: color 0.3s ease !important;
+  font-family: var(--nav-font) !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+.header .navmenu a:hover {
+  text-decoration: none !important;
+  color: var(--nav-hover-color) !important;
+}
+
+.header .navmenu a.active {
+  color: var(--nav-hover-color) !important;
+}
+
+.header .logo i {
+  color: #ffffff !important;
+}
+
+/* Restore beautiful navigation hover effects */
+.header .navmenu li:hover > a {
+  color: var(--nav-hover-color) !important;
+}
+
+.header .navmenu .dropdown ul a {
+  color: var(--nav-dropdown-color) !important;
+}
+
+.header .navmenu .dropdown ul a:hover {
+  color: var(--nav-dropdown-hover-color) !important;
+}

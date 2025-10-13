@@ -1,0 +1,78 @@
+/* Glowing Border Effects */
+.glowing-border {
+  --glow-deg: 0deg;
+  --gradient-glow: #ff6b6b, #ffd93d, #6bcf7f, #4d96ff, #9c88ff, #ff6b6b;
+  --border-width: 3px;
+  --glow-size: 1rem;
+  --glow-intensity: 0.125;
+
+  margin-block: 3rem;
+  padding: 4rem 3rem;
+  max-width: 60ch;
+
+  border: var(--border-width) solid transparent;
+  border-left: 0;
+  border-radius: 0 100vw 100vw 0;
+  background: linear-gradient(rgba(26, 26, 26, 0.8) 0 0) padding-box,
+    conic-gradient(from var(--glow-deg), var(--gradient-glow)) border-box;
+
+  position: relative;
+  isolation: isolate;
+  color: #f8f9fa;
+
+  animation: glow 10s infinite linear;
+}
+
+@keyframes glow {
+  100% {
+    --glow-deg: 360deg;
+  }
+}
+
+.glowing-border::before,
+.glowing-border::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+}
+
+.glowing-border::before {
+  z-index: -1;
+  background: rgba(26, 26, 26, 0.9);
+  inset: 0.5rem;
+  scale: 1.2 1;
+  transform-origin: right;
+  filter: blur(var(--glow-size));
+}
+
+.glowing-border::after {
+  z-index: -2;
+  inset: -1.5rem;
+  background: conic-gradient(from var(--glow-deg), var(--gradient-glow));
+  filter: blur(var(--glow-size));
+  opacity: var(--glow-intensity);
+}
+
+.glowing-border.right {
+  margin-inline-start: auto;
+  border-radius: 100vw 0 0 100vw;
+  border: var(--border-width) solid transparent;
+  border-right: 0;
+}
+
+.glowing-border.right::before {
+  transform-origin: left;
+}
+
+.glowing-border h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.glowing-border p {
+  margin: 0;
+  line-height: 1.6;
+  color: #e9ecef;
+}

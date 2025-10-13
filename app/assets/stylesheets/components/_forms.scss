@@ -1,0 +1,420 @@
+/* Fix comment form styles */
+.card-footer input[type="text"] {
+  background: transparent !important;
+  border: none !important;
+  color: var(--default-color) !important;
+  font-size: 14px !important;
+}
+
+.card-footer input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 14px !important;
+}
+
+.card-footer input[type="submit"] {
+  background: none !important;
+  border: none !important;
+  color: var(--accent-color) !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  padding: 5px 10px !important;
+}
+
+.card-footer input[type="submit"]:hover {
+  color: #1e8a63 !important;
+}
+
+/* Fix like button and icons - high specificity */
+.button_to button[id*="likeBtn"] {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 8px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  font-size: 1.25rem !important;
+  color: var(--default-color) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.button_to button[id*="likeBtn"]:hover {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.button_to button[id*="likeBtn"] i {
+  color: var(--default-color) !important;
+  transition: color 0.3s !important;
+  font-size: 1.25rem !important;
+  display: inline-block !important;
+}
+
+.button_to button[id*="likeBtn"]:hover i {
+  color: var(--accent-color) !important;
+}
+
+/* Fix comment links */
+a[data-bs-toggle="modal"] i.bi-chat {
+  color: var(--default-color) !important;
+  transition: color 0.3s !important;
+  font-size: 1.25rem !important;
+  display: inline-block !important;
+}
+
+a[data-bs-toggle="modal"]:hover i.bi-chat {
+  color: var(--accent-color) !important;
+}
+
+/* Bootstrap Icons for like/comment - specific styles */
+.button_to button[id*="likeBtn"] i.bi-heart {
+  color: #6c757d !important;
+  font-size: 1.25rem !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  font-family: "bootstrap-icons" !important;
+}
+
+.button_to button[id*="likeBtn"] i.bi-heart-fill {
+  color: #dc3545 !important;
+  font-size: 1.25rem !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  font-family: "bootstrap-icons" !important;
+}
+
+.button_to button[id*="likeBtn"]:hover i.bi-heart {
+  color: #dc3545 !important;
+}
+
+/* Fix comment icon - specific styles */
+a[data-bs-toggle="modal"] i.bi-chat {
+  color: #ffffff !important;
+  transition: color 0.3s !important;
+  font-size: 1.25rem !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  font-family: "bootstrap-icons" !important;
+}
+
+a[data-bs-toggle="modal"]:hover i.bi-chat {
+  color: #27a776 !important;
+}
+
+/* Comment toggle icon styles */
+a[data-bs-toggle="collapse"] i.bi-chat {
+  color: #ffffff !important;
+  transition: color 0.3s !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  font-family: "bootstrap-icons" !important;
+}
+
+a[data-bs-toggle="collapse"]:hover i.bi-chat {
+  color: #27a776 !important;
+}
+
+/* Chevron animation */
+i.bi-chevron-down, i.bi-chevron-up {
+  transition: transform 0.3s ease !important;
+}
+
+/* Custom scrollbar for comments section */
+.collapse[id*="commentsCollapse"] > div {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.collapse[id*="commentsCollapse"] > div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.collapse[id*="commentsCollapse"] > div::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.collapse[id*="commentsCollapse"] > div::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.collapse[id*="commentsCollapse"] > div::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Header buttons same height */
+.header-social-links .btn {
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Fix like count alignment */
+.d-flex.justify-content-start.align-items-center {
+  align-items: center !important;
+}
+
+.d-flex.justify-content-start.align-items-center .button_to {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.d-flex.justify-content-start.align-items-center .button_to button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 4px !important;
+}
+
+/* Fix like count text alignment */
+small.fw-bold.my-1 {
+  line-height: 1.25rem !important;
+  vertical-align: middle !important;
+}
+
+/* Fix FontAwesome icons display */
+.fa-heart, .fa-comment {
+  display: inline-block !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  line-height: 1 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.fa-regular {
+  font-weight: 400 !important;
+}
+
+.fa-solid {
+  font-weight: 900 !important;
+}
+
+/* Force FontAwesome content */
+.fa-heart.fa-regular:before {
+  content: "\\f004" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 400 !important;
+}
+
+.fa-heart.fa-solid:before {
+  content: "\\f004" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+.fa-comment.fa-regular:before {
+  content: "\\f075" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 400 !important;
+}
+
+/* Remove any background colors from icons */
+i.fa-heart, i.fa-comment {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Profile form styles */
+.profile-form .form-control {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+}
+
+.profile-form .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25) !important;
+  color: #ffffff !important;
+}
+
+.profile-form .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.profile-form .form-label {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
+}
+
+/* Card styles */
+.card.bg-dark {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.card-header.bg-dark {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Devise forms - card with visible border and backgrounds */
+body.sessions-controller .card.bg-dark.border-secondary,
+body.registrations-controller .card.bg-dark.border-secondary,
+body.passwords-controller .card.bg-dark.border-secondary {
+  border: 1px solid #6c757d !important;
+  background-color: #212529 !important;
+}
+
+body.sessions-controller .card-header.bg-dark.border-secondary,
+body.registrations-controller .card-header.bg-dark.border-secondary,
+body.passwords-controller .card-header.bg-dark.border-secondary {
+  border-bottom: 1px solid #6c757d !important;
+  background-color: #212529 !important;
+}
+
+body.sessions-controller .card-body,
+body.registrations-controller .card-body,
+body.passwords-controller .card-body {
+  background-color: #212529 !important;
+}
+
+/* Post show page - comment input field */
+body.posts-controller.show-action input[type="text"][placeholder*="comment"] {
+  background-color: #212529 !important;
+  color: #f8f9fa !important;
+  border-color: #6c757d !important;
+  -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+  -webkit-text-fill-color: #f8f9fa !important;
+}
+
+body.posts-controller.show-action input[type="text"][placeholder*="comment"]:focus {
+  background-color: #212529 !important;
+  color: #f8f9fa !important;
+  border-color: #0d6efd !important;
+  -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+  -webkit-text-fill-color: #f8f9fa !important;
+}
+
+/* Post show page - links in post actions */
+body.posts-controller.show-action a.text-light,
+body.posts-controller.show-action a.text-light:hover,
+body.posts-controller.show-action a.text-light:focus,
+body.posts-controller.show-action a.text-light:active {
+  color: #f8f9fa !important;
+  text-decoration: none !important;
+}
+
+/* Post comment links - keep white color on hover */
+a.post-comment-link,
+a.post-comment-link:hover,
+a.post-comment-link:focus,
+a.post-comment-link:active,
+a.post-comment-link:visited {
+  color: #f8f9fa !important;
+  text-decoration: none !important;
+}
+
+/* Category checkbox labels - interactive badges */
+.category-checkbox-label {
+  transition: all 0.3s ease !important;
+}
+
+.category-checkbox-label:hover {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3) !important;
+}
+
+.form-check-input:checked + .category-checkbox-label {
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+  color: #ffffff !important;
+}
+
+/* Fix text visibility for hints and small text */
+.profile-form small.text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.875rem !important;
+}
+
+.profile-form .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Alert styles */
+.alert-info {
+  background-color: rgba(13, 202, 240, 0.1) !important;
+  border-color: rgba(13, 202, 240, 0.3) !important;
+  color: #0dcaf0 !important;
+}
+
+/* Colored hint text */
+.profile-form .text-info {
+  color: #17a2b8 !important;
+  font-size: 0.875rem !important;
+}
+
+.profile-form .text-warning {
+  color: #ffc107 !important;
+  font-size: 0.875rem !important;
+}
+
+.profile-form .text-success {
+  color: var(--accent-color) !important;
+  font-size: 0.875rem !important;
+}
+
+/* Icon spacing in hints */
+.profile-form small i {
+  opacity: 0.8 !important;
+}
+
+/* Force dark background */
+body {
+  background-color: #000000 !important;
+  color: #fafafa !important;
+}
+
+/* Ensure CSS variables are applied */
+* {
+  color: inherit;
+}
+
+/* Fix gallery title */
+h2.mb-4 {
+  color: #ffffff !important;
+}
+
+/* Ensure all headings use the theme color */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color) !important;
+}
+
+/* Ensure labels use proper color */
+label {
+  color: var(--default-color) !important;
+}
+
+/* Ensure form elements have proper styling */
+.form-control, input[type="text"], input[type="email"], input[type="password"], textarea {
+  background-color: var(--surface-color) !important;
+  color: var(--default-color) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.form-control:focus, input:focus, textarea:focus {
+  background-color: var(--surface-color) !important;
+  color: var(--default-color) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(39, 167, 118, 0.25) !important;
+}
+
+/* Fix placeholder text color */
+.form-control::placeholder, input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}

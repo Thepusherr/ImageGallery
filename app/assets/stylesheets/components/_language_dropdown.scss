@@ -1,0 +1,21 @@
+/* Language dropdown styles */
+.dropdown-menu-dark {
+  background-color: #212529 !important;
+  border: 1px solid #495057 !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5) !important;
+}
+
+.dropdown-item.text-light {
+  color: #f8f9fa !important;
+}
+
+.dropdown-item.text-light:hover,
+.dropdown-item.text-light:focus {
+  background-color: #495057 !important;
+  color: #ffffff !important;
+}
+
+.dropdown-item.text-light.active {
+  background-color: #0d6efd !important;
+  color: #ffffff !important;
+}

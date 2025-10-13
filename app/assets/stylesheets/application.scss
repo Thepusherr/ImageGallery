@@ -32,6 +32,16 @@
 @import "components/swirl_effect";
 @import "components/buttons/index";
 
+// New components from _head.html.haml refactoring
+@import "components/language_dropdown";
+@import "components/navigation";
+@import "components/breadcrumbs";
+@import "components/page_content";
+@import "components/avatar_upload";
+@import "components/glowing_border";
+@import "components/forms";
+@import "components/buttons";
+
 
 
 // html, body {
