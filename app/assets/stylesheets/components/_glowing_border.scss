@@ -1,10 +1,47 @@
+/* CSS Properties for better browser support */
+@property --glow-deg {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --clr-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: red;
+}
+
+@property --clr-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: yellow;
+}
+
+@property --clr-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: green;
+}
+
+@property --clr-4 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: blue;
+}
+
+@property --clr-5 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: purple;
+}
+
 /* Glowing Border Effects */
 .glowing-border {
-  --glow-deg: 0deg;
-  --gradient-glow: #ff6b6b, #ffd93d, #6bcf7f, #4d96ff, #9c88ff, #ff6b6b;
+  --gradient-glow: var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4), var(--clr-5), var(--clr-1);
   --border-width: 3px;
   --glow-size: 1rem;
   --glow-intensity: 0.125;
+  --surface: rgba(26, 26, 26, 0.8);
 
   margin-block: 3rem;
   padding: 4rem 3rem;
@@ -13,7 +50,7 @@
   border: var(--border-width) solid transparent;
   border-left: 0;
   border-radius: 0 100vw 100vw 0;
-  background: linear-gradient(rgba(26, 26, 26, 0.8) 0 0) padding-box,
+  background: linear-gradient(var(--surface) 0 0) padding-box,
     conic-gradient(from var(--glow-deg), var(--gradient-glow)) border-box;
 
   position: relative;
@@ -29,6 +66,40 @@
   }
 }
 
+/* Fallback animation for browsers that don't support @property */
+@supports not (background: conic-gradient(from var(--glow-deg), red)) {
+  .glowing-border {
+    animation: glow-fallback 10s infinite linear;
+  }
+
+  @keyframes glow-fallback {
+    0% {
+      background: linear-gradient(var(--surface) 0 0) padding-box,
+        conic-gradient(from 0deg, red, yellow, green, blue, purple, red) border-box;
+    }
+    20% {
+      background: linear-gradient(var(--surface) 0 0) padding-box,
+        conic-gradient(from 72deg, red, yellow, green, blue, purple, red) border-box;
+    }
+    40% {
+      background: linear-gradient(var(--surface) 0 0) padding-box,
+        conic-gradient(from 144deg, red, yellow, green, blue, purple, red) border-box;
+    }
+    60% {
+      background: linear-gradient(var(--surface) 0 0) padding-box,
+        conic-gradient(from 216deg, red, yellow, green, blue, purple, red) border-box;
+    }
+    80% {
+      background: linear-gradient(var(--surface) 0 0) padding-box,
+        conic-gradient(from 288deg, red, yellow, green, blue, purple, red) border-box;
+    }
+    100% {
+      background: linear-gradient(var(--surface) 0 0) padding-box,
+        conic-gradient(from 360deg, red, yellow, green, blue, purple, red) border-box;
+    }
+  }
+}
+
 .glowing-border::before,
 .glowing-border::after {
   content: "";
@@ -38,7 +109,7 @@
 
 .glowing-border::before {
   z-index: -1;
-  background: rgba(26, 26, 26, 0.9);
+  background: var(--surface);
   inset: 0.5rem;
   scale: 1.2 1;
   transform-origin: right;
