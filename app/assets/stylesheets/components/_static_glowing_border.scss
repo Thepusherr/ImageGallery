@@ -1,0 +1,128 @@
+/* Static Glowing Border Effects - No Animation */
+.static-glowing-border {
+  --glow-deg: 45deg;
+  --gradient-glow: #ff6b6b, #ffd93d, #6bcf7f, #4d96ff, #9c88ff, #ff6b6b;
+  --border-width: 3px;
+  --glow-size: 1rem;
+  --glow-intensity: 0.125;
+
+  margin-block: 3rem;
+  margin-left: 0;
+  padding: 4rem 3rem;
+  max-width: 60ch;
+
+  border: var(--border-width) solid transparent;
+  border-left: 0;
+  border-radius: 0 100vw 100vw 0;
+  background: linear-gradient(rgba(26, 26, 26, 0.8) 0 0) padding-box,
+    conic-gradient(from var(--glow-deg), var(--gradient-glow)) border-box;
+
+  position: relative;
+  isolation: isolate;
+  color: #f8f9fa;
+
+  /* No animation - static glow */
+}
+
+.static-glowing-border::before,
+.static-glowing-border::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+}
+
+.static-glowing-border::before {
+  z-index: -1;
+  background: rgba(26, 26, 26, 0.95);
+  inset: 3px;
+  transform-origin: right;
+}
+
+.static-glowing-border::after {
+  z-index: -2;
+  inset: -0.8rem;
+  background: conic-gradient(from var(--glow-deg), var(--gradient-glow));
+  filter: blur(calc(var(--glow-size) * 0.8));
+  opacity: calc(var(--glow-intensity) * 0.8);
+}
+
+.static-glowing-border.right {
+  margin-left: auto;
+  margin-right: 0;
+  border-radius: 100vw 0 0 100vw;
+  border: var(--border-width) solid transparent;
+  border-right: 0;
+}
+
+.static-glowing-border.right::before {
+  transform-origin: left;
+}
+
+.static-glowing-border h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.static-glowing-border p {
+  margin: 0;
+  line-height: 1.6;
+  color: #e9ecef;
+}
+
+/* Variations with different glow angles */
+.static-glowing-border.angle-90 {
+  --glow-deg: 90deg;
+}
+
+.static-glowing-border.angle-135 {
+  --glow-deg: 135deg;
+}
+
+.static-glowing-border.angle-180 {
+  --glow-deg: 180deg;
+}
+
+.static-glowing-border.angle-225 {
+  --glow-deg: 225deg;
+}
+
+.static-glowing-border.angle-270 {
+  --glow-deg: 270deg;
+}
+
+.static-glowing-border.angle-315 {
+  --glow-deg: 315deg;
+}
+
+/* Full border variant - complete border without cuts */
+.static-glowing-border.full-border {
+  border: var(--border-width) solid transparent;
+  border-radius: 20px;
+  margin-inline: auto;
+}
+
+.static-glowing-border.full-border::before {
+  transform-origin: center;
+  inset: 3px;
+}
+
+.static-glowing-border.full-border::after {
+  inset: -0.8rem;
+  filter: blur(calc(var(--glow-size) * 0.8));
+  opacity: calc(var(--glow-intensity) * 0.8);
+}
+
+/* Hover effect for interactivity */
+.static-glowing-border:hover {
+  --glow-intensity: 0.4;
+  --glow-size: 1.5rem;
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.static-glowing-border:hover::after {
+  transition: all 0.3s ease;
+}
