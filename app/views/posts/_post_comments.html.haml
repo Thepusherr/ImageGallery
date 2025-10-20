@@ -10,7 +10,6 @@
     -# Кнопка для скрытия/раскрытия комментариев
     %div{"data-controller" => "comments-toggle"}
       %a.d-flex.align-items-center.gap-2{"data-bs-toggle" => "collapse", "data-bs-target" => "#post#{post.id}commentsCollapse", "data-action" => "click->comments-toggle#toggle", href: "#", style: "text-decoration: none;", "aria-expanded" => "false", "aria-controls" => "post#{post.id}commentsCollapse"}
-        %i.bi.bi-chat.text-light{style: "font-size: 1.1rem;"}
         %small.text-secondary
           View all #{pluralize(comments_count, "comments")}
         %i.bi.bi-chevron-down.text-secondary.ms-auto{"data-comments-toggle-target" => "chevron", style: "font-size: 0.8rem;"}
