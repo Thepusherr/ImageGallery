@@ -1,8 +1,6 @@
 # Authentication helper for tests
 # This file provides additional helper methods for authentication in tests
 
-# This file provides additional helper methods for authentication in tests
-
 module AuthHelper
   # Sign in a user for controller tests
   def sign_in_user(user = nil)

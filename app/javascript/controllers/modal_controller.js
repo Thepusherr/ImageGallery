@@ -11,7 +11,6 @@ export default class extends Controller {
     const modalElement = document.querySelector(modalId)
     
     if (modalElement) {
-      // Используем Bootstrap API напрямую
       const modal = new bootstrap.Modal(modalElement)
       modal.show()
     }

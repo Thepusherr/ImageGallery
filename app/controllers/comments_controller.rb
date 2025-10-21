@@ -4,14 +4,12 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
-    # Для тестов
     if params[:post_id]
       @post = Post.find(params[:post_id])
     end
   end
 
   def create
-    # Получаем текст комментария из параметров формы
     text = params[:text]
 
     Rails.logger.info("Creating comment for post #{@post.id} by user #{current_user.id}: #{text}")
@@ -43,7 +41,6 @@ class CommentsController < ApplicationController
         end
       end
 
-      # Принудительно перезагружаем пост с комментариями
       @post = Post.find(@post.id)
       @post.reload
 
@@ -54,7 +51,7 @@ class CommentsController < ApplicationController
       })
 
       respond_to do |format|
-        format.turbo_stream # Будет использовать create.turbo_stream.haml
+        format.turbo_stream
         format.html { redirect_back(fallback_location: @post) }
       end
     else

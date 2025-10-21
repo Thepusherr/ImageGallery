@@ -5,7 +5,7 @@ class Like < ApplicationRecord
   validates :user_id, uniqueness: { scope: :post_id }
 
   after_create :log_like_event
-  # after_create :send_like_notification  # Временно отключено из-за проблем с Redis
+  # after_create :send_like_notification 
 
   def self.ransackable_associations(auth_object = nil)
     ["post", "user"]

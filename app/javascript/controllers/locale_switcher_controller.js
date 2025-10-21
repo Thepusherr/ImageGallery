@@ -26,23 +26,20 @@ export default class extends Controller {
       console.log('Response data:', data);
 
       if (data.status === 'success') {
-        // Обновляем кнопку языка
+
         const dropdownToggle = document.querySelector('.dropdown-toggle');
         if (dropdownToggle) {
           dropdownToggle.innerHTML = '<i class="bi bi-globe"></i> ' + locale.toUpperCase();
         }
 
-        // Обновляем активный класс
         document.querySelectorAll('.dropdown-item').forEach(item => {
           item.classList.remove('active');
         });
 
-        // Добавляем активный класс к выбранному элементу
         if (event && event.target) {
           event.target.classList.add('active');
         }
 
-        // Обновляем переводы на странице
         this.updatePageTranslations(data.translations);
 
         console.log('Language switched successfully');
@@ -60,7 +57,6 @@ export default class extends Controller {
   updatePageTranslations(translations) {
     console.log('Updating translations:', translations);
 
-    // Обновляем заголовок галереи
     const galleryTitle = document.querySelector('h2.mb-4');
     console.log('Gallery title element:', galleryTitle);
     if (galleryTitle && translations.gallery_title) {
@@ -68,7 +64,6 @@ export default class extends Controller {
       console.log('Updated gallery title to:', translations.gallery_title);
     }
 
-    // Обновляем время постов с новыми переводами
     const timeUpdatesController = this.application.getControllerForElementAndIdentifier(
       document.querySelector('[data-controller*="time-updates"]'), 
       "time-updates"
@@ -77,10 +72,8 @@ export default class extends Controller {
       timeUpdatesController.updatePostTimesWithLocale(translations.locale);
     }
 
-    // Обновляем навигацию
     this.updateNavigation(translations);
 
-    // Обновляем пользовательский dropdown
     this.updateUserDropdown(translations);
   }
 
@@ -121,7 +114,6 @@ export default class extends Controller {
 
   updateUserDropdown(translations) {
     if (translations.user) {
-      // Обновляем кнопки входа/регистрации
       const signInBtn = document.querySelector('a[href*="sign_in"] span, a[href*="sign_in"]');
       if (signInBtn && translations.user.sign_in) {
         if (signInBtn.tagName === 'SPAN') {
@@ -144,7 +136,6 @@ export default class extends Controller {
         console.log('Updated sign up button');
       }
 
-      // Обновляем dropdown пользователя
       const profileLink = document.querySelector('.dropdown-item[href*="profile"]');
       if (profileLink && translations.navigation.profile) {
         const textNode = Array.from(profileLink.childNodes).find(node => node.nodeType === 3 && node.textContent.trim());

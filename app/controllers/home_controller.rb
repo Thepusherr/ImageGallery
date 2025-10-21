@@ -16,14 +16,12 @@ class HomeController < ApplicationController
         @posts = posts_query.to_a
       end
     rescue => e
-      # В случае ошибки, просто создаем пустой массив
       @posts = []
       Rails.logger.error("Error loading posts: #{e.message}")
     end
   end
 
   def index
-    # Метод load_posts уже вызван через before_action
   end
 
   def about

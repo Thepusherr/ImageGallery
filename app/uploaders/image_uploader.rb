@@ -32,17 +32,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # Тумба маленькая (thumbnail) - используется в админ панели и на аватарах пользователей
+
   version :thumb do
     process resize_to_fit: [150, 150]
   end
   
-  # Тумба средняя - используется как preview на categories/index
   version :medium do
     process resize_to_fit: [400, 400]
   end
   
-  # Полноразмерная - используется на /image/show
   version :large do
     process resize_to_fit: [1200, 1200]
   end

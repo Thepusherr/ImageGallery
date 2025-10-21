@@ -53,7 +53,6 @@ class PostsController < ApplicationController
   end
 
   def time_update
-    # Устанавливаем локаль если передана
     if params[:locale].present?
       I18n.locale = params[:locale]
     end
