@@ -7,6 +7,20 @@
       %ul
         %li
           = link_to t('navigation.home'), home_starter_page_path
+        %li.dropdown
+          = link_to posts_path, class: (controller_name == 'posts') ? "active" : "" do
+            %span= t('posts.posts')
+            %i.bi.bi-chevron-down.toggle-dropdown
+          %ul
+            %li
+              = link_to t('posts.posts'), posts_path
+            - if user_signed_in?
+              %li
+                = link_to t('posts.create_new'), new_post_path
+              %li
+                %hr.dropdown-divider
+              %li
+                = link_to t('navigation.my_posts'), posts_path(user_id: current_user.id)
         %li
           = link_to t('navigation.profile'), profile_path
         %li
@@ -71,7 +85,7 @@
                 %i.bi.bi-person.me-2
                 = t('navigation.profile')
             %li
-              = link_to my_posts_path, class: "dropdown-item text-light" do
+              = link_to posts_path(user_id: current_user.id), class: "dropdown-item text-light" do
                 %i.bi.bi-images.me-2
                 = t('navigation.my_posts')
             %li

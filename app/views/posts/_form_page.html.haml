@@ -16,8 +16,9 @@
         %label.form-label.fw-bold.text-light
           %i.fas.fa-image.me-2
           Post Image *
-        = form.file_field :image, multiple: false, class: "form-control bg-dark text-light border-secondary", required: true, accept: "image/*", "data-image-preview-input-target" => "input"
-        .form-text.text-muted Choose an image for your post
+        = form.file_field :image, multiple: false, class: "form-control bg-dark text-light border-secondary", required: !post.persisted?, accept: "image/*", "data-image-preview-input-target" => "input"
+        .form-text.text-muted
+          = post.persisted? ? "Choose a new image to replace the current one (optional)" : "Choose an image for your post"
 
       .mb-4
         %label.form-label.fw-bold.text-light
@@ -69,4 +70,4 @@
     .col-12
       .d-grid.gap-2.d-md-flex.justify-content-md-end
         = link_to "Cancel", posts_path, class: "btn btn-outline-secondary me-md-2"
-        = form.submit "Create Post", class: "btn btn-primary btn-lg px-4"
+        = form.submit post.persisted? ? "Update Post" : "Create Post", class: "btn btn-primary btn-lg px-4"

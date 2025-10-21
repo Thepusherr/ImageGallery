@@ -11,7 +11,10 @@
               = "#{@selected_user.name || @selected_user.email}'s Posts"
             - else
               All Posts
-          = link_to 'New Post', new_post_path, class: "btn btn-primary"
+          - if user_signed_in?
+            = link_to new_post_path, class: "btn btn-primary d-flex align-items-center" do
+              %i.bi.bi-plus-circle.me-2
+              New Post
 
         - if @posts&.any?
           .row.gy-4
@@ -47,4 +50,12 @@
                 = "#{@selected_user.name || @selected_user.email} hasn't posted anything yet."
               - else
                 Be the first to share something!
-            = link_to 'Create Post', new_post_path, class: "btn btn-primary"
+            - if user_signed_in?
+              = link_to new_post_path, class: "btn btn-primary" do
+                %i.bi.bi-plus-circle.me-2
+                Create Post
+
+/ Floating Action Button for mobile
+- if user_signed_in?
+  = link_to new_post_path, class: "btn btn-primary rounded-circle position-fixed d-md-none", style: "bottom: 20px; right: 20px; width: 60px; height: 60px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);", title: t('posts.create_new') do
+    %i.bi.bi-plus.fs-4

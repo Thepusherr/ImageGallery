@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   get 'home/services'
 
   get 'profile', to: 'profile#index'
-  get 'my_posts', to: 'users/posts#my_posts'
   get "up" => "rails/health#show", as: :rails_health_check
   post "toggle_like", to: "likes#toggle_like", as: :toggle_like
   post "test_turbo", to: "home#test_turbo"

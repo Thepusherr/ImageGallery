@@ -63,7 +63,7 @@ en:
     comments: "comments"
     new_post: "New Post"
     show_post: "Show Post"
-    all_posts: "All Posts"
+    posts: "Posts"
     no_posts: "No posts"
     created_successfully: "Post was successfully created"
     updated_successfully: "Post was successfully updated"

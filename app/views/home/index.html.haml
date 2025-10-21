@@ -45,3 +45,8 @@
     %h1 Ask anything
     %p Trying to wrap your head around a new topic? Looking for specific recommendations? Need help deciding between two products? Just ask. We'll probably get it wrong, but we'll sure sound like we know what we're talking about!
 
+/ Floating Action Button for mobile
+- if user_signed_in?
+  = link_to new_post_path, class: "btn btn-primary rounded-circle position-fixed d-md-none", style: "bottom: 20px; right: 20px; width: 60px; height: 60px; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);", title: t('posts.create_new') do
+    %i.bi.bi-plus.fs-4
+

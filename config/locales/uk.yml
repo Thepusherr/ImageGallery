@@ -34,7 +34,7 @@ uk:
     comments: "коментарів"
     new_post: "Новий пост"
     show_post: "Показати пост"
-    all_posts: "Всі пости"
+    posts: "Пости"
     no_posts: "Немає постів"
     created_successfully: "Пост успішно створено"
     updated_successfully: "Пост успішно оновлено"

@@ -34,7 +34,7 @@ ru:
     comments: "комментариев"
     new_post: "Новый пост"
     show_post: "Показать пост"
-    all_posts: "Все посты"
+    posts: "Посты"
     no_posts: "Нет постов"
     created_successfully: "Пост успешно создан"
     updated_successfully: "Пост успешно обновлен"
