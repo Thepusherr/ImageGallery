@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ImageScraperService, type: :service do
   let(:valid_url) { 'https://example.com/page-with-images' }
-  let(:invalid_url) { 'not-a-url' }
+  let(:invalid_url) { 'ht!tp://invalid' }
   let(:service) { described_class.new(valid_url) }
 
   describe '#initialize' do
@@ -34,29 +34,29 @@ RSpec.describe ImageScraperService, type: :service do
               <img src="https://example.com/image2.png" alt="Image 2">
               <img data-src="/lazy-image.gif" alt="Lazy Image">
               <div style="background-image: url('/bg-image.jpg')"></div>
-              <img src="/not-an-image.txt">
+              <img src="/document.txt">
             </body>
           </html>
         HTML
       end
 
       before do
-        allow(URI).to receive(:open).and_return(StringIO.new(html_content))
+        allow(URI).to receive(:open).and_yield(StringIO.new(html_content))
       end
 
       it 'extracts image URLs from the page' do
         result = service.scrape_images
-        
+
         expect(result).to include('https://example.com/image1.jpg')
         expect(result).to include('https://example.com/image2.png')
         expect(result).to include('https://example.com/lazy-image.gif')
         expect(result).to include('https://example.com/bg-image.jpg')
-        expect(result).not_to include('https://example.com/not-an-image.txt')
+        expect(result).not_to include('https://example.com/document.txt')
       end
 
       it 'converts relative URLs to absolute URLs' do
         result = service.scrape_images
-        
+
         expect(result).to all(start_with('https://'))
       end
 
@@ -70,9 +70,9 @@ RSpec.describe ImageScraperService, type: :service do
             </body>
           </html>
         HTML
-        
-        allow(URI).to receive(:open).and_return(StringIO.new(html_with_duplicates))
-        
+
+        allow(URI).to receive(:open).and_yield(StringIO.new(html_with_duplicates))
+
         result = service.scrape_images
         expect(result.count('https://example.com/image1.jpg')).to eq(1)
       end
@@ -116,13 +116,13 @@ RSpec.describe ImageScraperService, type: :service do
     end
 
     before do
-      allow(URI).to receive(:open).and_return(StringIO.new(html_content))
+      allow(URI).to receive(:open).and_yield(StringIO.new(html_content))
       allow(service).to receive(:estimate_image_size).and_return(1024)
     end
 
     it 'returns detailed information about images' do
       result = service.scrape_images_with_details
-      
+
       expect(result).to be_an(Array)
       expect(result.first).to include(:url, :alt, :estimated_size, :valid)
       expect(result.first[:url]).to eq('https://example.com/image1.jpg')

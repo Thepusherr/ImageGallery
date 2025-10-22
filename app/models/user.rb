@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :posts
   has_many :categories
+  has_many :comments, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
   has_many :subscribed_categories, through: :subscriptions, source: :category
   has_many :views, dependent: :destroy

@@ -52,7 +52,10 @@ RSpec.describe RecaptchaService, type: :service do
 
     context 'when user has posted 3 or more comments in last 10 minutes' do
       before do
-        allow(user.comments).to receive_message_chain(:where, :count).and_return(3)
+        allow(Rails.env).to receive(:test?).and_return(false)
+        # Create a post and 3 comments by the user
+        post = create(:post)
+        create_list(:comment, 3, user: user, post: post)
       end
 
       it 'returns true' do
@@ -62,7 +65,10 @@ RSpec.describe RecaptchaService, type: :service do
 
     context 'when user has posted fewer than 3 comments in last 10 minutes' do
       before do
-        allow(user.comments).to receive_message_chain(:where, :count).and_return(2)
+        allow(Rails.env).to receive(:test?).and_return(false)
+        # Create a post and 2 comments by the user
+        post = create(:post)
+        create_list(:comment, 2, user: user, post: post)
       end
 
       it 'returns false' do

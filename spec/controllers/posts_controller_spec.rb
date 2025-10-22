@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   let(:user) { create(:user) }
-  let(:post_obj) { create(:post, user: user) }
+  let(:category) { create(:category, user: user) }
+  let(:post_obj) do
+    post = create(:post, user: user)
+    post.categories << category
+    post
+  end
 
   describe "GET #index" do
     it "returns a successful response" do
@@ -16,6 +21,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it "assigns @posts" do
+      post_obj # ensure post is created with category
       get :index
       expect(assigns(:posts)).to include(post_obj)
     end
