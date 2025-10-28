@@ -9,7 +9,6 @@ RSpec.describe "posts/index", type: :view do
       Post.create!(user: user, title: "Test Post 2", text: "Test content 2")
     ])
     
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end
 

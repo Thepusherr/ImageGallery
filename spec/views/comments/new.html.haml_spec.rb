@@ -6,7 +6,6 @@ RSpec.describe "comments/new", type: :view do
     post_obj = FactoryBot.create(:post, user: user)
     assign(:comment, Comment.new(user: user, post: post_obj, text: "Test comment"))
     assign(:post, post_obj)
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end
 

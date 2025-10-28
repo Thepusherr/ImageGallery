@@ -6,11 +6,9 @@ RSpec.describe "posts/show", type: :view do
     @post = Post.create!(user: user, title: "Test Post", text: "Test content")
     assign(:post, @post)
     
-    # Создаем комментарий для формы
     @comment = Comment.new(post: @post)
     assign(:comment, @comment)
     
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end
 

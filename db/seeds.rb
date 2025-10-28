@@ -14,7 +14,6 @@ admin = AdminUser.create!(email: 'admin@example.com', password: '123123', passwo
 
 #user2.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
 
-# Удаляем существующих пользователей, чтобы избежать дублирования
 User.where(email: ['spunkspunkik@gmail.com', 'spunkspunkik2@gmail.com']).destroy_all
 
 user1 = User.new(name: 'John', surname: 'Jons', username: 'johnjons', email: 'spunkspunkik@gmail.com', password: '123123', password_confirmation: '123123')

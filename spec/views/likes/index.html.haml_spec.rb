@@ -12,7 +12,6 @@ RSpec.describe "likes/index", type: :view do
       Like.create!(user: user2, post: post2)
     ])
     
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user1)
   end
 

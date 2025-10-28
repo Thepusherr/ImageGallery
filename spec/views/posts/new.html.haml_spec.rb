@@ -5,7 +5,6 @@ RSpec.describe "posts/new", type: :view do
     user = FactoryBot.create(:user)
     assign(:post, Post.new(user: user, title: "", text: ""))
     
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end
 

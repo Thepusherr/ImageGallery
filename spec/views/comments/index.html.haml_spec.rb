@@ -10,7 +10,6 @@ RSpec.describe "comments/index", type: :view do
       Comment.create!(user: user, post: post_obj, text: "Test comment 2")
     ])
     
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end
 

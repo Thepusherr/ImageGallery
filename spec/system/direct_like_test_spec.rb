@@ -22,13 +22,11 @@ RSpec.describe 'Direct Like Test', type: :system, js: true do
   before do
     driven_by(:selenium_chrome_headless)
     
-    # Войти в систему
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password123'
     click_button 'Log in'
     
-    # Перейти на главную страницу
     visit root_path
   end
 
@@ -36,31 +34,24 @@ RSpec.describe 'Direct Like Test', type: :system, js: true do
     skip 'System test requires proper UI elements and browser setup'
     puts "=== DIRECT LIKE TEST ==="
 
-    # Проверить, что страница загрузилась
     expect(page).to have_content('ImageGallery')
     puts "Page loaded successfully"
 
-    # Найти кнопку лайка
     like_button = find("button[onclick*='toggleLike']", match: :first)
     puts "Found like button: #{like_button.inspect}"
     
-    # Найти иконку сердца
     heart_icon = like_button.find('i')
     initial_classes = heart_icon[:class]
     puts "Initial heart icon classes: #{initial_classes}"
     
-    # Кликнуть на кнопку лайка
     puts "Clicking like button..."
     like_button.click
     
-    # Подождать немного для обработки
     sleep 3
-    
-    # Проверить, что что-то изменилось на странице
+  
     current_url_after_click = current_url
     puts "URL after like click: #{current_url_after_click}"
     
-    # Проверить, что лайк был создан в базе данных (независимо от UI)
     post.reload
     likes_count = post.likes.count
     puts "Likes count in database: #{likes_count}"
@@ -68,18 +59,15 @@ RSpec.describe 'Direct Like Test', type: :system, js: true do
     user_like = post.likes.find_by(user: user)
     puts "User like exists: #{user_like.present?}"
     
-    # Если лайк не создался, попробуем понять почему
     if likes_count == 0
       puts "Like was not created. Let's check what happened..."
       
-      # Проверить логи браузера
       logs = page.driver.browser.logs.get(:browser)
       puts "Browser console logs:"
       logs.each do |log|
         puts "  #{log.level}: #{log.message}"
       end
       
-      # Попробовать создать лайк напрямую через модель (отключив callbacks)
       puts "Creating like directly through model..."
       Like.skip_callback(:create, :after, :log_like_event)
       Like.skip_callback(:create, :after, :send_like_notification)
@@ -92,8 +80,7 @@ RSpec.describe 'Direct Like Test', type: :system, js: true do
       post.reload
       puts "Likes count after direct creation: #{post.likes.count}"
     end
-    
-    # Основная проверка - лайк должен быть создан
+
     expect(likes_count).to be > 0
     expect(user_like).to be_present
   end

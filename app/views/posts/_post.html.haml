@@ -38,7 +38,6 @@
       = render "posts/post_comments", post: post
       = render "posts/comment_form", post: post
 
-/ Modal для комментариев (вне области Turbo Stream обновлений)
 .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "post#{post.id}_commentsModal", id: "post#{post.id}_commentsModal", tabindex: "-1"}
   .modal-dialog
     .modal-content.bg-dark.text-light

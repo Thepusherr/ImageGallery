@@ -9,7 +9,6 @@ RSpec.describe "likes/edit", type: :view do
 
   before(:each) do
     assign(:like, like)
-    # Имитируем current_user для представления
     allow(view).to receive(:current_user).and_return(user)
   end
 

@@ -22,13 +22,11 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
   before do
     driven_by(:selenium_chrome_headless)
     
-    # Войти в систему
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password123'
     click_button 'Log in'
     
-    # Перейти на главную страницу
     visit root_path
   end
 
@@ -36,20 +34,16 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
     skip 'System test requires proper UI elements and browser setup'
     puts "=== SIMPLE LIKE TEST ==="
 
-    # Проверить, что страница загрузилась
     expect(page).to have_content('ImageGallery')
     puts "Page loaded successfully"
 
-    # Найти кнопку лайка
     like_button = find("button[onclick*='toggleLike']", match: :first)
     puts "Found like button: #{like_button.inspect}"
     
-    # Проверить, что JavaScript функция существует
     js_result = page.evaluate_script('typeof window.toggleLike')
     puts "toggleLike function type: #{js_result}"
     expect(js_result).to eq('function')
     
-    # Проверить CSRF токен
     csrf_meta = page.evaluate_script("document.querySelector('meta[name=\"csrf-token\"]')")
     puts "CSRF meta tag present: #{csrf_meta.present?}"
 
@@ -61,14 +55,11 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
       puts "CSRF meta tag not found - this is expected in test environment"
     end
     
-    # Попробовать прямой HTTP запрос вместо JS
     puts "Making direct HTTP request..."
 
-    # Получить текущие куки сессии
     session_cookie = page.driver.browser.manage.cookie_named('_image_gallery_session')
     puts "Session cookie: #{session_cookie.present?}"
 
-    # Сделать прямой запрос
     require 'net/http'
     require 'uri'
 
@@ -83,7 +74,6 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
     response = http.request(request)
     puts "HTTP response code: #{response.code}"
 
-    # Проверить, что лайк был создан
     post.reload
     likes_count = post.likes.count
     puts "Likes count after HTTP request: #{likes_count}"

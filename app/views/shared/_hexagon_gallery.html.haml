@@ -10,22 +10,10 @@
 - size ||= '100px'
 - css_class ||= ''
 
--# Debug info
-%div{style: "background: yellow; padding: 10px; margin: 10px; border: 2px solid red;"}
-  %strong DEBUG HEXAGON GALLERY:
-  %br
-  Images count: #{images.count}
-  %br
-  Images class: #{images.class}
-  %br
-  First 3 images: #{images.first(3).inspect}
-
 - if images.any?
   %article.grid-gallery{class: css_class, style: "--size: #{size}"}
     - images.each_with_index do |image, index|
       - shift_class = (index + 1) % 5 == 4 ? "shifted" : ""
-      %div{style: "color: blue; font-size: 12px;"}
-        Image #{index + 1}: #{image.inspect[0..50]}... (class: #{shift_class})
       - if image.is_a?(String)
         %img{src: image, alt: "Gallery image", tabindex: "0", class: shift_class}
       - elsif image.respond_to?(:url)

@@ -6,7 +6,7 @@ class HomeController < ApplicationController
       posts_query = if current_user
                       Post.where(user: current_user).order(created_at: :desc)
                     else
-                      Post.where(visibility: 0).order(created_at: :desc)
+                      Post.where(visibility: 'visible').order(created_at: :desc)
                     end
       
       # Use pagination if available, otherwise just get all posts
@@ -50,7 +50,7 @@ class HomeController < ApplicationController
       @selected_category = nil
     end
   end
-
+  
   def gallery_single
   end
 
@@ -68,5 +68,4 @@ class HomeController < ApplicationController
       format.html { redirect_to root_path, notice: "Turbo test completed" }
     end
   end
-
 end

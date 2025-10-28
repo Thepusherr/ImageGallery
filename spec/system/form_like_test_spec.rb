@@ -22,21 +22,17 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
   before do
     driven_by(:selenium_chrome_headless)
 
-    # Отключить callbacks для лайков в тестах
     Like.skip_callback(:create, :after, :log_like_event)
     
-    # Войти в систему
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password123'
     click_button 'Log in'
-    
-    # Перейти на главную страницу
+
     visit root_path
   end
 
   after do
-    # Восстановить callbacks
     Like.set_callback(:create, :after, :log_like_event)
   end
 
@@ -44,35 +40,27 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
     skip 'System test requires proper UI elements and browser setup'
     puts "=== FORM LIKE TEST ==="
 
-    # Проверить, что страница загрузилась
     expect(page).to have_content('ImageGallery')
     puts "Page loaded successfully"
 
-    # Найти форму лайка
     like_form = find("form[id*='like-form']", match: :first)
     puts "Found like form: #{like_form.inspect}"
     
-    # Найти кнопку лайка в форме
     like_button = like_form.find("button[type='submit']")
     puts "Found like button: #{like_button.inspect}"
     
-    # Найти иконку сердца
     heart_icon = like_button.find('i')
     initial_classes = heart_icon[:class]
     puts "Initial heart icon classes: #{initial_classes}"
     
-    # Проверить начальное состояние в базе данных
     initial_likes_count = post.likes.count
     puts "Initial likes count: #{initial_likes_count}"
     
-    # Кликнуть на кнопку лайка
     puts "Clicking like button..."
     like_button.click
     
-    # Подождать обработки запроса
     sleep 3
     
-    # Проверить, что лайк был создан в базе данных
     post.reload
     final_likes_count = post.likes.count
     puts "Final likes count: #{final_likes_count}"
@@ -80,7 +68,6 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
     user_like = post.likes.find_by(user: user)
     puts "User like exists: #{user_like.present?}"
     
-    # Проверить, что иконка изменилась (если Turbo работает)
     begin
       updated_heart_icon = find("form[id*='like-form'] button i", match: :first)
       final_classes = updated_heart_icon[:class]
@@ -95,7 +82,6 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
       puts "Could not check heart icon change: #{e.message}"
     end
     
-    # Основная проверка - лайк должен быть создан
     expect(final_likes_count).to be > initial_likes_count
     expect(user_like).to be_present
     
