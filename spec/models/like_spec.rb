@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
@@ -17,7 +19,7 @@ RSpec.describe Like, type: :model do
 
   it 'is not valid without a post' do
     user = User.create(email: 'test@example.com', password: 'password')
-    post = Post.create(title: 'Test Post', text: 'Test Content', user_id: user.id)
+    Post.create(title: 'Test Post', text: 'Test Content', user_id: user.id)
     like = Like.new(user: user, post: nil)
     expect(like).to_not be_valid
   end

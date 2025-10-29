@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -11,8 +13,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :surname, :email, :password, :avatar, :password_confirmation])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :surname, :email, :password, :avatar, :password_confirmation])
+    devise_parameter_sanitizer.permit(:sign_up,
+                                      keys: %i[name surname email password avatar password_confirmation])
+    devise_parameter_sanitizer.permit(:account_update,
+                                      keys: %i[name surname email password avatar password_confirmation])
   end
 
   private
@@ -22,17 +26,17 @@ class ApplicationController < ActionController::Base
       # For logged-in users: show their categories and subscriptions first, then popular ones
       user_categories = current_user.categories.where(visibility: :visible)
       subscribed_categories = current_user.subscriptions.includes(:category)
-                                         .map(&:category)
-                                         .select { |cat| cat.visibility == 'visible' }
+                                          .map(&:category)
+                                          .select { |cat| cat.visibility == 'visible' }
 
       user_relevant_categories = (user_categories + subscribed_categories).uniq
 
       # Fill remaining slots with popular categories
       remaining_slots = 8 - user_relevant_categories.size
-      if remaining_slots > 0
+      if remaining_slots.positive?
         popular_categories = Category.where(visibility: :visible)
-                                   .where.not(id: user_relevant_categories.map(&:id))
-                                   .limit(remaining_slots)
+                                     .where.not(id: user_relevant_categories.map(&:id))
+                                     .limit(remaining_slots)
         @navbar_categories = user_relevant_categories + popular_categories.to_a
       else
         @navbar_categories = user_relevant_categories.first(8)
@@ -41,7 +45,7 @@ class ApplicationController < ActionController::Base
       # For guests: show popular categories
       @navbar_categories = Category.where(visibility: :visible).limit(8)
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Failed to load navbar categories: #{e.message}")
     @navbar_categories = []
   end
@@ -56,16 +60,16 @@ class ApplicationController < ActionController::Base
     return if Rails.env.test? # Skip tracking in test environment
 
     # Only track if UserEventLogger is defined
-    if defined?(UserEventLogger)
-      begin
-        UserEventLogger.log(
-          user: current_user,
-          action_type: 'navigation',
-          url: request.fullpath
-        )
-      rescue => e
-        Rails.logger.error("Failed to log navigation event: #{e.message}")
-      end
+    return unless defined?(UserEventLogger)
+
+    begin
+      UserEventLogger.log(
+        user: current_user,
+        action_type: 'navigation',
+        url: request.fullpath
+      )
+    rescue StandardError => e
+      Rails.logger.error("Failed to log navigation event: #{e.message}")
     end
   end
 

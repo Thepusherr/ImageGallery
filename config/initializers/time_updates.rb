@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Schedule periodic time updates
 Rails.application.config.after_initialize do
   # Only run in production or when explicitly enabled

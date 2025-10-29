@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Mock UserEventLogger for tests
 class UserEventLogger
   # Track method calls for debugging

@@ -32,13 +32,13 @@ module HexagonGalleryHelper
   # Convert posts to hexagon gallery format
   def posts_to_hexagon_images(posts, limit: 8)
     posts.limit(limit).map do |post|
-      if post.image.attached?
-        {
-          url: url_for(post.image),
-          alt: post.title || post.description || 'Gallery image',
-          post: post
-        }
-      end
+      next unless post.image.attached?
+
+      {
+        url: url_for(post.image),
+        alt: post.title || post.description || 'Gallery image',
+        post: post
+      }
     end.compact
   end
 

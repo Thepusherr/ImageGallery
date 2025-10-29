@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "comments/new", type: :view do
+RSpec.describe 'comments/new', type: :view do
   before(:each) do
     user = FactoryBot.create(:user)
     post_obj = FactoryBot.create(:post, user: user)
-    assign(:comment, Comment.new(user: user, post: post_obj, text: "Test comment"))
+    assign(:comment, Comment.new(user: user, post: post_obj, text: 'Test comment'))
     assign(:post, post_obj)
     allow(view).to receive(:current_user).and_return(user)
   end
 
-  it "renders new comment form" do
+  it 'renders new comment form' do
     render
 
-    assert_select "form[action=?][method=?]", comments_path, "post" do
+    assert_select 'form[action=?][method=?]', comments_path, 'post' do
     end
   end
 end

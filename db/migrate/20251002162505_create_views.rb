@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateViews < ActiveRecord::Migration[7.1]
   def change
     create_table :views do |t|
@@ -9,6 +11,6 @@ class CreateViews < ActiveRecord::Migration[7.1]
     end
 
     # Ensure one view per user per post
-    add_index :views, [:user_id, :post_id], unique: true
+    add_index :views, %i[user_id post_id], unique: true
   end
 end

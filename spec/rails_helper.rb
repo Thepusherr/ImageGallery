@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'devise'
 
@@ -37,22 +39,22 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :system
-  
+
   # Warden configuration
   config.include Warden::Test::Helpers
-  
+
   config.before(:suite) do
     Warden.test_mode!
   end
-  
+
   config.after(:suite) do
     Warden.test_reset!
   end
-  
+
   config.before(:each) do
     Warden.test_mode!
   end
-  
+
   config.after(:each) do
     Warden.test_reset!
   end

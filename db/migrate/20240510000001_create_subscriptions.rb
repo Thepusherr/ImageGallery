@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSubscriptions < ActiveRecord::Migration[6.1]
   def change
     create_table :subscriptions do |t|
@@ -6,7 +8,7 @@ class CreateSubscriptions < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    
-    add_index :subscriptions, [:user_id, :category_id], unique: true
+
+    add_index :subscriptions, %i[user_id category_id], unique: true
   end
 end

@@ -14,9 +14,9 @@ RSpec.describe 'User Event Logging', type: :controller do
   describe LikesController do
     describe 'POST #create' do
       it 'creates a like successfully' do
-        expect {
+        expect do
           post :create, params: { post_id: post_obj.id }
-        }.to change(Like, :count).by(1)
+        end.to change(Like, :count).by(1)
 
         expect(response).to redirect_to(post_path(post_obj))
         expect(Like.where(post: post_obj, user: user)).to exist
@@ -27,9 +27,9 @@ RSpec.describe 'User Event Logging', type: :controller do
       let!(:like) { create(:like, post: post_obj, user: user) }
 
       it 'destroys a like successfully' do
-        expect {
+        expect do
           delete :destroy, params: { id: like.id }
-        }.to change(Like, :count).by(-1)
+        end.to change(Like, :count).by(-1)
 
         expect(response).to redirect_to(post_path(post_obj))
         expect(Like.where(id: like.id)).not_to exist
@@ -40,9 +40,9 @@ RSpec.describe 'User Event Logging', type: :controller do
   describe CommentsController do
     describe 'POST #create' do
       it 'creates a comment successfully' do
-        expect {
+        expect do
           post :create, params: { post_id: post_obj.id, text: 'Test comment' }
-        }.to change(Comment, :count).by(1)
+        end.to change(Comment, :count).by(1)
 
         comment = Comment.last
         expect(comment.text).to eq('Test comment')

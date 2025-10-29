@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveStorageHelper
   # Helper method to set up ActiveStorage for tests
   def setup_active_storage_current_url_options
@@ -7,7 +9,7 @@ end
 
 RSpec.configure do |config|
   config.include ActiveStorageHelper
-  
+
   config.before(:each) do
     setup_active_storage_current_url_options
   end

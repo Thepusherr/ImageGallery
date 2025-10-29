@@ -142,10 +142,10 @@ ActiveAdmin.register_page 'Image Scraper' do
       if params[:scraper_url].present?
         div class: 'scraped-images-section' do
           h3 "Images found on: #{params[:scraper_url]}"
-          
+
           scraper = ImageScraperService.new(params[:scraper_url])
           images = scraper.scrape_images_with_details
-          
+
           if scraper.errors.any?
             div class: 'alert alert-danger' do
               h4 'Errors occurred:'
@@ -156,55 +156,53 @@ ActiveAdmin.register_page 'Image Scraper' do
               end
             end
           end
-          
+
           if images.any?
             form action: admin_image_scraper_download_path, method: :post, class: 'image-selection-form' do
               input type: 'hidden', name: 'authenticity_token', value: form_authenticity_token
               input type: 'hidden', name: 'source_url', value: params[:scraper_url]
-              
+
               div class: 'images-grid' do
-                images.each_with_index do |image_data, index|
+                images.each_with_index do |image_data, _index|
                   div class: 'image-item' do
                     div class: 'image-preview' do
-                      begin
-                        img src: image_data[:url], 
-                            alt: image_data[:alt] || 'Scraped image',
-                            style: 'max-width: 200px; max-height: 200px; object-fit: cover;',
-                            onerror: "this.style.display='none'; this.nextElementSibling.style.display='block';"
-                        div style: 'display: none; padding: 20px; border: 1px dashed #ccc; text-align: center;' do
-                          'Image failed to load'
-                        end
-                      rescue StandardError
-                        div style: 'padding: 20px; border: 1px dashed #ccc; text-align: center;' do
-                          'Invalid image URL'
-                        end
+                      img src: image_data[:url],
+                          alt: image_data[:alt] || 'Scraped image',
+                          style: 'max-width: 200px; max-height: 200px; object-fit: cover;',
+                          onerror: "this.style.display='none'; this.nextElementSibling.style.display='block';"
+                      div style: 'display: none; padding: 20px; border: 1px dashed #ccc; text-align: center;' do
+                        'Image failed to load'
+                      end
+                    rescue StandardError
+                      div style: 'padding: 20px; border: 1px dashed #ccc; text-align: center;' do
+                        'Invalid image URL'
                       end
                     end
-                    
+
                     div class: 'image-info' do
                       p do
                         strong 'URL: '
                         span image_data[:url], style: 'word-break: break-all; font-size: 12px;'
                       end
-                      
+
                       if image_data[:alt]
                         p do
                           strong 'Alt text: '
                           span image_data[:alt]
                         end
                       end
-                      
+
                       if image_data[:estimated_size]
                         p do
                           strong 'Size: '
                           span "#{(image_data[:estimated_size] / 1024.0).round(1)} KB"
                         end
                       end
-                      
+
                       div class: 'image-actions' do
                         label do
-                          input type: 'checkbox', 
-                                name: 'selected_images[]', 
+                          input type: 'checkbox',
+                                name: 'selected_images[]',
                                 value: image_data[:url],
                                 checked: image_data[:valid]
                           ' Select for download'
@@ -214,7 +212,7 @@ ActiveAdmin.register_page 'Image Scraper' do
                   end
                 end
               end
-              
+
               div class: 'form-actions' do
                 input type: 'submit', value: 'Download Selected Images', class: 'btn btn-success'
               end
@@ -246,11 +244,9 @@ ActiveAdmin.register_page 'Image Scraper' do
 
         if success
           message = "Successfully downloaded #{downloader.downloaded_count} images."
-          message += " #{downloader.failed_count} failed." if downloader.failed_count > 0
+          message += " #{downloader.failed_count} failed." if downloader.failed_count.positive?
 
-          if downloader.errors.any?
-            message += " Errors: #{downloader.errors.join(', ')}"
-          end
+          message += " Errors: #{downloader.errors.join(', ')}" if downloader.errors.any?
 
           redirect_to admin_posts_path, notice: message
         else

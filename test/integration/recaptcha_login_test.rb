@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RecaptchaLoginTest < ActionDispatch::IntegrationTest
@@ -10,17 +12,17 @@ class RecaptchaLoginTest < ActionDispatch::IntegrationTest
     FailedLoginAttempt.destroy_all
   end
 
-  test "should show login page without recaptcha initially" do
+  test 'should show login page without recaptcha initially' do
     get new_user_session_path
     assert_response :success
     assert_select 'form[action=?]', user_session_path
     assert_select 'input[name="user[email]"]'
     assert_select 'input[name="user[password]"]'
     # Should not show recaptcha initially
-    refute_match /recaptcha/, response.body.downcase
+    refute_match(/recaptcha/, response.body.downcase)
   end
 
-  test "should record failed login attempts using service directly" do
+  test 'should record failed login attempts using service directly' do
     # Test RecaptchaService directly
     request = ActionDispatch::TestRequest.create
     request.remote_ip = '127.0.0.1'
@@ -34,10 +36,10 @@ class RecaptchaLoginTest < ActionDispatch::IntegrationTest
     end
 
     # Should require reCAPTCHA after 3 attempts
-    assert service.recaptcha_required_for_login?(@email), "Should require reCAPTCHA after 3 failed attempts"
+    assert service.recaptcha_required_for_login?(@email), 'Should require reCAPTCHA after 3 failed attempts'
   end
 
-  test "should show recaptcha after 3 failed attempts" do
+  test 'should show recaptcha after 3 failed attempts' do
     # Create 3 failed attempts
     3.times do
       FailedLoginAttempt.create!(
@@ -51,12 +53,12 @@ class RecaptchaLoginTest < ActionDispatch::IntegrationTest
     # Now try to access login page
     get new_user_session_path
     assert_response :success
-    
+
     # Should show recaptcha warning
-    assert_match /recaptcha/i, response.body
+    assert_match(/recaptcha/i, response.body)
   end
 
-  test "should clear failed attempts after successful login" do
+  test 'should clear failed attempts after successful login' do
     # Create some failed attempts
     3.times do
       FailedLoginAttempt.create!(
@@ -77,18 +79,18 @@ class RecaptchaLoginTest < ActionDispatch::IntegrationTest
 
     # Should redirect after successful login
     assert_response :redirect
-    
+
     # Failed attempts should be cleared
     failed_attempts = FailedLoginAttempt.where(email: @email).count
-    assert_equal 0, failed_attempts, "Failed attempts should be cleared after successful login"
+    assert_equal 0, failed_attempts, 'Failed attempts should be cleared after successful login'
   end
 
-  test "recaptcha service should detect when recaptcha is required" do
+  test 'recaptcha service should detect when recaptcha is required' do
     service = RecaptchaService.new(ActionDispatch::TestRequest.create)
-    
+
     # Initially should not require recaptcha
     assert_not service.recaptcha_required_for_login?(@email)
-    
+
     # Create 3 failed attempts
     3.times do
       FailedLoginAttempt.create!(
@@ -98,21 +100,21 @@ class RecaptchaLoginTest < ActionDispatch::IntegrationTest
         last_attempt_at: Time.current
       )
     end
-    
+
     # Now should require recaptcha
     assert service.recaptcha_required_for_login?(@email)
   end
 
-  test "should record failed login attempt with correct data" do
+  test 'should record failed login attempt with correct data' do
     # Mock request with IP
     request = ActionDispatch::TestRequest.create
     request.remote_ip = '192.168.1.1'
-    
+
     service = RecaptchaService.new(request)
-    
+
     # Record failed attempt
     service.record_failed_login(@email)
-    
+
     # Check that attempt was recorded correctly
     attempt = FailedLoginAttempt.last
     assert_equal @email, attempt.email

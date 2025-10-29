@@ -26,33 +26,31 @@ class ImageDownloaderService
       end
     end
 
-    @downloaded_count > 0
+    @downloaded_count.positive?
   end
 
   # Download a single image and create a post
   def download_single_image(image_url, source_url = nil)
-    begin
-      temp_file = download_image_to_temp_file(image_url)
-      return false unless temp_file
+    temp_file = download_image_to_temp_file(image_url)
+    return false unless temp_file
 
-      post = create_post_from_temp_file(temp_file, image_url, source_url)
-      
-      # Clean up temp file
-      temp_file.close
-      temp_file.unlink
+    post = create_post_from_temp_file(temp_file, image_url, source_url)
 
-      if post&.persisted?
-        Rails.logger.info "Successfully downloaded image: #{image_url}"
-        true
-      else
-        @errors << "Failed to save post for image: #{image_url}"
-        false
-      end
-    rescue StandardError => e
-      @errors << "Error downloading #{image_url}: #{e.message}"
-      Rails.logger.error "Error downloading image #{image_url}: #{e.message}"
+    # Clean up temp file
+    temp_file.close
+    temp_file.unlink
+
+    if post&.persisted?
+      Rails.logger.info "Successfully downloaded image: #{image_url}"
+      true
+    else
+      @errors << "Failed to save post for image: #{image_url}"
       false
     end
+  rescue StandardError => e
+    @errors << "Error downloading #{image_url}: #{e.message}"
+    Rails.logger.error "Error downloading image #{image_url}: #{e.message}"
+    false
   end
 
   private
@@ -62,23 +60,23 @@ class ImageDownloaderService
     uri = URI.parse(image_url)
     extension = File.extname(uri.path)
     extension = '.jpg' if extension.empty?
-    
+
     # Create temporary file
     temp_file = Tempfile.new(['scraped_image', extension])
     temp_file.binmode
-    
+
     # Download image with proper headers
-    URI.open(image_url, 
+    URI.open(image_url,
              'User-Agent' => 'Mozilla/5.0 (compatible; ImageScraper/1.0)',
              'Accept' => 'image/*',
              read_timeout: 30) do |image|
       temp_file.write(image.read)
     end
-    
+
     temp_file.rewind
-    
+
     # Validate that we actually downloaded an image
-    if temp_file.size == 0
+    if temp_file.empty?
       temp_file.close
       temp_file.unlink
       @errors << "Downloaded file is empty: #{image_url}"
@@ -116,7 +114,7 @@ class ImageDownloaderService
     temp_file.rewind
     header = temp_file.read(12)
     temp_file.rewind
-    
+
     return false if header.nil? || header.empty?
 
     # Check for common image file signatures
@@ -125,20 +123,20 @@ class ImageDownloaderService
     # GIF: 47 49 46 38
     # WebP: 52 49 46 46 (RIFF) + WebP
     # BMP: 42 4D
-    
-    header_hex = header.unpack('H*')[0].upcase
-    
-    header_hex.start_with?('FFD8FF') ||      # JPEG
-    header_hex.start_with?('89504E47') ||    # PNG
-    header_hex.start_with?('47494638') ||    # GIF
-    header_hex.start_with?('424D') ||        # BMP
-    (header_hex.start_with?('52494646') && header.include?('WEBP')) # WebP
+
+    header_hex = header.unpack1('H*').upcase
+
+    header_hex.start_with?('FFD8FF') || # JPEG
+      header_hex.start_with?('89504E47') ||    # PNG
+      header_hex.start_with?('47494638') ||    # GIF
+      header_hex.start_with?('424D') ||        # BMP
+      (header_hex.start_with?('52494646') && header.include?('WEBP')) # WebP
   end
 
   def create_post_from_temp_file(temp_file, image_url, source_url)
     # Generate title from URL
     title = generate_title_from_url(image_url)
-    
+
     # Create text content
     text = if source_url
              "Image scraped from #{source_url}"
@@ -161,7 +159,7 @@ class ImageDownloaderService
 
     # Attach the image using CarrierWave
     post.image = temp_file
-    
+
     if post.save
       Rails.logger.info "Created post with ID: #{post.id} for image: #{image_url}"
       post
@@ -179,7 +177,7 @@ class ImageDownloaderService
   def generate_title_from_url(image_url)
     uri = URI.parse(image_url)
     filename = File.basename(uri.path, '.*')
-    
+
     if filename.empty? || filename == '/'
       "Scraped Image #{Time.current.strftime('%Y%m%d_%H%M%S')}"
     else

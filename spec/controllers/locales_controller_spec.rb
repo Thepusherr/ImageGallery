@@ -7,14 +7,14 @@ RSpec.describe LocalesController, type: :controller do
     context 'with valid locale' do
       it 'switches to English' do
         get :switch, params: { locale: 'en' }
-        
+
         expect(session[:locale]).to eq('en')
         expect(response).to redirect_to(root_path)
       end
 
       it 'switches to Russian' do
         get :switch, params: { locale: 'ru' }
-        
+
         expect(session[:locale]).to eq('ru')
         expect(response).to redirect_to(root_path)
       end

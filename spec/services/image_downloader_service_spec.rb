@@ -33,7 +33,7 @@ RSpec.describe ImageDownloaderService, type: :service do
 
       it 'downloads all images successfully' do
         result = service.download_images(image_urls, source_url)
-        
+
         expect(result).to be true
         expect(service.downloaded_count).to eq(2)
         expect(service.failed_count).to eq(0)
@@ -47,7 +47,7 @@ RSpec.describe ImageDownloaderService, type: :service do
 
       it 'tracks successful and failed downloads' do
         result = service.download_images(image_urls, source_url)
-        
+
         expect(result).to be true # At least one succeeded
         expect(service.downloaded_count).to eq(1)
         expect(service.failed_count).to eq(1)
@@ -86,7 +86,8 @@ RSpec.describe ImageDownloaderService, type: :service do
 
     context 'with successful download and post creation' do
       before do
-        allow(service).to receive(:create_post_from_temp_file).and_return(create(:post, user: user, categories: [category]))
+        allow(service).to receive(:create_post_from_temp_file).and_return(create(:post, user: user,
+                                                                                        categories: [category]))
       end
 
       it 'creates a post and returns true' do
@@ -101,10 +102,10 @@ RSpec.describe ImageDownloaderService, type: :service do
       end
 
       it 'returns false and does not create post' do
-        expect {
+        expect do
           result = service.download_single_image(image_url, source_url)
           expect(result).to be false
-        }.not_to change(Post, :count)
+        end.not_to change(Post, :count)
       end
     end
 
@@ -130,10 +131,10 @@ RSpec.describe ImageDownloaderService, type: :service do
 
       it 'downloads image and creates temp file' do
         temp_file = service.send(:download_image_to_temp_file, image_url)
-        
+
         expect(temp_file).to be_a(Tempfile)
         expect(temp_file.size).to be > 0
-        
+
         temp_file.close
         temp_file.unlink
       end
@@ -145,7 +146,7 @@ RSpec.describe ImageDownloaderService, type: :service do
 
         it 'returns nil and adds error' do
           temp_file = service.send(:download_image_to_temp_file, image_url)
-          
+
           expect(temp_file).to be_nil
           expect(service.errors).to include(match(/HTTP Error downloading.*404 Not Found/))
         end
@@ -158,7 +159,7 @@ RSpec.describe ImageDownloaderService, type: :service do
 
         it 'returns nil and adds error' do
           temp_file = service.send(:download_image_to_temp_file, image_url)
-          
+
           expect(temp_file).to be_nil
           expect(service.errors).to include(match(/Downloaded file is empty/))
         end
@@ -170,10 +171,10 @@ RSpec.describe ImageDownloaderService, type: :service do
         temp_file = Tempfile.new(['test', '.jpg'])
         temp_file.write("\xFF\xD8\xFF\xE0")
         temp_file.rewind
-        
+
         result = service.send(:valid_image_file?, temp_file)
         expect(result).to be true
-        
+
         temp_file.close
         temp_file.unlink
       end
@@ -182,22 +183,22 @@ RSpec.describe ImageDownloaderService, type: :service do
         temp_file = Tempfile.new(['test', '.png'])
         temp_file.write("\x89PNG\r\n\x1A\n")
         temp_file.rewind
-        
+
         result = service.send(:valid_image_file?, temp_file)
         expect(result).to be true
-        
+
         temp_file.close
         temp_file.unlink
       end
 
       it 'returns false for non-image files' do
         temp_file = Tempfile.new(['test', '.txt'])
-        temp_file.write("This is not an image")
+        temp_file.write('This is not an image')
         temp_file.rewind
-        
+
         result = service.send(:valid_image_file?, temp_file)
         expect(result).to be false
-        
+
         temp_file.close
         temp_file.unlink
       end
@@ -220,7 +221,7 @@ RSpec.describe ImageDownloaderService, type: :service do
         long_filename = 'a' * 60
         url = "https://example.com/#{long_filename}.jpg"
         title = service.send(:generate_title_from_url, url)
-        expect(title.length).to be <= 51  # Allow for "..." at the end
+        expect(title.length).to be <= 51 # Allow for "..." at the end
         expect(title).to end_with('...')
       end
     end
@@ -233,11 +234,11 @@ RSpec.describe ImageDownloaderService, type: :service do
       end
 
       it 'creates new scraped category if not exists' do
-        expect {
+        expect do
           category = service.send(:find_or_create_scraped_category)
           expect(category.name).to eq('Scraped Images')
           expect(category.user).to be_a(User)
-        }.to change(Category, :count).by(1)
+        end.to change(Category, :count).by(1)
       end
     end
   end

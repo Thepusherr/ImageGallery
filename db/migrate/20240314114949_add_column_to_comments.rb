@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddColumnToComments < ActiveRecord::Migration[7.1]
   def change
     add_column :comments, :user_id, :integer

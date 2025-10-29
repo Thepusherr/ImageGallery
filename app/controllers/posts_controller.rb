@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :time_update]
-  before_action :set_post, only: %i[ show edit update destroy time_update ]
+  before_action :authenticate_user!, except: %i[index show time_update]
+  before_action :set_post, only: %i[show edit update destroy time_update]
 
   def index
     @posts = if params[:user_id].present?
@@ -39,8 +41,8 @@ class PostsController < ApplicationController
       # Broadcast view count update if a new view was created
       if view_created.persisted? && view_created.created_at == view_created.updated_at
         ViewsChannel.broadcast_to(post, {
-          actions_html: render_to_string(partial: "posts/post_actions", locals: { post: post })
-        })
+                                    actions_html: render_to_string(partial: 'posts/post_actions', locals: { post: post })
+                                  })
       end
     end
 
@@ -53,11 +55,9 @@ class PostsController < ApplicationController
   end
 
   def time_update
-    if params[:locale].present?
-      I18n.locale = params[:locale]
-    end
+    I18n.locale = params[:locale] if params[:locale].present?
 
-    render partial: "posts/post_time", locals: { post: @post }
+    render partial: 'posts/post_time', locals: { post: @post }
   end
 
   def new
@@ -66,9 +66,9 @@ class PostsController < ApplicationController
 
   def edit
     # Only allow the post owner to edit
-    unless Rails.env.test? || current_user == @post.user
-      redirect_to posts_url, alert: "You are not authorized to edit this post."
-    end
+    return if Rails.env.test? || current_user == @post.user
+
+    redirect_to posts_url, alert: 'You are not authorized to edit this post.'
   end
 
   def create
@@ -78,11 +78,11 @@ class PostsController < ApplicationController
       if @post.save
         # Notify subscribers of categories associated with this post
         notify_subscribers if params[:post][:category_ids].present?
-        
+
         # Notify subscribers of categories associated with this post
         notify_subscribers if params[:post][:category_ids].present?
-        
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+
+        format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -95,7 +95,7 @@ class PostsController < ApplicationController
     # Only allow the post owner to update
     unless Rails.env.test? || current_user == @post.user
       respond_to do |format|
-        format.html { redirect_to posts_url, alert: "You are not authorized to update this post." }
+        format.html { redirect_to posts_url, alert: 'You are not authorized to update this post.' }
         format.json { head :unauthorized }
       end
       return
@@ -103,7 +103,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        format.html { redirect_to post_url(@post), notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -116,12 +116,12 @@ class PostsController < ApplicationController
     if Rails.env.test? || current_user == @post.user
       @post.destroy
       respond_to do |format|
-        format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to posts_url, alert: "You are not authorized to delete this post." }
+        format.html { redirect_to posts_url, alert: 'You are not authorized to delete this post.' }
         format.json { head :unauthorized }
       end
     end
@@ -132,25 +132,25 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-  
+
   def notify_subscribers
     return unless @post.image.present?
-    
+
     # Get all categories associated with this post
     categories = Category.where(id: params[:post][:category_ids])
-    
+
     categories.each do |category|
       # Get all subscribers for this category
       subscribers = category.subscribers
-      
+
       # Send notification to each subscriber
       subscribers.each do |subscriber|
         # Skip notification to the post creator
         next if subscriber == current_user
-        
+
         begin
           NotifierMailer.new_image_notification(subscriber, category, @post).deliver_later
-        rescue => e
+        rescue StandardError => e
           Rails.logger.error("Failed to send notification to #{subscriber.email}: #{e.message}")
         end
       end

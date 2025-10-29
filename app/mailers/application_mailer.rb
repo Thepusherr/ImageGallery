@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ApplicationMailer < ActionMailer::Base
-  default from: "pospelvv@gmail.com"
-  layout "mailer"
+  default from: 'pospelvv@gmail.com'
+  layout 'mailer'
 
   def simple_message(recipient)
     mail(

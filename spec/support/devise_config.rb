@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseRequestSpecHelpers
   include Warden::Test::Helpers
 
@@ -15,11 +17,11 @@ end
 
 RSpec.configure do |config|
   config.include DeviseRequestSpecHelpers, type: :request
-  
+
   config.before(:each, type: :controller) do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @request.env['devise.mapping'] = Devise.mappings[:user]
   end
-  
+
   config.before(:each, type: :request) do
   end
 end
@@ -41,11 +43,11 @@ end
 
 RSpec.configure do |config|
   config.include DeviseRequestSpecHelpers, type: :request
-  
+
   config.before(:each, type: :controller) do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @request.env['devise.mapping'] = Devise.mappings[:user]
   end
-  
+
   config.before(:each, type: :request) do
   end
 end

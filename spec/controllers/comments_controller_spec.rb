@@ -1,60 +1,62 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
   let(:user) { create(:user) }
   let(:post_obj) { create(:post, user: user) }
 
-  describe "POST #create" do
-    context "when user is signed in" do
+  describe 'POST #create' do
+    context 'when user is signed in' do
       before do
-        @request.env["devise.mapping"] = Devise.mappings[:user]
+        @request.env['devise.mapping'] = Devise.mappings[:user]
         sign_in user
       end
 
-      it "creates a new comment" do
-        expect {
-          post :create, params: { post_id: post_obj.id, text: "Great post!" }
-        }.to change(Comment, :count).by(1)
+      it 'creates a new comment' do
+        expect do
+          post :create, params: { post_id: post_obj.id, text: 'Great post!' }
+        end.to change(Comment, :count).by(1)
       end
 
-      it "returns turbo stream response" do
-        post :create, params: { post_id: post_obj.id, text: "Great post!" }, format: :turbo_stream
+      it 'returns turbo stream response' do
+        post :create, params: { post_id: post_obj.id, text: 'Great post!' }, format: :turbo_stream
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to include('text/vnd.turbo-stream.html')
       end
     end
 
-    context "when user is not signed in" do
-      it "redirects to the sign-in page" do
-        post :create, params: { post_id: post_obj.id, comment: { text: "Great post!" } }
+    context 'when user is not signed in' do
+      it 'redirects to the sign-in page' do
+        post :create, params: { post_id: post_obj.id, comment: { text: 'Great post!' } }
         expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
 
-  describe "DELETE #destroy" do
+  describe 'DELETE #destroy' do
     let!(:comment) { create(:comment, user: user, post: post_obj) }
 
-    context "when user is signed in" do
+    context 'when user is signed in' do
       before do
-        @request.env["devise.mapping"] = Devise.mappings[:user]
+        @request.env['devise.mapping'] = Devise.mappings[:user]
         sign_in user
       end
 
-      it "destroys the comment" do
-        expect {
+      it 'destroys the comment' do
+        expect do
           delete :destroy, params: { id: comment.id }
-        }.to change(Comment, :count).by(-1)
+        end.to change(Comment, :count).by(-1)
       end
 
-      it "redirects to the post show page" do
+      it 'redirects to the post show page' do
         delete :destroy, params: { id: comment.id }
         expect(response).to redirect_to(post_path(post_obj))
       end
     end
 
-    context "when user is not signed in" do
-      it "redirects to the sign-in page" do
+    context 'when user is not signed in' do
+      it 'redirects to the sign-in page' do
         delete :destroy, params: { id: comment.id }
         expect(response).to redirect_to(new_user_session_path)
       end

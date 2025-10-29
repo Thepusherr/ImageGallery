@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy, :toggle_like]
-  before_action :set_post, only: [:create, :toggle_like]
+  before_action :authenticate_user!, only: %i[create destroy toggle_like]
+  before_action :set_post, only: %i[create toggle_like]
   before_action :set_like, only: [:destroy]
 
   def index
@@ -22,13 +24,13 @@ class LikesController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @like = @post.likes.build(user: current_user)
-    
+
     if @like.save
       redirect_to post_path(@post), notice: 'Post liked successfully.'
     else
       redirect_to post_path(@post), alert: 'Unable to like post.'
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Error creating like: #{e.message}")
     redirect_to post_path(@post || Post.find(params[:post_id])), alert: 'Unable to like post.'
   end
@@ -36,7 +38,7 @@ class LikesController < ApplicationController
   def update
     @like = Like.find(params[:id])
     if @like.update(like_params)
-      redirect_to like_url(@like), notice: "Like was successfully updated."
+      redirect_to like_url(@like), notice: 'Like was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -47,13 +49,13 @@ class LikesController < ApplicationController
     @post = @like.post
     @like.destroy
     redirect_to post_path(@post), notice: 'Like removed successfully.'
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Error destroying like: #{e.message}")
     redirect_to post_path(@post || Like.find(params[:id]).post), alert: 'Unable to unlike post.'
   end
 
   def toggle_like
-    if(@like = @post.likes.find_by(user: current_user))
+    if (@like = @post.likes.find_by(user: current_user))
       @like.destroy
       action = 'unliked'
     else
@@ -62,25 +64,23 @@ class LikesController < ApplicationController
     end
 
     # Skip logging in test environment
-    unless Rails.env.test?
-      if defined?(UserEventLogger)
-        begin
-          UserEventLogger.log(
-            user: current_user,
-            action_type: action,
-            url: url_for(:only_path => false) # request.fullpath
-          )
-        rescue => e
-          Rails.logger.error("Error logging user event: #{e.message}")
-        end
+    if !Rails.env.test? && defined?(UserEventLogger)
+      begin
+        UserEventLogger.log(
+          user: current_user,
+          action_type: action,
+          url: url_for(only_path: false) # request.fullpath
+        )
+      rescue StandardError => e
+        Rails.logger.error("Error logging user event: #{e.message}")
       end
     end
-    
+
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(
           "post#{@post.id}actions",
-          partial: "posts/post_actions",
+          partial: 'posts/post_actions',
           locals: { post: @post }
         )
       end

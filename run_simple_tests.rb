@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 # This script runs the simple tests without loading Rails
 
@@ -9,12 +10,12 @@ RSpec.configure do |config|
   # Basic RSpec configuration
   config.color = true
   config.formatter = :documentation
-  
+
   # Don't run tests that require Rails
-  config.filter_run_excluding :requires_rails => true
-  
+  config.filter_run_excluding requires_rails: true
+
   # Run tests that don't require Rails
-  config.filter_run_including :simple => true
+  config.filter_run_including simple: true
 end
 
 # Run the tests

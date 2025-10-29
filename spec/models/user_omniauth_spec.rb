@@ -6,22 +6,22 @@ RSpec.describe User, type: :model do
   describe '.from_omniauth' do
     let(:auth) do
       OmniAuth::AuthHash.new({
-        provider: 'github',
-        uid: '123456',
-        info: {
-          email: 'test@example.com',
-          name: 'Test User',
-          first_name: 'Test',
-          last_name: 'User'
-        }
-      })
+                               provider: 'github',
+                               uid: '123456',
+                               info: {
+                                 email: 'test@example.com',
+                                 name: 'Test User',
+                                 first_name: 'Test',
+                                 last_name: 'User'
+                               }
+                             })
     end
 
     context 'when user does not exist' do
       it 'creates a new user' do
-        expect {
+        expect do
           User.from_omniauth(auth)
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
 
         user = User.last
         expect(user.email).to eq('test@example.com')
@@ -34,7 +34,7 @@ RSpec.describe User, type: :model do
 
       it 'generates unique username when email username is taken' do
         create(:user, username: 'test')
-        
+
         user = User.from_omniauth(auth)
         expect(user.username).to eq('test1')
       end
@@ -44,9 +44,9 @@ RSpec.describe User, type: :model do
       let!(:existing_user) { create(:user, email: 'test@example.com') }
 
       it 'returns the existing user' do
-        expect {
+        expect do
           User.from_omniauth(auth)
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
 
         user = User.from_omniauth(auth)
         expect(user).to eq(existing_user)
@@ -56,15 +56,15 @@ RSpec.describe User, type: :model do
     context 'with minimal auth info' do
       let(:minimal_auth) do
         OmniAuth::AuthHash.new({
-          provider: 'github',
-          uid: '789012',
-          info: {
-            email: 'minimal@example.com',
-            name: nil,
-            first_name: nil,
-            last_name: nil
-          }
-        })
+                                 provider: 'github',
+                                 uid: '789012',
+                                 info: {
+                                   email: 'minimal@example.com',
+                                   name: nil,
+                                   first_name: nil,
+                                   last_name: nil
+                                 }
+                               })
       end
 
       it 'creates user with default values' do
@@ -91,7 +91,7 @@ RSpec.describe User, type: :model do
 
     it 'generates unique username when base is taken' do
       create(:user, username: 'testuser')
-      
+
       username = User.generate_username_from_email('test.user@example.com')
       expect(username).to eq('testuser1')
     end
@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
     it 'increments counter for multiple conflicts' do
       create(:user, username: 'testuser')
       create(:user, username: 'testuser1')
-      
+
       username = User.generate_username_from_email('test.user@example.com')
       expect(username).to eq('testuser2')
     end

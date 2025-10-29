@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Form Like Test', type: :system, js: true do
@@ -7,7 +9,7 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
     User.set_callback(:create, :after, :send_welcome_email)
     user
   end
-  
+
   let!(:post) do
     Post.skip_callback(:create, :after, :log_post_creation)
     Post.skip_callback(:create, :after, :process_image_in_background)
@@ -23,7 +25,7 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
     driven_by(:selenium_chrome_headless)
 
     Like.skip_callback(:create, :after, :log_like_event)
-    
+
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password123'
@@ -38,53 +40,53 @@ RSpec.describe 'Form Like Test', type: :system, js: true do
 
   it 'can like a post using form submission' do
     skip 'System test requires proper UI elements and browser setup'
-    puts "=== FORM LIKE TEST ==="
+    puts '=== FORM LIKE TEST ==='
 
     expect(page).to have_content('ImageGallery')
-    puts "Page loaded successfully"
+    puts 'Page loaded successfully'
 
     like_form = find("form[id*='like-form']", match: :first)
     puts "Found like form: #{like_form.inspect}"
-    
+
     like_button = like_form.find("button[type='submit']")
     puts "Found like button: #{like_button.inspect}"
-    
+
     heart_icon = like_button.find('i')
     initial_classes = heart_icon[:class]
     puts "Initial heart icon classes: #{initial_classes}"
-    
+
     initial_likes_count = post.likes.count
     puts "Initial likes count: #{initial_likes_count}"
-    
-    puts "Clicking like button..."
+
+    puts 'Clicking like button...'
     like_button.click
-    
+
     sleep 3
-    
+
     post.reload
     final_likes_count = post.likes.count
     puts "Final likes count: #{final_likes_count}"
-    
+
     user_like = post.likes.find_by(user: user)
     puts "User like exists: #{user_like.present?}"
-    
+
     begin
       updated_heart_icon = find("form[id*='like-form'] button i", match: :first)
       final_classes = updated_heart_icon[:class]
       puts "Final heart icon classes: #{final_classes}"
-      
+
       if final_classes != initial_classes
-        puts "Heart icon changed successfully!"
+        puts 'Heart icon changed successfully!'
       else
-        puts "Heart icon did not change (Turbo may not be working)"
+        puts 'Heart icon did not change (Turbo may not be working)'
       end
-    rescue => e
+    rescue StandardError => e
       puts "Could not check heart icon change: #{e.message}"
     end
-    
+
     expect(final_likes_count).to be > initial_likes_count
     expect(user_like).to be_present
-    
-    puts "✅ Like functionality works!"
+
+    puts '✅ Like functionality works!'
   end
 end

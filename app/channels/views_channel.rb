@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ViewsChannel < ApplicationCable::Channel
   def subscribed
     post = Post.find(params[:post_id])

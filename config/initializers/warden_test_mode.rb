@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Add a test strategy for Warden in the test environment
 Warden::Strategies.add(:test_mode) do
   def valid?

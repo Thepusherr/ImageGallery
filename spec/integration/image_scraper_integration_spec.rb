@@ -67,13 +67,13 @@ RSpec.describe 'Image Scraper Integration', type: :request do
       allow_any_instance_of(ImageDownloaderService).to receive(:download_multiple_images)
         .and_return({ success: 2, failed: 0, errors: [] })
 
-      expect {
+      # Mocked, so no actual posts created
+      expect do
         post '/admin/image_scraper/download', params: {
           source_url: test_url,
           selected_images: selected_images
         }
-      }.to change(Post, :count).by(0) # Mocked, so no actual posts created
-
+      end.to change(Post, :count).by(0)
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Successfully downloaded 2 images')
     end

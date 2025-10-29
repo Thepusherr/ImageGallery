@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
@@ -7,12 +9,12 @@ class Comment < ApplicationRecord
   after_create :log_comment_event
   after_create :send_notification_email
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "post_id", "text", "updated_at", "user_id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id id_value post_id text updated_at user_id]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["post", "user"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[post user]
   end
 
   private
@@ -26,7 +28,7 @@ class Comment < ApplicationRecord
         action_type: 'comment',
         url: "/posts/#{post.id}"
       )
-    rescue => e
+    rescue StandardError => e
       Rails.logger.error("Failed to log comment event: #{e.message}")
     end
   end

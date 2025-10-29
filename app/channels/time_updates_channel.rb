@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class TimeUpdatesChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "time_updates"
+    stream_from 'time_updates'
   end
 
   def unsubscribed

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Simple Like Test', type: :system, js: true do
@@ -7,7 +9,7 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
     User.set_callback(:create, :after, :send_welcome_email)
     user
   end
-  
+
   let!(:post) do
     Post.skip_callback(:create, :after, :log_post_creation)
     Post.skip_callback(:create, :after, :process_image_in_background)
@@ -21,29 +23,29 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
 
   before do
     driven_by(:selenium_chrome_headless)
-    
+
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password123'
     click_button 'Log in'
-    
+
     visit root_path
   end
 
   it 'can execute JavaScript and find elements' do
     skip 'System test requires proper UI elements and browser setup'
-    puts "=== SIMPLE LIKE TEST ==="
+    puts '=== SIMPLE LIKE TEST ==='
 
     expect(page).to have_content('ImageGallery')
-    puts "Page loaded successfully"
+    puts 'Page loaded successfully'
 
     like_button = find("button[onclick*='toggleLike']", match: :first)
     puts "Found like button: #{like_button.inspect}"
-    
+
     js_result = page.evaluate_script('typeof window.toggleLike')
     puts "toggleLike function type: #{js_result}"
     expect(js_result).to eq('function')
-    
+
     csrf_meta = page.evaluate_script("document.querySelector('meta[name=\"csrf-token\"]')")
     puts "CSRF meta tag present: #{csrf_meta.present?}"
 
@@ -52,10 +54,10 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
       puts "CSRF token present: #{csrf_token.present?}"
       expect(csrf_token).to be_present
     else
-      puts "CSRF meta tag not found - this is expected in test environment"
+      puts 'CSRF meta tag not found - this is expected in test environment'
     end
-    
-    puts "Making direct HTTP request..."
+
+    puts 'Making direct HTTP request...'
 
     session_cookie = page.driver.browser.manage.cookie_named('_image_gallery_session')
     puts "Session cookie: #{session_cookie.present?}"
@@ -63,7 +65,7 @@ RSpec.describe 'Simple Like Test', type: :system, js: true do
     require 'net/http'
     require 'uri'
 
-    uri = URI('http://127.0.0.1:' + Capybara.current_session.server.port.to_s + '/toggle_like')
+    uri = URI("http://127.0.0.1:#{Capybara.current_session.server.port}/toggle_like")
     http = Net::HTTP.new(uri.host, uri.port)
 
     request = Net::HTTP::Post.new(uri)

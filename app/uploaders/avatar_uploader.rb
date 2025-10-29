@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -44,7 +46,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg png)
+    %w[jpg jpeg png]
   end
 
   def size_range

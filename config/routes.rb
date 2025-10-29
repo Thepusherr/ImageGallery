@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   mount ActiveStorage::Engine => '/rails/active_storage'
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -24,9 +26,9 @@ Rails.application.routes.draw do
   get 'home/services'
 
   get 'profile', to: 'profile#index'
-  get "up" => "rails/health#show", as: :rails_health_check
-  post "toggle_like", to: "likes#toggle_like", as: :toggle_like
-  post "test_turbo", to: "home#test_turbo"
+  get 'up' => 'rails/health#show', as: :rails_health_check
+  post 'toggle_like', to: 'likes#toggle_like', as: :toggle_like
+  post 'test_turbo', to: 'home#test_turbo'
 
   # Locale switching
   get 'switch_locale/:locale', to: 'locales#switch', as: :switch_locale
@@ -34,8 +36,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
-
-
 
   resources :users do
     resources :posts, only: [:index], controller: 'users/posts'
@@ -59,9 +59,9 @@ Rails.application.routes.draw do
       get 'show_image/:image_index', to: 'categories#show_image', as: 'show_image'
       delete 'destroy', to: 'categories#destroy', as: 'destroy_category'
     end
-    
-    resource :subscription, only: [:create, :destroy]
+
+    resource :subscription, only: %i[create destroy]
   end
 
-  root to: "home#index"
+  root to: 'home#index'
 end

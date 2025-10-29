@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 # Pin npm packages by running ./bin/importmap
 
-pin "application"
-pin "@hotwired/turbo-rails", to: "turbo.min.js"
-pin "@hotwired/stimulus", to: "stimulus.min.js"
-pin "@rails/actioncable", to: "@rails--actioncable.js"
+pin 'application'
+pin '@hotwired/turbo-rails', to: 'turbo.min.js'
+pin '@hotwired/stimulus', to: 'stimulus.min.js'
+pin '@rails/actioncable', to: '@rails--actioncable.js'
 
 pin 'filepond', to: 'https://ga.jspm.io/npm:filepond@4.30.4/dist/filepond.js', preload: true
 pin 'aos', to: 'aos.js', preload: true
 # Visual effects
-pin "tubes_cursor"
-pin  "snow_effect"
-pin "swirl_effect"
-pin "start_coding_button"
-pin_all_from "app/javascript/components/buttons", under: "components/buttons"
+pin 'tubes_cursor'
+pin 'snow_effect'
+pin 'swirl_effect'
+pin 'start_coding_button'
+pin_all_from 'app/javascript/components/buttons', under: 'components/buttons'
 
-pin_all_from "app/javascript/controllers", under: "controllers"
-pin_all_from "app/javascript/channels", under: "channels"
+pin_all_from 'app/javascript/controllers', under: 'controllers'
+pin_all_from 'app/javascript/channels', under: 'channels'

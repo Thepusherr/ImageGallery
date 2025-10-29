@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UserEvent, type: :model do
@@ -8,7 +10,7 @@ RSpec.describe UserEvent, type: :model do
   end
 
   it 'is not valid without a user' do
-    user = FactoryBot.create(:user)
+    FactoryBot.create(:user)
     user_event = FactoryBot.build(:user_event, user: nil)
     expect(user_event).to_not be_valid
   end

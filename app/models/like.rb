@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Like < ApplicationRecord
   belongs_to :post
   belongs_to :user
@@ -5,14 +7,14 @@ class Like < ApplicationRecord
   validates :user_id, uniqueness: { scope: :post_id }
 
   after_create :log_like_event
-  # after_create :send_like_notification 
+  # after_create :send_like_notification
 
-  def self.ransackable_associations(auth_object = nil)
-    ["post", "user"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[post user]
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["active", "created_at", "id", "id_value", "post_id", "updated_at", "user_id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[active created_at id id_value post_id updated_at user_id]
   end
 
   private
@@ -26,7 +28,7 @@ class Like < ApplicationRecord
         action_type: 'like',
         url: "/posts/#{post.id}"
       )
-    rescue => e
+    rescue StandardError => e
       Rails.logger.error("Failed to log like event: #{e.message}")
     end
   end

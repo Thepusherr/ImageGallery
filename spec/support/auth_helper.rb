@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Authentication helper for tests
 # This file provides additional helper methods for authentication in tests
 
@@ -14,7 +16,7 @@ module AuthHelper
     login_as(user, scope: :user)
     user
   end
-  
+
   # Create and sign in a user for any test type
   def create_and_sign_in_user
     user = create(:user)
@@ -25,7 +27,7 @@ module AuthHelper
     end
     user
   end
-  
+
   # Create and sign in a user for any test type
   def create_and_sign_in_user
     user = create(:user)

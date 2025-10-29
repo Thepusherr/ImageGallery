@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFailedLoginAttempts < ActiveRecord::Migration[7.1]
   def change
     create_table :failed_login_attempts do |t|

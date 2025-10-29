@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -7,22 +9,27 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-admin = AdminUser.create!(email: 'admin@example.com', password: '123123', password_confirmation: '123123') if Rails.env.development? 
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: '123123',
+                    password_confirmation: '123123')
+end
 
 # image = File.open(Rails.root.join('db/seeds/micropost_placeholder.png'))
 # image.rewind
 
-#user2.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
+# user2.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png')
 
 User.where(email: ['spunkspunkik@gmail.com', 'spunkspunkik2@gmail.com']).destroy_all
 
-user1 = User.new(name: 'John', surname: 'Jons', username: 'johnjons', email: 'spunkspunkik@gmail.com', password: '123123', password_confirmation: '123123')
+user1 = User.new(name: 'John', surname: 'Jons', username: 'johnjons', email: 'spunkspunkik@gmail.com',
+                 password: '123123', password_confirmation: '123123')
 user1.avatar = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
 user1.save!
-#user1.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png') 
+# user1.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default-avatar.png')), filename: 'default-avatar.png')
 
 # File.open(File.join(Rails.root,'app/assets/images/default-avatar.png'))
-user2 = User.new(name: 'Bert', surname: 'Berner', username: 'bertberner', email: 'spunkspunkik2@gmail.com', password: '123123', password_confirmation: '123123')
+user2 = User.new(name: 'Bert', surname: 'Berner', username: 'bertberner', email: 'spunkspunkik2@gmail.com',
+                 password: '123123', password_confirmation: '123123')
 user2.avatar = File.open(Rails.root.join('app/assets/images/default-avatar.png'))
 user2.save!
 # Create posts

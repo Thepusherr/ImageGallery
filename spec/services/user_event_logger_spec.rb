@@ -9,13 +9,13 @@ RSpec.describe UserEventLogger, type: :service do
     context 'in test environment' do
       it 'returns true without creating UserEvent' do
         expect(UserEvent).not_to receive(:create!)
-        
+
         result = UserEventLogger.log(
           user: user,
           action_type: 'test_action',
           url: '/test'
         )
-        
+
         expect(result).to be true
       end
     end

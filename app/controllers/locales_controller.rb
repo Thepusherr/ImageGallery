@@ -35,12 +35,10 @@ class LocalesController < ApplicationController
       else
         redirect_to(request.referer || '/')
       end
+    elsif request.xhr?
+      render json: { status: 'error' }
     else
-      if request.xhr?
-        render json: { status: 'error' }
-      else
-        redirect_to(request.referer || '/', alert: t('language.invalid_locale'))
-      end
+      redirect_to(request.referer || '/', alert: t('language.invalid_locale'))
     end
   end
 end

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   attribute :visibility, :integer
   enum visibility: { public_visibility: 0, private_visibility: 1, draft: 2 }
   enum visibility: { visible: 0, hidden: 1 }, _default: :visible
-  
+
   belongs_to :user
   has_and_belongs_to_many :categories
   mount_uploader :image, ImageUploader
@@ -19,8 +21,8 @@ class Post < ApplicationRecord
   after_create :process_image_in_background
   after_create :notify_category_subscribers
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "image", "text", "title", "updated_at", "user_id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id id_value image text title updated_at user_id]
   end
 
   def views_count

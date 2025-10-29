@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserEvent < ApplicationRecord
   belongs_to :user
 
@@ -6,11 +8,11 @@ class UserEvent < ApplicationRecord
   validates :url, presence: true
   validates :user, presence: true
 
-  def self.ransackable_associations(auth_object = nil)
-    ["user"]
+  def self.ransackable_associations(_auth_object = nil)
+    ['user']
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["action_type", "created_at", "id", "id_value", "timestamp", "updated_at", "url", "user_id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[action_type created_at id id_value timestamp updated_at url user_id]
   end
 end

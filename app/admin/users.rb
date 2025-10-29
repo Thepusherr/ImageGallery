@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register User do
   # Use friendly_id in ActiveAdmin
   controller do
@@ -24,7 +26,6 @@ ActiveAdmin.register User do
   # end
 
   remove_filter :avatar_attachment, :avatar_blob
-  
 
   permit_params :email, :password, :password_confirmation, :name, :surname, :username
 
@@ -35,7 +36,7 @@ ActiveAdmin.register User do
     column :surname
     column :email
     column :current_sign_in_at
-    #column :sign_in_count
+    # column :sign_in_count
     column :created_at
     actions
   end
@@ -44,7 +45,7 @@ ActiveAdmin.register User do
   filter :surname
   filter :email
   filter :current_sign_in_at
-  #filter :sign_in_count
+  # filter :sign_in_count
   filter :created_at
 
   form do |f|

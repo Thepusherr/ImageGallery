@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Simple fix for the frozen array issue in Rails
 
 # Only apply in test environment
@@ -14,11 +16,11 @@ if Rails.env.test?
       end
     end
   end
-  
+
   # Monkey patch Array to handle unshift on frozen arrays
   class Array
-    alias_method :original_unshift, :unshift
-    
+    alias original_unshift unshift
+
     def unshift(*args)
       if frozen?
         # If the array is frozen, return a new array with the elements added

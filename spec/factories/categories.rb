@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :category do
-    name { "Sample Category" }
+    name { 'Sample Category' }
     user
     visibility { :visible }
-    
+
     trait :hidden do
       visibility { :hidden }
     end

@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 class NotifierMailer < ApplicationMailer
   default from: 'notifications@imagegallery.com'
 
-  def simple_message(recipient)
-    attachments["attachment.pdf"] = File.read("path/to/file.pdf")
+  def simple_message(_recipient)
+    attachments['attachment.pdf'] = File.read('path/to/file.pdf')
     mail(
-      to: "pospelvv@gmail.com",
-      subject: "New account information"
+      to: 'pospelvv@gmail.com',
+      subject: 'New account information'
     )
   end
-  
+
   def category_subscription(user, category)
     @user = user
     @category = category
@@ -17,7 +19,7 @@ class NotifierMailer < ApplicationMailer
       subject: "You've subscribed to #{category.name}"
     )
   end
-  
+
   def new_image_notification(user, category, post)
     @user = user
     @category = category

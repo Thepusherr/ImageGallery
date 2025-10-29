@@ -16,7 +16,7 @@ class RecaptchaService
   def recaptcha_required_for_comment?(user)
     return false if Rails.env.test? # Skip in tests
     return false if user.nil? # Require login for comments
-    
+
     # Require reCAPTCHA if user has posted many comments recently
     recent_comments_count = user.comments.where('created_at > ?', 10.minutes.ago).count
     recent_comments_count >= 3
@@ -54,8 +54,8 @@ class RecaptchaService
 
   def recent_failed_attempts_count(email)
     FailedLoginAttempt.recent
-                     .where(ip_address: @ip_address)
-                     .or(FailedLoginAttempt.recent.where(email: email))
-                     .sum(:attempts_count)
+                      .where(ip_address: @ip_address)
+                      .or(FailedLoginAttempt.recent.where(email: email))
+                      .sum(:attempts_count)
   end
 end

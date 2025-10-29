@@ -22,10 +22,10 @@ class FailedLoginAttempt < ApplicationRecord
     Rails.logger.debug "FailedLoginAttempt: Found/created attempt: #{attempt.inspect}"
 
     if attempt.persisted?
-      Rails.logger.debug "FailedLoginAttempt: Incrementing existing attempt"
+      Rails.logger.debug 'FailedLoginAttempt: Incrementing existing attempt'
       attempt.increment!(:attempts_count)
     else
-      Rails.logger.debug "FailedLoginAttempt: Creating new attempt"
+      Rails.logger.debug 'FailedLoginAttempt: Creating new attempt'
       attempt.attempts_count = 1
     end
 

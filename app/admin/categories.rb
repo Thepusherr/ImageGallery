@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Category do
   # Specify parameters which should be permitted for assignment
   permit_params :name, :user_id

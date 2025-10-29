@@ -10,15 +10,15 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   describe 'GitHub OAuth' do
     let(:github_auth) do
       OmniAuth::AuthHash.new({
-        provider: 'github',
-        uid: '123456',
-        info: {
-          email: 'test@example.com',
-          name: 'Test User',
-          first_name: 'Test',
-          last_name: 'User'
-        }
-      })
+                               provider: 'github',
+                               uid: '123456',
+                               info: {
+                                 email: 'test@example.com',
+                                 name: 'Test User',
+                                 first_name: 'Test',
+                                 last_name: 'User'
+                               }
+                             })
     end
 
     before do
@@ -27,9 +27,9 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
     context 'when user does not exist' do
       it 'creates a new user and signs them in' do
-        expect {
+        expect do
           get :github
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
 
         user = User.last
         expect(user.email).to eq('test@example.com')
@@ -44,9 +44,9 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       let!(:existing_user) { create(:user, email: 'test@example.com') }
 
       it 'signs in the existing user' do
-        expect {
+        expect do
           get :github
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
 
         expect(response).to be_redirect
       end
@@ -56,15 +56,15 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   describe 'Google OAuth' do
     let(:google_auth) do
       OmniAuth::AuthHash.new({
-        provider: 'google_oauth2',
-        uid: '789012',
-        info: {
-          email: 'google@example.com',
-          name: 'Google User',
-          first_name: 'Google',
-          last_name: 'User'
-        }
-      })
+                               provider: 'google_oauth2',
+                               uid: '789012',
+                               info: {
+                                 email: 'google@example.com',
+                                 name: 'Google User',
+                                 first_name: 'Google',
+                                 last_name: 'User'
+                               }
+                             })
     end
 
     before do
@@ -72,9 +72,9 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
     end
 
     it 'creates a new user and signs them in' do
-      expect {
+      expect do
         get :google_oauth2
-      }.to change(User, :count).by(1)
+      end.to change(User, :count).by(1)
 
       user = User.last
       expect(user.email).to eq('google@example.com')

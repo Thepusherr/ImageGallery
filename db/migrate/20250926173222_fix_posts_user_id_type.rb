@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixPostsUserIdType < ActiveRecord::Migration[7.1]
   def up
     # First, let's check if there are any invalid user_ids

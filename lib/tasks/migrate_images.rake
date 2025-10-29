@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/tasks/migrate_images.rake
 
 namespace :app do

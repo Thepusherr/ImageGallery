@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :set_posts, only: [:show]
 
   def set_posts
@@ -22,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     authorize_user
-    
+
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'User was successfully updated.'
     else
@@ -32,7 +34,7 @@ class UsersController < ApplicationController
 
   def destroy
     authorize_user
-    
+
     @user.destroy
     redirect_to users_path, notice: 'User was successfully deleted.'
   end
@@ -46,9 +48,9 @@ class UsersController < ApplicationController
   end
 
   def authorize_user
-    unless current_user == @user
-      redirect_to users_path, alert: 'You are not authorized to perform this action.'
-    end
+    return if current_user == @user
+
+    redirect_to users_path, alert: 'You are not authorized to perform this action.'
   end
 
   def user_params

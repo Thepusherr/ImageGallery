@@ -70,10 +70,10 @@ class ImageScraperService
 
   def extract_image_urls(doc)
     base_uri = URI.parse(@url)
-    
+
     # Find all img tags
     img_tags = doc.css('img')
-    
+
     image_urls = img_tags.map do |img|
       src = img['src'] || img['data-src'] || img['data-lazy-src']
       next unless src
@@ -89,18 +89,18 @@ class ImageScraperService
 
     # Also look for images in CSS background-image properties
     css_images = extract_css_background_images(doc, base_uri)
-    
+
     (image_urls + css_images).uniq
   end
 
   def extract_css_background_images(doc, base_uri)
     css_images = []
-    
+
     # Look for inline styles with background-image
     doc.css('[style*="background-image"]').each do |element|
       style = element['style']
       matches = style.scan(/background-image:\s*url\(['"]?([^'"]+)['"]?\)/)
-      
+
       matches.each do |match|
         url = match[0]
         begin
@@ -111,7 +111,7 @@ class ImageScraperService
         end
       end
     end
-    
+
     css_images
   end
 
@@ -121,7 +121,7 @@ class ImageScraperService
     # Check if URL has image extension
     uri = URI.parse(url)
     path = uri.path.downcase
-    
+
     image_extensions = %w[.jpg .jpeg .png .gif .bmp .webp .svg .tiff .ico]
     image_extensions.any? { |ext| path.end_with?(ext) } ||
       path.include?('image') ||
@@ -139,12 +139,8 @@ class ImageScraperService
   end
 
   def estimate_image_size(img_url)
-    begin
-      URI.open(img_url, 'User-Agent' => 'Mozilla/5.0 (compatible; ImageScraper/1.0)') do |file|
-        file.size
-      end
-    rescue StandardError
-      nil
-    end
+    URI.open(img_url, 'User-Agent' => 'Mozilla/5.0 (compatible; ImageScraper/1.0)', &:size)
+  rescue StandardError
+    nil
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
@@ -14,7 +16,7 @@ RSpec.describe Category, type: :model do
   end
 
   it 'is not valid without a user' do
-    user = FactoryBot.create(:user)
+    FactoryBot.create(:user)
     category = Category.new(name: 'Test Category', user: nil)
     expect(category).to_not be_valid
   end

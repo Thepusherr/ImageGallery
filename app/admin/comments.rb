@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Comment do
   # Specify parameters which should be permitted for assignment
   permit_params :post_id, :text, :user_id
