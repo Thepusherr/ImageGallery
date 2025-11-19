@@ -1,0 +1,6 @@
+exclude_paths:
+  - vendor
+  - vendor/bundle
+  - bin
+  - db/schema.rb
+  - db/migrate
